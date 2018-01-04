@@ -3,3 +3,19 @@
 ################################################################################
 
 /.vs
+/packages
+/Vatas_Admin/bin
+/Vatas_Admin/obj
+/Vatas_BAL/bin
+/Vatas_BAL/obj
+/Vatas_Common/bin
+/Vatas_Common/obj
+/Vatas_Common/obj
+/Vatas_DAL/bin
+/Vatas_DAL/obj
+/Vatas_Services/bin
+/Vatas_Services/obj
+/Vatas_UI/bin
+/Vatas_UI/obj
+/Vatas_Wrapper/bin
+/Vatas_Wrapper/obj

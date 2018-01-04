@@ -1,0 +1,14 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Root.Master" AutoEventWireup="true" CodeBehind="SiteAdmin.master.cs" Inherits="Vatas_UI.SiteAdmin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
+    <asp:ContentPlaceHolder ID="ContentPlaceBody" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
+    <asp:ContentPlaceHolder ID="ContentPlaceFooter" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

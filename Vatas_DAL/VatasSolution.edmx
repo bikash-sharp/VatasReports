@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VatasSolutionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_ProcessesHistoryofjob">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MasterID" Type="bigint" />
+          <Property Name="Next_UserID" Type="bigint" />
+          <Property Name="Previous_UserID" Type="bigint" />
+          <Property Name="Date_Time_Stamp" Type="nvarchar" MaxLength="50" />
+          <Property Name="Priority_of_Job" Type="bigint" />
+          <Property Name="Job_Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Reason_for_Delay" Type="nvarchar(max)" />
+          <Property Name="Supervisor" Type="nvarchar" MaxLength="100" />
+          <Property Name="Is_Sent" Type="nvarchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="tbl_ProcessPriority">
+          <Key>
+            <PropertyRef Name="Priority_ID" />
+          </Key>
+          <Property Name="Priority_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Priority" Type="nvarchar" MaxLength="50" />
+          <Property Name="Priority_Time_Limit" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_ProcessStatus">
+          <Key>
+            <PropertyRef Name="Process_Status_ID" />
+          </Key>
+          <Property Name="Process_Status_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Process_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Process_Code" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="ID_Admin" Type="int" />
+        </EntityType>
+        <Function Name="proc_GetReturnsByJobStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JobStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="proc_ReturnsAssigned" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_ReturnsAtFrontOffice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="VatasSolutionModelStoreContainer">
+          <EntitySet Name="tbl_ProcessesHistoryofjob" EntityType="Self.tbl_ProcessesHistoryofjob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ProcessPriority" EntityType="Self.tbl_ProcessPriority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ProcessStatus" EntityType="Self.tbl_ProcessStatus" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VatasSolutionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="VatasSolutionEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="proc_ReturnsAtFrontOffice" ReturnType="Collection(VatasSolutionModel.proc_ReturnsAtFrontOffice_Result)" />
+          <FunctionImport Name="proc_ReturnsAssigned" ReturnType="Collection(VatasSolutionModel.proc_ReturnsAssigned_Result)" />
+          <FunctionImport Name="proc_GetReturnsByJobStatus" ReturnType="Collection(VatasSolutionModel.proc_GetReturnsByJobStatus_Result)">
+          <Parameter Name="JobStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tbl_ProcessPriority" EntityType="VatasSolutionModel.tbl_ProcessPriority" />
+          <EntitySet Name="tbl_ProcessStatus" EntityType="VatasSolutionModel.tbl_ProcessStatus" />
+          <EntitySet Name="tbl_ProcessesHistoryofjob" EntityType="VatasSolutionModel.tbl_ProcessesHistoryofjob" />
+        </EntityContainer>
+        <ComplexType Name="proc_ReturnsAtFrontOffice_Result">
+          <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="Job_No" Nullable="true" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FormType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
+        </ComplexType>
+        <ComplexType Name="proc_ReturnsAssigned_Result">
+          <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="Job_No" Nullable="true" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FormType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
+          <Property Type="Int64" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="AssignedDate" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="proc_GetReturnsByJobStatus_Result">
+          <Property Type="Int64" Name="JobNo" Nullable="true" />
+          <Property Type="Int32" Name="JobID" Nullable="false" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FormType" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="tbl_ProcessPriority">
+          <Key>
+            <PropertyRef Name="Priority_ID" />
+          </Key>
+          <Property Name="Priority_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Priority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Priority_Time_Limit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_ProcessStatus">
+          <Key>
+            <PropertyRef Name="Process_Status_ID" />
+          </Key>
+          <Property Name="Process_Status_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Process_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Process_Code" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Admin" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_ProcessesHistoryofjob">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MasterID" Type="Int64" />
+          <Property Name="Next_UserID" Type="Int64" />
+          <Property Name="Previous_UserID" Type="Int64" />
+          <Property Name="Date_Time_Stamp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Priority_of_Job" Type="Int64" />
+          <Property Name="Job_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Reason_for_Delay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Supervisor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Sent" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VatasSolutionModelStoreContainer" CdmEntityContainer="VatasSolutionEntities" >
+          <FunctionImportMapping FunctionImportName="proc_ReturnsAtFrontOffice" FunctionName="VatasSolutionModel.Store.proc_ReturnsAtFrontOffice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_ReturnsAtFrontOffice_Result">
+                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+                <ScalarProperty Name="Job_No" ColumnName="Job No" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="TAN" ColumnName="TAN" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_ReturnsAssigned" FunctionName="VatasSolutionModel.Store.proc_ReturnsAssigned">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_ReturnsAssigned_Result">
+                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+                <ScalarProperty Name="Job_No" ColumnName="Job No" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="TAN" ColumnName="TAN" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetReturnsByJobStatus" FunctionName="VatasSolutionModel.Store.proc_GetReturnsByJobStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_GetReturnsByJobStatus_Result">
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="TAN" ColumnName="TAN" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_ProcessPriority">
+            <EntityTypeMapping TypeName="VatasSolutionModel.tbl_ProcessPriority">
+              <MappingFragment StoreEntitySet="tbl_ProcessPriority">
+                <ScalarProperty Name="Priority_Time_Limit" ColumnName="Priority_Time_Limit" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Priority_ID" ColumnName="Priority_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ProcessStatus">
+            <EntityTypeMapping TypeName="VatasSolutionModel.tbl_ProcessStatus">
+              <MappingFragment StoreEntitySet="tbl_ProcessStatus">
+                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+                <ScalarProperty Name="Process_Code" ColumnName="Process_Code" />
+                <ScalarProperty Name="Process_Name" ColumnName="Process_Name" />
+                <ScalarProperty Name="Process_Status_ID" ColumnName="Process_Status_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ProcessesHistoryofjob">
+            <EntityTypeMapping TypeName="VatasSolutionModel.tbl_ProcessesHistoryofjob">
+              <MappingFragment StoreEntitySet="tbl_ProcessesHistoryofjob">
+                <ScalarProperty Name="Is_Sent" ColumnName="Is_Sent" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="Reason_for_Delay" ColumnName="Reason_for_Delay" />
+                <ScalarProperty Name="Job_Status" ColumnName="Job_Status" />
+                <ScalarProperty Name="Priority_of_Job" ColumnName="Priority_of_Job" />
+                <ScalarProperty Name="Date_Time_Stamp" ColumnName="Date_Time_Stamp" />
+                <ScalarProperty Name="Previous_UserID" ColumnName="Previous_UserID" />
+                <ScalarProperty Name="Next_UserID" ColumnName="Next_UserID" />
+                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

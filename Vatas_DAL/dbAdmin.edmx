@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="db_AdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Roles">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Is_Deleted" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Role_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_Admin" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_User_Credential">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Is_Deleted" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ID_Admin" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_User_Info">
+          <Key>
+            <PropertyRef Name="User_Info_ID" />
+            <PropertyRef Name="Can_Change_Password" />
+            <PropertyRef Name="Is_Deleted" />
+          </Key>
+          <Property Name="User_Info_ID" Type="int" Nullable="false" />
+          <Property Name="Can_Change_Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+          <Property Name="Is_Locked" Type="nvarchar" MaxLength="50" />
+          <Property Name="Consecutive_Attempts" Type="int" />
+          <Property Name="Is_Deleted" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ID_Admin" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_User_Session_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" />
+          <Property Name="Login_Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="Logout_Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="Session_ID" Type="nvarchar" MaxLength="200" />
+          <Property Name="Logout_Nature" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_Admin" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_User_Transaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Table_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Database_Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="User_ID" Type="int" />
+          <Property Name="Time_Stamp" Type="nvarchar" MaxLength="30" />
+          <Property Name="Action" Type="char" MaxLength="1" />
+          <Property Name="Page_ID" Type="int" />
+          <Property Name="Page_SubModule_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_UserGroup_Registration">
+          <Key>
+            <PropertyRef Name="Super_User_Id" />
+          </Key>
+          <Property Name="Super_User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="EmailID" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Confirm_Password" Type="nvarchar(max)" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Country" Type="nvarchar" MaxLength="75" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="75" />
+          <Property Name="PinCode" Type="int" Nullable="false" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="11" />
+          <Property Name="STDCODE" Type="int" Nullable="false" />
+          <Property Name="Telephone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrganizationName" Type="nvarchar" MaxLength="75" Nullable="false" />
+          <Property Name="SecurityQuestion" Type="nvarchar" MaxLength="30" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="50" />
+          <Property Name="SelectPackage" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActivationCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="STATUS" Type="char" MaxLength="1" />
+          <Property Name="Join_Date" Type="nvarchar" MaxLength="12" />
+          <Property Name="Account_Type" Type="char" MaxLength="1" />
+          <Property Name="Is_Login_Active" Type="nvarchar" MaxLength="1" />
+          <Property Name="ID_Admin" Type="int" />
+        </EntityType>
+        <Function Name="proc_GetUserRoleByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="db_AdminModelStoreContainer">
+          <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User_Credential" EntityType="Self.tbl_User_Credential" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User_Session_Details" EntityType="Self.tbl_User_Session_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User_Transaction" EntityType="Self.tbl_User_Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_UserGroup_Registration" EntityType="Self.tbl_UserGroup_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User_Info" EntityType="Self.tbl_User_Info" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_User_Info].[User_Info_ID] AS [User_Info_ID], 
+    [tbl_User_Info].[Can_Change_Password] AS [Can_Change_Password], 
+    [tbl_User_Info].[Role] AS [Role], 
+    [tbl_User_Info].[Is_Locked] AS [Is_Locked], 
+    [tbl_User_Info].[Consecutive_Attempts] AS [Consecutive_Attempts], 
+    [tbl_User_Info].[Is_Deleted] AS [Is_Deleted], 
+    [tbl_User_Info].[ID_Admin] AS [ID_Admin]
+    FROM [dbo].[tbl_User_Info] AS [tbl_User_Info]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_AdminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Roles">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Role_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Admin" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_User_Credential">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Is_Deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_Admin" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_User_Session_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" />
+          <Property Name="Login_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Logout_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Session_ID" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Logout_Nature" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Admin" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_User_Transaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Table_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Database_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="User_ID" Type="Int32" />
+          <Property Name="Time_Stamp" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Page_ID" Type="Int32" />
+          <Property Name="Page_SubModule_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_UserGroup_Registration">
+          <Key>
+            <PropertyRef Name="Super_User_Id" />
+          </Key>
+          <Property Name="Super_User_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Confirm_Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="Int32" Nullable="false" />
+          <Property Name="MobileNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="STDCODE" Type="Int32" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrganizationName" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecurityQuestion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SelectPackage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActivationCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Join_Date" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Account_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Is_Login_Active" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Admin" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_User_Info">
+          <Key>
+            <PropertyRef Name="User_Info_ID" />
+            <PropertyRef Name="Can_Change_Password" />
+            <PropertyRef Name="Is_Deleted" />
+          </Key>
+          <Property Name="User_Info_ID" Type="Int32" Nullable="false" />
+          <Property Name="Can_Change_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Is_Locked" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Consecutive_Attempts" Type="Int32" />
+          <Property Name="Is_Deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_Admin" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="AdminEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" />
+          <EntitySet Name="tbl_User_Credential" EntityType="Self.tbl_User_Credential" />
+          <EntitySet Name="tbl_User_Session_Details" EntityType="Self.tbl_User_Session_Details" />
+          <EntitySet Name="tbl_User_Transaction" EntityType="Self.tbl_User_Transaction" />
+          <EntitySet Name="tbl_UserGroup_Registration" EntityType="Self.tbl_UserGroup_Registration" />
+          <EntitySet Name="tbl_User_Info" EntityType="Self.tbl_User_Info" />
+          <FunctionImport Name="proc_GetUserRoleByRoleId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByRoleId_Result)">
+            <Parameter Name="RoleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="proc_GetUserRoleByRoleId_Result">
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+          <Property Type="String" Name="Role_Name" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_AdminModelStoreContainer" CdmEntityContainer="AdminEntities">
+          <EntitySetMapping Name="tbl_Roles">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_Roles">
+              <MappingFragment StoreEntitySet="tbl_Roles">
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Role_Code" ColumnName="Role_Code" />
+                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User_Credential">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_User_Credential">
+              <MappingFragment StoreEntitySet="tbl_User_Credential">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User_Session_Details">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_User_Session_Details">
+              <MappingFragment StoreEntitySet="tbl_User_Session_Details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Login_Time" ColumnName="Login_Time" />
+                <ScalarProperty Name="Logout_Time" ColumnName="Logout_Time" />
+                <ScalarProperty Name="Session_ID" ColumnName="Session_ID" />
+                <ScalarProperty Name="Logout_Nature" ColumnName="Logout_Nature" />
+                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User_Transaction">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_User_Transaction">
+              <MappingFragment StoreEntitySet="tbl_User_Transaction">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Table_Name" ColumnName="Table_Name" />
+                <ScalarProperty Name="Database_Name" ColumnName="Database_Name" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Time_Stamp" ColumnName="Time_Stamp" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Page_ID" ColumnName="Page_ID" />
+                <ScalarProperty Name="Page_SubModule_ID" ColumnName="Page_SubModule_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_UserGroup_Registration">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_UserGroup_Registration">
+              <MappingFragment StoreEntitySet="tbl_UserGroup_Registration">
+                <ScalarProperty Name="Super_User_Id" ColumnName="Super_User_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Confirm_Password" ColumnName="Confirm_Password" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="STDCODE" ColumnName="STDCODE" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="SelectPackage" ColumnName="SelectPackage" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="Join_Date" ColumnName="Join_Date" />
+                <ScalarProperty Name="Account_Type" ColumnName="Account_Type" />
+                <ScalarProperty Name="Is_Login_Active" ColumnName="Is_Login_Active" />
+                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User_Info">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_User_Info">
+              <MappingFragment StoreEntitySet="tbl_User_Info">
+                <ScalarProperty Name="User_Info_ID" ColumnName="User_Info_ID" />
+                <ScalarProperty Name="Can_Change_Password" ColumnName="Can_Change_Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Is_Locked" ColumnName="Is_Locked" />
+                <ScalarProperty Name="Consecutive_Attempts" ColumnName="Consecutive_Attempts" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetUserRoleByRoleId" FunctionName="db_AdminModel.Store.proc_GetUserRoleByRoleId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetUserRoleByRoleId_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
