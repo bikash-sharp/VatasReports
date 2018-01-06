@@ -12,6 +12,12 @@ namespace Vatas_UI
 {
     public partial class LockScreen : System.Web.UI.Page
     {
+        //Get the Current Page Relative Path
+        public string AppPath()
+        {
+            string path = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpContext.Current.Request.ApplicationPath;
+            return path.EndsWith("/") ? path : path + "/";
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 

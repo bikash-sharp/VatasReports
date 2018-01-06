@@ -53,7 +53,7 @@
         Google+</a>
                 </div>
 
-                <a href="<%= Page.ResolveUrl("~/Login")%>" class="text-center">I already have a membership</a>
+                <a href="<%= this.AppPath() + "Login" %>" class="text-center">I already have a membership</a>
             </div>
             <!-- /.form-box -->
         </div>

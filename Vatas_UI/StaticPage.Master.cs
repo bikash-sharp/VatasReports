@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Vatas_UI
 {
-    public partial class StaticPage : System.Web.UI.MasterPage
+    public partial class StaticPage : VatasMasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

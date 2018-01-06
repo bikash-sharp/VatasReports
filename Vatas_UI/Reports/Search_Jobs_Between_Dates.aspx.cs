@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.UI;
 using Vatas_Common;
 using Vatas_Wrapper;
@@ -12,6 +13,7 @@ namespace Vatas_UI.Reports
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string path = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpContext.Current.Request.ApplicationPath;
             txtDateRange.Attributes.Add("readonly", "readonly");
             if (!Page.IsPostBack)
             {
