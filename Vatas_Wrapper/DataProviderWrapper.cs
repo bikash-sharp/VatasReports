@@ -17,7 +17,6 @@ namespace Vatas_Wrapper
         static DataProviderWrapper() { }
         private DataProviderWrapper() { }
 
-        
         public static DataProviderWrapper Instance
         {
             get
@@ -49,58 +48,27 @@ namespace Vatas_Wrapper
 
         #region Reports
 
-        public List<ReturnsCL> ReturnsAtFrontPage()
+        //public List<ReturnsCL> ReturnsAtFrontPage()
+        //{
+        //    using (VatasSolutionEntities context = new VatasSolutionEntities() )
+        //    {
+        //        return BLReports.Instance(context).ReturnsAtFrontPage();
+        //    }
+        //}
+
+        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus,char IsSent)
         {
-            using (VatasSolutionEntities context = new VatasSolutionEntities() )
+            using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLReports.Instance(context).ReturnsAtFrontPage();
+                return BLReports.Instance(context).Report_GetReturnsByJobStatus(JobStatus, IsSent);
             }
         }
 
-        public List<ReturnsCL> ReturnsAssigned()
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLReports.Instance(context).ReturnsAssigned();
-            }
-        }
-
-        public List<ReturnsCL> ReturnsCompleted()
-        {
-            using (VatasSolutionEntities context = new VatasSolutionEntities())
-            {
-                return BLReports.Instance(context).ReturnsCompleted();
-            }
-        }
-
-        public List<ReturnsCL> ReturnsIncompleted()
-        {
-            using (VatasSolutionEntities context = new VatasSolutionEntities())
-            {
-                return BLReports.Instance(context).ReturnsIncompleted();
-            }
-        }
-        public List<ReturnsCL> ReturnsUploaded()
-        {
-            using (VatasSolutionEntities context = new VatasSolutionEntities())
-            {
-                return BLReports.Instance(context).ReturnsUploaded();
-            }
-        }
-
-        public List<ReturnsCL> ReturnsPending()
-        {
-            using (VatasSolutionEntities context = new VatasSolutionEntities())
-            {
-                return BLReports.Instance(context).ReturnsPending();
-            }
-        }
-
-        public List<ReturnsCL> SearchJobsBetweenDates(DateTime startDate, DateTime endDate)
-        {
-            using (VatasSolutionEntities context = new VatasSolutionEntities())
-            {
-                return BLReports.Instance(context).SearchJobsBetweenDates(startDate,endDate);
+                return BLReports.Instance(context).Report_SearchJobsBetweenDates(startDate,endDate);
             }
         }
         #endregion

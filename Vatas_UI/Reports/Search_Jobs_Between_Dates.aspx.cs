@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using Vatas_Common;
 using Vatas_Wrapper;
 
@@ -24,7 +21,7 @@ namespace Vatas_UI.Reports
 
         public void BindData(DateTime startDate, DateTime endDate)
         {
-            List<ReturnsCL> result = DataProviderWrapper.Instance.SearchJobsBetweenDates(startDate, endDate);
+            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate);
             if (result.Count > 0)
             {
                 rptReport.DataSource = result;
@@ -35,9 +32,9 @@ namespace Vatas_UI.Reports
         public void Export(DateTime startDate, DateTime endDate)
         {
             StringWriter strwriter = new StringWriter();
-            string fileName = DateTime.Now.Date.ToString("MM/d/yyyy") + "_SearchJobsBetweenDates.csv";
+            string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_SearchJobsBetweenDates.csv";
 
-            var ResultList = DataProviderWrapper.Instance.SearchJobsBetweenDates(startDate, endDate);
+            var ResultList = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate);
             if (ResultList.Count > 0)
             {
                 strwriter.WriteLine("\"Sr.No\",\"Firm Name\",\"File No\",\"TAN\",\"Account Name\",\"FY\",\"FormType\",\"Quarter\",\"RetType\",\"Date\"");

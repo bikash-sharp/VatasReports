@@ -72,13 +72,10 @@
     <Compile Include="proc_GetUserRoleByRoleId_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
-    <Compile Include="proc_ReturnsAssigned_Result.cs">
+    <Compile Include="proc_Report_GetReturnsByJobStatus_Result.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>
-    <Compile Include="proc_ReturnsAtFrontOffice_Result.cs">
-      <DependentUpon>VatasSolution.tt</DependentUpon>
-    </Compile>
-    <Compile Include="proc_SearchJobsBetweenDates_Result.cs">
+    <Compile Include="proc_Report_SearchJobsBetweenDates_Result.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

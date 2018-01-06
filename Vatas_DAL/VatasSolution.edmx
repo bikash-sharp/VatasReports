@@ -41,9 +41,10 @@
         <Function Name="proc_GetReturnsByJobStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="JobStatus" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="proc_ReturnsAssigned" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="proc_ReturnsAtFrontOffice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="proc_SearchJobsBetweenDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="proc_Report_GetReturnsByJobStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JobStatus" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="proc_Report_SearchJobsBetweenDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
         </Function>
@@ -57,43 +58,20 @@
     <edmx:ConceptualModels>
       <Schema Namespace="VatasSolutionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="VatasSolutionEntities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="proc_ReturnsAtFrontOffice" ReturnType="Collection(VatasSolutionModel.proc_ReturnsAtFrontOffice_Result)" />
-          <FunctionImport Name="proc_ReturnsAssigned" ReturnType="Collection(VatasSolutionModel.proc_ReturnsAssigned_Result)" />
           <FunctionImport Name="proc_GetReturnsByJobStatus" ReturnType="Collection(VatasSolutionModel.proc_GetReturnsByJobStatus_Result)">
           <Parameter Name="JobStatus" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="tbl_ProcessPriority" EntityType="VatasSolutionModel.tbl_ProcessPriority" />
           <EntitySet Name="tbl_ProcessStatus" EntityType="VatasSolutionModel.tbl_ProcessStatus" />
           <EntitySet Name="tbl_ProcessesHistoryofjob" EntityType="VatasSolutionModel.tbl_ProcessesHistoryofjob" />
-          <FunctionImport Name="proc_SearchJobsBetweenDates" ReturnType="Collection(VatasSolutionModel.proc_SearchJobsBetweenDates_Result)">
+          <FunctionImport Name="proc_Report_GetReturnsByJobStatus" ReturnType="Collection(VatasSolutionModel.proc_Report_GetReturnsByJobStatus_Result)">
+          <Parameter Name="JobStatus" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc_Report_SearchJobsBetweenDates" ReturnType="Collection(VatasSolutionModel.proc_Report_SearchJobsBetweenDates_Result)">
             <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="proc_ReturnsAtFrontOffice_Result">
-          <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
-          <Property Type="Int64" Name="Job_No" Nullable="true" />
-          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FormType" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
-        </ComplexType>
-        <ComplexType Name="proc_ReturnsAssigned_Result">
-          <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
-          <Property Type="Int64" Name="Job_No" Nullable="true" />
-          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FormType" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
-          <Property Type="Int64" Name="UserID" Nullable="true" />
-          <Property Type="String" Name="AssignedDate" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="proc_GetReturnsByJobStatus_Result">
           <Property Type="Int64" Name="JobNo" Nullable="true" />
           <Property Type="Int32" Name="JobID" Nullable="false" />
@@ -137,7 +115,20 @@
           <Property Name="Is_Sent" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="PRN_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="proc_SearchJobsBetweenDates_Result">
+        <ComplexType Name="proc_Report_GetReturnsByJobStatus_Result">
+          <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="Job_No" Nullable="true" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FormType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
+          <Property Type="Int64" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="AssignedDate" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="proc_Report_SearchJobsBetweenDates_Result">
           <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
           <Property Type="Int64" Name="Job_No" Nullable="true" />
           <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
@@ -154,38 +145,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="VatasSolutionModelStoreContainer" CdmEntityContainer="VatasSolutionEntities" >
-          <FunctionImportMapping FunctionImportName="proc_ReturnsAtFrontOffice" FunctionName="VatasSolutionModel.Store.proc_ReturnsAtFrontOffice">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_ReturnsAtFrontOffice_Result">
-                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
-                <ScalarProperty Name="Job_No" ColumnName="Job No" />
-                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-                <ScalarProperty Name="TAN" ColumnName="TAN" />
-                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
-                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
-                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
-                <ScalarProperty Name="FormType" ColumnName="FormType" />
-                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_ReturnsAssigned" FunctionName="VatasSolutionModel.Store.proc_ReturnsAssigned">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_ReturnsAssigned_Result">
-                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
-                <ScalarProperty Name="Job_No" ColumnName="Job No" />
-                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-                <ScalarProperty Name="TAN" ColumnName="TAN" />
-                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
-                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
-                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
-                <ScalarProperty Name="FormType" ColumnName="FormType" />
-                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_GetReturnsByJobStatus" FunctionName="VatasSolutionModel.Store.proc_GetReturnsByJobStatus">
             <ResultMapping>
               <ComplexTypeMapping TypeName="VatasSolutionModel.proc_GetReturnsByJobStatus_Result">
@@ -236,9 +195,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="proc_SearchJobsBetweenDates" FunctionName="VatasSolutionModel.Store.proc_SearchJobsBetweenDates">
+          <FunctionImportMapping FunctionImportName="proc_Report_GetReturnsByJobStatus" FunctionName="VatasSolutionModel.Store.proc_Report_GetReturnsByJobStatus">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_SearchJobsBetweenDates_Result">
+              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_Report_GetReturnsByJobStatus_Result">
+                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+                <ScalarProperty Name="Job_No" ColumnName="Job No" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="TAN" ColumnName="TAN" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_Report_SearchJobsBetweenDates" FunctionName="VatasSolutionModel.Store.proc_Report_SearchJobsBetweenDates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_Report_SearchJobsBetweenDates_Result">
                 <ScalarProperty Name="FirmName" ColumnName="FirmName" />
                 <ScalarProperty Name="Job_No" ColumnName="Job No" />
                 <ScalarProperty Name="AccountName" ColumnName="AccountName" />

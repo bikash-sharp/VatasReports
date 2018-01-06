@@ -31,16 +31,6 @@ namespace Vatas_DAL
         public virtual DbSet<tbl_ProcessStatus> tbl_ProcessStatus { get; set; }
         public virtual DbSet<tbl_ProcessesHistoryofjob> tbl_ProcessesHistoryofjob { get; set; }
     
-        public virtual ObjectResult<proc_ReturnsAtFrontOffice_Result> proc_ReturnsAtFrontOffice()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_ReturnsAtFrontOffice_Result>("proc_ReturnsAtFrontOffice");
-        }
-    
-        public virtual ObjectResult<proc_ReturnsAssigned_Result> proc_ReturnsAssigned()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_ReturnsAssigned_Result>("proc_ReturnsAssigned");
-        }
-    
         public virtual ObjectResult<proc_GetReturnsByJobStatus_Result> proc_GetReturnsByJobStatus(string jobStatus)
         {
             var jobStatusParameter = jobStatus != null ?
@@ -50,7 +40,16 @@ namespace Vatas_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetReturnsByJobStatus_Result>("proc_GetReturnsByJobStatus", jobStatusParameter);
         }
     
-        public virtual ObjectResult<proc_SearchJobsBetweenDates_Result> proc_SearchJobsBetweenDates(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        public virtual ObjectResult<proc_Report_GetReturnsByJobStatus_Result> proc_Report_GetReturnsByJobStatus(string jobStatus)
+        {
+            var jobStatusParameter = jobStatus != null ?
+                new ObjectParameter("JobStatus", jobStatus) :
+                new ObjectParameter("JobStatus", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_GetReturnsByJobStatus_Result>("proc_Report_GetReturnsByJobStatus", jobStatusParameter);
+        }
+    
+        public virtual ObjectResult<proc_Report_SearchJobsBetweenDates_Result> proc_Report_SearchJobsBetweenDates(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
         {
             var startDateParameter = startDate.HasValue ?
                 new ObjectParameter("StartDate", startDate) :
@@ -60,7 +59,7 @@ namespace Vatas_DAL
                 new ObjectParameter("EndDate", endDate) :
                 new ObjectParameter("EndDate", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_SearchJobsBetweenDates_Result>("proc_SearchJobsBetweenDates", startDateParameter, endDateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_SearchJobsBetweenDates_Result>("proc_Report_SearchJobsBetweenDates", startDateParameter, endDateParameter);
         }
     }
 }

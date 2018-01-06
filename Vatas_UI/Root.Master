@@ -378,8 +378,6 @@
         </script>
         <asp:ContentPlaceHolder ID="ContentPlaceFooter" runat="server">
         </asp:ContentPlaceHolder>
-
-
     </form>
 </body>
 </html>

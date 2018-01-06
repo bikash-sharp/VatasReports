@@ -11,7 +11,7 @@ namespace Vatas_DAL
 {
     using System;
     
-    public partial class proc_ReturnsAssigned_Result
+    public partial class proc_Report_GetReturnsByJobStatus_Result
     {
         public string FirmName { get; set; }
         public Nullable<long> Job_No { get; set; }

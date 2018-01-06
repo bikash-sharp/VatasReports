@@ -40,41 +40,41 @@ namespace Vatas_BAL
             return _instance;
         }
 
-        public List<ReturnsCL> ReturnsAtFrontPage()
-        {
-            List<ReturnsCL> result = new List<ReturnsCL>();
-            try
-            {
-                result =
-                    _vatasSolution.proc_ReturnsAtFrontOffice()
-                        .ToList()
-                        .Select(p => new ReturnsCL
-                        {
-                            AccountName = p.AccountName,
-                            FinancialYear=p.FinancialYear,
-                            Date=p.JobDate,
-                            FirmName=p.FirmName,
-                            FormType=p.FormType,
-                            Quarter=p.Quarter,
-                            ReturnType=p.ReturnType,
-                            TAN=p.TAN,
-                            JobNo= (p.Job_No != null ? p.Job_No.Value : 0)
-            }).ToList();
-            }
-            catch(Exception ex)
-            {
-                var error = ex.Message;
-            }
-            return result;
-        }
+        //public List<ReturnsCL> ReturnsAtFrontPage()
+        //{
+        //    List<ReturnsCL> result = new List<ReturnsCL>();
+        //    try
+        //    {
+        //        result =
+        //            _vatasSolution.proc_ReturnsAtFrontOffice()
+        //                .ToList()
+        //                .Select(p => new ReturnsCL
+        //                {
+        //                    AccountName = p.AccountName,
+        //                    FinancialYear=p.FinancialYear,
+        //                    Date=p.JobDate,
+        //                    FirmName=p.FirmName,
+        //                    FormType=p.FormType,
+        //                    Quarter=p.Quarter,
+        //                    ReturnType=p.ReturnType,
+        //                    TAN=p.TAN,
+        //                    JobNo= (p.Job_No != null ? p.Job_No.Value : 0)
+        //    }).ToList();
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        var error = ex.Message;
+        //    }
+        //    return result;
+        //}
 
-        public List<ReturnsCL> ReturnsAssigned()
+        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus,char IsSent)
         {
             List<ReturnsCL> result = new List<ReturnsCL>();
             try
             {
                 result =
-                    _vatasSolution.proc_ReturnsAssigned()
+                    _vatasSolution.proc_Report_GetReturnsByJobStatus(JobStatus)
                         .ToList()
                         .Select(p => new ReturnsCL
                         {
@@ -115,65 +115,13 @@ namespace Vatas_BAL
             return result;
         }
 
-        public List<ReturnsCL> ReturnsCompleted()
-        {
-            List<ReturnsCL> result = new List<ReturnsCL>();
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                var error = ex.Message;
-            }
-            return result;
-        }
-
-        public List<ReturnsCL> ReturnsIncompleted()
-        {
-            List<ReturnsCL> result = new List<ReturnsCL>();
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                var error = ex.Message;
-            }
-            return result;
-        }
-
-        public List<ReturnsCL> ReturnsUploaded()
-        {
-            List<ReturnsCL> result = new List<ReturnsCL>();
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                var error = ex.Message;
-            }
-            return result;
-        }
-
-        public List<ReturnsCL> ReturnsPending()
-        {
-            List<ReturnsCL> result = new List<ReturnsCL>();
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                var error = ex.Message;
-            }
-            return result;
-        }
-
-        public List<ReturnsCL> SearchJobsBetweenDates(DateTime startDate, DateTime endDate)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate)
         {
             List<ReturnsCL> result = new List<ReturnsCL>();
             try
             {
                 result =
-                    _vatasSolution.proc_SearchJobsBetweenDates(startDate,endDate)
+                    _vatasSolution.proc_Report_SearchJobsBetweenDates(startDate,endDate)
                         .ToList()
                         .Select(p => new ReturnsCL
                         {

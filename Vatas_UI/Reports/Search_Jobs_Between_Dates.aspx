@@ -89,10 +89,9 @@
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->
-       <%-- <div class="overlay">
+        <%-- <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
         </div>--%>
-
     </section>
     <!-- /.content -->
 </asp:Content>
