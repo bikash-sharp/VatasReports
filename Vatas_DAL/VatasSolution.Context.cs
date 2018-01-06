@@ -49,5 +49,18 @@ namespace Vatas_DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetReturnsByJobStatus_Result>("proc_GetReturnsByJobStatus", jobStatusParameter);
         }
+    
+        public virtual ObjectResult<proc_SearchJobsBetweenDates_Result> proc_SearchJobsBetweenDates(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_SearchJobsBetweenDates_Result>("proc_SearchJobsBetweenDates", startDateParameter, endDateParameter);
+        }
     }
 }

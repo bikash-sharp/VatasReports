@@ -10,7 +10,7 @@ GO
 -- Create date: <04-01-2017>
 -- Description:	<Report: Search jobs between two dates>
 -- =============================================
-ALTER PROCEDURE [dbo].[proc_SearchJobsBetweenDates] 
+CREATE PROCEDURE [dbo].[proc_SearchJobsBetweenDates] 
 	@StartDate DateTime,
 	@EndDate DateTime
 AS

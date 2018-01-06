@@ -78,6 +78,9 @@
     <Compile Include="proc_ReturnsAtFrontOffice_Result.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_SearchJobsBetweenDates_Result.cs">
+      <DependentUpon>VatasSolution.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tbl_ProcessesHistoryofjob.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>

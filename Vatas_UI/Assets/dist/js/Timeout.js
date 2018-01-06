@@ -10,10 +10,10 @@
         idleAfter: 600, // 5 seconds
         timeout: 60, //30 seconds to timeout
         pollingInterval: 600, // 5 seconds
-        keepAliveURL: '/Logon',
+        keepAliveURL: '/ProcessReport//Logon',
         serverResponseEquals: 'OK',
         onTimeout: function () {
-            window.location = "/Lock";
+            window.location = "/ProcessReport//Lock";
         },
         onIdle: function () {
             $('#idle-timeout-dialog').modal('show');

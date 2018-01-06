@@ -16,7 +16,7 @@
         <div class="lockscreen-item">
             <!-- lockscreen image -->
             <div class="lockscreen-image">
-                <img src="/Assets/dist/img/user1-128x128.jpg" alt="User Image" />
+                <img src="<%=Page.ResolveUrl("~/Assets/dist/img/user1-128x128.jpg")%>" alt="User Image" />
             </div>
             <!-- /.lockscreen-image -->
             <asp:Panel ID="Panel1" runat="server" DefaultButton="lnkLogin">
@@ -39,7 +39,7 @@
         </asp:RequiredFieldValidator>
 
         <div class="text-center">
-            Click<a href="/Login" title="Login"> Here</a>  sign in as a different user
+            Click<a href="<%= Page.ResolveUrl("~/Login")%>" title="Login"> Here</a>  sign in as a different user
         </div>
         <div class="lockscreen-footer text-center">
             <strong>© <a href="http://www.vatasinfotech.com/">Vatas Infotech Pvt Ltd</a>.</strong>

@@ -7,7 +7,7 @@
     <section class="register-page">
         <div class="register-box">
             <div class="register-logo">
-                <a href="/"><b>Vatas </b>Infotech</a>
+                <a href="javascript:;"><b>Vatas </b>Infotech</a>
             </div>
 
             <div class="register-box-body">
@@ -55,7 +55,7 @@
         Google+</a>
                 </div>
 
-                <a href="/Login" class="text-center">I already have a membership</a>
+                <a href="<%= Page.ResolveUrl( "~/Login")%>" class="text-center">I already have a membership</a>
             </div>
             <!-- /.form-box -->
         </div>

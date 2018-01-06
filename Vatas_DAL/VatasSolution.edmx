@@ -42,6 +42,10 @@
         </Function>
         <Function Name="proc_ReturnsAssigned" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_ReturnsAtFrontOffice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_SearchJobsBetweenDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="VatasSolutionModelStoreContainer">
           <EntitySet Name="tbl_ProcessesHistoryofjob" EntityType="Self.tbl_ProcessesHistoryofjob" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_ProcessPriority" EntityType="Self.tbl_ProcessPriority" Schema="dbo" store:Type="Tables" />
@@ -60,6 +64,10 @@
           <EntitySet Name="tbl_ProcessPriority" EntityType="VatasSolutionModel.tbl_ProcessPriority" />
           <EntitySet Name="tbl_ProcessStatus" EntityType="VatasSolutionModel.tbl_ProcessStatus" />
           <EntitySet Name="tbl_ProcessesHistoryofjob" EntityType="VatasSolutionModel.tbl_ProcessesHistoryofjob" />
+          <FunctionImport Name="proc_SearchJobsBetweenDates" ReturnType="Collection(VatasSolutionModel.proc_SearchJobsBetweenDates_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="proc_ReturnsAtFrontOffice_Result">
           <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
@@ -127,6 +135,17 @@
           <Property Name="Supervisor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Is_Sent" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="proc_SearchJobsBetweenDates_Result">
+          <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="Job_No" Nullable="true" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FormType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -214,6 +233,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_SearchJobsBetweenDates" FunctionName="VatasSolutionModel.Store.proc_SearchJobsBetweenDates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_SearchJobsBetweenDates_Result">
+                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+                <ScalarProperty Name="Job_No" ColumnName="Job No" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="TAN" ColumnName="TAN" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

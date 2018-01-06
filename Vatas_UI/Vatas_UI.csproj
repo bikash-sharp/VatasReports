@@ -1053,6 +1053,7 @@
     <Content Include="Reports\Return_Pending.aspx" />
     <Content Include="Reports\Return_Recv_Front_Office.aspx" />
     <Content Include="Reports\Return_Uploaded.aspx" />
+    <Content Include="Reports\Search_Jobs_Between_Dates.aspx" />
     <Content Include="Root.Master" />
     <Content Include="SiteAdmin.master" />
     <Content Include="SiteUser.master" />
@@ -1207,6 +1208,13 @@
     </Compile>
     <Compile Include="Reports\Return_Uploaded.aspx.designer.cs">
       <DependentUpon>Return_Uploaded.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Search_Jobs_Between_Dates.aspx.cs">
+      <DependentUpon>Search_Jobs_Between_Dates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Search_Jobs_Between_Dates.aspx.designer.cs">
+      <DependentUpon>Search_Jobs_Between_Dates.aspx</DependentUpon>
     </Compile>
     <Compile Include="Root.Master.cs">
       <DependentUpon>Root.Master</DependentUpon>
