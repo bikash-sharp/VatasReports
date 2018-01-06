@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.3
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vatas_UI", "Vatas_UI\Vatas_UI.csproj", "{191371CF-50E2-406D-A7D2-CA41FEFB58AC}"
 EndProject
@@ -20,6 +20,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseUpdates", "DatabaseUpdates", "{7F41BECA-792A-42FC-9761-6AD173144D28}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Procedures", "Procedures", "{E9577DE9-6845-4072-8CC0-6A9DCA248E9F}"
+	ProjectSection(SolutionItems) = preProject
+		proc_SearchJobsBetweenDates.sql = proc_SearchJobsBetweenDates.sql
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Queries", "Queries", "{4AC8E38D-DC00-4263-960A-9EEC3AF9F0A2}"
 EndProject
