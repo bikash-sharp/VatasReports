@@ -95,6 +95,14 @@ namespace Vatas_Wrapper
                 return BLReports.Instance(context).ReturnsPending();
             }
         }
+
+        public List<ReturnsCL> SearchJobsBetweenDates(DateTime startDate, DateTime endDate)
+        {
+            using (VatasSolutionEntities context = new VatasSolutionEntities())
+            {
+                return BLReports.Instance(context).SearchJobsBetweenDates(startDate,endDate);
+            }
+        }
         #endregion
 
         #region Process

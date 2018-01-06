@@ -30,6 +30,7 @@
             <li id="liReport4"><a href="/ReturnIncompleted" title="Return Incompleted"><i class="fa fa-files-o"></i>Return Incompleted</a></li>
             <li id="liReport5"><a href="/ReturnUploaded" title="Return Uploaded"><i class="fa fa-files-o"></i>Return Uploaded</a></li>
             <li id="liReport6"><a href="/ReturnPending" title="Pending Returns For Upload"><i class="fa fa-files-o"></i>Pending Returns for Upload</a></li>
+            <li id="liReport7"><a href="/SearchJobsBetweenDates" title="Search Jobs Between Dates"><i class="fa fa-files-o"></i>Search Jobs Between Dates</a></li>
         </ul>
     </li>
 </ul>

@@ -44,6 +44,7 @@ namespace Vatas_UI
             routes.MapPageRoute("ReturnIncompleted", "ReturnIncompleted", "~/Reports/Return_InCompleted.aspx", true);
             routes.MapPageRoute("ReturnUploaded", "ReturnUploaded", "~/Reports/Return_Uploaded.aspx", true);
             routes.MapPageRoute("ReturnPending", "ReturnPending", "~/Reports/Return_Pending.aspx", true);
+            routes.MapPageRoute("SearchJobsBetweenDates", "SearchJobsBetweenDates", "~/Reports/Search_Jobs_Between_Dates.aspx", true);
             #endregion
 
             #region Process Based Pages
