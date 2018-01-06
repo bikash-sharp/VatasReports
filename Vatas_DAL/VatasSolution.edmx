@@ -19,6 +19,7 @@
           <Property Name="Reason_for_Delay" Type="nvarchar(max)" />
           <Property Name="Supervisor" Type="nvarchar" MaxLength="100" />
           <Property Name="Is_Sent" Type="nvarchar" MaxLength="2" />
+          <Property Name="PRN_No" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_ProcessPriority">
           <Key>
@@ -134,6 +135,7 @@
           <Property Name="Reason_for_Delay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Supervisor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Is_Sent" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="PRN_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <ComplexType Name="proc_SearchJobsBetweenDates_Result">
           <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
@@ -220,6 +222,7 @@
           <EntitySetMapping Name="tbl_ProcessesHistoryofjob">
             <EntityTypeMapping TypeName="VatasSolutionModel.tbl_ProcessesHistoryofjob">
               <MappingFragment StoreEntitySet="tbl_ProcessesHistoryofjob">
+                <ScalarProperty Name="PRN_No" ColumnName="PRN_No" />
                 <ScalarProperty Name="Is_Sent" ColumnName="Is_Sent" />
                 <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
                 <ScalarProperty Name="Reason_for_Delay" ColumnName="Reason_for_Delay" />

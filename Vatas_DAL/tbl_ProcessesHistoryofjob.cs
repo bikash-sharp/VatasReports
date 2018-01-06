@@ -24,5 +24,6 @@ namespace Vatas_DAL
         public string Reason_for_Delay { get; set; }
         public string Supervisor { get; set; }
         public string Is_Sent { get; set; }
+        public string PRN_No { get; set; }
     }
 }

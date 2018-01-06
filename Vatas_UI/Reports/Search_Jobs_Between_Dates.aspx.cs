@@ -87,6 +87,7 @@ namespace Vatas_UI.Reports
             }
             catch (Exception ex)
             {
+                Console.Write(ex.Message);
                 throw;
             }
         }
