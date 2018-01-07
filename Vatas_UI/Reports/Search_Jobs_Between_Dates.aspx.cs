@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -79,8 +80,8 @@ namespace Vatas_UI.Reports
                 if (!string.IsNullOrEmpty(dateRange))
                 {
                     string[] date = Regex.Split(dateRange, " - ");
-                    startDate = Convert.ToDateTime(date[0].Trim());
-                    endDate = Convert.ToDateTime(date[1].Trim());
+                    startDate = DateTime.ParseExact(date[0].Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    endDate = DateTime.ParseExact(date[1].Trim(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 }
 
             }

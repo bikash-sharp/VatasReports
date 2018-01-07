@@ -100,14 +100,11 @@
         $(document).ready(function () {
             $('#liReport').addClass('active');
             $('#liReport7').addClass('active');
-            var start = moment();
-            var end = moment().add(1, 'month');
             $('.jobSearch-DateRange').daterangepicker({
-                startDate: start,
-                endDate: end,
                 autoUpdateInput: true,
                 locale: {
-                    cancelLabel: 'Clear'
+                    cancelLabel: 'Clear',
+                    format: 'DD-MM-YYYY'
                 }
             });
             $('.jobSearch-DateRange').on('apply.daterangepicker', function (ev, picker) {

@@ -65,13 +65,13 @@ namespace Vatas_UI
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            //CultureInfo newCulture = (CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
-            //newCulture.DateTimeFormat.ShortDatePattern = "dd-MMM-yyyy";
-            //newCulture.DateTimeFormat.DateSeparator = "-";
+            CultureInfo newCulture = (CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
+            newCulture.DateTimeFormat.ShortDatePattern = "dd-MM-yyyy";
+            newCulture.DateTimeFormat.DateSeparator = "-";
 
 
-            //newCulture.DateTimeFormat.LongDatePattern = "dd-MMM-yyyy";
-            //Thread.CurrentThread.CurrentCulture = newCulture;
+            newCulture.DateTimeFormat.LongDatePattern = "dd-MM-yyyy";
+            Thread.CurrentThread.CurrentCulture = newCulture;
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
