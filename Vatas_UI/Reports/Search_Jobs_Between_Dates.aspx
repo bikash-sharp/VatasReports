@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-3 col-xs-3">
-                                <asp:Button ID="btnSearch" OnClick="btnSearch_Click" runat="server" UseSubmitBehavior="true" class="btn btn-info" Text="Search" ValidationGroup="DateRange"></asp:Button>
+                                <asp:Button ID="btnSearch" OnClick="btnSearch_Click" runat="server" CssClass="btn btn-info submit" Text="Search" ValidationGroup="DateRange"></asp:Button>
                             </div>
                         </div>
                     </div>
@@ -89,9 +89,9 @@
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->
-        <%-- <div class="overlay">
+         <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
-        </div>--%>
+        </div>
     </section>
     <!-- /.content -->
 </asp:Content>
@@ -104,11 +104,11 @@
                 autoUpdateInput: true,
                 locale: {
                     cancelLabel: 'Clear',
-                    format: 'DD-MM-YYYY'
+                    format: 'DD/MM/YYYY'
                 }
             });
             $('.jobSearch-DateRange').on('apply.daterangepicker', function (ev, picker) {
-                $('.txtDateRange').val(picker.startDate.format('DD-MM-YYYY') + " - " + picker.endDate.format('DD-MM-YYYY'));
+                $('.txtDateRange').val(picker.startDate.format('DD/MM/YYYY') + " - " + picker.endDate.format('DD/MM/YYYY'));
             });
 
             $('.jobSearch-DateRange').on('cancel.daterangepicker', function (ev, picker) {

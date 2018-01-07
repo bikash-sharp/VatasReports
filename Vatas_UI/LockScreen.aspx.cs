@@ -30,8 +30,10 @@ namespace Vatas_UI
             {
                 lblUserName.Text = "User";
                 hfUserName.Value = BLFunction.GetUserName();
-                Session.Abandon();
+                HttpContext.Current.Session.Abandon();
                 FormsAuthentication.SignOut();
+                HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
+                HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
             }
             txtPassword.Focus();
 

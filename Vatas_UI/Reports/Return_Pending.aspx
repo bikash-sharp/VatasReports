@@ -83,7 +83,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
      <script type="text/javascript">
          $(document).ready(function () {
-             $('#liReport').addClass('active');
+            $('#liReport').addClass('active');
             $('#liReport6').addClass('active');
         });
     </script>

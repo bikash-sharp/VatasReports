@@ -66,7 +66,7 @@
             <div class="box-footer">
                 <% if(this.rptReport.Items.Count > 0)
                    { %>
-                        <asp:Button ID="btnExport" runat="server" UseSubmitBehavior="true" Text="Export To Excel" CssClass="btn btn-info pull-right btn-lg submit" OnClick="btnExport_Click" />
+                        <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right btn-lg submit" OnClick="btnExport_Click" />
                   <%     
                    } %>
                 
