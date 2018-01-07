@@ -63,7 +63,7 @@ namespace Vatas_UI
                     }
 
                     Response.Cookies.Add(cookie);
-                    Response.RedirectToRoute("Report");
+                    Response.RedirectToRoute("Home");
                 }
                 else
                 {

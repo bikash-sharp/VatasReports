@@ -16,7 +16,7 @@
         <div class="lockscreen-item">
             <!-- lockscreen image -->
             <div class="lockscreen-image">
-                <img src="<%=this.AppPath() +" Assets/dist/img/user1-128x128.jpg" %>" alt="User Image" />
+                <img src="<%=this.AppPath() +"Assets/dist/img/user1-128x128.jpg" %>" alt="User Image" />
             </div>
             <!-- /.lockscreen-image -->
             <asp:Panel ID="Panel1" runat="server" DefaultButton="lnkLogin">
