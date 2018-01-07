@@ -100,10 +100,22 @@
         $(document).ready(function () {
             $('#liReport').addClass('active');
             $('#liReport7').addClass('active');
-
-            $('.jobSearch-DateRange').daterangepicker();
+            var start = moment();
+            var end = moment().add(1, 'month');
+            $('.jobSearch-DateRange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                autoUpdateInput: true,
+                locale: {
+                    cancelLabel: 'Clear'
+                }
+            });
             $('.jobSearch-DateRange').on('apply.daterangepicker', function (ev, picker) {
                 $('.txtDateRange').val(picker.startDate.format('DD-MM-YYYY') + " - " + picker.endDate.format('DD-MM-YYYY'));
+            });
+
+            $('.jobSearch-DateRange').on('cancel.daterangepicker', function (ev, picker) {
+                $('.txtDateRange').val('');
             });
         });
     </script>
