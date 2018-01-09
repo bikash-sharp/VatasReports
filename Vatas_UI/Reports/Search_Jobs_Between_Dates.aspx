@@ -19,18 +19,35 @@
             </div>
             <div class="box-header">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="col-md-4 col-sm-3 col-xs-3 control-label" style="text-align: right;">Date range:</label>
-                            <div class="col-md-4 col-sm-6 col-xs-6" style="padding: 0">
-                                <div class="input-group jobSearch-DateRange">
-                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                    <asp:TextBox ID="txtDateRange" class="form-control pull-left txtDateRange" runat="server" />
-                                    <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" ControlToValidate="txtDateRange" EnableClientScript="true" ValidationGroup="DateRange" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                    <div class="portlet light bordered col-md-offset-4 col-md-4">
+                        <div class="portlet-body form">
+                            <div class="form-horizontal" role="form">
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Date range:</label>
+                                        <div class="input-group col-md-9 jobSearch-DateRange">
+                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                            <asp:TextBox ID="txtDateRange" class="form-control pull-left txtDateRange" runat="server" />
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" ControlToValidate="txtDateRange" EnableClientScript="true" ValidationGroup="DateRange" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4 col-sm-3 col-xs-3">
-                                <asp:Button ID="btnSearch" OnClick="btnSearch_Click" runat="server" CssClass="btn btn-info submit" Text="Search" ValidationGroup="DateRange"></asp:Button>
+                                <div class="form-body">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Firm Name:</label>
+                                        <div class="input-group col-md-9">
+                                            <asp:DropDownList ID="ddlFirmName" runat="server" CssClass="form-control pull-left" EnableViewState="true"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class=" input-group col-md-offset-3 col-md-9">
+                                            <asp:Button ID="Button1" OnClick="btnSearch_Click" runat="server" CssClass="btn btn-info submit" Text="Search" ValidationGroup="DateRange"></asp:Button>
+                                            <%--<button type="button" class="btn default">Cancel</button>--%>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,7 +106,7 @@
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->
-         <div class="overlay">
+        <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
         </div>
     </section>

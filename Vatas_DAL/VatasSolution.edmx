@@ -41,12 +41,14 @@
         <Function Name="proc_GetReturnsByJobStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="JobStatus" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="proc_Report_GetAllFirmName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_Report_GetReturnsByJobStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="JobStatus" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="proc_Report_SearchJobsBetweenDates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="proc_Report_SearchJobsBetweenDatesWithFirmName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="FirmName" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="VatasSolutionModelStoreContainer">
           <EntitySet Name="tbl_ProcessesHistoryofjob" EntityType="Self.tbl_ProcessesHistoryofjob" Schema="dbo" store:Type="Tables" />
@@ -70,6 +72,12 @@
           <FunctionImport Name="proc_Report_SearchJobsBetweenDates" ReturnType="Collection(VatasSolutionModel.proc_Report_SearchJobsBetweenDates_Result)">
             <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="proc_Report_GetAllFirmName" ReturnType="Collection(String)" />
+          <FunctionImport Name="proc_Report_SearchJobsBetweenDatesWithFirmName" ReturnType="Collection(VatasSolutionModel.proc_Report_SearchJobsBetweenDatesWithFirmName_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="FirmName" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="proc_GetReturnsByJobStatus_Result">
@@ -129,6 +137,17 @@
           <Property Type="String" Name="AssignedDate" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="proc_Report_SearchJobsBetweenDates_Result">
+          <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="Job_No" Nullable="true" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FormType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
+        </ComplexType>
+        <ComplexType Name="proc_Report_SearchJobsBetweenDatesWithFirmName_Result">
           <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
           <Property Type="Int64" Name="Job_No" Nullable="true" />
           <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
@@ -212,9 +231,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_Report_SearchJobsBetweenDates" FunctionName="VatasSolutionModel.Store.proc_Report_SearchJobsBetweenDates">
+          <FunctionImportMapping FunctionImportName="proc_Report_GetAllFirmName" FunctionName="VatasSolutionModel.Store.proc_Report_GetAllFirmName" />
+          <FunctionImportMapping FunctionImportName="proc_Report_SearchJobsBetweenDatesWithFirmName" FunctionName="VatasSolutionModel.Store.proc_Report_SearchJobsBetweenDatesWithFirmName">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_Report_SearchJobsBetweenDates_Result">
+              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_Report_SearchJobsBetweenDatesWithFirmName_Result">
                 <ScalarProperty Name="FirmName" ColumnName="FirmName" />
                 <ScalarProperty Name="Job_No" ColumnName="Job No" />
                 <ScalarProperty Name="AccountName" ColumnName="AccountName" />

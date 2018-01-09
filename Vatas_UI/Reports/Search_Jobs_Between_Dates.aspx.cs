@@ -5,6 +5,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using Vatas_Common;
 using Vatas_Wrapper;
 
@@ -12,32 +13,46 @@ namespace Vatas_UI.Reports
 {
     public partial class Search_Jobs_Between_Dates : System.Web.UI.Page
     {
+        string selectedValue = "All";
         protected void Page_Load(object sender, EventArgs e)
         {
             string path = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpContext.Current.Request.ApplicationPath;
             txtDateRange.Attributes.Add("readonly", "readonly");
+            BindFirmName();
             if (!Page.IsPostBack)
             {
-                BindData(DateTime.Now, DateTime.Now);
+                BindData(DateTime.Now.AddMonths(-1), DateTime.Now, "All");
             }
         }
 
-        public void BindData(DateTime startDate, DateTime endDate)
+        public void BindFirmName()
         {
-            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate);
+            List<string> firmNames = DataProviderWrapper.Instance.Report_GetAllFirmName();
+            if (firmNames.Count > 0)
+            {
+                ddlFirmName.DataSource = firmNames;
+                ddlFirmName.DataBind();
+                ddlFirmName.Items.Insert(0, new ListItem("All", "All"));
+            }
+        }
+
+        public void BindData(DateTime startDate, DateTime endDate, string firmName)
+        {
+            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, firmName);
             if (result.Count > 0)
             {
                 rptReport.DataSource = result;
                 rptReport.DataBind();
             }
+            ddlFirmName.SelectedValue = selectedValue;
         }
 
-        public void Export(DateTime startDate, DateTime endDate)
+        public void Export(DateTime startDate, DateTime endDate, string firmName)
         {
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_SearchJobsBetweenDates.csv";
 
-            var ResultList = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate);
+            var ResultList = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, firmName);
             if (ResultList.Count > 0)
             {
                 strwriter.WriteLine("\"Sr.No\",\"Firm Name\",\"File No\",\"TAN\",\"Account Name\",\"FY\",\"FormType\",\"Quarter\",\"RetType\",\"Date\"");
@@ -60,16 +75,23 @@ namespace Vatas_UI.Reports
         {
             DateTime startDate = DateTime.Now;
             DateTime endDate = DateTime.Now;
+            string firmName = ddlFirmName.SelectedItem.Value;
             GetDateRange(ref startDate, ref endDate);
-            Export(startDate, endDate);
+            Export(startDate, endDate, firmName);
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            string firmName = "All";
             DateTime startDate = DateTime.Now;
             DateTime endDate = DateTime.Now;
+            if (!string.IsNullOrEmpty(ddlFirmName.SelectedValue))
+            {
+                firmName = ddlFirmName.SelectedItem.Value;
+                selectedValue = firmName;
+            }
             GetDateRange(ref startDate, ref endDate);
-            BindData(startDate, endDate);
+            BindData(startDate, endDate, firmName);
         }
 
         private void GetDateRange(ref DateTime startDate, ref DateTime endDate)
@@ -80,7 +102,7 @@ namespace Vatas_UI.Reports
                 if (!string.IsNullOrEmpty(dateRange))
                 {
                     string[] date = Regex.Split(dateRange, " - ");
-                    startDate = DateTime.ParseExact(date[0].Trim().Replace('/','-'), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    startDate = DateTime.ParseExact(date[0].Trim().Replace('/', '-'), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                     endDate = DateTime.ParseExact(date[1].Trim().Replace('/', '-'), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 }
 

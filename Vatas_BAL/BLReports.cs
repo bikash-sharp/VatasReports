@@ -68,7 +68,7 @@ namespace Vatas_BAL
         //    return result;
         //}
 
-        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus,char IsSent)
+        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent)
         {
             List<ReturnsCL> result = new List<ReturnsCL>();
             try
@@ -115,13 +115,13 @@ namespace Vatas_BAL
             return result;
         }
 
-        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate,string firmName)
         {
             List<ReturnsCL> result = new List<ReturnsCL>();
             try
             {
                 result =
-                    _vatasSolution.proc_Report_SearchJobsBetweenDates(startDate,endDate)
+                    _vatasSolution.proc_Report_SearchJobsBetweenDatesWithFirmName(startDate, endDate,firmName)
                         .ToList()
                         .Select(p => new ReturnsCL
                         {
@@ -135,6 +135,20 @@ namespace Vatas_BAL
                             TAN = p.TAN,
                             JobNo = (p.Job_No != null ? p.Job_No.Value : 0)
                         }).ToList();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+            }
+            return result;
+        }
+
+        public List<string> Report_GetAllFirmName()
+        {
+            List<string> result = new List<string>();
+            try
+            {
+                result = _vatasSolution.proc_Report_GetAllFirmName().ToList();
             }
             catch (Exception ex)
             {

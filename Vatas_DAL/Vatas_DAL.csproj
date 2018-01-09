@@ -75,6 +75,9 @@
     <Compile Include="proc_Report_GetReturnsByJobStatus_Result.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_Report_SearchJobsBetweenDatesWithFirmName_Result.cs">
+      <DependentUpon>VatasSolution.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_Report_SearchJobsBetweenDates_Result.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>
