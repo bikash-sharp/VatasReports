@@ -20,23 +20,24 @@ namespace Vatas_UI
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            if (!this.Page.User.Identity.IsAuthenticated)
+            if (!Page.IsPostBack)
             {
-                HttpContext.Current.Response.RedirectToRoute("Login");
-                return;
+                if (!this.Page.User.Identity.IsAuthenticated)
+                {
+                    HttpContext.Current.Response.RedirectToRoute("Login");
+                    return;
+                }
+                else
+                {
+                    lblUserName.Text = "User";
+                    hfUserName.Value = BLFunction.GetUserName();
+                    HttpContext.Current.Session.Abandon();
+                    FormsAuthentication.SignOut();
+                    HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
+                    HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
+                }
+                txtPassword.Focus();
             }
-            else
-            {
-                lblUserName.Text = "User";
-                hfUserName.Value = BLFunction.GetUserName();
-                HttpContext.Current.Session.Abandon();
-                FormsAuthentication.SignOut();
-                HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
-                HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
-            }
-            txtPassword.Focus();
-
         }
 
         protected void lnkLogin_Click(object sender, EventArgs e)
