@@ -11,16 +11,9 @@ namespace Vatas_DAL
 {
     using System;
     
-    public partial class proc_Report_SearchJobsBetweenDates_Result
+    public partial class proc_Report_GetAllFirmName_Result
     {
-        public string FirmName { get; set; }
-        public Nullable<long> Job_No { get; set; }
-        public string AccountName { get; set; }
-        public string TAN { get; set; }
-        public string FinancialYear { get; set; }
-        public string ReturnType { get; set; }
-        public string Quarter { get; set; }
-        public string FormType { get; set; }
-        public string JobDate { get; set; }
+        public int FirmId { get; set; }
+        public string NameOfFirm { get; set; }
     }
 }

@@ -64,15 +64,15 @@ namespace Vatas_Wrapper
             }
         }
 
-        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate,string firmName)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate,int? firmId)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLReports.Instance(context).Report_SearchJobsBetweenDates(startDate,endDate, firmName);
+                return BLReports.Instance(context).Report_SearchJobsBetweenDates(startDate,endDate, firmId);
             }
         }
 
-        public List<string> Report_GetAllFirmName()
+        public List<DropDownCL> Report_GetAllFirmName()
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {

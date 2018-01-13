@@ -40,6 +40,28 @@ namespace Vatas_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetReturnsByJobStatus_Result>("proc_GetReturnsByJobStatus", jobStatusParameter);
         }
     
+        public virtual ObjectResult<proc_Report_SearchJobsBetweenDatesWithFirmName_Result> proc_Report_SearchJobsBetweenDatesWithFirmName(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> firmId)
+        {
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var firmIdParameter = firmId.HasValue ?
+                new ObjectParameter("FirmId", firmId) :
+                new ObjectParameter("FirmId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_SearchJobsBetweenDatesWithFirmName_Result>("proc_Report_SearchJobsBetweenDatesWithFirmName", startDateParameter, endDateParameter, firmIdParameter);
+        }
+    
+        public virtual ObjectResult<proc_Report_GetAllFirmName_Result> proc_Report_GetAllFirmName()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_GetAllFirmName_Result>("proc_Report_GetAllFirmName");
+        }
+    
         public virtual ObjectResult<proc_Report_GetReturnsByJobStatus_Result> proc_Report_GetReturnsByJobStatus(string jobStatus)
         {
             var jobStatusParameter = jobStatus != null ?
@@ -47,41 +69,6 @@ namespace Vatas_DAL
                 new ObjectParameter("JobStatus", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_GetReturnsByJobStatus_Result>("proc_Report_GetReturnsByJobStatus", jobStatusParameter);
-        }
-    
-        public virtual ObjectResult<proc_Report_SearchJobsBetweenDates_Result> proc_Report_SearchJobsBetweenDates(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
-        {
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_SearchJobsBetweenDates_Result>("proc_Report_SearchJobsBetweenDates", startDateParameter, endDateParameter);
-        }
-    
-        public virtual ObjectResult<string> proc_Report_GetAllFirmName()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("proc_Report_GetAllFirmName");
-        }
-    
-        public virtual ObjectResult<proc_Report_SearchJobsBetweenDatesWithFirmName_Result> proc_Report_SearchJobsBetweenDatesWithFirmName(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string firmName)
-        {
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
-    
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
-    
-            var firmNameParameter = firmName != null ?
-                new ObjectParameter("FirmName", firmName) :
-                new ObjectParameter("FirmName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_SearchJobsBetweenDatesWithFirmName_Result>("proc_Report_SearchJobsBetweenDatesWithFirmName", startDateParameter, endDateParameter, firmNameParameter);
         }
     }
 }

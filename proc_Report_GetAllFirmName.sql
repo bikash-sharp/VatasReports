@@ -8,7 +8,7 @@ GO
 -- Create date: <07-01-2018>
 -- Description:	<Get all distinct firm name>
 -- =============================================
-CREATE PROCEDURE proc_Report_GetAllFirmName
+ALTER PROCEDURE proc_Report_GetAllFirmName
 	
 AS
 BEGIN
@@ -16,6 +16,6 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	SELECT DISTINCT NameOfFirm FROM tbl_Firm
+	SELECT FirmId, NameOfFirm FROM tbl_Firm
 END
 GO

@@ -20,6 +20,7 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 		SELECT DISTINCT 
+			TF.FirmId as FirmId,
 			TF.NameOfFirm As FirmName,
 			RC.SerialNo_By_Job_Firm AS [Job No],
 			--PHJ.ID AS [JobID],
@@ -35,8 +36,7 @@ BEGIN
 			LEFT OUTER JOIN tbl_ProcessesHistoryofjob PHJ ON RC.Job_ID = PHJ.MasterID 
 			LEFT OUTER JOIN tbl_Firm tf ON rc.FirmID = tf.FirmId
 		WHERE 
-			(PHJ.Job_Status = 'FO') AND (PHJ.Is_Sent = '') 
-			AND TF.NameOfFirm=
+			TF.NameOfFirm=
 			CASE LOWER(@FirmName)
 			WHEN 'all' THEN TF.NameOfFirm
 			ELSE @FirmName

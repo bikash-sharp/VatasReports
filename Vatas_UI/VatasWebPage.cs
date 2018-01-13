@@ -6,17 +6,22 @@ using Vatas_Common;
 
 namespace Vatas_UI
 {
-    public class VatasWebPage : System.Web.UI.Page
+    public abstract partial class VatasWebPage : System.Web.UI.Page
     {
-        protected override void OnUnload(EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
             if (!this.Page.User.Identity.IsAuthenticated)
             {
                 HttpContext.Current.Response.RedirectToRoute("Login");
                 return;
             }
-            base.OnUnload(e);
+            base.OnLoad(e);
         }
+        //protected override void OnUnload(EventArgs e)
+        //{
+            
+        //    base.OnUnload(e);
+        //}
 
         public int CurrentUserID
         {

@@ -67,7 +67,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" EnablePartialRendering="true" LoadScriptsBeforeUI="true" ScriptMode="Release"></asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" EnablePartialRendering="true" LoadScriptsBeforeUI="true" ScriptMode="Release" AjaxFrameworkMode="Enabled" ClientIDMode="Static"></asp:ScriptManager>
         <asp:HiddenField ID="hfPath" ClientIDMode="Static" runat="server" />
         <div class="wrapper">
             <header class="main-header">
@@ -213,6 +213,7 @@
 
             function InitializeRequest(sender, args) {
                 postBackElement = args.get_postBackElement();
+                alert(postBackElement);
                 $('.overlay').css('display', 'block');
             }
 

@@ -115,13 +115,13 @@ namespace Vatas_BAL
             return result;
         }
 
-        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate,string firmName)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate,int? firmId)
         {
             List<ReturnsCL> result = new List<ReturnsCL>();
             try
             {
                 result =
-                    _vatasSolution.proc_Report_SearchJobsBetweenDatesWithFirmName(startDate, endDate,firmName)
+                    _vatasSolution.proc_Report_SearchJobsBetweenDatesWithFirmName(startDate, endDate, firmId)
                         .ToList()
                         .Select(p => new ReturnsCL
                         {
@@ -143,12 +143,16 @@ namespace Vatas_BAL
             return result;
         }
 
-        public List<string> Report_GetAllFirmName()
+        public List<DropDownCL> Report_GetAllFirmName()
         {
-            List<string> result = new List<string>();
+            List<DropDownCL> result = new List<DropDownCL>();
             try
             {
-                result = _vatasSolution.proc_Report_GetAllFirmName().ToList();
+                result = _vatasSolution.proc_Report_GetAllFirmName().Select(p => new DropDownCL
+                {
+                    DataText = p.NameOfFirm + "",
+                    DataValue = p.FirmId + ""
+                }).ToList();
             }
             catch (Exception ex)
             {

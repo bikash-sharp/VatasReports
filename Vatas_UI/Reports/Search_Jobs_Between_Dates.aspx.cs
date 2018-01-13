@@ -11,48 +11,49 @@ using Vatas_Wrapper;
 
 namespace Vatas_UI.Reports
 {
-    public partial class Search_Jobs_Between_Dates : System.Web.UI.Page
+    public partial class Search_Jobs_Between_Dates : VatasWebPage
     {
-        string selectedValue = "All";
         protected void Page_Load(object sender, EventArgs e)
         {
-            string path = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpContext.Current.Request.ApplicationPath;
             txtDateRange.Attributes.Add("readonly", "readonly");
-            BindFirmName();
             if (!Page.IsPostBack)
             {
-                BindData(DateTime.Now.AddMonths(-1), DateTime.Now, "All");
+                BindFirmName();
             }
+            
         }
 
         public void BindFirmName()
         {
-            List<string> firmNames = DataProviderWrapper.Instance.Report_GetAllFirmName();
+            List<DropDownCL> firmNames = DataProviderWrapper.Instance.Report_GetAllFirmName();
+            ddlFirmName.DataSource = null;
             if (firmNames.Count > 0)
             {
                 ddlFirmName.DataSource = firmNames;
-                ddlFirmName.DataBind();
-                ddlFirmName.Items.Insert(0, new ListItem("All", "All"));
+                ddlFirmName.DataTextField = "DataText";
+                ddlFirmName.DataValueField = "DataValue";
             }
+            ddlFirmName.DataBind();
         }
 
-        public void BindData(DateTime startDate, DateTime endDate, string firmName)
+
+        public void BindData(DateTime startDate, DateTime endDate, int? firmId = null)
         {
-            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, firmName);
+            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, firmId);
+            rptReport.DataSource = null;
             if (result.Count > 0)
             {
                 rptReport.DataSource = result;
-                rptReport.DataBind();
             }
-            ddlFirmName.SelectedValue = selectedValue;
+            rptReport.DataBind();
         }
 
-        public void Export(DateTime startDate, DateTime endDate, string firmName)
+        public void Export(DateTime startDate, DateTime endDate, int? FirmId)
         {
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_SearchJobsBetweenDates.csv";
 
-            var ResultList = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, firmName);
+            var ResultList = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, FirmId);
             if (ResultList.Count > 0)
             {
                 strwriter.WriteLine("\"Sr.No\",\"Firm Name\",\"File No\",\"TAN\",\"Account Name\",\"FY\",\"FormType\",\"Quarter\",\"RetType\",\"Date\"");
@@ -75,23 +76,28 @@ namespace Vatas_UI.Reports
         {
             DateTime startDate = DateTime.Now;
             DateTime endDate = DateTime.Now;
-            string firmName = ddlFirmName.SelectedItem.Value;
+            int? FirmId = null;
+            if(ddlFirmName.SelectedValue != "0")
+            {
+                int _firmId = 0;
+                int.TryParse(ddlFirmName.SelectedValue, out _firmId);
+                FirmId = _firmId;
+            }
             GetDateRange(ref startDate, ref endDate);
-            Export(startDate, endDate, firmName);
+            Export(startDate, endDate, FirmId);
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            string firmName = "All";
+            int? FirmId = null;
             DateTime startDate = DateTime.Now;
             DateTime endDate = DateTime.Now;
-            if (!string.IsNullOrEmpty(ddlFirmName.SelectedValue))
+            if (ddlFirmName.SelectedValue != "0")
             {
-                firmName = ddlFirmName.SelectedItem.Value;
-                selectedValue = firmName;
+                FirmId = int.Parse(ddlFirmName.SelectedValue);
             }
             GetDateRange(ref startDate, ref endDate);
-            BindData(startDate, endDate, firmName);
+            BindData(startDate, endDate, FirmId);
         }
 
         private void GetDateRange(ref DateTime startDate, ref DateTime endDate)
@@ -109,9 +115,28 @@ namespace Vatas_UI.Reports
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
-                throw;
+                BLFunction.ShowAlert(this, ex.Message, ResponseType.DANGER);
+                //Console.Write(ex.Message);
+                //throw;
             }
+        }
+
+        protected void ddlFirmName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DateTime startDate = DateTime.Now;
+            DateTime endDate = DateTime.Now;
+            Nullable<int> FirmId = null;
+            GetDateRange(ref startDate, ref endDate);
+            if (ddlFirmName.SelectedValue != "0")
+            {
+                FirmId = int.Parse(ddlFirmName.SelectedValue);
+            }
+            BindData(startDate, endDate, FirmId);
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

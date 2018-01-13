@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.master" AutoEventWireup="true" CodeBehind="Search_Jobs_Between_Dates.aspx.cs" Inherits="Vatas_UI.Reports.Search_Jobs_Between_Dates" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.master" AutoEventWireup="true" CodeBehind="Search_Jobs_Between_Dates.aspx.cs" Inherits="Vatas_UI.Reports.Search_Jobs_Between_Dates" EnableViewState="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -20,14 +20,14 @@
             <div class="box-header">
                 <div class="row">
                     <div class="portlet light bordered col-md-offset-4 col-md-4">
-                        <div class="portlet-body form">
-                            <div class="form-horizontal" role="form">
+                        <div class="portlet-body">
+                            <div class="form-horizontal">
                                 <div class="form-body">
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">Date range:</label>
                                         <div class="input-group col-md-9 jobSearch-DateRange">
                                             <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                            <asp:TextBox ID="txtDateRange" class="form-control pull-left txtDateRange" runat="server" />
+                                            <asp:TextBox ID="txtDateRange" class="form-control pull-left txtDateRange" runat="server"/>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" ControlToValidate="txtDateRange" EnableClientScript="true" ValidationGroup="DateRange" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                                         </div>
                                     </div>
@@ -36,15 +36,16 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">Firm Name:</label>
                                         <div class="input-group col-md-9">
-                                            <asp:DropDownList ID="ddlFirmName" runat="server" CssClass="form-control pull-left" EnableViewState="true"></asp:DropDownList>
+                                            <asp:DropDownList ID="ddlFirmName" runat="server" CssClass="form-control pull-left" ValidationGroup="DateRange" AppendDataBoundItems="true">
+                                                <asp:ListItem Value="0">--Select--</asp:ListItem>
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class=" input-group col-md-offset-3 col-md-9">
-                                            <asp:Button ID="Button1" OnClick="btnSearch_Click" runat="server" CssClass="btn btn-info submit" Text="Search" ValidationGroup="DateRange"></asp:Button>
-                                            <%--<button type="button" class="btn default">Cancel</button>--%>
+                                            <asp:Button ID="Button1" OnClick="btnSearch_Click" UseSubmitBehavior="true" runat="server" CssClass="btn btn-info" Text="Search" ValidationGroup="DateRange"></asp:Button>
                                         </div>
                                     </div>
                                 </div>

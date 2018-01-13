@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/Root.Master" AutoEventWireup="true" CodeBehind="SiteAdmin.master.cs" Inherits="Vatas_UI.SiteAdmin" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Root.Master" ClientIDMode="Static" AutoEventWireup="true" CodeBehind="SiteAdmin.master.cs" Inherits="Vatas_UI.SiteAdmin" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <asp:ContentPlaceHolder ID="head" runat="server">

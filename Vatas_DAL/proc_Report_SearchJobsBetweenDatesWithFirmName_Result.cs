@@ -13,6 +13,7 @@ namespace Vatas_DAL
     
     public partial class proc_Report_SearchJobsBetweenDatesWithFirmName_Result
     {
+        public Nullable<int> FirmId { get; set; }
         public string FirmName { get; set; }
         public Nullable<long> Job_No { get; set; }
         public string AccountName { get; set; }

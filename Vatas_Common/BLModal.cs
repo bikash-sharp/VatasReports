@@ -10,6 +10,7 @@ namespace Vatas_Common
 
     public class DropDownCL
     {
+        public string SelectedValue { get; set; }
         public string DataText { get; set; }
         public string DataValue { get; set; }
         public DropDownCL() { }
