@@ -1,11 +1,4 @@
-﻿USE [VatasSolution]
-GO
-/****** Object:  StoredProcedure [dbo].[proc_Report_SearchJobsBetweenDates]    Script Date: 07-01-2018 22:19:45 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
+﻿-- =============================================
 -- Author:		<Gaurav Singla>
 -- Create date: <09-01-2017>
 -- Description:	<Report: Search jobs between two dates with firmname>
@@ -13,7 +6,7 @@ GO
 CREATE PROCEDURE [dbo].[proc_Report_SearchJobsBetweenDatesWithFirmName] 
 	@StartDate DateTime,
 	@EndDate DateTime,
-	@FirmName nvarchar(100)
+	@FirmId INT = NULL
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -36,11 +29,7 @@ BEGIN
 			LEFT OUTER JOIN tbl_ProcessesHistoryofjob PHJ ON RC.Job_ID = PHJ.MasterID 
 			LEFT OUTER JOIN tbl_Firm tf ON rc.FirmID = tf.FirmId
 		WHERE 
-			TF.NameOfFirm=
-			CASE LOWER(@FirmName)
-			WHEN 'all' THEN TF.NameOfFirm
-			ELSE @FirmName
-		END 
+			( TF.FirmId = @FirmId Or @FirmId IS NULL)
 			AND (CONVERT(DATETIME,RC.Job_Date,103)>=CONVERT(DATETIME,@StartDate,103) and CONVERT(DATETIME,RC.Job_Date,103)<=CONVERT(DATETIME,@EndDate,103))
 		ORDER BY RC.SerialNo_By_Job_Firm
 END	

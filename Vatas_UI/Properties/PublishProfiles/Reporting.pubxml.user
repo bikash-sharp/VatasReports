@@ -340,7 +340,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/28/2017 17:00:41</publishTime>
     </File>
     <File Include="Assets/dist/js/Timeout.js">
-      <publishTime>01/08/2018 23:53:38</publishTime>
+      <publishTime>01/13/2018 17:17:03</publishTime>
     </File>
     <File Include="Assets/fontawesome/css/font-awesome.css">
       <publishTime>05/28/2017 17:00:41</publishTime>
@@ -2878,10 +2878,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/28/2017 17:00:50</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/13/2018 17:06:20</publishTime>
+      <publishTime>01/13/2018 17:31:52</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/13/2018 17:06:20</publishTime>
+      <publishTime>01/13/2018 17:31:52</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/03/2015 17:43:42</publishTime>
@@ -2953,7 +2953,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/07/2018 01:58:28</publishTime>
     </File>
     <File Include="bin/Vatas_UI.dll">
-      <publishTime>01/13/2018 17:00:27</publishTime>
+      <publishTime>01/13/2018 17:31:26</publishTime>
     </File>
     <File Include="bin/Vatas_UI.pdb">
       <publishTime>01/07/2018 16:39:29</publishTime>
@@ -2989,7 +2989,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/28/2017 16:50:12</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/13/2018 17:06:01</publishTime>
+      <publishTime>01/13/2018 17:31:34</publishTime>
     </File>
     <File Include="Process/Process_AssignReturns.aspx">
       <publishTime>06/06/2017 03:02:44</publishTime>
