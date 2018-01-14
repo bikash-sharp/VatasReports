@@ -66,9 +66,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbAdmin.edmx</DependentUpon>
     </Compile>
-    <Compile Include="proc_GetReturnsByJobStatus_Result.cs">
-      <DependentUpon>VatasSolution.tt</DependentUpon>
-    </Compile>
     <Compile Include="proc_GetUserRoleByRoleId_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>

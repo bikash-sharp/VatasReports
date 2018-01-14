@@ -97,9 +97,9 @@
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->
-        <%--<div class="overlay">
+        <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
-        </div>--%>
+        </div>
     </section>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">

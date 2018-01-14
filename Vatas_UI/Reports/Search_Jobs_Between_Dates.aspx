@@ -37,7 +37,7 @@
                                         <label class="col-md-3 control-label">Firm Name:</label>
                                         <div class="input-group col-md-9">
                                             <asp:DropDownList ID="ddlFirmName" runat="server" CssClass="form-control pull-left" ValidationGroup="DateRange" AppendDataBoundItems="true">
-                                                <asp:ListItem Value="0">--Select--</asp:ListItem>
+                                                <asp:ListItem Value="0">All</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>

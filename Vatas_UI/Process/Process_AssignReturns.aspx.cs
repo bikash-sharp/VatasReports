@@ -13,6 +13,7 @@ namespace Vatas_UI.Process
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(!IsPostBack)
             BindData();
         }
 

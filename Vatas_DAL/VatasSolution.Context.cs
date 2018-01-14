@@ -31,15 +31,6 @@ namespace Vatas_DAL
         public virtual DbSet<tbl_ProcessStatus> tbl_ProcessStatus { get; set; }
         public virtual DbSet<tbl_ProcessesHistoryofjob> tbl_ProcessesHistoryofjob { get; set; }
     
-        public virtual ObjectResult<proc_GetReturnsByJobStatus_Result> proc_GetReturnsByJobStatus(string jobStatus)
-        {
-            var jobStatusParameter = jobStatus != null ?
-                new ObjectParameter("JobStatus", jobStatus) :
-                new ObjectParameter("JobStatus", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetReturnsByJobStatus_Result>("proc_GetReturnsByJobStatus", jobStatusParameter);
-        }
-    
         public virtual ObjectResult<proc_Report_SearchJobsBetweenDatesWithFirmName_Result> proc_Report_SearchJobsBetweenDatesWithFirmName(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> firmId)
         {
             var startDateParameter = startDate.HasValue ?

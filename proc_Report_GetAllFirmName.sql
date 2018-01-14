@@ -16,6 +16,6 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	SELECT FirmId, NameOfFirm FROM tbl_Firm
+	SELECT FirmId, NameOfFirm FROM tbl_Firm Order By NameOfFirm
 END
 GO

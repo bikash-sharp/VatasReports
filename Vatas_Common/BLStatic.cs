@@ -21,7 +21,8 @@ namespace Vatas_Common
         SuperAdmin=10,
         Staff=16,
         DataEntrySupervisor=24,
-        DataEntryOperator=23
+        DataEntryOperator=23,
+        All=0
 
     }
     class BLStatic

@@ -14,7 +14,8 @@ namespace Vatas_DAL
     public partial class proc_Report_GetReturnsByJobStatus_Result
     {
         public string FirmName { get; set; }
-        public Nullable<long> Job_No { get; set; }
+        public Nullable<long> JobNo { get; set; }
+        public int JobID { get; set; }
         public string AccountName { get; set; }
         public string TAN { get; set; }
         public string FinancialYear { get; set; }
@@ -24,5 +25,12 @@ namespace Vatas_DAL
         public string JobDate { get; set; }
         public Nullable<long> UserID { get; set; }
         public string AssignedDate { get; set; }
+        public string Comments { get; set; }
+        public Nullable<long> MasterID { get; set; }
+        public Nullable<long> PreviousAssignedUserID { get; set; }
+        public string PRN { get; set; }
+        public string SuperVisorName { get; set; }
+        public string StatusCode { get; set; }
+        public string StatusDesc { get; set; }
     }
 }

@@ -32,7 +32,7 @@
                                         </th>
                                         <th>SNo</th>
                                         <th>Send To</th>
-                                        <th>Reason to Return</th>
+                                        <th>Reason to Return / Additional Information</th>
                                         <th>Job No</th>
                                         <th>TAN</th>
                                         <th>Account Name</th>
@@ -63,7 +63,7 @@
                                                     <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
                                                 </td>
                                                 <td>
-                                                    <asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" />
+                                                    <asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" /></td>
                                                     <td>
                                                         <asp:Label ID="lblAccountName" Text='<%# Eval("AccountName") %>' runat="server" /></td>
                                                     <td>
@@ -98,9 +98,9 @@
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->
-        <%-- <div class="overlay">
+        <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
-        </div>--%>
+        </div>
     </section>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">

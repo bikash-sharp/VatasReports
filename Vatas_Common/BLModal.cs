@@ -151,12 +151,13 @@ namespace Vatas_Common
         public string ReturnType { get; set; }
         public string Quarter { get; set; }
         public string FormNumber { get; set; }
+        public string PRN { get; set; }
         public int JobID { get; set; }
 
         public List<DropDownCL> ProcessTypeList { get; set; }
         public string ReasonforReturn { get; set; }
         public string CurrentJobStatus { get; set; }
-        public int NextUserID { get; set; }
+        public long? NextUserID { get; set; }
         public string AssignedUser { get; set; }
         public string AssignedByUser { get; set; }
         public ProcessReturnsCL()

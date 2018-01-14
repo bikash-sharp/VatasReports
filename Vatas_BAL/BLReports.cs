@@ -86,7 +86,7 @@ namespace Vatas_BAL
                             Quarter = p.Quarter,
                             ReturnType = p.ReturnType,
                             TAN = p.TAN,
-                            JobNo = (p.Job_No != null ? p.Job_No.Value : 0),
+                            JobNo = (p.JobNo != null ? p.JobNo.Value : 0),
                             AssignedDate = p.AssignedDate,
                             Username = (p.UserID != null ? p.UserID.Value.ToString() : "0")
                         }).ToList();

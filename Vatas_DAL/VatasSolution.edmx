@@ -38,9 +38,6 @@
           <Property Name="Process_Code" Type="nvarchar" MaxLength="3" Nullable="false" />
           <Property Name="ID_Admin" Type="int" />
         </EntityType>
-        <Function Name="proc_GetReturnsByJobStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="JobStatus" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="proc_Report_GetAllFirmName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_Report_GetReturnsByJobStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="JobStatus" Type="varchar" Mode="In" />
@@ -60,9 +57,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="VatasSolutionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="VatasSolutionEntities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="proc_GetReturnsByJobStatus" ReturnType="Collection(VatasSolutionModel.proc_GetReturnsByJobStatus_Result)">
-          <Parameter Name="JobStatus" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="tbl_ProcessPriority" EntityType="VatasSolutionModel.tbl_ProcessPriority" />
           <EntitySet Name="tbl_ProcessStatus" EntityType="VatasSolutionModel.tbl_ProcessStatus" />
           <EntitySet Name="tbl_ProcessesHistoryofjob" EntityType="VatasSolutionModel.tbl_ProcessesHistoryofjob" />
@@ -76,16 +70,6 @@
             <Parameter Name="JobStatus" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="proc_GetReturnsByJobStatus_Result">
-          <Property Type="Int64" Name="JobNo" Nullable="true" />
-          <Property Type="Int32" Name="JobID" Nullable="false" />
-          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FormType" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <EntityType Name="tbl_ProcessPriority">
           <Key>
             <PropertyRef Name="Priority_ID" />
@@ -137,7 +121,8 @@
         </ComplexType>
         <ComplexType Name="proc_Report_GetReturnsByJobStatus_Result">
           <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
-          <Property Type="Int64" Name="Job_No" Nullable="true" />
+          <Property Type="Int64" Name="JobNo" Nullable="true" />
+          <Property Type="Int32" Name="JobID" Nullable="false" />
           <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
@@ -147,6 +132,13 @@
           <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
           <Property Type="Int64" Name="UserID" Nullable="true" />
           <Property Type="String" Name="AssignedDate" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Comments" Nullable="true" />
+          <Property Type="Int64" Name="MasterID" Nullable="true" />
+          <Property Type="Int64" Name="PreviousAssignedUserID" Nullable="true" />
+          <Property Type="String" Name="PRN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SuperVisorName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StatusCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="StatusDesc" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -154,20 +146,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="VatasSolutionModelStoreContainer" CdmEntityContainer="VatasSolutionEntities" >
-          <FunctionImportMapping FunctionImportName="proc_GetReturnsByJobStatus" FunctionName="VatasSolutionModel.Store.proc_GetReturnsByJobStatus">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_GetReturnsByJobStatus_Result">
-                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
-                <ScalarProperty Name="JobID" ColumnName="JobID" />
-                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-                <ScalarProperty Name="TAN" ColumnName="TAN" />
-                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
-                <ScalarProperty Name="FormType" ColumnName="FormType" />
-                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
-                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="tbl_ProcessPriority">
             <EntityTypeMapping TypeName="VatasSolutionModel.tbl_ProcessPriority">
               <MappingFragment StoreEntitySet="tbl_ProcessPriority">
@@ -232,7 +210,8 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="VatasSolutionModel.proc_Report_GetReturnsByJobStatus_Result">
                 <ScalarProperty Name="FirmName" ColumnName="FirmName" />
-                <ScalarProperty Name="Job_No" ColumnName="Job No" />
+                <ScalarProperty Name="JobNo" ColumnName="JobNo" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
                 <ScalarProperty Name="AccountName" ColumnName="AccountName" />
                 <ScalarProperty Name="TAN" ColumnName="TAN" />
                 <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
@@ -242,6 +221,13 @@
                 <ScalarProperty Name="JobDate" ColumnName="JobDate" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="AssignedDate" ColumnName="AssignedDate" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+                <ScalarProperty Name="PreviousAssignedUserID" ColumnName="PreviousAssignedUserID" />
+                <ScalarProperty Name="PRN" ColumnName="PRN" />
+                <ScalarProperty Name="SuperVisorName" ColumnName="SuperVisorName" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="StatusDesc" ColumnName="StatusDesc" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -53,7 +53,7 @@ namespace Vatas_BAL
         public List<ProcessReturnsCL> GetReturnsByJobStatus(string StatusName)
         {
             List<ProcessReturnsCL> result = new List<ProcessReturnsCL>();
-            result = _vatasSolution.proc_GetReturnsByJobStatus(StatusName).Select(p => new ProcessReturnsCL { AccountName = p.AccountName, FinancialYear = p.FinancialYear, FormNumber = p.FormType, JobNo = (p.JobNo.HasValue == true ? p.JobNo.Value : 0), Quarter = p.Quarter, ReturnType = p.ReturnType, TAN = p.TAN, JobID = p.JobID }).ToList();
+            result = _vatasSolution.proc_Report_GetReturnsByJobStatus(StatusName).Select(p => new ProcessReturnsCL { AccountName = p.AccountName, FinancialYear = p.FinancialYear, FormNumber = p.FormType, JobNo = (p.JobNo.HasValue == true ? p.JobNo.Value : 0), Quarter = p.Quarter, ReturnType = p.ReturnType, TAN = p.TAN, JobID = p.JobID, NextUserID=(p.UserID== null ? 0 : p.UserID.Value), ReasonforReturn=p.Comments,PRN=p.PRN, SupervisorName=p.SuperVisorName }).ToList();
             var priorities = getProcessPriorities();
             var processStatus = getProcessStatus();
             foreach (var item in result)
@@ -69,9 +69,23 @@ namespace Vatas_BAL
                 superVisiors = BLSiteUser.Instance(_admin).GetUserRolesByRoleId((int)Roles.DataEntrySupervisor);
                 else if(StatusName == "RDV")
                     superVisiors = BLSiteUser.Instance(_admin).GetUserRolesByRoleId((int)Roles.DataEntryOperator);
+                else
+                    superVisiors = BLSiteUser.Instance(_admin).GetUserRolesByRoleId((int)Roles.All);
+
+                //A Site User can be have multiple Roles, We Need to Send the Distinct User List
+                var UserList = new List<DropDownCL>();
+                foreach(var _usrid  in superVisiors.Select(p=>p.DataValue).Distinct().ToList())
+                {
+                    var SelectedItem = superVisiors.FirstOrDefault(p => p.DataValue == _usrid);
+                    if(SelectedItem != null)
+                    {
+                        UserList.Add(SelectedItem);
+                    }
+                }
+
                 foreach (var item in result)
                 {
-                    item.SupervisorList = superVisiors;
+                    item.SupervisorList = UserList;
                 }
             }
             return result;
@@ -98,7 +112,7 @@ namespace Vatas_BAL
                         Priority_of_Job = item.PriorityID == 0 ? selectedItem.Priority_of_Job: item.PriorityID,
                         Supervisor = String.IsNullOrEmpty(item.SupervisorName) == true ? selectedItem.Supervisor: item.SupervisorName,
                         Reason_for_Delay = String.IsNullOrEmpty(item.ReasonforReturn) == true ? selectedItem.Reason_for_Delay: item.ReasonforReturn,
-                        Date_Time_Stamp = DateTime.Now.ToString()
+                        Date_Time_Stamp = DateTime.Now.ToString(),
                     });
                     _vatasSolution.SaveChanges();
 
