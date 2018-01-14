@@ -53,10 +53,10 @@
                                                         <asp:CheckBox ID="chkRow" CssClass="chkrow" runat="server" />
                                                     </div>
                                                 </td>
-                                                <td><%# Container.ItemIndex + 1 %></td>
+                                                <td><asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td></td>
                                                 <td><asp:HiddenField ID="hfSelectedUserID" runat="server" Value='<%# Eval("NextUserID") %>' />
                                                     <asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue" ></asp:DropDownList></td>
-                                                <td><asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' /><%# Eval("JobNo") %>
+                                                <td><asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' /><asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
                                                 </td>
                                                 <td><asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" /></td>
                                                 <td><asp:Label ID="lblAccountName" Text='<%# Eval("AccountName") %>' runat="server" /></td>
@@ -83,17 +83,17 @@
 
                 <% if (this.rptProcess.Items.Count > 0)
                     { %>
-                <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" OnClick="btnConfirm_Click" runat="server" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
-                <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnReAssign" runat="server" CssClass="btn btn-info pull-right submit" style="margin-right:2%;"><i class="fa fa-check"></i>&nbsp;Re-Assign</asp:LinkButton>
+                <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click" />
+                <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" OnClick="btnConfirm_Click" Style="margin-right: 10px;" runat="server" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
                 <%     
                     } %>
             </div>
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->
-        <div class="overlay">
+        <%--<div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
-        </div>
+        </div>--%>
     </section>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">

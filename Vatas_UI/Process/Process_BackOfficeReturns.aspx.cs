@@ -104,7 +104,7 @@ namespace Vatas_UI.Process
                     {
                         //if (chkRow.Checked == true)
                         {
-                            int JobID = int.Parse(hfId.Value);
+                            int JobID = string.IsNullOrEmpty(hfId.Value) ? 0 : int.Parse(hfId.Value);
                             int JobNo = int.Parse(lblJobNo.Text);
                             string Reasons = txtReasons.Text;
                             string ProcessType = "";

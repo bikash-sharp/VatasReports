@@ -49,18 +49,18 @@
                                                         <asp:CheckBox ID="chkRow" CssClass="chkrow" runat="server" />
                                                     </div>
                                                 </td>
-                                                <td><%# Container.ItemIndex + 1 %></td>
+                                                <td><asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td></td>
                                                 <td><asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
                                                 <td>
                                                     <asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' />
-                                                    <%# Eval("JobNo") %>
+                                                    <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
                                                 </td>
-                                                <td><%# Eval("TAN") %></td>
-                                                <td><%# Eval("AccountName") %></td>
-                                                <td><%# Eval("FinancialYear") %></td>
-                                                <td><%# Eval("FormNumber") %></td>
-                                                <td><%# Eval("Quarter") %></td>
-                                                <td><%# Eval("ReturnType") %></td>
+                                               <td><asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" /></td>
+                                                <td><asp:Label ID="lblAccountName" Text='<%# Eval("AccountName") %>' runat="server" /></td>
+                                                <td><asp:Label ID="lblFinancialYear" Text='<%# Eval("FinancialYear") %>' runat="server" /></td>
+                                                <td><asp:Label ID="lblFormNumber" Text='<%# Eval("FormNumber") %>' runat="server" /></td>
+                                                <td><asp:Label ID="lblQuarter" Text='<%# Eval("Quarter") %>' runat="server" /></td>
+                                                <td><asp:Label ID="lblReturnType" Text='<%# Eval("ReturnType") %>' runat="server" /></td>
                                             </tr>
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -77,16 +77,17 @@
 
                 <% if (this.rptProcess.Items.Count > 0)
                     { %>
-                <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" OnClick="btnConfirm_Click" runat="server" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
+                <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click" />
+                <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" Style="margin-right: 10px;" OnClick="btnConfirm_Click" runat="server" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
                 <%     
                     } %>
             </div>
             <!-- /.box-footer-->
         </div>
         <!-- /.box -->
-        <div class="overlay">
+        <%--<div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
-        </div>
+        </div>--%>
     </section>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
