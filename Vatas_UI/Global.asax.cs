@@ -28,6 +28,9 @@ namespace Vatas_UI
             #region Login
             routes.MapPageRoute("Login", "Login", "~/Login.aspx", true);
             routes.MapPageRoute("SignUp", "SignUp", "~/SignUp.aspx", true);
+
+            routes.MapPageRoute("CreateUser", "CreateUser", "~/CreateUser.aspx", true);
+
             routes.MapPageRoute("Lock", "Lock", "~/LockScreen.aspx", true);
             routes.MapPageRoute("ForgotPassword", "RecoverPassword", "~/ForgotPassword.aspx", true);
             routes.MapPageRoute("ChangePassword", "ChangePassword", "~/ChangePassword.aspx", true);

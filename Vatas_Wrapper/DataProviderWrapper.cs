@@ -46,15 +46,15 @@ namespace Vatas_Wrapper
             }
         }
 
-        #region Reports
+        public bool SaveNewUser(User user)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).SaveNewUser(user);
+            }
+        }
 
-        //public List<ReturnsCL> ReturnsAtFrontPage()
-        //{
-        //    using (VatasSolutionEntities context = new VatasSolutionEntities() )
-        //    {
-        //        return BLReports.Instance(context).ReturnsAtFrontPage();
-        //    }
-        //}
+        #region Reports
 
         public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus,char IsSent)
         {

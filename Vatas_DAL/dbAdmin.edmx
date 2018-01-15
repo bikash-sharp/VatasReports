@@ -13,7 +13,6 @@
           <Property Name="Role_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Is_Deleted" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Role_Code" Type="nvarchar" MaxLength="50" />
-          <Property Name="ID_Admin" Type="int" />
         </EntityType>
         <EntityType Name="tbl_User_Credential">
           <Key>
@@ -97,6 +96,14 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
         </EntityType>
         <Function Name="proc_GetUserRoleByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="proc_SaveNewUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="MobileNumber" Type="varchar" Mode="In" />
+          <Parameter Name="AccountType" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="db_AdminModelStoreContainer">
           <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
@@ -216,7 +223,15 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <EntitySet Name="tbl_UserGroup_Registration" EntityType="Self.tbl_UserGroup_Registration" />
           <EntitySet Name="tbl_User_Info" EntityType="Self.tbl_User_Info" />
           <FunctionImport Name="proc_GetUserRoleByRoleId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByRoleId_Result)">
-            <Parameter Name="RoleId" Mode="In" Type="Int32" />
+          <Parameter Name="RoleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="proc_SaveNewUser">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="MobileNumber" Mode="In" Type="String" />
+            <Parameter Name="AccountType" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="proc_GetUserRoleByRoleId_Result">
@@ -238,7 +253,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
                 <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
                 <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
                 <ScalarProperty Name="Role_Code" ColumnName="Role_Code" />
-                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -333,6 +347,7 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_SaveNewUser" FunctionName="db_AdminModel.Store.proc_SaveNewUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -4,6 +4,14 @@
     <li id="lihome"><a href="<%=Page.ResolveUrl("~/Index")%>" title="Home">
         <i class="fa fa-dashboard"></i><span>Dashboard</span></a>
     </li>
+    <li id="liUser" class="treeview">
+        <a href="javascript:;" title="Reports"><i class="fa fa-edit"></i><span>User</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li id="liCreateUser"><a href="<%=Page.ResolveUrl("~/CreateUser")%>" title="Create User"><i class="fa fa-server"></i>Create User</a></li>
+        </ul>
+    </li>
      <li id="liProcess" class="treeview">
         <a href="javascript:;" title="Reports"><i class="fa fa-stack-overflow"></i><span>Process</span>
             <i class="fa fa-angle-left pull-right"></i>

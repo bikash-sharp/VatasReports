@@ -75,7 +75,7 @@ namespace Vatas_BAL
         {
             return
                 _context.tbl_UserGroup_Registration.ToList()
-                    .Select(p => new UserCL {UserID = p.Super_User_Id, Username = p.Name})
+                    .Select(p => new UserCL { UserID = p.Super_User_Id, Username = p.Name })
                     .ToList();
         }
 
@@ -83,10 +83,21 @@ namespace Vatas_BAL
         {
             return
                 _context.proc_GetUserRoleByRoleId(RoleId)
-                    .Select(p => new DropDownCL {DataText = p.UserName, DataValue = p.UserID.ToString()})
+                    .Select(p => new DropDownCL { DataText = p.UserName, DataValue = p.UserID.ToString() })
                     .ToList();
         }
 
-        
+        public bool SaveNewUser(User user)
+        {
+            try
+            {
+                _context.proc_SaveNewUser(user.FirstName, user.LastName, user.Email, user.Password, user.MobileNumber, user.AccountType);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
