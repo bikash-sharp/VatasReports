@@ -47,7 +47,7 @@ namespace Vatas_UI
                 var loginResult = DataProviderWrapper.Instance.CheckUserCredentials(hfUserName.Value, txtPassword.Text.Trim());
                 if (loginResult.Resp == ResponseType.SUCCESS)
                 {
-                    string userData = loginResult.UserID + "$" + loginResult.UserName;
+                    string userData = loginResult.UserID + "$" + loginResult.UserName +"$"+loginResult.RoleName;
 
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(Convert.ToInt32(loginResult.UserID),
                         BLSecurity.Encrypt(userData),

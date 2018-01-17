@@ -91,7 +91,7 @@ namespace Vatas_BAL
             return result;
         }
 
-        public StringMessageCL ProcessReturns(List<ProcessReturnsCL> returns, int UserID)
+        public StringMessageCL ProcessReturns(List<ProcessReturnsCL> returns, int UserID, string IsSent="Y")
         {
             var result = new StringMessageCL();
             try
@@ -100,7 +100,7 @@ namespace Vatas_BAL
                 {
                     var selectedItem = _vatasSolution.tbl_ProcessesHistoryofjob.FirstOrDefault(p => p.ID == item.JobID);
                     //Update Existing
-                    selectedItem.Is_Sent = "Y";
+                    selectedItem.Is_Sent = IsSent;
 
                     _vatasSolution.tbl_ProcessesHistoryofjob.Add(new tbl_ProcessesHistoryofjob
                     {

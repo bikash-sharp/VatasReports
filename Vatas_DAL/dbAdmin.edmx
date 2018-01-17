@@ -5,15 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="db_AdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tbl_Roles">
-          <Key>
-            <PropertyRef Name="Role_ID" />
-          </Key>
-          <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Role_Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Is_Deleted" Type="char" MaxLength="1" Nullable="false" />
-          <Property Name="Role_Code" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="tbl_User_Credential">
           <Key>
             <PropertyRef Name="User_ID" />
@@ -106,7 +97,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="AccountType" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="db_AdminModelStoreContainer">
-          <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Credential" EntityType="Self.tbl_User_Credential" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Session_Details" EntityType="Self.tbl_User_Session_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Transaction" EntityType="Self.tbl_User_Transaction" Schema="dbo" store:Type="Tables" />
@@ -127,16 +117,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="db_AdminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tbl_Roles">
-          <Key>
-            <PropertyRef Name="Role_ID" />
-          </Key>
-          <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Is_Deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Role_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ID_Admin" Type="Int32" />
-        </EntityType>
         <EntityType Name="tbl_User_Credential">
           <Key>
             <PropertyRef Name="User_ID" />
@@ -216,7 +196,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Name="ID_Admin" Type="Int32" />
         </EntityType>
         <EntityContainer Name="AdminEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" />
           <EntitySet Name="tbl_User_Credential" EntityType="Self.tbl_User_Credential" />
           <EntitySet Name="tbl_User_Session_Details" EntityType="Self.tbl_User_Session_Details" />
           <EntitySet Name="tbl_User_Transaction" EntityType="Self.tbl_User_Transaction" />
@@ -246,16 +225,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="db_AdminModelStoreContainer" CdmEntityContainer="AdminEntities">
-          <EntitySetMapping Name="tbl_Roles">
-            <EntityTypeMapping TypeName="db_AdminModel.tbl_Roles">
-              <MappingFragment StoreEntitySet="tbl_Roles">
-                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
-                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
-                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
-                <ScalarProperty Name="Role_Code" ColumnName="Role_Code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_User_Credential">
             <EntityTypeMapping TypeName="db_AdminModel.tbl_User_Credential">
               <MappingFragment StoreEntitySet="tbl_User_Credential">

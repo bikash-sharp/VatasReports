@@ -27,15 +27,23 @@ namespace Vatas_UI
                 createUser.Email = txtEmail.Text;
                 createUser.Password = txtPassword.Text;
                 createUser.MobileNumber = txtMobileNumber.Text;
-                createUser.AccountType = ddlAccountType.SelectedItem.Text;
+                createUser.AccountType = ddlAccountType.SelectedValue;
 
                 bool IsSaved = DataProviderWrapper.Instance.SaveNewUser(createUser);
                 if (IsSaved)
+                {
                     Clear();
+                    BLFunction.ShowAlert(this, "New User Created Successfully", ResponseType.SUCCESS);
+                }
+                else
+                {
+                    BLFunction.ShowAlert(this, "Unable To Create a New User.", ResponseType.WARNING);
+                }
+                    
             }
             catch (Exception ex)
             {
-
+                BLFunction.ShowAlert(this, "Server Error Occurred.", ResponseType.DANGER);
             }
         }
 

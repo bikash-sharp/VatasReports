@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="043fbaa1ddda4e9d8260738d25489689" Name="Diagram1">
-        <EntityTypeShape EntityType="db_AdminModel.tbl_Roles" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_AdminModel.tbl_User_Credential" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_AdminModel.tbl_User_Session_Details" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_AdminModel.tbl_User_Transaction" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />

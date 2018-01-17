@@ -27,7 +27,6 @@ namespace Vatas_DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tbl_Roles> tbl_Roles { get; set; }
         public virtual DbSet<tbl_User_Credential> tbl_User_Credential { get; set; }
         public virtual DbSet<tbl_User_Session_Details> tbl_User_Session_Details { get; set; }
         public virtual DbSet<tbl_User_Transaction> tbl_User_Transaction { get; set; }

@@ -31,7 +31,7 @@ namespace Vatas_UI
                 {
 
 
-                    string userData = loginResult.UserID + "$" + loginResult.UserName;
+                    string userData = loginResult.UserID + "$" + loginResult.UserName + "$" + loginResult.RoleName; ;
 
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(Convert.ToInt32(loginResult.UserID),
                         BLSecurity.Encrypt(userData),
@@ -50,7 +50,6 @@ namespace Vatas_UI
                     }
 
                     Response.Cookies.Add(cookie);
-                    Response.AddHeader("Test", "1233");
                     Response.RedirectToRoute("Home");
                 }
                 else

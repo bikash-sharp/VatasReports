@@ -91,11 +91,11 @@ namespace Vatas_Wrapper
             }
         }
 
-        public StringMessageCL ProcessReturns(List<ProcessReturnsCL> returns, int UserID)
+        public StringMessageCL ProcessReturns(List<ProcessReturnsCL> returns, int UserID, string IsSent = "Y")
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLProcess.Instance(context).ProcessReturns(returns, UserID);
+                return BLProcess.Instance(context).ProcessReturns(returns, UserID,IsSent);
             }
         }
         

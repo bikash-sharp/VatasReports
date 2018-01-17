@@ -4,7 +4,7 @@
 -- Description:	<To get the returns by passing job status like ASS,DEC,DEP.... ETC>
 -- =============================================
 ALTER PROCEDURE [dbo].[proc_Report_GetReturnsByJobStatus] 
-	@JobStatus varchar(10)
+	@JobStatus varchar(MAX)
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -36,5 +36,5 @@ BEGIN
 		INNER JOIN tbl_Firm TF ON RC.FirmID = TF.FirmId
 		INNER JOIN tbl_ProcessStatus PS ON PHJ.Job_Status = PS.Process_Code
 	WHERE 
-		(PHJ.Job_Status = @JobStatus) AND (PHJ.Is_Sent = '') ORDER BY RC.SerialNo_By_Job_Firm
+		(PHJ.Job_Status IN (SELECT item FROM DelimitedSplit8K(@JobStatus,','))) AND (PHJ.Is_Sent = '') ORDER BY RC.SerialNo_By_Job_Firm
 END

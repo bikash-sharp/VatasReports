@@ -57,7 +57,7 @@ namespace Vatas_UI.Process
                     }
                 }
 
-                var result = DataProviderWrapper.Instance.ProcessReturns(processList, BLFunction.GetUserID());
+                var result = DataProviderWrapper.Instance.ProcessReturns(processList, BLFunction.GetUserID(),"X");
                 if (result.Response == ResponseType.SUCCESS)
                 {
                     BLFunction.ShowAlert(this, "Returns has been Re-Assigned.", result.Response);

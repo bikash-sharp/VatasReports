@@ -51,6 +51,10 @@ namespace Vatas_BAL
                 else
                 {
                     string roleName = "";
+                    if (user.Account_Type == "A")
+                        roleName = "Admin";
+                    else
+                        roleName = "User";
                     string token = Guid.NewGuid().ToString();
                     return new AuthMessageCL(user.Super_User_Id, logon.Email, 0, roleName,token, ResponseType.SUCCESS, "Success");
                 }

@@ -4,15 +4,19 @@
     <li id="lihome"><a href="<%=Page.ResolveUrl("~/Index")%>" title="Home">
         <i class="fa fa-dashboard"></i><span>Dashboard</span></a>
     </li>
+    <%if (BLFunction.GetRoleName() == "Admin")
+        {
+    %>
     <li id="liUser" class="treeview">
-        <a href="javascript:;" title="Reports"><i class="fa fa-edit"></i><span>User</span>
+        <a href="javascript:;" title="Reports"><i class="fa fa-users"></i><span>User</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-            <li id="liCreateUser"><a href="<%=Page.ResolveUrl("~/CreateUser")%>" title="Create User"><i class="fa fa-server"></i>Create User</a></li>
+            <li id="liCreateUser"><a href="<%=Page.ResolveUrl("~/CreateUser")%>" title="Create User"><i class="fa fa-user"></i>Create User</a></li>
         </ul>
     </li>
-     <li id="liProcess" class="treeview">
+    <% } %>
+    <li id="liProcess" class="treeview">
         <a href="javascript:;" title="Reports"><i class="fa fa-stack-overflow"></i><span>Process</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -27,7 +31,7 @@
             <li id="liProcess8"><a href="<%=Page.ResolveUrl("~/ProcessUploadReturn")%>" title="Process Upload Returns"><i class="fa fa-server"></i>Completed Returns for Upload</a></li>
         </ul>
     </li>
-   <li id="liReport" class="treeview">
+    <li id="liReport" class="treeview">
         <a href="javascript:;" title="Reports"><i class="fa fa-pie-chart"></i><span>Reports</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>

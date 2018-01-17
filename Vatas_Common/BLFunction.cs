@@ -114,7 +114,7 @@ namespace Vatas_Common
                 string decrypt = BLSecurity.Decrypt(context.User.Identity.Name);
                 string[] temp = decrypt.Split('$');
 
-                return temp[3].ToString();
+                return temp[2].ToString();
             }
             else
             {
