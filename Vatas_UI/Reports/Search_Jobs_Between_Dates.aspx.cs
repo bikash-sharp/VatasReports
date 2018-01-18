@@ -13,6 +13,9 @@ namespace Vatas_UI.Reports
 {
     public partial class Search_Jobs_Between_Dates : VatasWebPage
     {
+        int PageNumber = 1;
+        int PageSize = 10;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             txtDateRange.Attributes.Add("readonly", "readonly");
@@ -39,7 +42,7 @@ namespace Vatas_UI.Reports
 
         public void BindData(DateTime startDate, DateTime endDate, int? firmId = null)
         {
-            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, firmId);
+            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, firmId, PageNumber, PageSize);
             rptReport.DataSource = null;
             if (result.Count > 0)
             {
@@ -53,7 +56,7 @@ namespace Vatas_UI.Reports
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_SearchJobsBetweenDates.csv";
 
-            var ResultList = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, FirmId);
+            var ResultList = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, FirmId, PageNumber, PageSize);
             if (ResultList.Count > 0)
             {
                 strwriter.WriteLine("\"Sr.No\",\"Firm Name\",\"File No\",\"TAN\",\"Account Name\",\"FY\",\"FormType\",\"Quarter\",\"RetType\",\"Date\"");

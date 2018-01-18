@@ -48,18 +48,18 @@ namespace Vatas_Common
 
     public class StringMessageCL
     {
-        
+
         public string Message { get; set; }
-        
+
         public string RetValue { get; set; }
-        
+
         public ResponseType Response { get; set; }
-        
+
         public long IntValue { get; set; }
-        
+
         public dynamic ObjClass { get; set; }
         public StringMessageCL() { }
-        public StringMessageCL(string message, ResponseType response, string retValue = "", long intValue = 0, dynamic objValue=null)
+        public StringMessageCL(string message, ResponseType response, string retValue = "", long intValue = 0, dynamic objValue = null)
         {
             Message = message;
             Response = response;
@@ -72,11 +72,11 @@ namespace Vatas_Common
 
     public class LogonCL
     {
-        
+
         public string UserName { get; set; }
-        
+
         public string Password { get; set; }
-        
+
         public string Email { get; set; }
         public LogonCL() { }
     }
@@ -92,7 +92,7 @@ namespace Vatas_Common
     public class FirmCL
     {
         public FirmCL() { }
-        public  long FirmId { get; set; }
+        public long FirmId { get; set; }
         public string FirmName { get; set; }
         public bool IsActive { get; set; }
     }
@@ -122,6 +122,7 @@ namespace Vatas_Common
         public string Date { get; set; }
         public string AssignedDate { get; set; }
         public string Username { get; set; }
+        public int RecordCount { get; set; }
     }
 
     public class UserCL
@@ -153,7 +154,6 @@ namespace Vatas_Common
         public string FormNumber { get; set; }
         public string PRN { get; set; }
         public int JobID { get; set; }
-
         public List<DropDownCL> ProcessTypeList { get; set; }
         public string ReasonforReturn { get; set; }
         public string CurrentJobStatus { get; set; }
@@ -166,6 +166,7 @@ namespace Vatas_Common
             PriorityList = new List<DropDownCL>();
             ProcessTypeList = new List<DropDownCL>();
         }
+        public int RecordCount { get; set; }
     }
     #endregion
 

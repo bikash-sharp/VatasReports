@@ -23,5 +23,6 @@ namespace Vatas_DAL
         public string Quarter { get; set; }
         public string FormType { get; set; }
         public string JobDate { get; set; }
+        public Nullable<int> RecordCount { get; set; }
     }
 }

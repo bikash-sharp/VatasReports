@@ -56,19 +56,19 @@ namespace Vatas_Wrapper
 
         #region Reports
 
-        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus,char IsSent)
+        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus,char IsSent, int PageNumber, int PageSize)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLReports.Instance(context).Report_GetReturnsByJobStatus(JobStatus, IsSent);
+                return BLReports.Instance(context).Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize);
             }
         }
 
-        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate,int? firmId)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate,int? firmId,int PageNumber,int PageSize)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLReports.Instance(context).Report_SearchJobsBetweenDates(startDate,endDate, firmId);
+                return BLReports.Instance(context).Report_SearchJobsBetweenDates(startDate,endDate, firmId, PageNumber, PageSize);
             }
         }
 
@@ -83,11 +83,11 @@ namespace Vatas_Wrapper
 
         #region Process
 
-        public List<ProcessReturnsCL> GetReturnsByJobStatus(string StatusName)
+        public List<ProcessReturnsCL> GetReturnsByJobStatus(string StatusName, int PageNumber, int PageSize)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLProcess.Instance(context).GetReturnsByJobStatus(StatusName);
+                return BLProcess.Instance(context).GetReturnsByJobStatus(StatusName, PageNumber, PageSize);
             }
         }
 

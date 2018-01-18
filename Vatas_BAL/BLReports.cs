@@ -68,13 +68,13 @@ namespace Vatas_BAL
         //    return result;
         //}
 
-        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent)
+        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent, int PageNumber, int PageSize)
         {
             List<ReturnsCL> result = new List<ReturnsCL>();
             try
             {
                 result =
-                    _vatasSolution.proc_Report_GetReturnsByJobStatus(JobStatus)
+                    _vatasSolution.proc_Report_GetReturnsByJobStatus(JobStatus, PageNumber, PageSize)
                         .ToList()
                         .Select(p => new ReturnsCL
                         {
@@ -88,7 +88,8 @@ namespace Vatas_BAL
                             TAN = p.TAN,
                             JobNo = (p.JobNo != null ? p.JobNo.Value : 0),
                             AssignedDate = p.AssignedDate,
-                            Username = (p.UserID != null ? p.UserID.Value.ToString() : "0")
+                            Username = (p.UserID != null ? p.UserID.Value.ToString() : "0"),
+                            RecordCount = p.RecordCount == null ? 0 : p.RecordCount.Value
                         }).ToList();
 
                 if (result.Count > 0)
@@ -115,13 +116,13 @@ namespace Vatas_BAL
             return result;
         }
 
-        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate,int? firmId)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate, int? firmId, int PageNumber, int PageSize)
         {
             List<ReturnsCL> result = new List<ReturnsCL>();
             try
             {
                 result =
-                    _vatasSolution.proc_Report_SearchJobsBetweenDatesWithFirmName(startDate, endDate, firmId)
+                    _vatasSolution.proc_Report_SearchJobsBetweenDatesWithFirmName(startDate, endDate, firmId,PageNumber,PageSize)
                         .ToList()
                         .Select(p => new ReturnsCL
                         {
@@ -133,7 +134,8 @@ namespace Vatas_BAL
                             Quarter = p.Quarter,
                             ReturnType = p.ReturnType,
                             TAN = p.TAN,
-                            JobNo = (p.Job_No != null ? p.Job_No.Value : 0)
+                            JobNo = (p.Job_No != null ? p.Job_No.Value : 0),
+                            RecordCount = (p.RecordCount != null ? p.RecordCount.Value : 0)
                         }).ToList();
             }
             catch (Exception ex)

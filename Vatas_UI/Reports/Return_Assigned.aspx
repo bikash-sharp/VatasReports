@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.master" AutoEventWireup="true" CodeBehind="Return_Assigned.aspx.cs" Inherits="Vatas_UI.Reports.Return_Assigned" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
-     <section class="content-header">
+    <section class="content-header">
         <h1>Return Assigned</h1>
         <ol class="breadcrumb">
             <li><a href="javascript:;"><i class="fa fa-dashboard"></i>Reports</a></li>
@@ -41,7 +42,9 @@
                                     <asp:Repeater ID="rptReport" runat="server">
                                         <ItemTemplate>
                                             <tr>
-                                                <td><%# Container.ItemIndex + 1 %></td>
+                                                <td>
+                                                    <%# Container.ItemIndex + 1 %>
+                                                </td>
                                                 <td><%# Eval("FirmName") %></td>
                                                 <td><%# Eval("JobNo") %></td>
                                                 <td><%# Eval("TAN") %></td>
@@ -57,19 +60,28 @@
                                         </ItemTemplate>
                                     </asp:Repeater>
                                 </tbody>
+                                <tfoot>
+                                    <asp:Repeater ID="rptPager" runat="server">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lnkPage" runat="server" Text='<%#Eval("Text") %>' CommandArgument='<%# Eval("Value") %>'
+                                                CssClass='<%# Convert.ToBoolean(Eval("Enabled")) ? "page_enabled" : "page_disabled" %>'
+                                                OnClick="Page_Changed" OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tfoot>
                             </table>
+                            <ul id="pagination-demo" class="pagination-lg pull-right"></ul>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                <% if(this.rptReport.Items.Count > 0)
-                   { %>
-                        <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right btn-lg submit" OnClick="btnExport_Click" />
-                  <%     
-                   } %>
-                
+                <% if (this.rptReport.Items.Count > 0)
+                    { %>
+                <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right btn-lg submit" OnClick="btnExport_Click" />
+                <%     
+                    } %>
             </div>
             <!-- /.box-footer-->
         </div>
@@ -82,8 +94,8 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
     <script type="text/javascript">
-         $(document).ready(function () {
-             $('#liReport').addClass('active');
+        $(document).ready(function () {
+            $('#liReport').addClass('active');
             $('#liReport2').addClass('active');
         });
     </script>

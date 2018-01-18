@@ -11,6 +11,8 @@ namespace Vatas_UI.Reports
     {
         string JobStatus = "RDV";
         char IsSent;
+        int PageNumber = 1;
+        int PageSize = 10;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,7 +24,7 @@ namespace Vatas_UI.Reports
 
         public void BindData()
         {
-            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent);
+            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize);
             if (result.Count > 0)
             {
                 rptReport.DataSource = result;
@@ -35,7 +37,7 @@ namespace Vatas_UI.Reports
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_ReturnsPending.csv";
 
-            var ResultList = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent);
+            var ResultList = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize);
             if (ResultList.Count > 0)
             {
                 strwriter.WriteLine("\"Sr.No\",\"Firm Name\",\"File No\",\"TAN\",\"Account Name\",\"FY\",\"FormType\",\"Quarter\",\"RetType\",\"Date\",\"AssignedDate\",\"OperatorName\"");

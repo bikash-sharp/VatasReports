@@ -12,6 +12,9 @@ namespace Vatas_UI.Process
 {
     public partial class Process_BackOfficeReturns : VatasWebPage
     {
+        int PageNumber = 1;
+        int PageSize = 10;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
@@ -19,7 +22,7 @@ namespace Vatas_UI.Process
         }
         public void BindData()
         {
-            List<ProcessReturnsCL> result = DataProviderWrapper.Instance.GetReturnsByJobStatus("BO");
+            List<ProcessReturnsCL> result = DataProviderWrapper.Instance.GetReturnsByJobStatus("BO", PageNumber, PageSize);
             rptProcess.DataSource = null;
             if (result.Count > 0)
             {
@@ -32,7 +35,7 @@ namespace Vatas_UI.Process
             if (this.IsValid)
             {
                 List<ProcessReturnsCL> processList = new List<ProcessReturnsCL>();
-                var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("BO");
+                var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("BO", PageNumber, PageSize);
                 foreach (RepeaterItem item in rptProcess.Items)
                 {
                     ProcessReturnsCL itemProcess = new ProcessReturnsCL();
@@ -78,7 +81,7 @@ namespace Vatas_UI.Process
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_Process_FrontOfficeReturns.csv";
 
             List<ProcessReturnsCL> processList = new List<ProcessReturnsCL>();
-            var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("FO");
+            var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("FO", PageNumber, PageSize);
 
             if (frontOfcList.Count > 0)
             {

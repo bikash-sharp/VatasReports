@@ -32,5 +32,6 @@ namespace Vatas_DAL
         public string SuperVisorName { get; set; }
         public string StatusCode { get; set; }
         public string StatusDesc { get; set; }
+        public Nullable<int> RecordCount { get; set; }
     }
 }
