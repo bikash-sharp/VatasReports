@@ -1057,10 +1057,15 @@
     <Content Include="Reports\Return_Uploaded.aspx" />
     <Content Include="Reports\Search_Jobs_Between_Dates.aspx" />
     <Content Include="Root.Master" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery.bootpag.min.js" />
     <Content Include="SiteAdmin.master" />
     <Content Include="SiteUser.master" />
     <Content Include="StaticPage.Master" />
     <None Include="Properties\PublishProfiles\Reporting.pubxml" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

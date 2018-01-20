@@ -31,6 +31,42 @@ namespace Vatas_UI.Reports {
         protected global::System.Web.UI.WebControls.Repeater rptPager;
         
         /// <summary>
+        /// hdnPages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPages;
+        
+        /// <summary>
+        /// hdnPageSize control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPageSize;
+        
+        /// <summary>
+        /// hdnPageNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPageNumber;
+        
+        /// <summary>
+        /// hdnRecordCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnRecordCount;
+        
+        /// <summary>
         /// btnExport control.
         /// </summary>
         /// <remarks>

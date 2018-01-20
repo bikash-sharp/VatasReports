@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Web.Script.Serialization;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Vatas_Common;
@@ -14,7 +17,7 @@ namespace Vatas_UI.Reports
         char IsSent;
         int PageNumber = 1;
         int PageSize = 10;
-             
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -32,6 +35,11 @@ namespace Vatas_UI.Reports
                 rptReport.DataBind();
 
                 this.PopulatePager(result[0].RecordCount, PageNumber);
+
+                hdnPages.Value = (Math.Ceiling((double)result[0].RecordCount / PageSize)).ToString();
+                hdnPageSize.Value = PageSize.ToString();
+                hdnPageNumber.Value = PageNumber.ToString();
+                hdnRecordCount.Value = result[0].RecordCount.ToString();
             }
         }
 

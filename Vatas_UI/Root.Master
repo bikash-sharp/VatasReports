@@ -172,6 +172,8 @@
         <script src="<%=this.AppPath() +"Assets/plugins/daterangepicker/daterangepicker.js"%>"></script>
         <!-- iCheck -->
         <script src="<%=this.AppPath() + "Assets/plugins/iCheck/icheck.min.js"%>" type="text/javascript"></script>
+        <script src="../Scripts/jquery.bootpag.min.js"></script>
+
         <script type="text/javascript">
             $(document).ready(function () {
 
