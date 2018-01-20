@@ -29,7 +29,9 @@ namespace Vatas_UI
             routes.MapPageRoute("Login", "Login", "~/Login.aspx", true);
             routes.MapPageRoute("SignUp", "SignUp", "~/SignUp.aspx", true);
 
-            routes.MapPageRoute("CreateUser", "CreateUser", "~/CreateUser.aspx", true);
+            routes.MapPageRoute("CreateUser", "CreateUser", "~/User/CreateUser.aspx", true);
+            routes.MapPageRoute("UserListing", "UserListing", "~/User/UserListing.aspx", true);
+            routes.MapPageRoute("EditUser", "EditUser", "~/User/EditUser.aspx", true);
 
             routes.MapPageRoute("Lock", "Lock", "~/LockScreen.aspx", true);
             routes.MapPageRoute("ForgotPassword", "RecoverPassword", "~/ForgotPassword.aspx", true);
@@ -90,7 +92,7 @@ namespace Vatas_UI
                         FormsAuthenticationTicket ticket = id.Ticket;
 
                         //string userData = BLSecurity.Decrypt(ticket.UserData);
-                        
+
                         //string[] roles = new string[] { userData.Split('$')[3] };
 
                         //HttpContext.Current.User = new GenericPrincipal(id, roles);

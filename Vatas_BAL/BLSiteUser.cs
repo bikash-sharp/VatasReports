@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Vatas_Common;
 using Vatas_DAL;
 
@@ -87,11 +88,103 @@ namespace Vatas_BAL
                     .ToList();
         }
 
-        public bool SaveNewUser(User user)
+        /// <summary>
+        /// Save New User with User Details
+        /// </summary>
+        /// <param name="User"></param>
+        /// <returns>user saved or not</returns>
+        public bool AddUpdateUser(UserRegistrationCL user)
         {
             try
             {
-                _context.proc_SaveNewUser(user.FirstName, user.LastName, user.Email, user.Password, user.MobileNumber, user.AccountType);
+                _context.proc_AddUpdateUser(user.UserId,user.FirstName, user.LastName, user.Email, user.Password, user.MobileNumber, user.AccountType);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Get all the registered user from Tbl_UserRegistration 
+        /// </summary>
+        /// <param></param>
+        /// <returns>List<UserRegistrationCL> list of users</returns>
+        public List<UserRegistrationCL> GetAllRegisterdUsers()
+        {
+            List<UserRegistrationCL> users = new List<UserRegistrationCL>();
+            try
+            {
+                users = _context.proc_GetAllRegisteredUsers().ToList()
+                     .Select(p =>
+                         new UserRegistrationCL
+                         {
+                             UserId = p.UserId,
+                             FirstName = p.FirstName,
+                             LastName = p.LastName,
+                             Email = p.Email,
+                             Password = p.Password,
+                             MobileNumber = p.MobileNumber,
+                             OrganizationName = p.OrganizationName,
+                             AccountType = p.AccountType,
+                             IsActive = p.IsActive,
+                         }).ToList();
+
+                return users;
+            }
+            catch (Exception ex)
+            {
+                return users;
+            }
+        }
+
+        /// <summary>
+        /// Get the registered user by userid
+        /// </summary>
+        /// <param>userid</param>
+        /// <returns>registerd user</returns>
+        public UserRegistrationCL GetRegisterdUserByUserId(int UserId)
+        {
+            UserRegistrationCL user = new UserRegistrationCL();
+            try
+            {
+                user = _context.proc_GetRegisteredUserByUserId(UserId)
+                     .Select(p =>
+                         new UserRegistrationCL
+                         {
+                             UserId = p.UserId,
+                             FirstName = p.FirstName,
+                             LastName = p.LastName,
+                             Email = p.Email,
+                             Password = p.Password,
+                             MobileNumber = p.MobileNumber,
+                             OrganizationName = p.OrganizationName,
+                             AccountType = p.AccountType,
+                             IsActive = p.IsActive,
+                         }).FirstOrDefault();
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                return user;
+            }
+        }
+
+        /// <summary>
+        /// Delete registered user by UserId
+        /// </summary>
+        /// <param>userid</param>
+        /// <returns>registerd user</returns>
+        public bool DeleteRegisteredUser(int UserId)
+        {
+            try
+            {
+                var result = _context.tbl_UserGroup_Registration.Where(p => p.Super_User_Id == UserId).FirstOrDefault();
+                result.Is_Login_Active = "N";
+
+                _context.SaveChanges();
                 return true;
             }
             catch (Exception ex)

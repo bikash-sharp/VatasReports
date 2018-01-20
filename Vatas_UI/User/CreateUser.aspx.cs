@@ -20,8 +20,8 @@ namespace Vatas_UI
         {
             try
             {
-                User createUser = new User();
-
+                UserRegistrationCL createUser = new UserRegistrationCL();
+                createUser.UserId = 0;
                 createUser.FirstName = txtFirstName.Text;
                 createUser.LastName = txtLastName.Text;
                 createUser.Email = txtEmail.Text;
@@ -29,7 +29,7 @@ namespace Vatas_UI
                 createUser.MobileNumber = txtMobileNumber.Text;
                 createUser.AccountType = ddlAccountType.SelectedValue;
 
-                bool IsSaved = DataProviderWrapper.Instance.SaveNewUser(createUser);
+                bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
                 if (IsSaved)
                 {
                     Clear();
@@ -54,6 +54,11 @@ namespace Vatas_UI
             txtEmail.Text = string.Empty;
             txtPassword.Text = string.Empty;
             txtMobileNumber.Text = string.Empty;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }

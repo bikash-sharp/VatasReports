@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Vatas_Common;
+using Vatas_Wrapper;
 
 namespace Vatas_UI
 {
@@ -32,6 +34,54 @@ namespace Vatas_UI
         {
             string path = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpContext.Current.Request.ApplicationPath;
             return path.EndsWith("/") ? path : path + "/";
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserRegistrationCL createUser = new UserRegistrationCL();
+                createUser.UserId = 0;
+                createUser.FirstName = txtFirstName.Text;
+                createUser.LastName = txtLastName.Text;
+                createUser.Email = txtEmail.Text;
+                createUser.Password = txtPassword.Text;
+                createUser.MobileNumber = txtMobileNumber.Text;
+                createUser.AccountType = "U";
+
+                bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
+                if (IsSaved)
+                {
+                    Clear();
+                    BLFunction.ShowAlert(this, "User has been successfully register.", ResponseType.SUCCESS);
+                    //Thread.Sleep(1000);
+                    //Response.Redirect("~/Login", true);
+                }
+                else
+                {
+                    BLFunction.ShowAlert(this, "Unable to register.", ResponseType.WARNING);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                BLFunction.ShowAlert(this, "Server Error Occurred.", ResponseType.DANGER);
+            }
+        }
+
+        public void Clear()
+        {
+            txtFirstName.Text = string.Empty;
+            txtLastName.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtPassword.Text = string.Empty;
+            txtConfirmPassword.Text = string.Empty;
+            txtMobileNumber.Text = string.Empty;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
     }
 }

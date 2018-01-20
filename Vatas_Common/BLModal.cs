@@ -129,7 +129,6 @@ namespace Vatas_Common
     {
         public int UserID { get; set; }
         public string Username { get; set; }
-
         public int RoleId { get; set; }
         public string RoleName { get; set; }
         public UserCL() { }
@@ -170,14 +169,34 @@ namespace Vatas_Common
     }
     #endregion
 
-    public class User
+    public class UserRegistrationCL
     {
+        public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string Address { get; set; }
+        public string Country { get; set; }
+        public int State { get; set; }
+        public string City { get; set; }
+        public int PinCode { get; set; }
         public string MobileNumber { get; set; }
+        public int STDCode { get; set; }
+        public string Telephone { get; set; }
+        public string OrganizationName { get; set; }
+        public string SecurityQuestion { get; set; }
+        public string Answer { get; set; }
+        public string SelectPackage { get; set; }
+        public string ActivationCode { get; set; }
+        public char Status { get; set; }
+        public string JoinDate { get; set; }
         public string AccountType { get; set; }
+        public string IsActive { get; set; }
+        public int AdminId { get; set; }
+
+
 
     }
 }

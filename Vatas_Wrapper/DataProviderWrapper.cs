@@ -12,11 +12,9 @@ namespace Vatas_Wrapper
     public class DataProviderWrapper
     {
         private static readonly DataProviderWrapper instance = new DataProviderWrapper();
-        //private static POSEntities context;
 
         static DataProviderWrapper() { }
         private DataProviderWrapper() { }
-
         public static DataProviderWrapper Instance
         {
             get
@@ -24,7 +22,6 @@ namespace Vatas_Wrapper
                 return instance;
             }
         }
-
         public AuthMessageCL CheckUserCredentials(string email, string password)
         {
             try
@@ -45,18 +42,38 @@ namespace Vatas_Wrapper
                 return new AuthMessageCL(0, null, 0, null, "", ResponseType.DANGER, Msg);
             }
         }
-
-        public bool SaveNewUser(User user)
+        public bool AddUpdateUser(UserRegistrationCL user)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).SaveNewUser(user);
+                return BLSiteUser.Instance(context).AddUpdateUser(user);
+            }
+        }
+        public List<UserRegistrationCL> GetAllRegisterdUser()
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).GetAllRegisterdUsers();
+            }
+        }
+        public UserRegistrationCL GetRegisterdUserByUserId(int UserId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).GetRegisterdUserByUserId(UserId);
+            }
+        }
+        public bool DeleteRegisteredUser(int UserId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).DeleteRegisteredUser(UserId);
             }
         }
 
         #region Reports
 
-        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus,char IsSent, int PageNumber, int PageSize)
+        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent, int PageNumber, int PageSize)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
@@ -64,11 +81,11 @@ namespace Vatas_Wrapper
             }
         }
 
-        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate,int? firmId,int PageNumber,int PageSize)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate, int? firmId, int PageNumber, int PageSize)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLReports.Instance(context).Report_SearchJobsBetweenDates(startDate,endDate, firmId, PageNumber, PageSize);
+                return BLReports.Instance(context).Report_SearchJobsBetweenDates(startDate, endDate, firmId, PageNumber, PageSize);
             }
         }
 
@@ -95,10 +112,11 @@ namespace Vatas_Wrapper
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLProcess.Instance(context).ProcessReturns(returns, UserID,IsSent);
+                return BLProcess.Instance(context).ProcessReturns(returns, UserID, IsSent);
             }
         }
-        
+
         #endregion
-        }
+
+    }
 }

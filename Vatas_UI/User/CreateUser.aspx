@@ -37,6 +37,7 @@
                                 <label for="txtEmail" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
                                     <asp:TextBox ID="txtEmail" runat="server" class="form-control" MaxLength="30" placeholder="Email" />
+                                    <asp:RequiredFieldValidator ID="rfvEmail" ControlToValidate="txtEmail" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="revEmail" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
@@ -51,7 +52,7 @@
                                 <label for="txtConfirmPassword" class="col-sm-2 control-label">Confirm Password</label>
                                 <div class="col-sm-10">
                                     <asp:TextBox ID="txtConfirmPassword" MaxLength="15" runat="server" class="form-control" placeholder="Confirm Password" TextMode="Password" />
-                                    <asp:CompareValidator ID="cmConfirmPassword" runat="server" ControlToValidate="txtConfirmPassword" ControlToCompare="txtPassword" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" />
+                                    <asp:CompareValidator ID="cmConfirmPassword" runat="server" ControlToValidate="txtConfirmPassword" ControlToCompare="txtPassword" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" ValidationGroup="CreateUser" />
                                     <asp:RequiredFieldValidator ID="rfvConfirmPassword" ControlToValidate="txtConfirmPassword" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
@@ -59,7 +60,8 @@
                                 <label for="txtMobileNumber" class="col-sm-2 control-label">Mobile Number</label>
                                 <div class="col-sm-10">
                                     <asp:TextBox ID="txtMobileNumber" runat="server" MaxLength="10" class="form-control" placeholder="Mobile Number" />
-                                    <asp:RegularExpressionValidator runat="server" ID="revMobileNumber" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ControlToValidate="txtMobileNumber" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic" ValidationExpression="^([0-9\(\)\/\+ \-]*)$"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator runat="server" ID="revMobileNumber" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ControlToValidate="txtMobileNumber" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic" ValidationExpression="[0-9]{10}"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="rfvMobileNumber" ControlToValidate="txtMobileNumber" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="form-group has-feedback">
@@ -73,8 +75,8 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-default">Cancel</button>
-                            <asp:Button ID="btnSubmit" CssClass="btn btn-info pull-right submit" runat="server" Text="Submit" OnClick="btnSubmit_Click" ValidationGroup="CreateUser" />
+                            <asp:Button ID="btnCancel" Text="Cancel" runat="server" CssClass="btn btn-default pull-right" OnClick="btnCancel_Click" />
+                            <asp:Button ID="btnSubmit" CssClass="btn btn-info pull-right submit" runat="server" Style="margin-right: 10px;" Text="Save" OnClick="btnSubmit_Click" ValidationGroup="CreateUser" />
                         </div>
                     </div>
                     <div class="box-footer">
@@ -82,7 +84,7 @@
                 </div>
             </div>
         </div>
-          <div class="overlay">
+        <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
         </div>
     </section>

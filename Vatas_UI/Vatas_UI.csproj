@@ -968,7 +968,7 @@
     <Content Include="Assets\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Assets\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="ChangePassword.aspx" />
-    <Content Include="CreateUser.aspx" />
+    <Content Include="User\CreateUser.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="Global.asax" />
@@ -1076,6 +1076,8 @@
   <ItemGroup>
     <Content Include="SignUp.aspx" />
     <Content Include="UC\UCMenu.ascx" />
+    <Content Include="User\EditUser.aspx" />
+    <Content Include="User\UserListing.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1088,11 +1090,11 @@
     <Compile Include="ChangePassword.aspx.designer.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CreateUser.aspx.cs">
+    <Compile Include="User\CreateUser.aspx.cs">
       <DependentUpon>CreateUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CreateUser.aspx.designer.cs">
+    <Compile Include="User\CreateUser.aspx.designer.cs">
       <DependentUpon>CreateUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="ForgotPassword.aspx.cs">
@@ -1273,6 +1275,20 @@
     </Compile>
     <Compile Include="UC\UCMenu.ascx.designer.cs">
       <DependentUpon>UCMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="User\EditUser.aspx.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\EditUser.aspx.designer.cs">
+      <DependentUpon>EditUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\UserListing.aspx.cs">
+      <DependentUpon>UserListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\UserListing.aspx.designer.cs">
+      <DependentUpon>UserListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="VatasMasterPage.cs">
       <SubType>ASPXCodeBehind</SubType>

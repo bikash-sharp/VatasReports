@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Vatas_UI {
+namespace Vatas_UI.User {
     
     
-    public partial class CreateUser {
+    public partial class EditUser {
         
         /// <summary>
         /// txtFirstName control.
@@ -56,6 +56,15 @@ namespace Vatas_UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        
+        /// <summary>
+        /// rfvEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEmail;
         
         /// <summary>
         /// revEmail control.
@@ -130,6 +139,15 @@ namespace Vatas_UI {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revMobileNumber;
         
         /// <summary>
+        /// rfvMobileNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMobileNumber;
+        
+        /// <summary>
         /// ddlAccountType control.
         /// </summary>
         /// <remarks>
@@ -137,6 +155,15 @@ namespace Vatas_UI {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlAccountType;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
         /// btnSubmit control.

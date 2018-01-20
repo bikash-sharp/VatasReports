@@ -13,15 +13,12 @@
             <div class="login-logo">
                 <a href="javascript:;"><b>Vatas </b>Infotech</a>
             </div>
-            <!-- /.login-logo -->
             <div class="login-box-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-
                 <div class="form-group has-feedback">
-
                     <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" ControlToValidate="txtEmail" EnableClientScript="true" ValidationGroup="Login" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
-                    
+
                 </div>
                 <div class="form-group has-feedback">
                     <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Password" TextMode="Password"></asp:TextBox>
@@ -34,15 +31,12 @@
                                 <asp:CheckBox ID="chkRememberMe" runat="server" />&nbsp;Remember Me</label>
                         </div>
                     </div>
-                    <!-- /.col -->
                     <div class="col-md-4">
                         <asp:Button ID="BtnSubmit" CssClass="btn btn-primary btn-block btn-flat" runat="server" Text="Sign In" OnClick="BtnSubmit_Click" ValidationGroup="Login" />
                     </div>
-                    <!-- /.col -->
                 </div>
                 <br />
-
-                <a href="#" class="text-center hide">Register a new membership</a>
+                <a href="<%= this.AppPath() + "SignUp" %>" class="text-center">Register a new membership</a>
                 <div class="social-auth-links text-center hide">
                     <p>- OR -</p>
                     <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i>Sign in using
@@ -52,10 +46,7 @@
                 </div>
                 <%--OnClick="lnkRecoverPassword_Click"--%>
                 <asp:LinkButton ID="lnkRecoverPassword" runat="server" CssClass="hide">I forgot my password</asp:LinkButton>
-                <!-- /.social-auth-links -->
             </div>
-            <!-- /.login-box-body -->
         </div>
-        <!-- /.login-box -->
     </section>
 </asp:Content>

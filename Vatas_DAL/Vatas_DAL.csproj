@@ -66,6 +66,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbAdmin.edmx</DependentUpon>
     </Compile>
+    <Compile Include="proc_GetAllRegisteredUsers_Result.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetRegisteredUserByUserId_Result.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetUserRoleByRoleId_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>

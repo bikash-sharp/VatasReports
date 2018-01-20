@@ -22,6 +22,13 @@ namespace Vatas_UI
                 }
         }
 
+        //Get the Current Page Relative Path
+        public string AppPath()
+        {
+            string path = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpContext.Current.Request.ApplicationPath;
+            return path.EndsWith("/") ? path : path + "/";
+        }
+
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
