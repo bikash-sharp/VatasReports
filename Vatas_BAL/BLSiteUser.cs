@@ -93,10 +93,10 @@ namespace Vatas_BAL
             try
             {
                 return _context.proc_GetUserRoleByUserId(UserId)
-                    .Select(p => new UserCL { UserID = p.UserID ?? 0, Username = p.UserName, RoleId=p.RoleId ?? 0 , RoleName=p.Role_Name})
+                    .Select(p => new UserCL { UserID = p.UserID ?? 0, Username = p.UserName, RoleId = p.RoleId ?? 0, RoleName = p.Role_Name })
                     .ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var err = ex.Message;
             }
@@ -257,14 +257,91 @@ namespace Vatas_BAL
         }
 
         /// <summary>
-        /// Get all menus
+        /// Add Update role user by RoleId
         /// </summary>
-        /// <param>userid</param>
-        /// <returns>registerd user</returns>
-        public bool GetAllMenus()
+        /// <param>RoleId,RoleName</param>
+        public bool AddUpdateRole(int RoleId, string RoleName)
         {
             try
             {
+
+
+                _context.proc_AddUpdateRolesByRoleId(RoleId, RoleName);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool IsRoleExist(string RoleName)
+        {
+            try
+            {
+                var result = _context.tbl_Roles.Where(s => s.Role_Name.ToLower() == RoleName.ToLower()).FirstOrDefault();
+                if (result != null)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Delete role user by RoleId
+        /// </summary>
+        /// <param>Roleid</param>
+        public bool DeleteRoleByRoleId(int RoleId)
+        {
+            try
+            {
+                var result = _context.tbl_Roles.Where(p => p.Role_ID == RoleId).FirstOrDefault();
+                result.Is_Deleted = "Y";
+
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public List<MenuCL> GetMenuByRoleId(int RoleId)
+        {
+            List<MenuCL> result = new List<MenuCL>();
+            try
+            {
+                result = _context.proc_GetMenuByRoleId(RoleId).ToList().Select(p => new MenuCL
+                {
+                    MenuID = p.Menu_ID,
+                    MenuLevel = p.Menu_Level,
+                    MenuLink = p.Menu_Link,
+                    MenuName = p.Menu_Name,
+                    MenuOrder = p.Menu_Order,
+                    MenuStatus = p.Menu_Status,
+                    ProjectName = p.Project_Name
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+            }
+            return result;
+        }
+
+        public bool DeleteUserMenuByMenuId(int RoleId, int MenuId)
+        {
+            try
+            {
+                var result = _context.tbl_UserMenu.Where(p => p.Role_ID == RoleId && p.Menu_ID == MenuId).FirstOrDefault();
+                result.Menu_Status = "N";
+
+                _context.SaveChanges();
                 return true;
             }
             catch (Exception ex)

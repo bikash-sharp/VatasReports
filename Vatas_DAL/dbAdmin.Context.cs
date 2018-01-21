@@ -34,15 +34,7 @@ namespace Vatas_DAL
         public virtual DbSet<tbl_User_Info> tbl_User_Info { get; set; }
         public virtual DbSet<tbl_Roles> tbl_Roles { get; set; }
         public virtual DbSet<tbl_UserRoles> tbl_UserRoles { get; set; }
-    
-        public virtual ObjectResult<proc_GetUserRoleByRoleId_Result> proc_GetUserRoleByRoleId(Nullable<int> roleId)
-        {
-            var roleIdParameter = roleId.HasValue ?
-                new ObjectParameter("RoleId", roleId) :
-                new ObjectParameter("RoleId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByRoleId_Result>("proc_GetUserRoleByRoleId", roleIdParameter);
-        }
+        public virtual DbSet<tbl_UserMenu> tbl_UserMenu { get; set; }
     
         public virtual int proc_AddUpdateUser(Nullable<int> userId, string firstName, string lastName, string email, string password, string mobileNumber, string accountType, Nullable<int> roleId)
         {
@@ -102,6 +94,37 @@ namespace Vatas_DAL
                 new ObjectParameter("UserId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByUserId_Result>("proc_GetUserRoleByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<proc_GetUserRoleByRoleId_Result> proc_GetUserRoleByRoleId(Nullable<int> roleId)
+        {
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByRoleId_Result>("proc_GetUserRoleByRoleId", roleIdParameter);
+        }
+    
+        public virtual int proc_AddUpdateRolesByRoleId(Nullable<int> roleId, string roleName)
+        {
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(int));
+    
+            var roleNameParameter = roleName != null ?
+                new ObjectParameter("RoleName", roleName) :
+                new ObjectParameter("RoleName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdateRolesByRoleId", roleIdParameter, roleNameParameter);
+        }
+    
+        public virtual ObjectResult<proc_GetMenuByRoleId_Result> proc_GetMenuByRoleId(Nullable<int> roleId)
+        {
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetMenuByRoleId_Result>("proc_GetMenuByRoleId", roleIdParameter);
         }
     }
 }

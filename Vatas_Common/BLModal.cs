@@ -201,4 +201,15 @@ namespace Vatas_Common
         public string MenuName { get; set; }
     }
 
+    public class MenuCL
+    {
+        public int MenuID { get; set; }
+        public string MenuName { get; set; }
+        public int MenuLevel { get; set; }
+        public string MenuLink { get; set; }
+        public int MenuStatus { get; set; }
+        public string ProjectName { get; set; }
+        public int MenuOrder { get; set; }
+    }
+
 }

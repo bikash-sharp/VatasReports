@@ -32,6 +32,7 @@ namespace Vatas_UI
             routes.MapPageRoute("CreateUser", "CreateUser", "~/User/CreateUser.aspx", true);
             routes.MapPageRoute("UserListing", "UserListing", "~/User/UserListing.aspx", true);
             routes.MapPageRoute("EditUser", "EditUser", "~/User/EditUser.aspx", true);
+            routes.MapPageRoute("ManageRoles", "ManageRoles", "~/User/ManageRoles.aspx", true);
 
             routes.MapPageRoute("Lock", "Lock", "~/LockScreen.aspx", true);
             routes.MapPageRoute("ForgotPassword", "RecoverPassword", "~/ForgotPassword.aspx", true);

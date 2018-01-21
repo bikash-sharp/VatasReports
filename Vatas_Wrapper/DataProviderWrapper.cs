@@ -85,6 +85,46 @@ namespace Vatas_Wrapper
                 return BLSiteUser.Instance(context).GetAllRoles();
             }
         }
+        public bool DeleteRoleByRoleId(int RoleId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).DeleteRoleByRoleId(RoleId);
+            }
+        }
+
+        public bool AddUpdateRole(int RoleId, string RoleName)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).AddUpdateRole(RoleId, RoleName);
+            }
+        }
+
+        public bool IsRoleExist(string RoleName)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).IsRoleExist(RoleName);
+            }
+        }
+
+        public List<MenuCL> GetMenuByRoleId(int RoleId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).GetMenuByRoleId(RoleId);
+            }
+        }
+
+        public bool DeleteUserMenuByMenuId(int RoleId,int MenuId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).DeleteUserMenuByMenuId(RoleId,MenuId);
+            }
+        }
+
 
         #region Reports
 
@@ -115,7 +155,7 @@ namespace Vatas_Wrapper
 
         #region Process
 
-        public List<ProcessReturnsCL> GetReturnsByJobStatus(string StatusName, int PageNumber, int PageSize,string SearchText=null)
+        public List<ProcessReturnsCL> GetReturnsByJobStatus(string StatusName, int PageNumber, int PageSize, string SearchText = null)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {

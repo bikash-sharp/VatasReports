@@ -29,7 +29,6 @@ namespace Vatas_UI.User
                 {
                     Server.Transfer("UserListing.aspx");
                 }
-
             }
         }
 

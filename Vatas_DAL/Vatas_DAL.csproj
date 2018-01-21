@@ -69,6 +69,9 @@
     <Compile Include="proc_GetAllRegisteredUsers_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_GetMenuByRoleId_Result.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetRegisteredUserByUserId_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
@@ -101,6 +104,9 @@
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_UserGroup_Registration.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_UserMenu.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_UserRoles.cs">
