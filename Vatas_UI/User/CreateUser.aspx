@@ -64,13 +64,22 @@
                                     <asp:RequiredFieldValidator ID="rfvMobileNumber" ControlToValidate="txtMobileNumber" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
-                            <div class="form-group has-feedback">
-                                <label for="txtAccountType" class="col-sm-2 control-label">Account Type</label>
+                            <div class="form-group has-feedback hide">
+                                <label for="ddlAccountType" class="col-sm-2 control-label">Account Type</label>
                                 <div class="col-sm-10">
                                     <asp:DropDownList ID="ddlAccountType" runat="server" class="form-control">
-                                        <asp:ListItem Value="U">User</asp:ListItem>
+                                        <asp:ListItem Value="U" Selected="True">User</asp:ListItem>
                                         <asp:ListItem Value="A">Admin</asp:ListItem>
                                     </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="form-group has-feedback">
+                                <label for="ddlRoles" class="col-sm-2 control-label">Role Type</label>
+                                <div class="col-sm-10">
+                                    <asp:DropDownList ID="ddlRoles" runat="server" class="form-control" AppendDataBoundItems="true">
+                                        <asp:ListItem Value="0" Selected="True">Select</asp:ListItem>
+                                    </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvRoles" ControlToValidate="ddlRoles" InitialValue="0" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>

@@ -94,6 +94,38 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Name="Is_Login_Active" Type="nvarchar" MaxLength="1" />
           <Property Name="ID_Admin" Type="int" />
         </EntityType>
+        <EntityType Name="tbl_UserRoles">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <Association Name="FK_tbl_UserRoles_tbl_Roles">
+          <End Role="tbl_Roles" Type="Self.tbl_Roles" Multiplicity="0..1" />
+          <End Role="tbl_UserRoles" Type="Self.tbl_UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Roles">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="tbl_UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_UserRoles_tbl_UserGroup_Registration">
+          <End Role="tbl_UserGroup_Registration" Type="Self.tbl_UserGroup_Registration" Multiplicity="0..1" />
+          <End Role="tbl_UserRoles" Type="Self.tbl_UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UserGroup_Registration">
+              <PropertyRef Name="Super_User_Id" />
+            </Principal>
+            <Dependent Role="tbl_UserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="proc_AddUpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
           <Parameter Name="FirstName" Type="varchar" Mode="In" />
@@ -111,12 +143,16 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
         <Function Name="proc_GetUserRoleByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
         </Function>
+        <Function Name="proc_GetUserRoleByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="db_AdminModelStoreContainer">
           <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Credential" EntityType="Self.tbl_User_Credential" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Session_Details" EntityType="Self.tbl_User_Session_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Transaction" EntityType="Self.tbl_User_Transaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_UserGroup_Registration" EntityType="Self.tbl_UserGroup_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_UserRoles" EntityType="Self.tbl_UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Info" EntityType="Self.tbl_User_Info" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [tbl_User_Info].[User_Info_ID] AS [User_Info_ID], 
@@ -128,6 +164,14 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
     [tbl_User_Info].[ID_Admin] AS [ID_Admin]
     FROM [dbo].[tbl_User_Info] AS [tbl_User_Info]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_tbl_UserRoles_tbl_Roles" Association="Self.FK_tbl_UserRoles_tbl_Roles">
+            <End Role="tbl_Roles" EntitySet="tbl_Roles" />
+            <End Role="tbl_UserRoles" EntitySet="tbl_UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_UserRoles_tbl_UserGroup_Registration" Association="Self.FK_tbl_UserRoles_tbl_UserGroup_Registration">
+            <End Role="tbl_UserGroup_Registration" EntitySet="tbl_UserGroup_Registration" />
+            <End Role="tbl_UserRoles" EntitySet="tbl_UserRoles" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -196,6 +240,7 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Name="Account_Type" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Is_Login_Active" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="ID_Admin" Type="Int32" />
+          <NavigationProperty Name="tbl_UserRoles" Relationship="db_AdminModel.FK_tbl_UserRoles_tbl_UserGroup_Registration" FromRole="tbl_UserGroup_Registration" ToRole="tbl_UserRoles" />
         </EntityType>
         <EntityType Name="tbl_User_Info">
           <Key>
@@ -233,6 +278,18 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           </FunctionImport>
           <FunctionImport Name="proc_GetAllRegisteredUsers" ReturnType="Collection(db_AdminModel.proc_GetAllRegisteredUsers_Result)" />
           <FunctionImport Name="proc_GetRegisteredUserByUserId" ReturnType="Collection(db_AdminModel.proc_GetRegisteredUserByUserId_Result)">
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="tbl_UserRoles" EntityType="db_AdminModel.tbl_UserRoles" />
+          <AssociationSet Name="FK_tbl_UserRoles_tbl_Roles" Association="db_AdminModel.FK_tbl_UserRoles_tbl_Roles">
+            <End Role="tbl_Roles" EntitySet="tbl_Roles" />
+            <End Role="tbl_UserRoles" EntitySet="tbl_UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_UserRoles_tbl_UserGroup_Registration" Association="db_AdminModel.FK_tbl_UserRoles_tbl_UserGroup_Registration">
+            <End Role="tbl_UserGroup_Registration" EntitySet="tbl_UserGroup_Registration" />
+            <End Role="tbl_UserRoles" EntitySet="tbl_UserRoles" />
+          </AssociationSet>
+          <FunctionImport Name="proc_GetUserRoleByUserId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByUserId_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -250,6 +307,7 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Name="Role_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Is_Deleted" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Role_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_UserRoles" Relationship="db_AdminModel.FK_tbl_UserRoles_tbl_Roles" FromRole="tbl_Roles" ToRole="tbl_UserRoles" />
         </EntityType>
         <ComplexType Name="proc_GetAllRegisteredUsers_Result">
           <Property Type="Int32" Name="UserId" Nullable="false" />
@@ -276,6 +334,46 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Type="String" Name="IsActive" Nullable="true" MaxLength="1" />
           <Property Type="Int32" Name="RoleId" Nullable="false" />
           <Property Type="String" Name="RoleName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="tbl_UserRoles">
+          <Key>
+            <PropertyRef Name="UserRoleId" />
+          </Key>
+          <Property Name="UserRoleId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="tbl_Roles" Relationship="db_AdminModel.FK_tbl_UserRoles_tbl_Roles" FromRole="tbl_UserRoles" ToRole="tbl_Roles" />
+          <NavigationProperty Name="tbl_UserGroup_Registration" Relationship="db_AdminModel.FK_tbl_UserRoles_tbl_UserGroup_Registration" FromRole="tbl_UserRoles" ToRole="tbl_UserGroup_Registration" />
+        </EntityType>
+        <Association Name="FK_tbl_UserRoles_tbl_Roles">
+          <End Type="db_AdminModel.tbl_Roles" Role="tbl_Roles" Multiplicity="0..1" />
+          <End Type="db_AdminModel.tbl_UserRoles" Role="tbl_UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Roles">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="tbl_UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_UserRoles_tbl_UserGroup_Registration">
+          <End Type="db_AdminModel.tbl_UserGroup_Registration" Role="tbl_UserGroup_Registration" Multiplicity="0..1" />
+          <End Type="db_AdminModel.tbl_UserRoles" Role="tbl_UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UserGroup_Registration">
+              <PropertyRef Name="Super_User_Id" />
+            </Principal>
+            <Dependent Role="tbl_UserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="proc_GetUserRoleByUserId_Result">
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+          <Property Type="String" Name="Role_Name" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -416,6 +514,25 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_UserRoles">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_UserRoles">
+              <MappingFragment StoreEntitySet="tbl_UserRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetUserRoleByUserId" FunctionName="db_AdminModel.Store.proc_GetUserRoleByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetUserRoleByUserId_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

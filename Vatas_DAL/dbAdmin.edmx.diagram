@@ -11,6 +11,9 @@
         <EntityTypeShape EntityType="db_AdminModel.tbl_UserGroup_Registration" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_AdminModel.tbl_User_Info" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_AdminModel.tbl_Roles" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="db_AdminModel.tbl_UserRoles" Width="1.5" PointX="7" PointY="4.25" />
+        <AssociationConnector Association="db_AdminModel.FK_tbl_UserRoles_tbl_Roles" />
+        <AssociationConnector Association="db_AdminModel.FK_tbl_UserRoles_tbl_UserGroup_Registration" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
     <li id="lihome"><a href="<%=Page.ResolveUrl("~/Index")%>" title="Home">
         <i class="fa fa-dashboard"></i><span>Dashboard</span></a>
     </li>
-    <%if (BLFunction.GetRoleName() == "Admin")
+    <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
         {
     %>
     <li id="liUser" class="treeview">

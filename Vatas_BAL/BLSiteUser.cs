@@ -82,10 +82,25 @@ namespace Vatas_BAL
 
         public List<DropDownCL> GetUserRolesByRoleId(int RoleId)
         {
-            return
-                _context.proc_GetUserRoleByRoleId(RoleId)
+            return _context.proc_GetUserRoleByRoleId(RoleId)
                     .Select(p => new DropDownCL { DataText = p.UserName, DataValue = p.UserID.ToString() })
                     .ToList();
+        }
+
+        public List<UserCL> GetUserRolesByUserId(int UserId)
+        {
+            List<UserCL> result = new List<UserCL>();
+            try
+            {
+                return _context.proc_GetUserRoleByUserId(UserId)
+                    .Select(p => new UserCL { UserID = p.UserID ?? 0, Username = p.UserName, RoleId=p.RoleId ?? 0 , RoleName=p.Role_Name})
+                    .ToList();
+            }
+            catch(Exception ex)
+            {
+                var err = ex.Message;
+            }
+            return result;
         }
 
         /// <summary>

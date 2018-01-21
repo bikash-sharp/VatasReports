@@ -9,7 +9,7 @@ using Vatas_Wrapper;
 
 namespace Vatas_UI.User
 {
-    public partial class UserListing : System.Web.UI.Page
+    public partial class UserListing : VatasWebPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

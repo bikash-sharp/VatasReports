@@ -33,6 +33,7 @@ namespace Vatas_DAL
         public virtual DbSet<tbl_UserGroup_Registration> tbl_UserGroup_Registration { get; set; }
         public virtual DbSet<tbl_User_Info> tbl_User_Info { get; set; }
         public virtual DbSet<tbl_Roles> tbl_Roles { get; set; }
+        public virtual DbSet<tbl_UserRoles> tbl_UserRoles { get; set; }
     
         public virtual ObjectResult<proc_GetUserRoleByRoleId_Result> proc_GetUserRoleByRoleId(Nullable<int> roleId)
         {
@@ -92,6 +93,15 @@ namespace Vatas_DAL
                 new ObjectParameter("UserId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetRegisteredUserByUserId_Result>("proc_GetRegisteredUserByUserId", userIdParameter);
+        }
+    
+        public virtual ObjectResult<proc_GetUserRoleByUserId_Result> proc_GetUserRoleByUserId(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByUserId_Result>("proc_GetUserRoleByUserId", userIdParameter);
         }
     }
 }

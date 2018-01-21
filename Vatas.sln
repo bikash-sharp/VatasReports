@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Procedures", "Procedures", 
 		GetAllRegisteredUsers.sql = GetAllRegisteredUsers.sql
 		GetRegisteredUserByUserId.sql = GetRegisteredUserByUserId.sql
 		proc_GetUserRoleByRoleId.sql = proc_GetUserRoleByRoleId.sql
+		proc_GetUserRoleByUserId.sql = proc_GetUserRoleByUserId.sql
 		proc_Report_GetAllFirmName.sql = proc_Report_GetAllFirmName.sql
 		proc_Report_GetReturnsByJobStatus.sql = proc_Report_GetReturnsByJobStatus.sql
 		proc_Report_SearchJobsBetweenDatesWithFirmName.sql = proc_Report_SearchJobsBetweenDatesWithFirmName.sql

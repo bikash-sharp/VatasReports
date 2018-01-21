@@ -9,11 +9,14 @@ using Vatas_Wrapper;
 
 namespace Vatas_UI
 {
-    public partial class CreateUser : System.Web.UI.Page
+    public partial class CreateUser : VatasWebPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(!IsPostBack)
+            {
+                BindRoles();
+            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -28,7 +31,7 @@ namespace Vatas_UI
                 createUser.Password = txtPassword.Text;
                 createUser.MobileNumber = txtMobileNumber.Text;
                 createUser.AccountType = ddlAccountType.SelectedValue;
-                createUser.RoleId = 0;
+                createUser.RoleId = int.Parse(ddlRoles.SelectedValue);
 
                 bool IsExist = DataProviderWrapper.Instance.IsEmailExist(createUser.Email);
 
@@ -38,7 +41,7 @@ namespace Vatas_UI
                     if (IsSaved)
                     {
                         Clear();
-                        BLFunction.ShowAlert(this, "New User Created Successfully", ResponseType.SUCCESS);
+                        BLFunction.ShowAlertRedirect(this, "New User Created Successfully", CurrentPagePath+"UserListing", ResponseType.SUCCESS);
                     }
                     else
                     {
@@ -63,6 +66,19 @@ namespace Vatas_UI
             txtEmail.Text = string.Empty;
             txtPassword.Text = string.Empty;
             txtMobileNumber.Text = string.Empty;
+        }
+
+        public void BindRoles()
+        {
+            List<DropDownCL> roles = DataProviderWrapper.Instance.GetAllRoles();
+            ddlRoles.DataSource = null;
+            if (roles.Count > 0)
+            {
+                ddlRoles.DataSource = roles;
+                ddlRoles.DataTextField = "DataText";
+                ddlRoles.DataValueField = "DataValue";
+            }
+            ddlRoles.DataBind();
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)

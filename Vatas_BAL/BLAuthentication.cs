@@ -51,11 +51,17 @@ namespace Vatas_BAL
                 else
                 {
                     string roleName = "";
-                    if (user.Account_Type == "A")
-                        roleName = "Admin";
+                    var UserRoles = BLSiteUser.Instance(_context).GetUserRolesByUserId(user.Super_User_Id).FirstOrDefault();
+                    if(UserRoles != null)
+                    {
+                        roleName = UserRoles.RoleName;
+                    }
                     else
-                        roleName = "User";
+                    {
+                        roleName = "Staff";
+                    }
                     string token = Guid.NewGuid().ToString();
+
                     return new AuthMessageCL(user.Super_User_Id, logon.Email, 0, roleName,token, ResponseType.SUCCESS, "Success");
                 }
 

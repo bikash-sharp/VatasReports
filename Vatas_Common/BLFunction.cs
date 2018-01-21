@@ -144,7 +144,7 @@ namespace Vatas_Common
         /// <param name="type"></param>
         public static void ShowAlertRedirect(Control page, string message, string pageurl, ResponseType type = ResponseType.PRIMARY)
         {
-            ScriptManager.RegisterClientScriptBlock(page, typeof(Page), Guid.NewGuid().ToString(), "ShowMessageWithPageRedirect('" + type.ToString() + "','" + message.Replace("'", "").Replace("\r\n", "<Br/>") + "','" + pageurl + "')", true);
+            ScriptManager.RegisterStartupScript(page, typeof(Page), Guid.NewGuid().ToString(), "ShowMessageWithPageRedirect('" + type.ToString() + "','" + message.Replace("'", "").Replace("\r\n", "<Br/>") + "','" + pageurl + "')", true);
             return;
         }
     }

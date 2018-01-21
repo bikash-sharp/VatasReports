@@ -14,6 +14,12 @@ namespace Vatas_DAL
     
     public partial class tbl_UserGroup_Registration
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbl_UserGroup_Registration()
+        {
+            this.tbl_UserRoles = new HashSet<tbl_UserRoles>();
+        }
+    
         public int Super_User_Id { get; set; }
         public string Name { get; set; }
         public string Last_Name { get; set; }
@@ -38,5 +44,8 @@ namespace Vatas_DAL
         public string Account_Type { get; set; }
         public string Is_Login_Active { get; set; }
         public Nullable<int> ID_Admin { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_UserRoles> tbl_UserRoles { get; set; }
     }
 }

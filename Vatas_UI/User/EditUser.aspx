@@ -41,6 +41,9 @@
                                     <asp:RegularExpressionValidator ID="revEmail" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="EditUser" SetFocusOnError="true" Display="Dynamic"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
+                            <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
+                                {
+                            %>
                             <div class="form-group has-feedback">
                                 <label for="txtPassword" class="col-sm-2 control-label">Password</label>
                                 <div class="col-xs-10 col-sm-9" style="padding-right: 0px;">
@@ -49,7 +52,7 @@
                                 </div>
                                 <div class="col-xs-1" style="padding-left: 0px;">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default reveal" style="padding: 6px 15px;" type="button"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                        <button class="btn btn-default reveal" style="padding: 6px 15px;" type="button"><i class="glyphicon glyphicon-eye-close"></i></button>
                                     </span>
                                 </div>
                             </div>
@@ -62,10 +65,11 @@
                                 </div>
                                 <div class="col-xs-1" style="padding-left: 0px;">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default revealCfrmPwd" style="padding: 6px 15px;" type="button"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                        <button class="btn btn-default revealCfrmPwd" style="padding: 6px 15px;" type="button"><i class="glyphicon glyphicon-eye-close"></i></button>
                                     </span>
                                 </div>
                             </div>
+                            <%} %>
                             <div class="form-group has-feedback" style="margin-bottom: 0px;">
                                 <label for="txtMobileNumber" class="col-sm-2 control-label">Mobile Number</label>
                                 <div class="col-sm-10">
@@ -74,7 +78,7 @@
                                     <asp:RequiredFieldValidator ID="rfvMobileNumber" ControlToValidate="txtMobileNumber" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="EditUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
-                            <div class="form-group has-feedback">
+                            <div class="form-group has-feedback hide">
                                 <label for="txtAccountType" class="col-sm-2 control-label">Account Type</label>
                                 <div class="col-sm-10">
                                     <asp:DropDownList ID="ddlAccountType" runat="server" class="form-control">
@@ -119,8 +123,10 @@
             var $pwd = $(".pwd");
             if ($pwd.attr('type') === 'password') {
                 $pwd.attr('type', 'text');
+                $('.reveal .glyphicon').removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open');
             } else {
                 $pwd.attr('type', 'password');
+                $('.reveal .glyphicon').removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close');
             }
         });
 
@@ -128,8 +134,10 @@
             var $pwd = $(".cfrmpwd");
             if ($pwd.attr('type') === 'password') {
                 $pwd.attr('type', 'text');
+                $('.revealCfrmPwd .glyphicon').removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open');
             } else {
                 $pwd.attr('type', 'password');
+                $('.revealCfrmPwd .glyphicon').removeClass('glyphicon-eye-open').addClass('glyphicon-eye-close');
             }
         });
 

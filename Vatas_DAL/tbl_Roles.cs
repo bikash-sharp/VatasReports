@@ -14,9 +14,18 @@ namespace Vatas_DAL
     
     public partial class tbl_Roles
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tbl_Roles()
+        {
+            this.tbl_UserRoles = new HashSet<tbl_UserRoles>();
+        }
+    
         public int Role_ID { get; set; }
         public string Role_Name { get; set; }
         public string Is_Deleted { get; set; }
         public string Role_Code { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_UserRoles> tbl_UserRoles { get; set; }
     }
 }

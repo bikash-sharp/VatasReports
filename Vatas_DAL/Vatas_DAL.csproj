@@ -75,6 +75,9 @@
     <Compile Include="proc_GetUserRoleByRoleId_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_GetUserRoleByUserId_Result.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_Report_GetAllFirmName_Result.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>
@@ -98,6 +101,9 @@
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_UserGroup_Registration.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbl_UserRoles.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="tbl_User_Credential.cs">

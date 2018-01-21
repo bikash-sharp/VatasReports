@@ -10,7 +10,7 @@ using Vatas_Wrapper;
 
 namespace Vatas_UI.User
 {
-    public partial class EditUser : System.Web.UI.Page
+    public partial class EditUser : VatasWebPage
     {
         HttpContext CurrContext = HttpContext.Current;
         static int UserId = 0;
@@ -53,29 +53,13 @@ namespace Vatas_UI.User
                 txtFirstName.Text = result.FirstName;
                 txtLastName.Text = result.LastName;
                 txtEmail.Text = result.Email;
-
-                if (BLFunction.GetRoleName().ToLower() == "superadmin")
-                {
-                    txtPassword.Attributes.Add("value", result.Password);
-                    txtConfirmPassword.Attributes.Add("value", result.Password);
-                    //txtPassword.Text = result.Password;
-                    //txtConfirmPassword.Text = result.Password;
-                }
-                else
-                {
-                    txtPassword.Text = string.Empty;
-                    txtConfirmPassword.Text = string.Empty;
-                }
-
-
+                txtPassword.Attributes.Add("value", result.Password);
+                txtConfirmPassword.Attributes.Add("value", result.Password);
                 txtMobileNumber.Text = result.MobileNumber;
                 if (result.RoleId > 0)
                     ddlRoles.SelectedValue = result.RoleId.ToString();
             }
         }
-
-        //BLFunction.GetRoleName() == "Admin"
-
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             try
