@@ -65,7 +65,7 @@ function ShowMessageWithPageRedirect(type,yourmessage,Page)
 function ConfirmMessage(control) {
     BootstrapDialog.confirm({
         title: 'WARNING',
-        message: 'Are you sure, You want to delete this ? It will also delete all the associated items',
+        message: 'Are you sure, You want to delete this ? ', //It will also delete all the associated items
         type: BootstrapDialog.TYPE_WARNING, // <-- Default value is BootstrapDialog.TYPE_PRIMARY    
         btnCancelLabel: 'Cancel', // <-- Default value is 'Cancel',    
         btnOKLabel: 'Continue', // <-- Default value is 'OK',    
@@ -75,7 +75,6 @@ function ConfirmMessage(control) {
             if (result) {
                 var href = control.getAttribute("href");
                 eval(href);
-
             }
             else {
                 BootstrapDialog.closeAll();

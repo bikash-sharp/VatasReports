@@ -43,7 +43,7 @@ namespace Vatas_UI.User
 
         protected void btnEditUser_Click(object sender, EventArgs e)
         {
-            Button btnEditUser = (Button)(sender);
+            LinkButton btnEditUser = (LinkButton)(sender);
             int UserId = Convert.ToInt32(btnEditUser.CommandArgument);
 
             HttpContext _context = HttpContext.Current;
@@ -57,18 +57,18 @@ namespace Vatas_UI.User
         {
             try
             {
-                Button btnDeleteUser = (Button)(sender);
+                LinkButton btnDeleteUser = (LinkButton)(sender);
                 int UserId = Convert.ToInt32(btnDeleteUser.CommandArgument);
 
                 bool IsSaved = DataProviderWrapper.Instance.DeleteRegisteredUser(UserId);
                 if (IsSaved)
                 {
-                    BLFunction.ShowAlert(this, "User has been deleted Successfully.", ResponseType.SUCCESS);
+                    BLFunction.ShowAlert(this, "User has been deleted successfully.", ResponseType.SUCCESS);
                     BindData();
                 }
                 else
                 {
-                    BLFunction.ShowAlert(this, "Unable to deletethe user.", ResponseType.WARNING);
+                    BLFunction.ShowAlert(this, "Unable to delete the user.", ResponseType.WARNING);
                 }
             }
             catch (Exception ex)

@@ -54,8 +54,9 @@
                                                     <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
                                                         {
                                                     %>
-                                                    <asp:Button ID="btnEditUser" CommandArgument='<%# Eval("UserId") %>' Text="Edit" CssClass="btn btn-success" runat="server" OnClick="btnEditUser_Click" />
-                                                    <asp:Button ID="btnDeleteUser" CommandArgument='<%# Eval("UserId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteUser_Click" />
+                                                    <asp:LinkButton ID="btnEdit" CausesValidation="false" CommandArgument='<%# Eval("UserId") %>' Text="Edit" CssClass="btn btn-success" runat="server" OnClick="btnEditUser_Click"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</asp:LinkButton>
+                                                    <asp:LinkButton ID="lnkDeleteUser" CausesValidation="false" CommandArgument='<%# Eval("UserId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteUser_Click" OnClientClick="if(!ConfirmMessage(this))return false;"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete</asp:LinkButton>
+                                                    
                                                     <%} %>
                                                 </td>
                                             </tr>
