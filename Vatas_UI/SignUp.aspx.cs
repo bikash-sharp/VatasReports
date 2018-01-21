@@ -50,19 +50,27 @@ namespace Vatas_UI
                 createUser.AccountType = "U";
                 createUser.RoleId = 0;
 
-                bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
-                if (IsSaved)
+                bool IsExist = DataProviderWrapper.Instance.IsEmailExist(createUser.Email);
+
+                if (!IsExist)
                 {
-                    Clear();
-                    BLFunction.ShowAlert(this, "User has been successfully register.", ResponseType.SUCCESS);
-                    //Thread.Sleep(1000);
-                    //Response.Redirect("~/Login", true);
+                    bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
+                    if (IsSaved)
+                    {
+                        Clear();
+                        BLFunction.ShowAlert(this, "User has been successfully register.", ResponseType.SUCCESS);
+                        //Thread.Sleep(1000);
+                        //Response.Redirect("~/Login", true);
+                    }
+                    else
+                    {
+                        BLFunction.ShowAlert(this, "Unable to register.", ResponseType.WARNING);
+                    }
                 }
                 else
                 {
-                    BLFunction.ShowAlert(this, "Unable to register.", ResponseType.WARNING);
+                    BLFunction.ShowAlert(this, "EmailId already exist.", ResponseType.SUCCESS);
                 }
-
             }
             catch (Exception ex)
             {

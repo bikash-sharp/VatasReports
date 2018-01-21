@@ -53,14 +53,28 @@ namespace Vatas_UI.User
                 txtFirstName.Text = result.FirstName;
                 txtLastName.Text = result.LastName;
                 txtEmail.Text = result.Email;
-                txtPassword.Text = result.Password;
-                txtConfirmPassword.Text = result.Password;
+
+                if (BLFunction.GetRoleName().ToLower() == "superadmin")
+                {
+                    txtPassword.Attributes.Add("value", result.Password);
+                    txtConfirmPassword.Attributes.Add("value", result.Password);
+                    //txtPassword.Text = result.Password;
+                    //txtConfirmPassword.Text = result.Password;
+                }
+                else
+                {
+                    txtPassword.Text = string.Empty;
+                    txtConfirmPassword.Text = string.Empty;
+                }
+
+
                 txtMobileNumber.Text = result.MobileNumber;
                 if (result.RoleId > 0)
                     ddlRoles.SelectedValue = result.RoleId.ToString();
-
             }
         }
+
+        //BLFunction.GetRoleName() == "Admin"
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {

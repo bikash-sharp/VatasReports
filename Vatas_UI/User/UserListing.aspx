@@ -14,6 +14,7 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">User Listing</h3>
+                <a href="<%= this.AppPath() + "CreateUser" %>" class="btn btn-info text-center" style="float: right">Create New User</a>
             </div>
             <div class="box-body">
                 <div class="form-inline">
@@ -26,7 +27,7 @@
                                         <th>First Name</th>
                                         <th>Last Name</th>
                                         <th>EmailId</th>
-                                        <th>Password</th>
+                                        <%--<th>Password</th>--%>
                                         <th>Mobile No.</th>
                                         <th>Account Type</th>
                                         <th>Role</th>
@@ -44,14 +45,14 @@
                                                 <td><%# Eval("FirstName") %></td>
                                                 <td><%# Eval("LastName") %></td>
                                                 <td><%# Eval("Email") %></td>
-                                                <td><%# Eval("Password") %></td>
+                                                <%--<td><%# Eval("Password") %></td>--%>
                                                 <td><%# Eval("MobileNumber") %></td>
                                                 <td><%# Eval("AccountType") %></td>
                                                 <td><%# Eval("RoleName") %></td>
                                                 <td>
                                                     <%--<asp:Button ID="btnUserDetail" CommandArgument='<%# Eval("UserId") %>' Text="Show Detail" CssClass="btn btn-info" runat="server" OnClick="btnUserDetail_Click"/>--%>
-                                                    <asp:Button ID="btnEditUser" CommandArgument='<%# Eval("UserId") %>' Text="Edit" CssClass="btn btn-success" runat="server" OnClick="btnEditUser_Click"/>
-                                                    <asp:Button ID="btnDeleteUser" CommandArgument='<%# Eval("UserId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteUser_Click"/>
+                                                    <asp:Button ID="btnEditUser" CommandArgument='<%# Eval("UserId") %>' Text="Edit" CssClass="btn btn-success" runat="server" OnClick="btnEditUser_Click" />
+                                                    <asp:Button ID="btnDeleteUser" CommandArgument='<%# Eval("UserId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteUser_Click" />
                                                 </td>
                                             </tr>
                                         </ItemTemplate>

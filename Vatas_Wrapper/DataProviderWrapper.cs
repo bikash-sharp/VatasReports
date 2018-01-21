@@ -49,6 +49,14 @@ namespace Vatas_Wrapper
                 return BLSiteUser.Instance(context).AddUpdateUser(user);
             }
         }
+
+        public bool IsEmailExist(string EmailId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).IsEmailAlreadyExist(EmailId);
+            }
+        }
         public List<UserRegistrationCL> GetAllRegisterdUser()
         {
             using (AdminEntities context = new AdminEntities())

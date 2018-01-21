@@ -30,17 +30,25 @@ namespace Vatas_UI
                 createUser.AccountType = ddlAccountType.SelectedValue;
                 createUser.RoleId = 0;
 
-                bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
-                if (IsSaved)
+                bool IsExist = DataProviderWrapper.Instance.IsEmailExist(createUser.Email);
+
+                if (!IsExist)
                 {
-                    Clear();
-                    BLFunction.ShowAlert(this, "New User Created Successfully", ResponseType.SUCCESS);
+                    bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
+                    if (IsSaved)
+                    {
+                        Clear();
+                        BLFunction.ShowAlert(this, "New User Created Successfully", ResponseType.SUCCESS);
+                    }
+                    else
+                    {
+                        BLFunction.ShowAlert(this, "Unable To Create a New User.", ResponseType.WARNING);
+                    }
                 }
                 else
                 {
-                    BLFunction.ShowAlert(this, "Unable To Create a New User.", ResponseType.WARNING);
+                    BLFunction.ShowAlert(this, "EmailId already exist.", ResponseType.SUCCESS);
                 }
-
             }
             catch (Exception ex)
             {

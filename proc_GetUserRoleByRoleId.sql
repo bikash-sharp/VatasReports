@@ -1,7 +1,11 @@
 ﻿USE [db_Admin]
-
-
-ALTER PROCEDURE proc_GetUserRoleByRoleId
+GO
+/****** Object:  StoredProcedure [dbo].[proc_GetUserRoleByRoleId]    Script Date: 21-01-2018 14:54:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[proc_GetUserRoleByRoleId]
 	-- Add the parameters for the stored procedure here
 	@RoleId INT  = 0
 AS

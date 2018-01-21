@@ -107,6 +107,27 @@ namespace Vatas_BAL
         }
 
         /// <summary>
+        /// check emailid is already exist or not
+        /// </summary>
+        /// <param name="emailId"></param>
+        /// <returns>user saved or not</returns>
+        public bool IsEmailAlreadyExist(string emailId)
+        {
+            try
+            {
+                var result = _context.tbl_UserGroup_Registration.Where(s => s.EmailID.ToLower() == emailId.ToLower().Trim()).FirstOrDefault();
+                if (result != null)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Get all the registered user from Tbl_UserRegistration 
         /// </summary>
         /// <param></param>
