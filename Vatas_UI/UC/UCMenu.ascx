@@ -14,7 +14,6 @@
         <ul class="treeview-menu">
             <li id="liCreateUser"><a href="<%=Page.ResolveUrl("~/CreateUser")%>" title="Create User"><i class="fa fa-user"></i>Create User</a></li>
             <li id="liUserListing"><a href="<%=Page.ResolveUrl("~/UserListing")%>" title="Create User"><i class="fa fa-user"></i>Listing User</a></li>
-            <li id="liManageRolesAndMenu"><a href="<%=Page.ResolveUrl("~/ManageRolesAndMenu")%>" title="Create User"><i class="fa fa-user"></i>Manage Roles And Menu</a></li>
         </ul>
     </li>
     <% } %>
