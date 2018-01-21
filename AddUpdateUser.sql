@@ -65,6 +65,9 @@ BEGIN
 				@Telephone,
 				@OrganizationName
 			)
+			
+			Select @UserId = SCOPE_IDENTITY();
+			INSERT INTO tbl_UserRoles VALUES(@UserId,@RoleId)
 		END
 		ELSE
 			BEGIN
