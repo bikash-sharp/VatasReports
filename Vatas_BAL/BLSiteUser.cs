@@ -97,7 +97,7 @@ namespace Vatas_BAL
         {
             try
             {
-                _context.proc_AddUpdateUser(user.UserId,user.FirstName, user.LastName, user.Email, user.Password, user.MobileNumber, user.AccountType);
+                _context.proc_AddUpdateUser(user.UserId, user.FirstName, user.LastName, user.Email, user.Password, user.MobileNumber, user.AccountType, user.RoleId);
                 return true;
             }
             catch (Exception ex)
@@ -129,6 +129,8 @@ namespace Vatas_BAL
                              OrganizationName = p.OrganizationName,
                              AccountType = p.AccountType,
                              IsActive = p.IsActive,
+                             RoleId = p.RoleId,
+                             RoleName = p.RoleName
                          }).ToList();
 
                 return users;
@@ -162,6 +164,8 @@ namespace Vatas_BAL
                              OrganizationName = p.OrganizationName,
                              AccountType = p.AccountType,
                              IsActive = p.IsActive,
+                             RoleId = p.RoleId,
+                             RoleName = p.RoleName
                          }).FirstOrDefault();
 
                 return user;
@@ -192,5 +196,46 @@ namespace Vatas_BAL
                 return false;
             }
         }
+
+        /// <summary>
+        /// Get all roles
+        /// </summary>
+        /// <param>userid</param>
+        /// <returns>registerd user</returns>
+        public List<DropDownCL> GetAllRoles()
+        {
+            List<DropDownCL> result = new List<DropDownCL>();
+            try
+            {
+                result = _context.tbl_Roles.Where(p => p.Is_Deleted == "N").ToList().Select(p => new DropDownCL
+                {
+                    DataText = p.Role_Name + "",
+                    DataValue = p.Role_ID + ""
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Get all menus
+        /// </summary>
+        /// <param>userid</param>
+        /// <returns>registerd user</returns>
+        public bool GetAllMenus()
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
 }

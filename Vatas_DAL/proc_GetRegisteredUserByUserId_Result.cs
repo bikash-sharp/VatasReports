@@ -22,5 +22,7 @@ namespace Vatas_DAL
         public string OrganizationName { get; set; }
         public string AccountType { get; set; }
         public string IsActive { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
     }
 }

@@ -22,16 +22,29 @@ namespace Vatas_UI.User
                 {
                     UserId = Convert.ToInt32(CurrContext.Items["UserId"].ToString());
                     //int UserId = Convert.ToInt32(Request.QueryString["UserId"].ToString());
+                    BindRoles();
                     BindData(UserId);
                 }
                 catch (Exception ex)
                 {
-                    Response.Redirect("~/User/UserListing.aspx");
+                    Server.Transfer("UserListing.aspx");
                 }
                 
             }
         }
 
+        public void BindRoles()
+        {
+            List<DropDownCL> roles = DataProviderWrapper.Instance.GetAllRoles();
+            ddlRoles.DataSource = null;
+            if (roles.Count > 0)
+            {
+                ddlRoles.DataSource = roles;
+                ddlRoles.DataTextField = "DataText";
+                ddlRoles.DataValueField = "DataValue";
+            }
+            ddlRoles.DataBind();
+        }
         public void BindData(int UserId)
         {
             UserRegistrationCL result = DataProviderWrapper.Instance.GetRegisterdUserByUserId(UserId);
@@ -43,6 +56,9 @@ namespace Vatas_UI.User
                 txtPassword.Text = result.Password;
                 txtConfirmPassword.Text = result.Password;
                 txtMobileNumber.Text = result.MobileNumber;
+                if (result.RoleId > 0)
+                    ddlRoles.SelectedValue = result.RoleId.ToString();
+
             }
         }
 
@@ -58,12 +74,13 @@ namespace Vatas_UI.User
                 createUser.Password = txtPassword.Text;
                 createUser.MobileNumber = txtMobileNumber.Text;
                 createUser.AccountType = ddlAccountType.SelectedValue;
+                createUser.RoleId = Convert.ToInt32(ddlRoles.SelectedValue);
 
                 bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
                 if (IsSaved)
                 {
                     BLFunction.ShowAlert(this, "User has been updated successfully", ResponseType.SUCCESS);
-                    Response.Redirect("~/User/UserListing.aspx");
+                    Server.Transfer("UserListing.aspx");
                 }
                 else
                 {

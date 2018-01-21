@@ -94,6 +94,9 @@
     <Compile Include="tbl_ProcessStatus.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbl_Roles.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_UserGroup_Registration.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>

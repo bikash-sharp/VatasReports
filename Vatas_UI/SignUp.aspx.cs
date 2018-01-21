@@ -48,6 +48,7 @@ namespace Vatas_UI
                 createUser.Password = txtPassword.Text;
                 createUser.MobileNumber = txtMobileNumber.Text;
                 createUser.AccountType = "U";
+                createUser.RoleId = 0;
 
                 bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
                 if (IsSaved)

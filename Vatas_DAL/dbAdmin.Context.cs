@@ -32,6 +32,7 @@ namespace Vatas_DAL
         public virtual DbSet<tbl_User_Transaction> tbl_User_Transaction { get; set; }
         public virtual DbSet<tbl_UserGroup_Registration> tbl_UserGroup_Registration { get; set; }
         public virtual DbSet<tbl_User_Info> tbl_User_Info { get; set; }
+        public virtual DbSet<tbl_Roles> tbl_Roles { get; set; }
     
         public virtual ObjectResult<proc_GetUserRoleByRoleId_Result> proc_GetUserRoleByRoleId(Nullable<int> roleId)
         {
@@ -56,7 +57,7 @@ namespace Vatas_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetRegisteredUserByUserId_Result>("proc_GetRegisteredUserByUserId", userIdParameter);
         }
     
-        public virtual int proc_AddUpdateUser(Nullable<int> userId, string firstName, string lastName, string email, string password, string mobileNumber, string accountType)
+        public virtual int proc_AddUpdateUser(Nullable<int> userId, string firstName, string lastName, string email, string password, string mobileNumber, string accountType, Nullable<int> roleId)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
@@ -86,7 +87,11 @@ namespace Vatas_DAL
                 new ObjectParameter("AccountType", accountType) :
                 new ObjectParameter("AccountType", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdateUser", userIdParameter, firstNameParameter, lastNameParameter, emailParameter, passwordParameter, mobileNumberParameter, accountTypeParameter);
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdateUser", userIdParameter, firstNameParameter, lastNameParameter, emailParameter, passwordParameter, mobileNumberParameter, accountTypeParameter, roleIdParameter);
         }
     }
 }

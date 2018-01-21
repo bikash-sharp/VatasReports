@@ -73,6 +73,13 @@
                                     </asp:DropDownList>
                                 </div>
                             </div>
+                            <div class="form-group has-feedback">
+                                <label for="txtAccountType" class="col-sm-2 control-label">Roles</label>
+                                <div class="col-sm-10">
+                                    <asp:DropDownList ID="ddlRoles" runat="server" CssClass="form-control pull-left" ValidationGroup="EditUser" AppendDataBoundItems="true">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
                         </div>
                         <div class="box-footer">
                             <asp:Button ID="btnCancel" Text="Cancel" runat="server" CssClass="btn btn-default pull-right" OnClick="btnCancel_Click" />

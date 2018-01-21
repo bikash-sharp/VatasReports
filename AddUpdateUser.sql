@@ -1,6 +1,6 @@
 ﻿USE [db_Admin]
 GO
-/****** Object:  StoredProcedure [dbo].[proc_AddUpdateUser]    Script Date: 20-01-2018 19:05:20 ******/
+/****** Object:  StoredProcedure [dbo].[proc_AddUpdateUser]    Script Date: 21-01-2018 08:24:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,16 +9,17 @@ GO
 -- Author:		Gaurav Singla
 -- Create date: Jan, 15 2018
 -- Description:	Add or Update user
--- EXEC proc_AddUpdateUser @UserId=0,@FirstName='GauravSingla',@LastName='Singla',@Email='asd@fsd.com',@Password='1',@MobileNumber='1111111111',@AccountType='U'
+-- EXEC proc_AddUpdateUser @UserId=0,@FirstName='GauravSingla',@LastName='Singla',@Email='asd@fsd.com',@Password='1',@MobileNumber='1111111111',@AccountType='U',@RoleId=2
 -- =============================================
-CREATE PROCEDURE [dbo].[proc_AddUpdateUser]
+ALTER PROCEDURE [dbo].[proc_AddUpdateUser]
 	@UserId int,
 	@FirstName VARCHAR(50),
 	@LastName VARCHAR(50),
 	@Email VARCHAR(50),
 	@Password VARCHAR(50),
 	@MobileNumber VARCHAR(50),
-	@AccountType VARCHAR(50)
+	@AccountType VARCHAR(50),
+	@RoleId INT
 AS 
 BEGIN
 
@@ -78,5 +79,19 @@ BEGIN
 						MobileNumber=@MobileNumber,
 						Account_Type=@AccountType
 				WHERE Super_User_Id=@UserId
+
+				IF NOT EXISTS (SELECT UserRoleId FROM tbl_UserRoles WHERE UserId=@UserId)
+				BEGIN
+					  INSERT 
+					  INTO tbl_UserRoles 
+					  VALUES(@UserId,@RoleId)
+				END
+				ELSE
+				BEGIN
+					   UPDATE 
+					   tbl_UserRoles 
+					   SET RoleId=@RoleId 
+					   WHERE UserId=@UserId
+				END
 			END
 END

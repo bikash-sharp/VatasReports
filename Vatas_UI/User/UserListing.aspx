@@ -29,6 +29,7 @@
                                         <th>Password</th>
                                         <th>Mobile No.</th>
                                         <th>Account Type</th>
+                                        <th>Role</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -46,6 +47,7 @@
                                                 <td><%# Eval("Password") %></td>
                                                 <td><%# Eval("MobileNumber") %></td>
                                                 <td><%# Eval("AccountType") %></td>
+                                                <td><%# Eval("RoleName") %></td>
                                                 <td>
                                                     <%--<asp:Button ID="btnUserDetail" CommandArgument='<%# Eval("UserId") %>' Text="Show Detail" CssClass="btn btn-info" runat="server" OnClick="btnUserDetail_Click"/>--%>
                                                     <asp:Button ID="btnEditUser" CommandArgument='<%# Eval("UserId") %>' Text="Edit" CssClass="btn btn-success" runat="server" OnClick="btnEditUser_Click"/>

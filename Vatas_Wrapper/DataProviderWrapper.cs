@@ -70,6 +70,13 @@ namespace Vatas_Wrapper
                 return BLSiteUser.Instance(context).DeleteRegisteredUser(UserId);
             }
         }
+        public List<DropDownCL> GetAllRoles()
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).GetAllRoles();
+            }
+        }
 
         #region Reports
 

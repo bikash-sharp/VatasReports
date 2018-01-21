@@ -1,6 +1,6 @@
 ﻿USE [db_Admin]
 GO
-/****** Object:  StoredProcedure [dbo].[GetAllRegisteredUsers]    Script Date: 20-01-2018 13:53:42 ******/
+/****** Object:  StoredProcedure [dbo].[proc_GetAllRegisteredUsers]    Script Date: 21-01-2018 08:24:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,24 +9,28 @@ GO
 -- Author:		<Author,Gaurav>
 -- Create date: <Create Date,Jan 20 2018>
 -- Description:	<Description,Get all the registered users>
--- EXEC GetAllRegisteredUsers
+-- EXEC proc_GetAllRegisteredUsers
 -- =============================================
-CREATE PROCEDURE [dbo].[GetAllRegisteredUsers]
+ALTER PROCEDURE [dbo].[proc_GetAllRegisteredUsers]
 	
 AS
 BEGIN
 	SET NOCOUNT ON;
 	
 	SELECT 
-		   Super_User_Id as UserId
-		  ,Name as FirstName
-		  ,Last_Name as LastName
-		  ,EmailID as Email
-		  ,Password
-		  ,[MobileNumber]
-		  ,[OrganizationName]
-		  ,Account_Type as AccountType
-		  ,Is_Login_Active as IsActive
-	  FROM db_Admin.dbo.tbl_UserGroup_Registration 
+		   UGR.Super_User_Id AS UserId
+		  ,UGR.Name AS FirstName
+		  ,UGR.Last_Name AS LastName
+		  ,UGR.EmailID AS Email
+		  ,UGR.Password
+		  ,UGR.[MobileNumber]
+		  ,UGR.[OrganizationName]
+		  ,UGR.Account_Type AS AccountType
+		  ,UGR.Is_Login_Active AS IsActive
+		  ,ISNULL(UR.RoleId, 0 ) AS RoleId
+		  ,R.Role_Name AS RoleName
+	  FROM db_Admin.dbo.tbl_UserGroup_Registration UGR
+	  LEFT JOIN db_Admin.dbo.tbl_UserRoles UR ON UR.UserId=UGR.Super_User_Id
+	  LEFT JOIN db_Admin.dbo.tbl_Roles R ON R.Role_ID=UR.RoleId 
 	  WHERE Is_Login_Active='Y' 
 END

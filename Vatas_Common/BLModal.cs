@@ -195,8 +195,10 @@ namespace Vatas_Common
         public string AccountType { get; set; }
         public string IsActive { get; set; }
         public int AdminId { get; set; }
-
-
-
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+        public int MenuId { get; set; }
+        public string MenuName { get; set; }
     }
+
 }
