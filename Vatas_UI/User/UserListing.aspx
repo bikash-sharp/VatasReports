@@ -51,8 +51,12 @@
                                                 <td><%# Eval("RoleName") %></td>
                                                 <td>
                                                     <%--<asp:Button ID="btnUserDetail" CommandArgument='<%# Eval("UserId") %>' Text="Show Detail" CssClass="btn btn-info" runat="server" OnClick="btnUserDetail_Click"/>--%>
+                                                    <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
+                                                        {
+                                                    %>
                                                     <asp:Button ID="btnEditUser" CommandArgument='<%# Eval("UserId") %>' Text="Edit" CssClass="btn btn-success" runat="server" OnClick="btnEditUser_Click" />
                                                     <asp:Button ID="btnDeleteUser" CommandArgument='<%# Eval("UserId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteUser_Click" />
+                                                    <%} %>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>

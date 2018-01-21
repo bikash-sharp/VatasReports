@@ -70,7 +70,10 @@ namespace Vatas_UI.User
                 createUser.FirstName = txtFirstName.Text;
                 createUser.LastName = txtLastName.Text;
                 createUser.Email = txtEmail.Text;
-                createUser.Password = hfPassword.Value;
+                if (BLFunction.GetRoleName().ToLower() != "superadmin")
+                    createUser.Password = hfPassword.Value;
+                else
+                    createUser.Password = txtPassword.Text;
                 createUser.MobileNumber = txtMobileNumber.Text;
                 createUser.AccountType = ddlAccountType.SelectedValue;
                 createUser.RoleId = Convert.ToInt32(ddlRoles.SelectedValue);

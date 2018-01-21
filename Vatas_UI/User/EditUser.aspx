@@ -99,8 +99,12 @@
                             </div>
                         </div>
                         <div class="box-footer">
+                            <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
+                                {
+                            %>
                             <asp:Button ID="btnCancel" Text="Cancel" runat="server" CssClass="btn btn-default pull-right" OnClick="btnCancel_Click" />
                             <asp:Button ID="btnSubmit" CssClass="btn btn-info pull-right submit" Style="margin-right: 10px;" runat="server" Text="Save" OnClick="btnSubmit_Click" ValidationGroup="EditUser" />
+                            <%} %>
                         </div>
                     </div>
                     <div class="box-footer">
