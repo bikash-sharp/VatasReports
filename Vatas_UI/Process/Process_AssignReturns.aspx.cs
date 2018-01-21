@@ -12,32 +12,44 @@ namespace Vatas_UI.Process
 {
     public partial class Process_AssignReturns : VatasWebPage
     {
-        int PageNumber = 1;
-        int PageSize = 10;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                BindData();
+            {
+                btnSearch_Click(btnSearch, null);
+            }
         }
 
-        public void BindData()
+        public void BindData(int PageNumber, int PageSize, string SearchText)
         {
-            List<ProcessReturnsCL> result = DataProviderWrapper.Instance.GetReturnsByJobStatus("RDV",PageNumber,PageSize);
+            int TotalPages = 0;
+            List<ProcessReturnsCL> result = DataProviderWrapper.Instance.GetReturnsByJobStatus("RDV",PageNumber,PageSize,SearchText);
             rptProcess.DataSource = null;
             if (result.Count > 0)
             {
                 rptProcess.DataSource = result;
+                int.TryParse(result.FirstOrDefault()?.RecordCount+"", out TotalPages);
             }
             rptProcess.DataBind();
+            float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
+            TotalPages = Convert.ToInt32(Math.Ceiling(pages));
+            hidPages.Value = TotalPages.ToString();
         }
 
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
+            int PageNumber = 1;
+            int.TryParse(hidPageNo.Value, out PageNumber);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+
+            string SearchText = txtSearch.Text.Trim();
+
             if (this.IsValid)
             {
                 List<ProcessReturnsCL> processList = new List<ProcessReturnsCL>();
-                var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("RDV", PageNumber, PageSize);
+                var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("RDV", PageNumber, PageSize, SearchText);
                 foreach (RepeaterItem item in rptProcess.Items)
                 {
                     ProcessReturnsCL itemProcess = new ProcessReturnsCL();
@@ -73,16 +85,24 @@ namespace Vatas_UI.Process
                 BLFunction.ShowAlert(this, "Invalid page request found. Reload again and try once again.", ResponseType.INFO);
             }
 
-            BindData();
+            BindData(PageNumber,PageSize,SearchText);
         }
 
         public void Export()
         {
+            int PageNumber = 1;
+            int.TryParse(hidPageNo.Value, out PageNumber);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+
+            string SearchText = txtSearch.Text.Trim();
+
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_Process_AssignReturn.csv";
 
             List<ProcessReturnsCL> processList = new List<ProcessReturnsCL>();
-            var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("RDV", PageNumber, PageSize);
+            var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("RDV", PageNumber, PageSize, SearchText);
 
             if (frontOfcList.Count > 0)
             {
@@ -92,7 +112,7 @@ namespace Vatas_UI.Process
                 {
                     ProcessReturnsCL itemProcess = new ProcessReturnsCL();
                     HiddenField hfId = (HiddenField)item.FindControl("hfId");
-                    Label lblSrno = (Label)item.FindControl("lblSrno");
+                    //Label lblSrno = (Label)item.FindControl("lblSrno");
                     Label lblTAN = (Label)item.FindControl("lblTAN");
                     Label lblJobNo = (Label)item.FindControl("lblJobNo");
                     Label lblAccountName = (Label)item.FindControl("lblAccountName");
@@ -112,7 +132,7 @@ namespace Vatas_UI.Process
                             string SupervisorName = "";
                             if (ddlOperator.SelectedItem != null)
                                 SupervisorName = ddlOperator.SelectedItem.Text;
-                            string Srno = lblSrno.Text;
+                            string Srno = (++i).ToString();
                             string AccountName = lblAccountName.Text;
                             string TAN = lblTAN.Text;
                             string FinancialYear = lblFinancialYear.Text;
@@ -131,6 +151,10 @@ namespace Vatas_UI.Process
                 Response.AddHeader("content-disposition", "attachment;filename=" + fileName);
                 Response.ContentType = "text/csv";
                 Response.Write(strwriter.ToString());
+                HttpContext.Current.Response.Flush();
+                HttpContext.Current.Response.SuppressContent = true;
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+                BLFunction.ShowAlert(this, "File has been exported successully.", ResponseType.INFO);
                 Response.End();
             }
         }
@@ -140,5 +164,22 @@ namespace Vatas_UI.Process
             Export();
         }
 
+        protected void ddlPageLength_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnSearch_Click(btnSearch, null);
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            int CurrentPageNo = 1;
+            int.TryParse(hidPageNo.Value, out CurrentPageNo);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+
+            string SearchText = txtSearch.Text.Trim();
+
+            BindData(CurrentPageNo, PageSize, SearchText);
+        }
     }
 }

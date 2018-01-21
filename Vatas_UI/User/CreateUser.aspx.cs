@@ -40,7 +40,7 @@ namespace Vatas_UI
                 {
                     BLFunction.ShowAlert(this, "Unable To Create a New User.", ResponseType.WARNING);
                 }
-                    
+
             }
             catch (Exception ex)
             {

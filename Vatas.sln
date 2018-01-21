@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vatas_UI", "Vatas_UI\Vatas_UI.csproj", "{191371CF-50E2-406D-A7D2-CA41FEFB58AC}"
 EndProject
@@ -22,6 +22,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Procedures", "Procedures", "{E9577DE9-6845-4072-8CC0-6A9DCA248E9F}"
 	ProjectSection(SolutionItems) = preProject
 		AddUpdateUser.sql = AddUpdateUser.sql
+		C:\Users\admin\Desktop\Dummy Procedure.sql = C:\Users\admin\Desktop\Dummy Procedure.sql
 		GetAllRegisteredUsers.sql = GetAllRegisteredUsers.sql
 		GetRegisteredUserByUserId.sql = GetRegisteredUserByUserId.sql
 		proc_GetUserRoleByRoleId.sql = proc_GetUserRoleByRoleId.sql

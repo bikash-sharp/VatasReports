@@ -50,10 +50,10 @@ namespace Vatas_BAL
             return _vatasSolution.tbl_ProcessStatus.Select(p => new DropDownCL { DataText = p.Process_Name, DataValue = p.Process_Code.ToString() }).ToList();
         }
 
-        public List<ProcessReturnsCL> GetReturnsByJobStatus(string StatusName, int PageNumber, int PageSize)
+        public List<ProcessReturnsCL> GetReturnsByJobStatus(string StatusName, int PageNumber, int PageSize,string SearchText)
         {
             List<ProcessReturnsCL> result = new List<ProcessReturnsCL>();
-            result = _vatasSolution.proc_Report_GetReturnsByJobStatus(StatusName, PageNumber, PageSize)
+            result = _vatasSolution.proc_Report_GetReturnsByJobStatus(StatusName, PageNumber, PageSize,SearchText)
                 .Select(p => new ProcessReturnsCL
                 {
                     AccountName = p.AccountName,

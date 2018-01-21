@@ -39,7 +39,7 @@ BEGIN
 			LEFT OUTER JOIN tbl_ProcessesHistoryofjob PHJ ON RC.Job_ID = PHJ.MasterID 
 			LEFT OUTER JOIN tbl_Firm tf ON rc.FirmID = tf.FirmId
 		WHERE 
-			( TF.FirmId = @FirmId Or @FirmId IS NULL)
+			( TF.FirmId = @FirmId Or @FirmId IS NULL) AND ( RC.Quarter IS NOT NULL AND RC.Quarter != '')
 			AND (CONVERT(DATETIME,RC.Job_Date,103)>=CONVERT(DATETIME,@StartDate,103) and CONVERT(DATETIME,RC.Job_Date,103)<=CONVERT(DATETIME,@EndDate,103))
 		ORDER BY RC.SerialNo_By_Job_Firm
 

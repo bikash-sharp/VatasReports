@@ -74,7 +74,7 @@ namespace Vatas_BAL
             try
             {
                 result =
-                    _vatasSolution.proc_Report_GetReturnsByJobStatus(JobStatus, PageNumber, PageSize)
+                    _vatasSolution.proc_Report_GetReturnsByJobStatus(JobStatus, PageNumber, PageSize,"")
                         .ToList()
                         .Select(p => new ReturnsCL
                         {

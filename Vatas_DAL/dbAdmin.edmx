@@ -221,10 +221,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="RoleId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="tbl_Roles" EntityType="db_AdminModel.tbl_Roles" />
-          <FunctionImport Name="proc_GetAllRegisteredUsers" ReturnType="Collection(db_AdminModel.proc_GetAllRegisteredUsers_Result)" />
-          <FunctionImport Name="proc_GetRegisteredUserByUserId" ReturnType="Collection(db_AdminModel.proc_GetRegisteredUserByUserId_Result)">
-          <Parameter Name="UserId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="proc_AddUpdateUser">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
             <Parameter Name="FirstName" Mode="In" Type="String" />
@@ -234,6 +230,10 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
             <Parameter Name="MobileNumber" Mode="In" Type="String" />
             <Parameter Name="AccountType" Mode="In" Type="String" />
             <Parameter Name="RoleId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="proc_GetAllRegisteredUsers" ReturnType="Collection(db_AdminModel.proc_GetAllRegisteredUsers_Result)" />
+          <FunctionImport Name="proc_GetRegisteredUserByUserId" ReturnType="Collection(db_AdminModel.proc_GetRegisteredUserByUserId_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="proc_GetUserRoleByRoleId_Result">
@@ -384,6 +384,7 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_AddUpdateUser" FunctionName="db_AdminModel.Store.proc_AddUpdateUser" />
           <FunctionImportMapping FunctionImportName="proc_GetAllRegisteredUsers" FunctionName="db_AdminModel.Store.proc_GetAllRegisteredUsers">
             <ResultMapping>
               <ComplexTypeMapping TypeName="db_AdminModel.proc_GetAllRegisteredUsers_Result">
@@ -418,7 +419,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_AddUpdateUser" FunctionName="db_AdminModel.Store.proc_AddUpdateUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

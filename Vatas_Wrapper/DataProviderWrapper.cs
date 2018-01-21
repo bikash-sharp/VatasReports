@@ -107,11 +107,11 @@ namespace Vatas_Wrapper
 
         #region Process
 
-        public List<ProcessReturnsCL> GetReturnsByJobStatus(string StatusName, int PageNumber, int PageSize)
+        public List<ProcessReturnsCL> GetReturnsByJobStatus(string StatusName, int PageNumber, int PageSize,string SearchText=null)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLProcess.Instance(context).GetReturnsByJobStatus(StatusName, PageNumber, PageSize);
+                return BLProcess.Instance(context).GetReturnsByJobStatus(StatusName, PageNumber, PageSize, SearchText);
             }
         }
 

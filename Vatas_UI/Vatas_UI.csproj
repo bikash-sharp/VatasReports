@@ -166,6 +166,8 @@
     <Content Include="Assets\ionicons\fonts\ionicons.svg" />
     <Content Include="Assets\ionicons\ionicons.css" />
     <Content Include="Assets\ionicons\ionicons.min.css" />
+    <Content Include="Assets\plugins\bootpag\jquery.bootpag.js" />
+    <Content Include="Assets\plugins\bootpag\jquery.bootpag.min.js" />
     <Content Include="Assets\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Assets\plugins\bootstrap-slider\slider.css" />
     <Content Include="Assets\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />

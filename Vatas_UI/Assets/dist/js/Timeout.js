@@ -7,10 +7,10 @@
     //alert('hell');
     // start the idle timer plugin
     $.idleTimeout('#idle-timeout-dialog', '.modal-content button:last', {
-        idleAfter: 60, // 5 seconds
+        idleAfter: 600, // 5 seconds
         timeout: 30, //30 seconds to timeout
         pollingInterval: 0, // 5 seconds
-        keepAliveURL: $('#hfPath').val() + 'Logon',
+        keepAliveURL: $('#hfPath').val() + 'Login',
         serverResponseEquals: 'OK',
         onTimeout: function () {
             window.location = $('#hfPath').val() + 'Lock';

@@ -24,32 +24,30 @@
                             <table id="example1" class="table table-bordered table-striped dataTable">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Firm Name</th>
                                         <th>File No.</th>
+                                        <th>Date</th>
+                                        <th>Firm Name</th>
                                         <th>TAN</th>
                                         <th>Account Name</th>
                                         <th>Financial Year(FY)</th>
                                         <th>Form Type</th>
                                         <th>Quarter</th>
                                         <th>Return Type</th>
-                                        <th>Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <asp:Repeater ID="rptReport" runat="server">
                                         <ItemTemplate>
                                             <tr>
-                                                <td><%# Container.ItemIndex + 1 %></td>
-                                                <td><%# Eval("FirmName") %></td>
                                                 <td><%# Eval("JobNo") %></td>
+                                                <td><%# Eval("Date") %></td>
+                                                <td><%# Eval("FirmName") %></td>
                                                 <td><%# Eval("TAN") %></td>
                                                 <td><%# Eval("AccountName") %></td>
                                                 <td><%# Eval("FinancialYear") %></td>
                                                 <td><%# Eval("FormType") %></td>
                                                 <td><%# Eval("Quarter") %></td>
                                                 <td><%# Eval("ReturnType") %></td>
-                                                <td><%# Eval("Date") %></td>
                                             </tr>
                                         </ItemTemplate>
                                     </asp:Repeater>

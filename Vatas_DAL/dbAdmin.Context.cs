@@ -43,20 +43,6 @@ namespace Vatas_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByRoleId_Result>("proc_GetUserRoleByRoleId", roleIdParameter);
         }
     
-        public virtual ObjectResult<proc_GetAllRegisteredUsers_Result> proc_GetAllRegisteredUsers()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetAllRegisteredUsers_Result>("proc_GetAllRegisteredUsers");
-        }
-    
-        public virtual ObjectResult<proc_GetRegisteredUserByUserId_Result> proc_GetRegisteredUserByUserId(Nullable<int> userId)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetRegisteredUserByUserId_Result>("proc_GetRegisteredUserByUserId", userIdParameter);
-        }
-    
         public virtual int proc_AddUpdateUser(Nullable<int> userId, string firstName, string lastName, string email, string password, string mobileNumber, string accountType, Nullable<int> roleId)
         {
             var userIdParameter = userId.HasValue ?
@@ -92,6 +78,20 @@ namespace Vatas_DAL
                 new ObjectParameter("RoleId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdateUser", userIdParameter, firstNameParameter, lastNameParameter, emailParameter, passwordParameter, mobileNumberParameter, accountTypeParameter, roleIdParameter);
+        }
+    
+        public virtual ObjectResult<proc_GetAllRegisteredUsers_Result> proc_GetAllRegisteredUsers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetAllRegisteredUsers_Result>("proc_GetAllRegisteredUsers");
+        }
+    
+        public virtual ObjectResult<proc_GetRegisteredUserByUserId_Result> proc_GetRegisteredUserByUserId(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetRegisteredUserByUserId_Result>("proc_GetRegisteredUserByUserId", userIdParameter);
         }
     }
 }
