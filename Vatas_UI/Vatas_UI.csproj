@@ -1079,6 +1079,7 @@
     <Content Include="SignUp.aspx" />
     <Content Include="UC\UCMenu.ascx" />
     <Content Include="User\EditUser.aspx" />
+    <Content Include="User\ManageRolesAndMenu.aspx" />
     <Content Include="User\UserListing.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1284,6 +1285,13 @@
     </Compile>
     <Compile Include="User\EditUser.aspx.designer.cs">
       <DependentUpon>EditUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\ManageRolesAndMenu.aspx.cs">
+      <DependentUpon>ManageRolesAndMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\ManageRolesAndMenu.aspx.designer.cs">
+      <DependentUpon>ManageRolesAndMenu.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\UserListing.aspx.cs">
       <DependentUpon>UserListing.aspx</DependentUpon>

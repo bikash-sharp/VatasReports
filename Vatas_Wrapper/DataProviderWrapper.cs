@@ -86,6 +86,14 @@ namespace Vatas_Wrapper
             }
         }
 
+        public bool DeleteRoleByRoleId(int RoleId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).DeleteRoleByRoleId(RoleId);
+            }
+        }
+
         #region Reports
 
         public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent, int PageNumber, int PageSize)

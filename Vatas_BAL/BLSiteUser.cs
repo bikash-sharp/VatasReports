@@ -257,6 +257,26 @@ namespace Vatas_BAL
         }
 
         /// <summary>
+        /// Delete role user by RoleId
+        /// </summary>
+        /// <param>Roleid</param>
+        public bool DeleteRoleByRoleId(int RoleId)
+        {
+            try
+            {
+                var result = _context.tbl_Roles.Where(p => p.Role_ID == RoleId).FirstOrDefault();
+                result.Is_Deleted = "Y";
+
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Get all menus
         /// </summary>
         /// <param>userid</param>
