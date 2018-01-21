@@ -53,6 +53,7 @@ namespace Vatas_UI.User
                 txtFirstName.Text = result.FirstName;
                 txtLastName.Text = result.LastName;
                 txtEmail.Text = result.Email;
+                hfPassword.Value = result.Password;
                 txtPassword.Attributes.Add("value", result.Password);
                 txtConfirmPassword.Attributes.Add("value", result.Password);
                 txtMobileNumber.Text = result.MobileNumber;
@@ -69,7 +70,7 @@ namespace Vatas_UI.User
                 createUser.FirstName = txtFirstName.Text;
                 createUser.LastName = txtLastName.Text;
                 createUser.Email = txtEmail.Text;
-                createUser.Password = txtPassword.Text;
+                createUser.Password = hfPassword.Value;
                 createUser.MobileNumber = txtMobileNumber.Text;
                 createUser.AccountType = ddlAccountType.SelectedValue;
                 createUser.RoleId = Convert.ToInt32(ddlRoles.SelectedValue);

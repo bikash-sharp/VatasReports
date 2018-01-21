@@ -41,6 +41,7 @@
                                     <asp:RegularExpressionValidator ID="revEmail" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="EditUser" SetFocusOnError="true" Display="Dynamic"></asp:RegularExpressionValidator>
                                 </div>
                             </div>
+                            <asp:HiddenField ID="hfPassword" runat="server" />
                             <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
                                 {
                             %>
