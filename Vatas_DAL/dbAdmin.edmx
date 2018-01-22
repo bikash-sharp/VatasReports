@@ -5,6 +5,33 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="db_AdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db_Admin.dbo.tbl_Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_Menu">
+          <Key>
+            <PropertyRef Name="Menu_id" />
+            <PropertyRef Name="Parent_Menu" />
+            <PropertyRef Name="Menu_Level" />
+            <PropertyRef Name="Menu_Order" />
+            <PropertyRef Name="Menu_Status" />
+          </Key>
+          <Property Name="Menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Parent_Menu" Type="int" Nullable="false" />
+          <Property Name="Menu_Level" Type="int" Nullable="false" />
+          <Property Name="Menu_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Menu_Link" Type="nvarchar" MaxLength="50" />
+          <Property Name="Menu_Order" Type="int" Nullable="false" />
+          <Property Name="Menu_Status" Type="int" Nullable="false" />
+          <Property Name="Is_Deleted" Type="char" MaxLength="1" />
+          <Property Name="Project_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Page_ID" Type="int" />
+          <Property Name="Sub_ModuleID" Type="int" />
+          <Property Name="ID_Admin" Type="int" />
+          <Property Name="ITRCheck" Type="nvarchar" MaxLength="500" />
+          <Property Name="AssesseeCheck" Type="nvarchar" MaxLength="500" />
+          <Property Name="AY" Type="nvarchar" MaxLength="500" />
+          <Property Name="url" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="tbl_Roles">
           <Key>
             <PropertyRef Name="Role_ID" />
@@ -139,6 +166,10 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="proc_AddMenuToUserMenuByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleId" Type="int" Mode="In" />
+          <Parameter Name="MenuId" Type="int" Mode="In" />
+        </Function>
         <Function Name="proc_AddUpdateRolesByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
           <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
@@ -171,6 +202,26 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <EntitySet Name="tbl_UserGroup_Registration" EntityType="Self.tbl_UserGroup_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_UserMenu" EntityType="Self.tbl_UserMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_UserRoles" EntityType="Self.tbl_UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Menu" EntityType="Self.tbl_Menu" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_Menu].[Menu_id] AS [Menu_id], 
+    [tbl_Menu].[Parent_Menu] AS [Parent_Menu], 
+    [tbl_Menu].[Menu_Level] AS [Menu_Level], 
+    [tbl_Menu].[Menu_Name] AS [Menu_Name], 
+    [tbl_Menu].[Menu_Link] AS [Menu_Link], 
+    [tbl_Menu].[Menu_Order] AS [Menu_Order], 
+    [tbl_Menu].[Menu_Status] AS [Menu_Status], 
+    [tbl_Menu].[Is_Deleted] AS [Is_Deleted], 
+    [tbl_Menu].[Project_Name] AS [Project_Name], 
+    [tbl_Menu].[Page_ID] AS [Page_ID], 
+    [tbl_Menu].[Sub_ModuleID] AS [Sub_ModuleID], 
+    [tbl_Menu].[ID_Admin] AS [ID_Admin], 
+    [tbl_Menu].[ITRCheck] AS [ITRCheck], 
+    [tbl_Menu].[AssesseeCheck] AS [AssesseeCheck], 
+    [tbl_Menu].[AY] AS [AY], 
+    [tbl_Menu].[url] AS [url]
+    FROM [dbo].[tbl_Menu] AS [tbl_Menu]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="tbl_User_Info" EntityType="Self.tbl_User_Info" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [tbl_User_Info].[User_Info_ID] AS [User_Info_ID], 
@@ -318,6 +369,11 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="RoleId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="tbl_UserMenu" EntityType="db_AdminModel.tbl_UserMenu" />
+          <EntitySet Name="tbl_Menu" EntityType="db_AdminModel.tbl_Menu" />
+          <FunctionImport Name="proc_AddMenuToUserMenuByRoleId">
+            <Parameter Name="RoleId" Mode="In" Type="Int32" />
+            <Parameter Name="MenuId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbl_Roles">
           <Key>
@@ -422,6 +478,31 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Name="Menu_Status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="Menu_Level" Type="Int32" />
           <Property Name="ID_Admin" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Menu">
+          <Key>
+            <PropertyRef Name="Menu_id" />
+            <PropertyRef Name="Parent_Menu" />
+            <PropertyRef Name="Menu_Level" />
+            <PropertyRef Name="Menu_Order" />
+            <PropertyRef Name="Menu_Status" />
+          </Key>
+          <Property Name="Menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Parent_Menu" Type="Int32" Nullable="false" />
+          <Property Name="Menu_Level" Type="Int32" Nullable="false" />
+          <Property Name="Menu_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Menu_Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Menu_Order" Type="Int32" Nullable="false" />
+          <Property Name="Menu_Status" Type="Int32" Nullable="false" />
+          <Property Name="Is_Deleted" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Project_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Page_ID" Type="Int32" />
+          <Property Name="Sub_ModuleID" Type="Int32" />
+          <Property Name="ID_Admin" Type="Int32" />
+          <Property Name="ITRCheck" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AssesseeCheck" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AY" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -602,6 +683,29 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Menu">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_Menu">
+              <MappingFragment StoreEntitySet="tbl_Menu">
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="AY" ColumnName="AY" />
+                <ScalarProperty Name="AssesseeCheck" ColumnName="AssesseeCheck" />
+                <ScalarProperty Name="ITRCheck" ColumnName="ITRCheck" />
+                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+                <ScalarProperty Name="Sub_ModuleID" ColumnName="Sub_ModuleID" />
+                <ScalarProperty Name="Page_ID" ColumnName="Page_ID" />
+                <ScalarProperty Name="Project_Name" ColumnName="Project_Name" />
+                <ScalarProperty Name="Is_Deleted" ColumnName="Is_Deleted" />
+                <ScalarProperty Name="Menu_Status" ColumnName="Menu_Status" />
+                <ScalarProperty Name="Menu_Order" ColumnName="Menu_Order" />
+                <ScalarProperty Name="Menu_Link" ColumnName="Menu_Link" />
+                <ScalarProperty Name="Menu_Name" ColumnName="Menu_Name" />
+                <ScalarProperty Name="Menu_Level" ColumnName="Menu_Level" />
+                <ScalarProperty Name="Parent_Menu" ColumnName="Parent_Menu" />
+                <ScalarProperty Name="Menu_id" ColumnName="Menu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_AddMenuToUserMenuByRoleId" FunctionName="db_AdminModel.Store.proc_AddMenuToUserMenuByRoleId" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

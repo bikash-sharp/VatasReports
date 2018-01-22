@@ -16,6 +16,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Manage Menu</h3>
                 <a href="<%= this.AppPath() + "ManageRoles" %>" class="btn btn-info text-center" style="float: right">Back</a>
+                <button type="button" class="btn btn-info text-center addMenu" data-toggle="modal" data-target="#exampleModal" data-whatever="Add Menu To Role" style="float: right;margin-right:10px;">Add Menu To Role</button>
             </div>
             <div class="box-body">
                 <div class="form-inline">
@@ -57,6 +58,33 @@
         <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">New Message</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <asp:HiddenField ID="hdnRoleId" runat="server" Value="0" />
+                            <div class="form-group">
+                                <label for="Role-name" class="control-label">Select Menu:</label>
+                                <asp:DropDownList ID="ddlMenu" runat="server" CssClass="form-control pull-left select2" ValidationGroup="AddUpdateMenu" AppendDataBoundItems="true">
+                                    <asp:ListItem Value="0" Selected="True">Select Menu</asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator ID="rfvdllMenu" ControlToValidate="ddlMenu" InitialValue="0" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="EditUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <asp:Button ID="btnAddUpdateMenu" Text="Add" class="btn btn-primary" runat="server" ValidationGroup="AddUpdateMenu" OnClick="btnAddUpdateMenu_Click" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
@@ -65,5 +93,13 @@
             $('#liUser').addClass('active');
             $('#liManageRoles').addClass('active');
         });
+
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var Button = $(event.relatedTarget)
+            var Rec = Button.data('whatever')
+            var modal = $(this)
+            modal.find('.modal-title').text(Rec)
+        })
+
     </script>
 </asp:Content>

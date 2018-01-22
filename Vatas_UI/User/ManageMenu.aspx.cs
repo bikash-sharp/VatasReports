@@ -20,6 +20,7 @@ namespace Vatas_UI.User
                 try
                 {
                     RoleId = Convert.ToInt32(CurrContext.Items["RoleId"].ToString());
+                    BindMenu(RoleId);
                     BindData(RoleId);
                 }
                 catch (Exception ex)
@@ -35,6 +36,18 @@ namespace Vatas_UI.User
             return path.EndsWith("/") ? path : path + "/";
         }
 
+        public void BindMenu(int RoleId)
+        {
+            List<DropDownCL> roles = DataProviderWrapper.Instance.GetAllMenu();
+            ddlMenu.DataSource = null;
+            if (roles.Count > 0)
+            {
+                ddlMenu.DataSource = roles;
+                ddlMenu.DataTextField = "DataText";
+                ddlMenu.DataValueField = "DataValue";
+            }
+            ddlMenu.DataBind();
+        }
         public void BindData(int RoleId)
         {
             var menu = DataProviderWrapper.Instance.GetMenuByRoleId(RoleId);
@@ -66,6 +79,31 @@ namespace Vatas_UI.User
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+
+        protected void btnAddUpdateMenu_Click(object sender, EventArgs e)
+        {
+            int MenuId = Convert.ToInt32(ddlMenu.SelectedValue);
+
+            bool IsExist = DataProviderWrapper.Instance.IsMenuAlreadyExistInUserMenu(RoleId,MenuId);
+
+            if (!IsExist)
+            {
+                bool IsAddUpdate = DataProviderWrapper.Instance.AddMenuToUserMenuByRoleId(RoleId, MenuId);
+                if (IsAddUpdate)
+                {
+                    BLFunction.ShowAlert(this, "Menu has been saved successfully.", ResponseType.SUCCESS);
+                    BindData(RoleId);
+                }
+                else
+                {
+                    BLFunction.ShowAlert(this, "Unable to save the Menu.", ResponseType.WARNING);
+                }
+            }
+            else
+            {
+                BLFunction.ShowAlert(this, "Entered Menu is already exist.", ResponseType.SUCCESS);
             }
         }
     }

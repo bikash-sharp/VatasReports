@@ -125,6 +125,29 @@ namespace Vatas_Wrapper
             }
         }
 
+        public List<DropDownCL> GetAllMenu()
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).GetAllMenu();
+            }
+        }
+
+        public bool AddMenuToUserMenuByRoleId(int RoleId, int MenuId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).AddMenuToUserMenuByRoleId(RoleId, MenuId);
+            }
+        }
+
+        public bool IsMenuAlreadyExistInUserMenu(int RoleId, int MenuId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).IsMenuAlreadyExistInUserMenu(RoleId,MenuId);
+            }
+        }
 
         #region Reports
 

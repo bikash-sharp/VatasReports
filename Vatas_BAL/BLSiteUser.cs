@@ -264,8 +264,6 @@ namespace Vatas_BAL
         {
             try
             {
-
-
                 _context.proc_AddUpdateRolesByRoleId(RoleId, RoleName);
                 return true;
             }
@@ -343,6 +341,53 @@ namespace Vatas_BAL
 
                 _context.SaveChanges();
                 return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public List<DropDownCL> GetAllMenu()
+        {
+            List<DropDownCL> result = new List<DropDownCL>();
+            try
+            {
+                result = _context.tbl_Menu.Where(p => p.Is_Deleted == "N").ToList().Select(p => new DropDownCL
+                {
+                    DataText = p.Menu_Name + "",
+                    DataValue = p.Menu_id + ""
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+            }
+            return result;
+        }
+
+        public bool AddMenuToUserMenuByRoleId(int RoleId, int MenuId)
+        {
+            try
+            {
+                _context.proc_AddMenuToUserMenuByRoleId(RoleId, MenuId);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool IsMenuAlreadyExistInUserMenu(int RoleId, int MenuId)
+        {
+            try
+            {
+                var result = _context.tbl_UserMenu.Where(s => s.Role_ID == RoleId && s.Menu_ID == MenuId).FirstOrDefault();
+                if (result != null)
+                    return true;
+                else
+                    return false;
             }
             catch (Exception ex)
             {

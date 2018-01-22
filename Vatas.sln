@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Procedures", "Procedures", 
 		Dummy Procedure.sql = Dummy Procedure.sql
 		GetAllRegisteredUsers.sql = GetAllRegisteredUsers.sql
 		GetRegisteredUserByUserId.sql = GetRegisteredUserByUserId.sql
+		proc_AddMenuToUserMenuByRoleId.sql = proc_AddMenuToUserMenuByRoleId.sql
 		proc_AddUpdateRolesByRoleId.sql = proc_AddUpdateRolesByRoleId.sql
 		proc_GetMenuByRoleId.sql = proc_GetMenuByRoleId.sql
 		proc_GetUserRoleByRoleId.sql = proc_GetUserRoleByRoleId.sql

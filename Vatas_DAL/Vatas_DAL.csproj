@@ -91,6 +91,9 @@
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tbl_Menu.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
     <Compile Include="tbl_ProcessesHistoryofjob.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>

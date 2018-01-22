@@ -35,6 +35,7 @@ namespace Vatas_DAL
         public virtual DbSet<tbl_Roles> tbl_Roles { get; set; }
         public virtual DbSet<tbl_UserRoles> tbl_UserRoles { get; set; }
         public virtual DbSet<tbl_UserMenu> tbl_UserMenu { get; set; }
+        public virtual DbSet<tbl_Menu> tbl_Menu { get; set; }
     
         public virtual int proc_AddUpdateUser(Nullable<int> userId, string firstName, string lastName, string email, string password, string mobileNumber, string accountType, Nullable<int> roleId)
         {
@@ -125,6 +126,19 @@ namespace Vatas_DAL
                 new ObjectParameter("RoleId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetMenuByRoleId_Result>("proc_GetMenuByRoleId", roleIdParameter);
+        }
+    
+        public virtual int proc_AddMenuToUserMenuByRoleId(Nullable<int> roleId, Nullable<int> menuId)
+        {
+            var roleIdParameter = roleId.HasValue ?
+                new ObjectParameter("RoleId", roleId) :
+                new ObjectParameter("RoleId", typeof(int));
+    
+            var menuIdParameter = menuId.HasValue ?
+                new ObjectParameter("MenuId", menuId) :
+                new ObjectParameter("MenuId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddMenuToUserMenuByRoleId", roleIdParameter, menuIdParameter);
         }
     }
 }

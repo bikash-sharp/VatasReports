@@ -33,7 +33,8 @@
                                     <asp:Repeater ID="rptRole" runat="server">
                                         <ItemTemplate>
                                             <tr>
-                                                <td><%# Container.ItemIndex + 1 %></td>
+                                                <td><%# Container.ItemIndex + 1 %>
+                                                </td>
                                                 <td><%# Eval("RoleName") %></td>
                                                 <td>
                                                     <asp:Button ID="btnViewMenu" Text="View Menu" runat="server" CommandArgument='<%# Eval("RoleId") %>' CssClass="btn btn-info" OnClick="btnViewMenu_Click" />
