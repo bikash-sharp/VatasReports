@@ -1,19 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.master" AutoEventWireup="true" CodeBehind="Process_AssignReturns.aspx.cs" Inherits="Vatas_UI.Process.Process_AssignReturns" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-        .table-bar {
-            margin-bottom: 0 !important;
-        }
-
-            .table-bar > tbody > tr > td {
-                vertical-align: auto !important;
-            }
-
-        #page-selection .pagination {
-            margin: 0px !important;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
     <section class="content-header">
@@ -32,80 +19,93 @@
             </div>
             <div class="box-body">
                 <asp:Panel ID="pnl" runat="server" DefaultButton="btnSearch">
-                    <div class="form-inline overflow">
+                    <div class="form-inline">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table class="table table-responsive table-bar">
-                                    <tr>
-                                        <td colspan="9">
-                                            <asp:DropDownList ID="ddlPageLength" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPageLength_SelectedIndexChanged">
-                                                <asp:ListItem Value="10" Selected="True">10</asp:ListItem>
-                                                <asp:ListItem Value="20">20</asp:ListItem>
-                                                <asp:ListItem Value="30">30</asp:ListItem>
-                                                <asp:ListItem Value="50">50</asp:ListItem>
-                                            </asp:DropDownList>
-
-                                            <div id="page-selection" class="pull-right"></div>
-                                        </td>
-                                        <asp:TextBox ID="txtSearch" CssClass="form-control hide" placeholder="Search.." runat="server"></asp:TextBox>
-                                        
-                                    </tr>
-                                </table>
-                                <table id="processTable" class="table table-bordered table-striped dataTable" style="width:100%!important;">
-                                    <thead>
-                                        <tr style="width:100%!important">
-                                            <th style="width:5%!important">
-                                                <div class="checkbox icheck">
-                                                    <asp:CheckBox ID="chkHeader" CssClass="chkheader" runat="server" />
-                                                </div>
-                                            </th>
-                                            <th style="width:5%!important">Job No<br /><asp:TextBox ID="txtJobNo" CssClass="form-control search" placeholder="Job No" runat="server"></asp:TextBox></th>
-                                            <th style="width:15%!important">Data Entry Operator<br /><asp:TextBox ID="txtOperator" CssClass="form-control search" placeholder="Operator" runat="server"></asp:TextBox></th>
-                                            <th style="width:10%!important">TAN<br /><asp:TextBox ID="txtTAN" CssClass="form-control search" placeholder="TAN" runat="server"></asp:TextBox></th>
-                                            <th style="width:45%!important">Account Name<br /><asp:TextBox ID="txtAccount" CssClass="form-control search" placeholder="Account Name" runat="server"></asp:TextBox></th>
-                                            <th style="width:5%!important">Financial Year(FY)<br /><asp:TextBox ID="txtFY" CssClass="form-control search" placeholder="FY" runat="server"></asp:TextBox></th>
-                                            <th style="width:5%!important">Form Type<br /><asp:TextBox ID="txtFormType" CssClass="form-control search" placeholder="Form Type" runat="server"></asp:TextBox></th>
-                                            <th style="width:5%!important">Quarter<br /><asp:TextBox ID="txtQuarter" CssClass="form-control search" placeholder="Quarter" runat="server"></asp:TextBox></th>
-                                            <th style="width:5%!important">Return Type<br /><asp:TextBox ID="txtReturnType" CssClass="form-control search" placeholder="Return Type" runat="server"></asp:TextBox></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <asp:Repeater ID="rptProcess" runat="server">
-                                            <ItemTemplate>
-                                                <tr style="width:100%!important">
-                                                    <td style="width:5%!important">
-                                                        <div class="checkbox icheck">
-                                                            <asp:CheckBox ID="chkRow" CssClass="chkrow" runat="server" />
-                                                        </div>
-                                                    </td>
-                                                    <td style="width:5%!important">
-                                                        <asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' />
-                                                        <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
-                                                    </td>
-                                                    <%--<td>
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        Show entries 
+                                        <asp:DropDownList ID="ddlPageLength" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPageLength_SelectedIndexChanged">
+                                            <asp:ListItem Value="10" Selected="True">10</asp:ListItem>
+                                            <asp:ListItem Value="20">20</asp:ListItem>
+                                            <asp:ListItem Value="30">30</asp:ListItem>
+                                            <asp:ListItem Value="50">50</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <asp:TextBox ID="txtSearch" CssClass="form-control" Style="float: right;" placeholder="Search.." runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                                <div class="form-inline overflow">
+                                    <table id="processTable" class="table table-bordered table-striped dataTable" style="width: 100%!important;">
+                                        <thead>
+                                            <tr style="width: 100%!important">
+                                                <th style="width: 5%!important">
+                                                    <div class="checkbox icheck">
+                                                        <asp:CheckBox ID="chkHeader" CssClass="chkheader" runat="server" />
+                                                    </div>
+                                                </th>
+                                                <th style="width: 5%!important">Job No<br />
+                                                    <asp:TextBox ID="txtJobNo" CssClass="form-control search" placeholder="Job No" runat="server"></asp:TextBox></th>
+                                                <th style="width: 15%!important">Data Entry Operator<br />
+                                                    <asp:TextBox ID="txtOperator" CssClass="form-control search" placeholder="Operator" runat="server"></asp:TextBox></th>
+                                                <th style="width: 10%!important">TAN<br />
+                                                    <asp:TextBox ID="txtTAN" CssClass="form-control search" placeholder="TAN" runat="server"></asp:TextBox></th>
+                                                <th style="width: 45%!important">Account Name<br />
+                                                    <asp:TextBox ID="txtAccount" CssClass="form-control search" placeholder="Account Name" runat="server"></asp:TextBox></th>
+                                                <th style="width: 5%!important">Financial Year(FY)<br />
+                                                    <asp:TextBox ID="txtFY" CssClass="form-control search" placeholder="FY" runat="server"></asp:TextBox></th>
+                                                <th style="width: 5%!important">Form Type<br />
+                                                    <asp:TextBox ID="txtFormType" CssClass="form-control search" placeholder="Form Type" runat="server"></asp:TextBox></th>
+                                                <th style="width: 5%!important">Quarter<br />
+                                                    <asp:TextBox ID="txtQuarter" CssClass="form-control search" placeholder="Quarter" runat="server"></asp:TextBox></th>
+                                                <th style="width: 5%!important">Return Type<br />
+                                                    <asp:TextBox ID="txtReturnType" CssClass="form-control search" placeholder="Return Type" runat="server"></asp:TextBox></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <asp:Repeater ID="rptProcess" runat="server">
+                                                <ItemTemplate>
+                                                    <tr style="width: 100%!important">
+                                                        <td style="width: 5%!important">
+                                                            <div class="checkbox icheck">
+                                                                <asp:CheckBox ID="chkRow" CssClass="chkrow" runat="server" />
+                                                            </div>
+                                                        </td>
+                                                        <td style="width: 5%!important">
+                                                            <asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' />
+                                                            <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
+                                                        </td>
+                                                        <%--<td>
                                                     <asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td>
                                                 </td>--%>
 
-                                                    <td style="width:15%!important">
-                                                        <asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
+                                                        <td style="width: 15%!important">
+                                                            <asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
 
-                                                    <td style="width:10%!important">
-                                                        <asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" /></td>
-                                                    <td style="width:45%!important">
-                                                        <asp:Label ID="lblAccountName" Text='<%# Eval("AccountName") %>' runat="server" /></td>
-                                                    <td style="width:5%!important">
-                                                        <asp:Label ID="lblFinancialYear" Text='<%# Eval("FinancialYear") %>' runat="server" /></td>
-                                                    <td style="width:5%!important">
-                                                        <asp:Label ID="lblFormNumber" Text='<%# Eval("FormNumber") %>' runat="server" /></td>
-                                                    <td style="width:5%!important">
-                                                        <asp:Label ID="lblQuarter" Text='<%# Eval("Quarter") %>' runat="server" /></td>
-                                                    <td style="width:5%!important">
-                                                        <asp:Label ID="lblReturnType" Text='<%# Eval("ReturnType") %>' runat="server" /></td>
-                                                </tr>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-                                    </tbody>
-                                </table>
+                                                        <td style="width: 10%!important">
+                                                            <asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" /></td>
+                                                        <td style="width: 45%!important">
+                                                            <asp:Label ID="lblAccountName" Text='<%# Eval("AccountName") %>' runat="server" /></td>
+                                                        <td style="width: 5%!important">
+                                                            <asp:Label ID="lblFinancialYear" Text='<%# Eval("FinancialYear") %>' runat="server" /></td>
+                                                        <td style="width: 5%!important">
+                                                            <asp:Label ID="lblFormNumber" Text='<%# Eval("FormNumber") %>' runat="server" /></td>
+                                                        <td style="width: 5%!important">
+                                                            <asp:Label ID="lblQuarter" Text='<%# Eval("Quarter") %>' runat="server" /></td>
+                                                        <td style="width: 5%!important">
+                                                            <asp:Label ID="lblReturnType" Text='<%# Eval("ReturnType") %>' runat="server" /></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div id="page-selection" class="pull-right" style="margin-top: 10px;"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,9 +123,7 @@
                 <%     
                     } %>
             </div>
-            <!-- /.box-footer-->
         </div>
-        <!-- /.box -->
         <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
         </div>
@@ -146,14 +144,13 @@
                 total: <%=hidPages.Value == ""? "0" : hidPages.Value %>,
                 page: <%=hidPageNo.Value %>,
                 maxVisible: 5
-            }).on("page", function(event,num){
+            }).on("page", function (event, num) {
                 $('[id$=hidPageNo]').val(num);
                 $('[id$=btnSearch]').click();
             });
 
-            $('[id$=txtSearch]').on('keydown',function(e){
-                if(e.keyCode == 13)
-                {
+            $('[id$=txtSearch]').on('keydown', function (e) {
+                if (e.keyCode == 13) {
                     $('[id$=btnSearch]').click();
                 }
             });

@@ -13,32 +13,44 @@ namespace Vatas_UI.Process
 {
     public partial class Process_ReAssignReturns : VatasWebPage
     {
-        int PageNumber = 1;
-        int PageSize = 10;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                BindData();
+            {
+                btnSearch_Click(btnSearch, null);
+            }
         }
 
-        public void BindData()
+        public void BindData(int PageNumber, int PageSize, string SearchText)
         {
-            List<ProcessReturnsCL> result = DataProviderWrapper.Instance.GetReturnsByJobStatus("ASS", PageNumber, PageSize);
+            int TotalPages = 0;
+            List<ProcessReturnsCL> result = DataProviderWrapper.Instance.GetReturnsByJobStatus("ASS", PageNumber, PageSize, SearchText);
             rptProcess.DataSource = null;
             if (result.Count > 0)
             {
                 rptProcess.DataSource = result;
+                int.TryParse(result.FirstOrDefault()?.RecordCount + "", out TotalPages);
             }
             rptProcess.DataBind();
+            float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
+            TotalPages = Convert.ToInt32(Math.Ceiling(pages));
+            hidPages.Value = TotalPages.ToString();
         }
 
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
+            int PageNumber = 1;
+            int.TryParse(hidPageNo.Value, out PageNumber);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+
+            string SearchText = txtSearch.Text.Trim();
+
             if (this.IsValid)
             {
                 List<ProcessReturnsCL> processList = new List<ProcessReturnsCL>();
-                var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("ASS", PageNumber, PageSize);
+                var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("ASS", PageNumber, PageSize, SearchText);
                 foreach (RepeaterItem item in rptProcess.Items)
                 {
                     ProcessReturnsCL itemProcess = new ProcessReturnsCL();
@@ -60,7 +72,7 @@ namespace Vatas_UI.Process
                     }
                 }
 
-                var result = DataProviderWrapper.Instance.ProcessReturns(processList, BLFunction.GetUserID(),"X");
+                var result = DataProviderWrapper.Instance.ProcessReturns(processList, BLFunction.GetUserID(), "X");
                 if (result.Response == ResponseType.SUCCESS)
                 {
                     BLFunction.ShowAlert(this, "Returns has been Re-Assigned.", result.Response);
@@ -75,7 +87,7 @@ namespace Vatas_UI.Process
                 BLFunction.ShowAlert(this, "Invalid page request found. Reload again and try once again.", ResponseType.INFO);
             }
 
-            BindData();
+            BindData(PageNumber, PageSize, SearchText);
         }
 
         protected void rptProcess_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -93,11 +105,19 @@ namespace Vatas_UI.Process
 
         public void Export()
         {
+            int PageNumber = 1;
+            int.TryParse(hidPageNo.Value, out PageNumber);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+
+            string SearchText = txtSearch.Text.Trim();
+
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_Process_ReAssignReturn.csv";
 
             List<ProcessReturnsCL> processList = new List<ProcessReturnsCL>();
-            var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("ASS", PageNumber, PageSize);
+            var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("ASS", PageNumber, PageSize, SearchText);
 
             if (frontOfcList.Count > 0)
             {
@@ -159,6 +179,24 @@ namespace Vatas_UI.Process
         protected void btnExport_Click(object sender, EventArgs e)
         {
             Export();
+        }
+
+        protected void ddlPageLength_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnSearch_Click(btnSearch, null);
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            int CurrentPageNo = 1;
+            int.TryParse(hidPageNo.Value, out CurrentPageNo);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+
+            string SearchText = txtSearch.Text.Trim();
+
+            BindData(CurrentPageNo, PageSize, SearchText);
         }
     }
 }

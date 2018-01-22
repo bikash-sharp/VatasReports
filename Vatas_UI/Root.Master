@@ -31,6 +31,18 @@
     <link href="<%= this.AppPath() + "Assets/dist/css/bootstrap-dialog.min.css"%>"
         rel="stylesheet" type="text/css" />
     <style type="text/css">
+        .table-bar {
+            margin-bottom: 0 !important;
+        }
+
+            .table-bar > tbody > tr > td {
+                vertical-align: auto !important;
+            }
+
+        #page-selection .pagination {
+            margin: 0px !important;
+        }
+
         .skin-blue .main-header li.user-header {
             background-color: #3cbc4a !important;
         }
