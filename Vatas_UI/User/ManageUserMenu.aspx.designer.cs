@@ -10,7 +10,7 @@
 namespace Vatas_UI.User {
     
     
-    public partial class ManageMenu1 {
+    public partial class ManageMenu {
         
         /// <summary>
         /// rptMenu control.
@@ -22,31 +22,31 @@ namespace Vatas_UI.User {
         protected global::System.Web.UI.WebControls.Repeater rptMenu;
         
         /// <summary>
-        /// hdnMenuId control.
+        /// hdnRoleId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnMenuId;
+        protected global::System.Web.UI.WebControls.HiddenField hdnRoleId;
         
         /// <summary>
-        /// txtMenuName control.
+        /// ddlMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMenuName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMenu;
         
         /// <summary>
-        /// rfvMenu control.
+        /// rfvdllMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMenu;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvdllMenu;
         
         /// <summary>
         /// btnAddUpdateMenu control.

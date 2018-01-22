@@ -395,5 +395,48 @@ namespace Vatas_BAL
             }
         }
 
+        public bool DeleteMenuByMenuId(int MenuId)
+        {
+            try
+            {
+                var result = _context.tbl_Menu.Where(p => p.Menu_id == MenuId).FirstOrDefault();
+                result.Is_Deleted = "Y";
+
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool IsMenuExist(string MenuName)
+        {
+            try
+            {
+                var result = _context.tbl_Menu.Where(s => s.Menu_Name.ToLower() == MenuName.ToLower()).FirstOrDefault();
+                if (result != null)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool AddUpdateMenu(int MenuId, string MenuName)
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -149,6 +149,30 @@ namespace Vatas_Wrapper
             }
         }
 
+        public bool DeleteMenuByMenuId(int MenuId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).DeleteMenuByMenuId(MenuId);
+            }
+        }
+
+        public bool IsMenuExist(string MenuName)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).IsRoleExist(MenuName);
+            }
+        }
+
+        public bool AddUpdateMenu(int MenuId, string MenuName)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).AddUpdateRole(MenuId, MenuName);
+            }
+        }
+
         #region Reports
 
         public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent, int PageNumber, int PageSize)

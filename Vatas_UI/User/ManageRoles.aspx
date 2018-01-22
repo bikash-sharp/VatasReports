@@ -91,7 +91,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#liUser').addClass('active');
-            $('#liManageRolesAndMenu').addClass('active');
+            $('#liManageRoles').addClass('active');
         });
 
         $('#exampleModal').on('show.bs.modal', function (event) {

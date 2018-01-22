@@ -9,24 +9,13 @@ using Vatas_Wrapper;
 
 namespace Vatas_UI.User
 {
-    public partial class ManageMenu : System.Web.UI.Page
+    public partial class ManageMenu1 : System.Web.UI.Page
     {
-        HttpContext CurrContext = HttpContext.Current;
-        static int RoleId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                try
-                {
-                    RoleId = Convert.ToInt32(CurrContext.Items["RoleId"].ToString());
-                    BindMenu(RoleId);
-                    BindData(RoleId);
-                }
-                catch (Exception ex)
-                {
-                    Server.Transfer("ManageRoles.aspx");
-                }
+                BindData();
             }
         }
 
@@ -36,65 +25,35 @@ namespace Vatas_UI.User
             return path.EndsWith("/") ? path : path + "/";
         }
 
-        public void BindMenu(int RoleId)
+        public void BindData()
         {
-            List<DropDownCL> roles = DataProviderWrapper.Instance.GetAllMenu();
-            ddlMenu.DataSource = null;
+            List<MenuCL> roles = DataProviderWrapper.Instance.GetAllMenu().ToList().Select(p => new MenuCL
+            {
+                MenuID = Convert.ToInt32(p.DataValue),
+                MenuName = p.DataText
+            }).ToList();
+
             if (roles.Count > 0)
             {
-                ddlMenu.DataSource = roles;
-                ddlMenu.DataTextField = "DataText";
-                ddlMenu.DataValueField = "DataValue";
-            }
-            ddlMenu.DataBind();
-        }
-        public void BindData(int RoleId)
-        {
-            var menu = DataProviderWrapper.Instance.GetMenuByRoleId(RoleId);
-            if (menu.Count > 0)
-            {
-                rptMenu.DataSource = menu;
+                rptMenu.DataSource = roles;
                 rptMenu.DataBind();
-            }
-        }
-
-        protected void btnDeleteMenu_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Button btnDeleteUser = (Button)(sender);
-                int MenuId = Convert.ToInt32(btnDeleteUser.CommandArgument);
-
-                bool IsDelete = DataProviderWrapper.Instance.DeleteUserMenuByMenuId(RoleId, MenuId);
-                if (IsDelete)
-                {
-                    BLFunction.ShowAlert(this, "Menu has been deleted successfully.", ResponseType.SUCCESS);
-                    BindData(RoleId);
-                }
-                else
-                {
-                    BLFunction.ShowAlert(this, "Unable to delete the menu.", ResponseType.WARNING);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw;
             }
         }
 
         protected void btnAddUpdateMenu_Click(object sender, EventArgs e)
         {
-            int MenuId = Convert.ToInt32(ddlMenu.SelectedValue);
+            int MenuId = Convert.ToInt32(hdnMenuId.Value);
+            string MenuName = txtMenuName.Text;
 
-            bool IsExist = DataProviderWrapper.Instance.IsMenuAlreadyExistInUserMenu(RoleId,MenuId);
+            bool IsExist = DataProviderWrapper.Instance.IsMenuExist(MenuName);
 
             if (!IsExist)
             {
-                bool IsAddUpdate = DataProviderWrapper.Instance.AddMenuToUserMenuByRoleId(RoleId, MenuId);
+                bool IsAddUpdate = DataProviderWrapper.Instance.AddUpdateMenu(MenuId, MenuName);
                 if (IsAddUpdate)
                 {
                     BLFunction.ShowAlert(this, "Menu has been saved successfully.", ResponseType.SUCCESS);
-                    BindData(RoleId);
+                    BindData();
                 }
                 else
                 {
@@ -103,7 +62,31 @@ namespace Vatas_UI.User
             }
             else
             {
-                BLFunction.ShowAlert(this, "Entered Menu is already exist.", ResponseType.SUCCESS);
+                BLFunction.ShowAlert(this, "Entered menu is already exist.", ResponseType.SUCCESS);
+            }
+        }
+
+        protected void btnDeleteMenu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btnDeleteMenu = (Button)(sender);
+                int MenuId = Convert.ToInt32(btnDeleteMenu.CommandArgument);
+
+                bool IsDelete = DataProviderWrapper.Instance.DeleteMenuByMenuId(MenuId);
+                if (IsDelete)
+                {
+                    BLFunction.ShowAlert(this, "Menu has been deleted successfully.", ResponseType.SUCCESS);
+                    BindData();
+                }
+                else
+                {
+                    BLFunction.ShowAlert(this, "Unable to delete the Menu.", ResponseType.WARNING);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }

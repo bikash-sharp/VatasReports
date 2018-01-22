@@ -72,7 +72,7 @@ namespace Vatas_UI.User
             HttpContext _context = HttpContext.Current;
             _context.Items.Add("RoleId", RoleId);
 
-            Server.Transfer("~/User/ManageMenu.aspx");
+            Server.Transfer("~/User/ManageUserMenu.aspx");
         }
 
         protected void btnEditRole_Click(object sender, EventArgs e)
