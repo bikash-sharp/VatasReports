@@ -4,16 +4,16 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
     <section class="content-header">
-        <h1>Manage Roles and Menu</h1>
+        <h1>Manage Roles and UserMenu</h1>
         <ol class="breadcrumb">
             <li><a href="javascript:;"><i class="fa fa-dashboard"></i>User</a></li>
-            <li><a href="javascript:;">Manage Roles and Menu</a></li>
+            <li><a href="javascript:;">Manage Roles and UserMenu</a></li>
         </ol>
     </section>
     <section class="content">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Manage Roles and Menu</h3>
+                <h3 class="box-title">Manage Roles and UserMenu</h3>
                 <button type="button" class="btn btn-info text-center addRole" data-roleid="0" data-rolename="" data-toggle="modal" data-target="#exampleModal" data-whatever="Add New Role" style="float: right">Add Role</button>
                 <%--<a href="<%= this.AppPath() + "AddRole" %>" class="btn btn-info text-center" >Add Role</a>--%>
             </div>

@@ -169,7 +169,7 @@ namespace Vatas_Wrapper
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).AddUpdateRole(MenuId, MenuName);
+                return BLSiteUser.Instance(context).AddUpdateMenu(MenuId, MenuName);
             }
         }
 

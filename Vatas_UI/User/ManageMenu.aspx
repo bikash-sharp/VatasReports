@@ -4,17 +4,17 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
     <section class="content-header">
-        <h1>Manage Roles and Menu</h1>
+        <h1>Manage Menu</h1>
         <ol class="breadcrumb">
             <li><a href="javascript:;"><i class="fa fa-dashboard"></i>User</a></li>
-            <li><a href="javascript:;">Manage Roles and Menu</a></li>
+            <li><a href="javascript:;">Manage Menu</a></li>
         </ol>
     </section>
     <section class="content">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Manage Roles and Menu</h3>
-                <button type="button" class="btn btn-info text-center addRole" data-menuid="0" data-menuname="" data-toggle="modal" data-target="#exampleModal" data-whatever="Add New Menu" style="float: right">Add Menu</button>
+                <h3 class="box-title">Manage Menu</h3>
+                <button type="button" class="btn btn-info text-center addMenu" data-menuid="0" data-menuname="" data-toggle="modal" data-target="#exampleModal" data-whatever="Add New Menu" style="float: right">Add Menu</button>
             </div>
             <div class="box-body">
                 <div class="form-inline">
@@ -68,7 +68,7 @@
                             <asp:HiddenField ID="hdnMenuId" runat="server" Value="0" />
                             <div class="form-group">
                                 <label for="Role-name" class="control-label">Menu Name:</label>
-                                <asp:TextBox ID="txtMenuName" runat="server" class="form-control" placeholder="Role Name" />
+                                <asp:TextBox ID="txtMenuName" runat="server" class="form-control" placeholder="Menu Name" />
                                 <asp:RequiredFieldValidator ID="rfvMenu" ControlToValidate="txtMenuName" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;padding: 40px 20px 0px 0px !important;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="AddUpdateMenu" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>

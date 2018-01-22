@@ -2,6 +2,35 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .select2-container .select2-selection--single {
+            height: 34px !important;
+        }
+
+        .select2-container--default.select2-container--open {
+            width: 100% !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 28px !important;
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            padding-left: 0px !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 34px !important;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 34px !important;
+        }
+
+        .select2-container {
+            width: 100% !important;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
     <section class="content-header">
@@ -16,7 +45,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Manage User Menu</h3>
                 <a href="<%= this.AppPath() + "ManageRoles" %>" class="btn btn-info text-center" style="float: right">Back</a>
-                <button type="button" class="btn btn-info text-center addMenu" data-toggle="modal" data-target="#exampleModal" data-whatever="Add Menu To Role" style="float: right;margin-right:10px;">Add Menu To Role</button>
+                <button type="button" class="btn btn-info text-center addMenu" data-toggle="modal" data-target="#exampleModal" data-whatever="Add Menu To Role" style="float: right; margin-right: 10px;">Add Menu To Role</button>
             </div>
             <div class="box-body">
                 <div class="form-inline">
@@ -59,7 +88,7 @@
             <i class="fa fa-refresh fa-spin"></i>
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -72,9 +101,7 @@
                             <div class="form-group">
                                 <label for="Role-name" class="control-label">Select Menu:</label>
                                 <asp:DropDownList ID="ddlMenu" runat="server" CssClass="form-control pull-left select2" ValidationGroup="AddUpdateMenu" AppendDataBoundItems="true">
-                                    <asp:ListItem Value="0" Selected="True">Select Menu</asp:ListItem>
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="rfvdllMenu" ControlToValidate="ddlMenu" InitialValue="0" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="EditUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                             </div>
                         </div>
                     </div>
@@ -90,6 +117,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
+            $('.select2').select2();
             $('#liUser').addClass('active');
             $('#liManageRoles').addClass('active');
         });
