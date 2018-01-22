@@ -170,6 +170,10 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="RoleId" Type="int" Mode="In" />
           <Parameter Name="MenuId" Type="int" Mode="In" />
         </Function>
+        <Function Name="proc_AddUpdateMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MenuId" Type="int" Mode="In" />
+          <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="proc_AddUpdateRolesByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
           <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
@@ -193,6 +197,9 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
         </Function>
         <Function Name="proc_GetUserRoleByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="proc_GetUserRoleByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="db_AdminModelStoreContainer">
           <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
@@ -355,9 +362,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
             <End Role="tbl_UserGroup_Registration" EntitySet="tbl_UserGroup_Registration" />
             <End Role="tbl_UserRoles" EntitySet="tbl_UserRoles" />
           </AssociationSet>
-          <FunctionImport Name="proc_GetUserRoleByUserId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByUserId_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="proc_GetUserRoleByRoleId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByRoleId_Result)">
           <Parameter Name="RoleId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -373,6 +377,13 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <FunctionImport Name="proc_AddMenuToUserMenuByRoleId">
             <Parameter Name="RoleId" Mode="In" Type="Int32" />
             <Parameter Name="MenuId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="proc_AddUpdateMenu">
+            <Parameter Name="MenuId" Mode="In" Type="Int32" />
+            <Parameter Name="MenuName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc_GetUserRoleByUserId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByUserId_Result1)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbl_Roles">
@@ -504,6 +515,12 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Name="AY" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="proc_GetUserRoleByUserId_Result1">
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+          <Property Type="String" Name="Role_Name" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -706,6 +723,17 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="proc_AddMenuToUserMenuByRoleId" FunctionName="db_AdminModel.Store.proc_AddMenuToUserMenuByRoleId" />
+          <FunctionImportMapping FunctionImportName="proc_AddUpdateMenu" FunctionName="db_AdminModel.Store.proc_AddUpdateMenu" />
+          <FunctionImportMapping FunctionImportName="proc_GetUserRoleByUserId" FunctionName="db_AdminModel.Store.proc_GetUserRoleByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetUserRoleByUserId_Result1">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

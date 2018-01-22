@@ -15,7 +15,7 @@
             <li id="liCreateUser"><a href="<%=Page.ResolveUrl("~/CreateUser")%>" title="Create User"><i class="fa fa-user"></i>Create User</a></li>
             <li id="liUserListing"><a href="<%=Page.ResolveUrl("~/UserListing")%>" title="Listing User"><i class="fa fa-user"></i>Listing User</a></li>
             <li id="liManageRoles"><a href="<%=Page.ResolveUrl("~/ManageRoles")%>" title="Manage Roles"><i class="fa fa-user"></i>Manage Roles</a></li>
-            <%--<li id="liManageMenu"><a href="<%=Page.ResolveUrl("~/ManageMenu")%>" title="Manage Menu"><i class="fa fa-user"></i>Manage Menu</a></li>--%>
+            <li id="liManageMenu"><a href="<%=Page.ResolveUrl("~/ManageMenu")%>" title="Manage Menu"><i class="fa fa-user"></i>Manage Menu</a></li>
         </ul>
     </li>
     <% } %>

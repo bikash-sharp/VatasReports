@@ -161,7 +161,7 @@ namespace Vatas_Wrapper
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).IsRoleExist(MenuName);
+                return BLSiteUser.Instance(context).IsMenuExist(MenuName);
             }
         }
 

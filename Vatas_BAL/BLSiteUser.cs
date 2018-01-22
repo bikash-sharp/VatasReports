@@ -431,6 +431,7 @@ namespace Vatas_BAL
         {
             try
             {
+                _context.proc_AddUpdateMenu(MenuId, MenuName);
                 return true;
             }
             catch (Exception ex)

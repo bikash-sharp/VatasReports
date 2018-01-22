@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseUpdates", "Database
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Procedures", "Procedures", "{E9577DE9-6845-4072-8CC0-6A9DCA248E9F}"
 	ProjectSection(SolutionItems) = preProject
+		AddUpdateMenu.sql = AddUpdateMenu.sql
 		AddUpdateUser.sql = AddUpdateUser.sql
 		Dummy Procedure.sql = Dummy Procedure.sql
 		GetAllRegisteredUsers.sql = GetAllRegisteredUsers.sql

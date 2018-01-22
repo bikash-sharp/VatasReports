@@ -88,15 +88,6 @@ namespace Vatas_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetRegisteredUserByUserId_Result>("proc_GetRegisteredUserByUserId", userIdParameter);
         }
     
-        public virtual ObjectResult<proc_GetUserRoleByUserId_Result> proc_GetUserRoleByUserId(Nullable<int> userId)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByUserId_Result>("proc_GetUserRoleByUserId", userIdParameter);
-        }
-    
         public virtual ObjectResult<proc_GetUserRoleByRoleId_Result> proc_GetUserRoleByRoleId(Nullable<int> roleId)
         {
             var roleIdParameter = roleId.HasValue ?
@@ -139,6 +130,28 @@ namespace Vatas_DAL
                 new ObjectParameter("MenuId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddMenuToUserMenuByRoleId", roleIdParameter, menuIdParameter);
+        }
+    
+        public virtual int proc_AddUpdateMenu(Nullable<int> menuId, string menuName)
+        {
+            var menuIdParameter = menuId.HasValue ?
+                new ObjectParameter("MenuId", menuId) :
+                new ObjectParameter("MenuId", typeof(int));
+    
+            var menuNameParameter = menuName != null ?
+                new ObjectParameter("MenuName", menuName) :
+                new ObjectParameter("MenuName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdateMenu", menuIdParameter, menuNameParameter);
+        }
+    
+        public virtual ObjectResult<proc_GetUserRoleByUserId_Result1> proc_GetUserRoleByUserId(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByUserId_Result1>("proc_GetUserRoleByUserId", userIdParameter);
         }
     }
 }

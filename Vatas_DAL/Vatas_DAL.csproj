@@ -81,6 +81,9 @@
     <Compile Include="proc_GetUserRoleByUserId_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_GetUserRoleByUserId_Result1.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_Report_GetAllFirmName_Result.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
     </Compile>
