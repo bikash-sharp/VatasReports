@@ -356,10 +356,10 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
             <Parameter Name="MenuId" Mode="In" Type="Int32" />
             <Parameter Name="MenuName" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="proc_GetUserRoleByUserId">
-          <Parameter Name="UserId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="tbl_Menu" EntityType="db_AdminModel.tbl_Menu" />
+          <FunctionImport Name="proc_GetUserRoleByUserId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByUserId_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbl_Roles">
           <Key>
@@ -431,12 +431,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="proc_GetUserRoleByUserId_Result">
-          <Property Type="Int32" Name="UserID" Nullable="true" />
-          <Property Type="String" Name="UserName" Nullable="true" />
-          <Property Type="Int32" Name="RoleId" Nullable="true" />
-          <Property Type="String" Name="Role_Name" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="proc_GetUserRoleByRoleId_Result">
           <Property Type="Int32" Name="UserID" Nullable="true" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="41" />
@@ -486,6 +480,12 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Name="AY" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="proc_GetUserRoleByUserId_Result">
+          <Property Type="Int32" Name="UserID" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" />
+          <Property Type="Int32" Name="RoleId" Nullable="true" />
+          <Property Type="String" Name="Role_Name" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -667,8 +667,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="proc_AddMenuToUserMenuByRoleId" FunctionName="db_AdminModel.Store.proc_AddMenuToUserMenuByRoleId" />
           <FunctionImportMapping FunctionImportName="proc_AddUpdateMenu" FunctionName="db_AdminModel.Store.proc_AddUpdateMenu" />
-          <FunctionImportMapping FunctionImportName="proc_GetUserRoleByUserId" FunctionName="db_AdminModel.Store.proc_GetUserRoleByUserId">
-          </FunctionImportMapping>
           <EntitySetMapping Name="tbl_Menu">
             <EntityTypeMapping TypeName="db_AdminModel.tbl_Menu">
               <MappingFragment StoreEntitySet="tbl_Menu">
@@ -691,6 +689,16 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetUserRoleByUserId" FunctionName="db_AdminModel.Store.proc_GetUserRoleByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetUserRoleByUserId_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
