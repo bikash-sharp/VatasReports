@@ -182,7 +182,10 @@ namespace Vatas_UI.Process
 
             int PageSize = 10;
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
-
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
             string SearchText = txtSearch.Text.Trim();
 
             BindData(CurrentPageNo, PageSize, SearchText);
