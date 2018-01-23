@@ -76,7 +76,7 @@
                                                         <asp:DropDownList ID="ddlSupervisor" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
                                                     <td>
                                                         <asp:DropDownList ID="ddlPriorities" runat="server" CssClass="form-control" DataSource='<%# Eval("PriorityList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
-                                                    
+
                                                     <td>
                                                         <asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" />
                                                         <td>
@@ -111,7 +111,7 @@
 
                 <% if (this.rptProcess.Items.Count > 0)
                     { %>
-                <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click" />
+                <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click">Export To Excel</asp:LinkButton>
                 <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" OnClick="btnConfirm_Click" runat="server" Style="margin-right: 10px;" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
                 <%     
                     } %>
