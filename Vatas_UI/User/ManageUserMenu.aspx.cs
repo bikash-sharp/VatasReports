@@ -62,7 +62,7 @@ namespace Vatas_UI.User
         {
             try
             {
-                Button btnDeleteUser = (Button)(sender);
+                LinkButton btnDeleteUser = (LinkButton)(sender);
                 int MenuId = Convert.ToInt32(btnDeleteUser.CommandArgument);
 
                 bool IsDelete = DataProviderWrapper.Instance.DeleteUserMenuByMenuId(RoleId, MenuId);

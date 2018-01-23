@@ -37,9 +37,9 @@
                                                 </td>
                                                 <td><%# Eval("RoleName") %></td>
                                                 <td>
-                                                    <asp:Button ID="btnViewMenu" Text="View Menu" runat="server" CommandArgument='<%# Eval("RoleId") %>' CssClass="btn btn-info" OnClick="btnViewMenu_Click" />
-                                                    <asp:Button type="button" ID="btnEditRole" Text="Edit" runat="server" UseSubmitBehavior="false" OnClientClick="return"  data-rolename='<%# Eval("RoleName") %>' data-roleid='<%# Eval("RoleId") %>' data-toggle="modal" data-target="#exampleModal" data-whatever="Edit Role" CssClass="btn btn-success" />
-                                                    <asp:Button ID="btnDeleteRole" CommandArgument='<%# Eval("RoleId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteRole_Click" />
+                                                    <asp:LinkButton ID="btnViewMenu" Text="View Menu" runat="server" CommandArgument='<%# Eval("RoleId") %>' CssClass="btn btn-info" OnClick="btnViewMenu_Click" ><i class="glyphicon glyphicon-eye-open"></i>&nbsp;View</asp:LinkButton>
+                                                    <asp:LinkButton type="button" ID="btnEditRole" Text="Edit" runat="server" UseSubmitBehavior="false" OnClientClick="return"  data-rolename='<%# Eval("RoleName") %>' data-roleid='<%# Eval("RoleId") %>' data-toggle="modal" data-target="#exampleModal" data-whatever="Edit Role" CssClass="btn btn-success" ><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</asp:LinkButton>
+                                                    <asp:LinkButton ID="btnDeleteRole" CommandArgument='<%# Eval("RoleId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteRole_Click" OnClientClick="if(!ConfirmMessage(this))return false;"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete</asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>

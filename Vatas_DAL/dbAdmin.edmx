@@ -5,15 +5,9 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="db_AdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'db_Admin.dbo.tbl_Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tbl_Menu">
           <Key>
             <PropertyRef Name="Menu_id" />
-            <PropertyRef Name="Parent_Menu" />
-            <PropertyRef Name="Menu_Level" />
-            <PropertyRef Name="Menu_Order" />
-            <PropertyRef Name="Menu_Status" />
           </Key>
           <Property Name="Menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Parent_Menu" Type="int" Nullable="false" />
@@ -202,6 +196,7 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="db_AdminModelStoreContainer">
+          <EntitySet Name="tbl_Menu" EntityType="Self.tbl_Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Credential" EntityType="Self.tbl_User_Credential" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Session_Details" EntityType="Self.tbl_User_Session_Details" Schema="dbo" store:Type="Tables" />
@@ -209,26 +204,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <EntitySet Name="tbl_UserGroup_Registration" EntityType="Self.tbl_UserGroup_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_UserMenu" EntityType="Self.tbl_UserMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_UserRoles" EntityType="Self.tbl_UserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbl_Menu" EntityType="Self.tbl_Menu" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tbl_Menu].[Menu_id] AS [Menu_id], 
-    [tbl_Menu].[Parent_Menu] AS [Parent_Menu], 
-    [tbl_Menu].[Menu_Level] AS [Menu_Level], 
-    [tbl_Menu].[Menu_Name] AS [Menu_Name], 
-    [tbl_Menu].[Menu_Link] AS [Menu_Link], 
-    [tbl_Menu].[Menu_Order] AS [Menu_Order], 
-    [tbl_Menu].[Menu_Status] AS [Menu_Status], 
-    [tbl_Menu].[Is_Deleted] AS [Is_Deleted], 
-    [tbl_Menu].[Project_Name] AS [Project_Name], 
-    [tbl_Menu].[Page_ID] AS [Page_ID], 
-    [tbl_Menu].[Sub_ModuleID] AS [Sub_ModuleID], 
-    [tbl_Menu].[ID_Admin] AS [ID_Admin], 
-    [tbl_Menu].[ITRCheck] AS [ITRCheck], 
-    [tbl_Menu].[AssesseeCheck] AS [AssesseeCheck], 
-    [tbl_Menu].[AY] AS [AY], 
-    [tbl_Menu].[url] AS [url]
-    FROM [dbo].[tbl_Menu] AS [tbl_Menu]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="tbl_User_Info" EntityType="Self.tbl_User_Info" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [tbl_User_Info].[User_Info_ID] AS [User_Info_ID], 
@@ -373,7 +348,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="RoleId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="tbl_UserMenu" EntityType="db_AdminModel.tbl_UserMenu" />
-          <EntitySet Name="tbl_Menu" EntityType="db_AdminModel.tbl_Menu" />
           <FunctionImport Name="proc_AddMenuToUserMenuByRoleId">
             <Parameter Name="RoleId" Mode="In" Type="Int32" />
             <Parameter Name="MenuId" Mode="In" Type="Int32" />
@@ -382,9 +356,10 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
             <Parameter Name="MenuId" Mode="In" Type="Int32" />
             <Parameter Name="MenuName" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="proc_GetUserRoleByUserId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByUserId_Result1)">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          <FunctionImport Name="proc_GetUserRoleByUserId">
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tbl_Menu" EntityType="db_AdminModel.tbl_Menu" />
         </EntityContainer>
         <EntityType Name="tbl_Roles">
           <Key>
@@ -493,10 +468,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
         <EntityType Name="tbl_Menu">
           <Key>
             <PropertyRef Name="Menu_id" />
-            <PropertyRef Name="Parent_Menu" />
-            <PropertyRef Name="Menu_Level" />
-            <PropertyRef Name="Menu_Order" />
-            <PropertyRef Name="Menu_Status" />
           </Key>
           <Property Name="Menu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Parent_Menu" Type="Int32" Nullable="false" />
@@ -515,12 +486,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Name="AY" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="url" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="proc_GetUserRoleByUserId_Result1">
-          <Property Type="Int32" Name="UserID" Nullable="true" />
-          <Property Type="String" Name="UserName" Nullable="true" />
-          <Property Type="Int32" Name="RoleId" Nullable="true" />
-          <Property Type="String" Name="Role_Name" Nullable="true" MaxLength="50" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -700,6 +665,10 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_AddMenuToUserMenuByRoleId" FunctionName="db_AdminModel.Store.proc_AddMenuToUserMenuByRoleId" />
+          <FunctionImportMapping FunctionImportName="proc_AddUpdateMenu" FunctionName="db_AdminModel.Store.proc_AddUpdateMenu" />
+          <FunctionImportMapping FunctionImportName="proc_GetUserRoleByUserId" FunctionName="db_AdminModel.Store.proc_GetUserRoleByUserId">
+          </FunctionImportMapping>
           <EntitySetMapping Name="tbl_Menu">
             <EntityTypeMapping TypeName="db_AdminModel.tbl_Menu">
               <MappingFragment StoreEntitySet="tbl_Menu">
@@ -722,18 +691,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="proc_AddMenuToUserMenuByRoleId" FunctionName="db_AdminModel.Store.proc_AddMenuToUserMenuByRoleId" />
-          <FunctionImportMapping FunctionImportName="proc_AddUpdateMenu" FunctionName="db_AdminModel.Store.proc_AddUpdateMenu" />
-          <FunctionImportMapping FunctionImportName="proc_GetUserRoleByUserId" FunctionName="db_AdminModel.Store.proc_GetUserRoleByUserId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetUserRoleByUserId_Result1">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

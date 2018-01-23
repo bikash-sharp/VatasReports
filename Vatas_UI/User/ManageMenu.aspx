@@ -36,8 +36,9 @@
                                                 </td>
                                                 <td><%# Eval("MenuName") %></td>
                                                 <td>
-                                                    <asp:Button type="button" ID="btnEditMenu" Text="Edit" runat="server" UseSubmitBehavior="false" OnClientClick="return"  data-menuname='<%# Eval("MenuName") %>' data-menuid='<%# Eval("MenuId") %>' data-toggle="modal" data-target="#exampleModal" data-whatever="Edit Menu" CssClass="btn btn-success" />
-                                                    <asp:Button ID="btnDeleteMenu" CommandArgument='<%# Eval("MenuId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteMenu_Click" />
+                                                    <asp:LinkButton type="button" ID="btnEditMenu" Text="Edit" runat="server" UseSubmitBehavior="false" OnClientClick="return"  data-menuname='<%# Eval("MenuName") %>' data-menuid='<%# Eval("MenuId") %>' data-toggle="modal" data-target="#exampleModal" data-whatever="Edit Menu" CssClass="btn btn-success" ><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</asp:LinkButton>
+
+                                                    <asp:LinkButton ID="btnDeleteMenu" CommandArgument='<%# Eval("MenuId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteMenu_Click" OnClientClick="if(!ConfirmMessage(this))return false;"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete</asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>

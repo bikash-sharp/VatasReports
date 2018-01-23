@@ -70,7 +70,7 @@
                                                 <td><%# Eval("MenuLevel") %></td>
                                                 <td><%# Eval("ProjectName") %></td>
                                                 <td>
-                                                    <asp:Button ID="btnDeleteMenu" CommandArgument='<%# Eval("MenuId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteMenu_Click" />
+                                                    <asp:LinkButton ID="btnDeleteMenu" CommandArgument='<%# Eval("MenuId") %>' Text="Delete" CssClass="btn btn-danger" runat="server" OnClick="btnDeleteMenu_Click" OnClientClick="if(!ConfirmMessage(this))return false;"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete</asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>

@@ -70,7 +70,7 @@ namespace Vatas_UI.User
         {
             try
             {
-                Button btnDeleteMenu = (Button)(sender);
+                LinkButton btnDeleteMenu = (LinkButton)(sender);
                 int MenuId = Convert.ToInt32(btnDeleteMenu.CommandArgument);
 
                 bool IsDelete = DataProviderWrapper.Instance.DeleteMenuByMenuId(MenuId);
@@ -86,7 +86,8 @@ namespace Vatas_UI.User
             }
             catch (Exception ex)
             {
-                throw;
+                BLFunction.ShowAlert(this, ex.Message, ResponseType.WARNING);
+                //throw;
             }
         }
     }

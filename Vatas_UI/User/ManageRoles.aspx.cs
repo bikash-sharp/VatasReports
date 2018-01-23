@@ -44,7 +44,7 @@ namespace Vatas_UI.User
         {
             try
             {
-                Button btnDeleteUser = (Button)(sender);
+                LinkButton btnDeleteUser = (LinkButton)(sender);
                 int UserId = Convert.ToInt32(btnDeleteUser.CommandArgument);
 
                 bool IsDelete = DataProviderWrapper.Instance.DeleteRoleByRoleId(UserId);
@@ -66,7 +66,7 @@ namespace Vatas_UI.User
 
         protected void btnViewMenu_Click(object sender, EventArgs e)
         {
-            Button btnEditRole = (Button)(sender);
+            LinkButton btnEditRole = (LinkButton)(sender);
             int RoleId = Convert.ToInt32(btnEditRole.CommandArgument);
 
             HttpContext _context = HttpContext.Current;

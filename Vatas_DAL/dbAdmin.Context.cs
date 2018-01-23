@@ -145,13 +145,13 @@ namespace Vatas_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdateMenu", menuIdParameter, menuNameParameter);
         }
     
-        public virtual ObjectResult<proc_GetUserRoleByUserId_Result1> proc_GetUserRoleByUserId(Nullable<int> userId)
+        public virtual int proc_GetUserRoleByUserId(Nullable<int> userId)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByUserId_Result1>("proc_GetUserRoleByUserId", userIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_GetUserRoleByUserId", userIdParameter);
         }
     }
 }
