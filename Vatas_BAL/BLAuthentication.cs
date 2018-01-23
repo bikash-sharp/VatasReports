@@ -48,6 +48,10 @@ namespace Vatas_BAL
                 {
                     return new AuthMessageCL(0, null, 0, null, "", ResponseType.DANGER, "The username and/or password is invalid.");
                 }
+                else if(user.Is_Login_Active != "Y")
+                {
+                    return new AuthMessageCL(0, null, 0, null, "", ResponseType.DANGER, "The account has been disabled.");
+                }
                 else
                 {
                     string roleName = "";

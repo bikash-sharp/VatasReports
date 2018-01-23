@@ -58,6 +58,7 @@ namespace Vatas_UI.User
                 txtMobileNumber.Text = result.MobileNumber;
                 if (result.RoleId > 0)
                     ddlRoles.SelectedValue = result.RoleId.ToString();
+                chkIsEnabled.Checked = ((String.IsNullOrEmpty(result.IsActive) || result.IsActive != "Y") ? false : true);
             }
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -76,7 +77,7 @@ namespace Vatas_UI.User
                 createUser.MobileNumber = txtMobileNumber.Text;
                 createUser.AccountType = ddlAccountType.SelectedValue;
                 createUser.RoleId = Convert.ToInt32(ddlRoles.SelectedValue);
-
+                createUser.IsActive = chkIsEnabled.Checked ? "Y" : "N";
                 bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
                 if (IsSaved)
                 {

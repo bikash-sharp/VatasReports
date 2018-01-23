@@ -1,6 +1,15 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/SiteAdmin.master" AutoEventWireup="true" CodeBehind="EditUser.aspx.cs" Inherits="Vatas_UI.User.EditUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .toggle.android {
+            border-radius: 0px;
+        }
+
+            .toggle.android .toggle-handle {
+                border-radius: 0px;
+            }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
     <section class="content-header">
@@ -97,6 +106,12 @@
                                     <asp:RequiredFieldValidator ID="rfvdllRoles" ControlToValidate="ddlRoles" InitialValue="0" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="EditUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
+                            <div class="form-group has-feedback">
+                                <label for="chkIsEnabled" class="col-sm-2 control-label">Enabled</label>
+                                <div class="col-sm-5">
+                                    <asp:CheckBox ID="chkIsEnabled" runat="server" />
+                                </div>
+                            </div>
                         </div>
                         <div class="box-footer">
                             <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
@@ -122,6 +137,13 @@
         $(document).ready(function () {
             $('#liUser').addClass('active');
             $('#liUserListing').addClass('active');
+            $('[id$=chkIsEnabled]').bootstrapToggle({
+                on: 'Enabled',
+                off: 'Disabled',
+                onstyle: 'success',
+                offstyle: 'danger',
+                style: 'android'
+            });
         });
 
         $(".reveal").on('click', function () {

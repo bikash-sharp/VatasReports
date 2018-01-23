@@ -396,6 +396,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Assets/plugins/bootstrap-slider/slider.css">
       <publishTime>05/28/2017 17:00:42</publishTime>
     </File>
+    <File Include="Assets/plugins/bootstrap-toggle/bootstrap-toggle.min.js.map">
+      <publishTime>03/18/2016 03:20:38</publishTime>
+    </File>
+    <File Include="Assets/plugins/bootstrap-toggle/bootstrap2-toggle.css">
+      <publishTime>03/18/2016 03:20:38</publishTime>
+    </File>
+    <File Include="Assets/plugins/bootstrap-toggle/bootstrap2-toggle.js">
+      <publishTime>03/18/2016 03:20:38</publishTime>
+    </File>
+    <File Include="Assets/plugins/bootstrap-toggle/bootstrap2-toggle.min.css">
+      <publishTime>03/18/2016 03:20:38</publishTime>
+    </File>
+    <File Include="Assets/plugins/bootstrap-toggle/bootstrap2-toggle.min.js">
+      <publishTime>03/18/2016 03:20:38</publishTime>
+    </File>
+    <File Include="Assets/plugins/bootstrap-toggle/bootstrap2-toggle.min.js.map">
+      <publishTime>03/18/2016 03:20:38</publishTime>
+    </File>
     <File Include="Assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js">
       <publishTime>05/28/2017 17:00:42</publishTime>
     </File>
@@ -2884,10 +2902,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/28/2017 17:00:50</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/23/2018 10:55:08</publishTime>
+      <publishTime>01/23/2018 11:16:38</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/23/2018 10:55:07</publishTime>
+      <publishTime>01/23/2018 11:16:38</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/03/2015 17:43:42</publishTime>
@@ -2959,7 +2977,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/07/2018 01:58:28</publishTime>
     </File>
     <File Include="bin/Vatas_UI.dll">
-      <publishTime>01/23/2018 10:54:42</publishTime>
+      <publishTime>01/23/2018 11:16:13</publishTime>
     </File>
     <File Include="bin/Vatas_UI.pdb">
       <publishTime>01/07/2018 16:39:29</publishTime>
@@ -2995,7 +3013,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/20/2018 20:12:00</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/23/2018 10:54:49</publishTime>
+      <publishTime>01/23/2018 11:16:20</publishTime>
     </File>
     <File Include="Process/Process_AssignReturns.aspx">
       <publishTime>01/23/2018 10:51:18</publishTime>

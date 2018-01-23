@@ -12,6 +12,7 @@
     <title>Vatas | E-TDS</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <link rel="stylesheet" href="<%= this.AppPath() +  "Assets/bootstrap/css/bootstrap.min.css" %> " type="text/css" />
+    <link rel="stylesheet" href="<%=this.AppPath() + "Assets/plugins/bootstrap-toggle/bootstrap-toggle.min.css"%>" type="text/css" />
     <link rel="stylesheet" href="<%= this.AppPath() + "Assets/plugins/datatables/dataTables.bootstrap.css"%>" type="text/css" />
     <link href="<%= this.AppPath() + "Assets/plugins/select2/select2.min.css"%>" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="<%= this.AppPath() + "Assets/fontawesome/css/font-awesome.min.css"%>" type="text/css" />
@@ -27,6 +28,8 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+    <!--Bootstrap-toggle-->
+    
     <!--Bootstrap Dialog -->
     <link href="<%= this.AppPath() + "Assets/dist/css/bootstrap-dialog.min.css"%>"
         rel="stylesheet" type="text/css" />
@@ -176,6 +179,7 @@
         <script src="<%=this.AppPath() + "Assets/plugins/jQuery/jQuery-2.2.0.min.js"%>" type="text/javascript"></script>
         <!-- Bootstrap 3.3.6 -->
         <script src="<%=this.AppPath() + "Assets/bootstrap/js/bootstrap.min.js"%>" type="text/javascript"></script>
+        <script src="<%=this.AppPath() + "Assets/plugins/bootstrap-toggle/bootstrap-toggle.min.js"%>" type="text/javascript"></script>
         <script src="<%=this.AppPath() + "Assets/plugins/bootpag/jquery.bootpag.min.js"%>" type="text/javascript"></script>
         <script src="<%=this.AppPath() + "Assets/plugins/datatables/jquery.dataTables.min.js"%>" type="text/javascript"></script>
         <script src="<%=this.AppPath() + "Assets/plugins/datatables/dataTables.bootstrap.min.js"%>" type="text/javascript"></script>
@@ -190,7 +194,7 @@
         <script src="<%=this.AppPath() +"Assets/plugins/daterangepicker/daterangepicker.js"%>"></script>
         <!-- iCheck -->
         <script src="<%=this.AppPath() + "Assets/plugins/iCheck/icheck.min.js"%>" type="text/javascript"></script>
-        <script src="../Scripts/jquery.bootpag.min.js"></script>
+        <script src="<%=this.AppPath() + "Scripts/jquery.bootpag.min.js"%>" type="text/javascript" ></script>
 
         <script type="text/javascript">
             $(document).ready(function () {

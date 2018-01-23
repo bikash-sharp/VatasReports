@@ -8,7 +8,7 @@
     // start the idle timer plugin
     $.idleTimeout('#idle-timeout-dialog', '.modal-content button:last', {
         idleAfter: 600, // 5 seconds
-        timeout: 30, //30 seconds to timeout
+        timeout: 600, //30 seconds to timeout
         pollingInterval: 0, // 5 seconds
         keepAliveURL: $('#hfPath').val() + 'Login',
         serverResponseEquals: 'OK',

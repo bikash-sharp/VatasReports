@@ -31,6 +31,7 @@
                                         <th>Mobile No.</th>
                                         <%--<th>Account Type</th>--%>
                                         <th>Role Name</th>
+                                        <th>Login Enabled ?</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -49,6 +50,7 @@
                                                 <td><%# Eval("MobileNumber") %></td>
                                                 <%--<td><%# Eval("AccountType") %></td>--%>
                                                 <td><%# Eval("RoleName") %></td>
+                                                <td><asp:Label ID="lblActive" runat="server" Text='<%# (Eval("IsActive")+"" == "Y" ? "Enabled":"Disabled")%>' ForeColor='<%# (Eval("IsActive")+"" == "Y" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>'></asp:Label></td>
                                                 <td>
                                                     <%--<asp:Button ID="btnUserDetail" CommandArgument='<%# Eval("UserId") %>' Text="Show Detail" CssClass="btn btn-info" runat="server" OnClick="btnUserDetail_Click"/>--%>
                                                     <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
