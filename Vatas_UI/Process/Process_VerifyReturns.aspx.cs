@@ -43,7 +43,10 @@ namespace Vatas_UI.Process
 
             int PageSize = 10;
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
-
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
             string SearchText = txtSearch.Text.Trim();
 
             if (this.IsValid)
@@ -109,7 +112,10 @@ namespace Vatas_UI.Process
 
             int PageSize = 10;
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
-
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
             string SearchText = txtSearch.Text.Trim();
 
 
@@ -127,7 +133,7 @@ namespace Vatas_UI.Process
                 {
                     ProcessReturnsCL itemProcess = new ProcessReturnsCL();
                     HiddenField hfId = (HiddenField)item.FindControl("hfId");
-                    Label lblSrno = (Label)item.FindControl("lblSrno");
+                    //Label lblSrno = (Label)item.FindControl("lblSrno");
                     Label lblTAN = (Label)item.FindControl("lblTAN");
                     Label lblJobNo = (Label)item.FindControl("lblJobNo");
                     Label lblAccountName = (Label)item.FindControl("lblAccountName");
@@ -152,7 +158,7 @@ namespace Vatas_UI.Process
                             {
                                 SupervisorName = ddlOperator.SelectedItem.Text;
                             }
-                            string Srno = lblSrno.Text;
+                            string Srno = (++i).ToString(); //lblSrno.Text;
                             string AccountName = lblAccountName.Text;
                             string TAN = lblTAN.Text;
                             string FinancialYear = lblFinancialYear.Text;

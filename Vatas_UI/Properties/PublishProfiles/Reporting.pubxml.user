@@ -310,7 +310,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/28/2017 17:00:41</publishTime>
     </File>
     <File Include="Assets/dist/js/dialog.js">
-      <publishTime>05/28/2017 17:00:41</publishTime>
+      <publishTime>01/21/2018 20:21:03</publishTime>
     </File>
     <File Include="Assets/dist/js/jquery-ui.js">
       <publishTime>05/28/2017 17:00:41</publishTime>
@@ -2884,10 +2884,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/28/2017 17:00:50</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>01/21/2018 19:08:42</publishTime>
+      <publishTime>01/23/2018 09:25:37</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>01/21/2018 19:08:41</publishTime>
+      <publishTime>01/23/2018 09:25:37</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/03/2015 17:43:42</publishTime>
@@ -2935,7 +2935,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/Vatas_BAL.dll">
-      <publishTime>01/21/2018 18:18:39</publishTime>
+      <publishTime>01/23/2018 09:24:15</publishTime>
     </File>
     <File Include="bin/Vatas_BAL.dll.config">
       <publishTime>01/06/2018 01:07:27</publishTime>
@@ -2944,13 +2944,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/07/2018 01:58:29</publishTime>
     </File>
     <File Include="bin/Vatas_Common.dll">
-      <publishTime>01/21/2018 18:18:38</publishTime>
+      <publishTime>01/23/2018 09:12:43</publishTime>
     </File>
     <File Include="bin/Vatas_Common.pdb">
       <publishTime>01/06/2018 12:41:23</publishTime>
     </File>
     <File Include="bin/Vatas_DAL.dll">
-      <publishTime>01/21/2018 18:18:38</publishTime>
+      <publishTime>01/23/2018 09:24:15</publishTime>
     </File>
     <File Include="bin/Vatas_DAL.dll.config">
       <publishTime>01/07/2018 00:41:16</publishTime>
@@ -2959,13 +2959,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/07/2018 01:58:28</publishTime>
     </File>
     <File Include="bin/Vatas_UI.dll">
-      <publishTime>01/21/2018 19:07:40</publishTime>
+      <publishTime>01/23/2018 09:24:31</publishTime>
     </File>
     <File Include="bin/Vatas_UI.pdb">
       <publishTime>01/07/2018 16:39:29</publishTime>
     </File>
     <File Include="bin/Vatas_Wrapper.dll">
-      <publishTime>01/21/2018 18:18:40</publishTime>
+      <publishTime>01/23/2018 09:24:16</publishTime>
     </File>
     <File Include="bin/Vatas_Wrapper.dll.config">
       <publishTime>01/06/2018 01:07:28</publishTime>
@@ -2995,31 +2995,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/20/2018 20:12:00</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>01/21/2018 19:08:21</publishTime>
+      <publishTime>01/23/2018 09:25:14</publishTime>
     </File>
     <File Include="Process/Process_AssignReturns.aspx">
-      <publishTime>01/21/2018 12:51:24</publishTime>
+      <publishTime>01/23/2018 00:38:34</publishTime>
     </File>
     <File Include="Process/Process_BackOfficeReturns.aspx">
-      <publishTime>01/16/2018 01:28:43</publishTime>
+      <publishTime>01/23/2018 00:38:34</publishTime>
     </File>
     <File Include="Process/Process_CompletedReturns.aspx">
-      <publishTime>01/16/2018 01:28:42</publishTime>
+      <publishTime>01/23/2018 00:38:34</publishTime>
     </File>
     <File Include="Process/Process_FrontOfficeReturns.aspx">
-      <publishTime>01/13/2018 23:23:48</publishTime>
+      <publishTime>01/23/2018 00:38:34</publishTime>
     </File>
     <File Include="Process/Process_IncompletedReturns.aspx">
       <publishTime>05/31/2017 02:11:59</publishTime>
     </File>
     <File Include="Process/Process_ReAssignReturns.aspx">
-      <publishTime>01/16/2018 01:28:43</publishTime>
+      <publishTime>01/23/2018 00:38:34</publishTime>
     </File>
     <File Include="Process/Process_UploadReturns.aspx">
-      <publishTime>01/16/2018 01:29:13</publishTime>
+      <publishTime>01/23/2018 00:38:34</publishTime>
     </File>
     <File Include="Process/Process_VerifyReturns.aspx">
-      <publishTime>01/16/2018 01:29:13</publishTime>
+      <publishTime>01/23/2018 00:38:34</publishTime>
     </File>
     <File Include="Reports/Home.aspx">
       <publishTime>05/28/2017 23:47:42</publishTime>
@@ -3046,7 +3046,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/14/2018 00:28:30</publishTime>
     </File>
     <File Include="Root.Master">
-      <publishTime>01/21/2018 12:33:56</publishTime>
+      <publishTime>01/23/2018 00:38:34</publishTime>
     </File>
     <File Include="Scripts/jquery-1.12.4.js">
       <publishTime>01/20/2018 20:11:59</publishTime>
@@ -3073,7 +3073,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/08/2018 23:53:40</publishTime>
     </File>
     <File Include="UC/UCMenu.ascx">
-      <publishTime>01/21/2018 17:27:19</publishTime>
+      <publishTime>01/22/2018 23:45:44</publishTime>
     </File>
     <File Include="User/CreateUser.aspx">
       <publishTime>01/21/2018 16:49:48</publishTime>
@@ -3081,8 +3081,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="User/EditUser.aspx">
       <publishTime>01/21/2018 18:59:52</publishTime>
     </File>
+    <File Include="User/ManageMenu.aspx">
+      <publishTime>01/23/2018 01:22:30</publishTime>
+    </File>
+    <File Include="User/ManageRoles.aspx">
+      <publishTime>01/23/2018 01:21:37</publishTime>
+    </File>
+    <File Include="User/ManageUserMenu.aspx">
+      <publishTime>01/23/2018 01:19:33</publishTime>
+    </File>
     <File Include="User/UserListing.aspx">
-      <publishTime>01/21/2018 19:00:08</publishTime>
+      <publishTime>01/21/2018 20:31:54</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>01/21/2018 18:19:42</publishTime>

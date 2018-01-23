@@ -30,6 +30,7 @@
                                             <asp:ListItem Value="20">20</asp:ListItem>
                                             <asp:ListItem Value="30">30</asp:ListItem>
                                             <asp:ListItem Value="50">50</asp:ListItem>
+                                            <asp:ListItem Value="-1">ALL</asp:ListItem>
                                         </asp:DropDownList>
                                 </div>
                                 <div class="col-sm-2">
@@ -45,10 +46,10 @@
                                                     <asp:CheckBox ID="chkHeader" CssClass="chkheader" runat="server" />
                                                 </div>
                                             </th>
-                                            <th>SNo</th>
+                                            <th>Job No</th>
+                                            <%--<th>SNo</th>--%>
                                             <th>Name Of Supervisor</th>
                                             <th>Priority</th>
-                                            <th>Job No</th>
                                             <th>TAN</th>
                                             <th>Account Name</th>
                                             <th>Financial Year(FY)</th>
@@ -67,15 +68,15 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td>
+                                                        <asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' />
+                                                        <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
+                                                    </td>
+                                                    <%--<td><asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td>--%>
                                                     <td>
                                                         <asp:DropDownList ID="ddlSupervisor" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
                                                     <td>
                                                         <asp:DropDownList ID="ddlPriorities" runat="server" CssClass="form-control" DataSource='<%# Eval("PriorityList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
-                                                    <td>
-                                                        <asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' />
-                                                        <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
-                                                    </td>
+                                                    
                                                     <td>
                                                         <asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" />
                                                         <td>

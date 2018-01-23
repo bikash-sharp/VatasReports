@@ -44,7 +44,10 @@ namespace Vatas_UI.Process
 
             int PageSize = 10;
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
-
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
             string SearchText = txtSearch.Text.Trim();
 
             if (this.IsValid)
@@ -97,7 +100,10 @@ namespace Vatas_UI.Process
 
             int PageSize = 10;
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
-
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
             string SearchText = txtSearch.Text.Trim();
 
             StringWriter strwriter = new StringWriter();
@@ -114,7 +120,7 @@ namespace Vatas_UI.Process
                 {
                     ProcessReturnsCL itemProcess = new ProcessReturnsCL();
                     HiddenField hfId = (HiddenField)item.FindControl("hfId");
-                    Label lblSrno = (Label)item.FindControl("lblSrno");
+                    //Label lblSrno = (Label)item.FindControl("lblSrno");
                     TextBox txtReasons = (TextBox)item.FindControl("txtReasons");
                     Label lblTAN = (Label)item.FindControl("lblTAN");
                     Label lblJobNo = (Label)item.FindControl("lblJobNo");
@@ -138,7 +144,7 @@ namespace Vatas_UI.Process
                             {
                                 ProcessType = ddlProcessType.SelectedItem.Text;
                             }
-                            string Srno = lblSrno.Text;
+                            string Srno = (++i).ToString(); //lblSrno.Text;
                             string AccountName = lblAccountName.Text;
                             string TAN = lblTAN.Text;
                             string FinancialYear = lblFinancialYear.Text;
@@ -148,7 +154,6 @@ namespace Vatas_UI.Process
 
                             strwriter.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\"",
                                 Srno, ProcessType, Reasons, JobNo, AccountName, TAN, FinancialYear, FormNumber, Quarter, ReturnType));
-
                         }
                     }
                 }

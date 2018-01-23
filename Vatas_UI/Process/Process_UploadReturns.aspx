@@ -28,6 +28,7 @@
                                             <asp:ListItem Value="20">20</asp:ListItem>
                                             <asp:ListItem Value="30">30</asp:ListItem>
                                             <asp:ListItem Value="50">50</asp:ListItem>
+                                            <asp:ListItem Value="-1">ALL</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                     <div class="col-sm-2">
@@ -115,7 +116,7 @@
 
                 <% if (this.rptProcess.Items.Count > 0)
                     { %>
-                <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click" />
+                <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right" OnClick="btnExport_Click" />
                 <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" OnClick="btnConfirm_Click" Style="margin-right: 10px;" runat="server" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
                 <%     
                     } %>

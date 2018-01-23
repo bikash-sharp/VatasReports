@@ -28,6 +28,7 @@
                                             <asp:ListItem Value="20">20</asp:ListItem>
                                             <asp:ListItem Value="30">30</asp:ListItem>
                                             <asp:ListItem Value="50">50</asp:ListItem>
+                                            <asp:ListItem Value="-1">ALL</asp:ListItem>
                                         </asp:DropDownList>
                                 </div>
                                 <div class="col-sm-2">
@@ -43,9 +44,9 @@
                                                     <asp:CheckBox ID="chkHeader" CssClass="chkheader" runat="server" />
                                                 </div>
                                             </th>
-                                            <th>SNo</th>
-                                            <th>Data Entry Operator</th>
                                             <th>Job No</th>
+                                            <%--<th>SNo</th>--%>
+                                            <th>Data Entry Operator</th>
                                             <th>TAN</th>
                                             <th>Account Name</th>
                                             <th>Financial Year(FY)</th>
@@ -67,14 +68,14 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td>
-                                                    <td>
-                                                        <asp:HiddenField ID="hfSelectedUserID" runat="server" Value='<%# Eval("NextUserID") %>' />
-                                                        <asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
-                                                    <td>
                                                         <asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' />
                                                         <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
                                                     </td>
+                                                    <%--<td><asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td>--%>
+                                                    <td>
+                                                        <asp:HiddenField ID="hfSelectedUserID" runat="server" Value='<%# Eval("NextUserID") %>' />
+                                                        <asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
+                                                    
                                                     <td>
                                                         <asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" /></td>
                                                     <td>
@@ -115,7 +116,7 @@
 
             <% if (this.rptProcess.Items.Count > 0)
                 { %>
-            <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click" />
+            <asp:Button ID="btnExport" runat="server" Text="Export To Excel" CssClass="btn btn-info pull-right" OnClick="btnExport_Click" />
             <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" OnClick="btnConfirm_Click" Style="margin-right: 10px;" runat="server" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
             <%     
                 } %>
