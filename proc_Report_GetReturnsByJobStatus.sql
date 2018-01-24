@@ -53,7 +53,7 @@ IF OBJECT_ID('tempdb..#DetailResult') IS NOT NULL
 
 	--SELECT * FROM #DetailResult
 	--ALL RECORDS
-	IF @PageSize = -1 OR @PageSize = 0
+	IF @PageSize = -1 
 	SELECT TOP 1 @PageSize = COUNT(*) FROM #DetailResult
 
 	--PRINT @PageSize;  
@@ -75,7 +75,12 @@ IF OBJECT_ID('tempdb..#DetailResult') IS NOT NULL
 	SELECT * from #DetailResult rs Where (rs.FormType LIKE '%'+@SearhText+'%'  OR @SearhText IS NULL)
 	)
 
-	SELECT DISTINCT * , COUNT(*) OVER() AS RecordCount from FinalResult ORDER BY [JobNo]
+	SELECT FirmName,JobNo,JobID,AccountName,[TAN],FinancialYear,ReturnType,[Quarter],FormType,
+           JobDate,UserID,AssignedDate,Comments,MasterID,PreviousAssignedUserID,PRN,StatusCode,SuperVisorName,StatusDesc, COUNT(*) OVER() AS RecordCount from FinalResult 
+		   GROUP BY
+		   FirmName,JobNo,JobID,AccountName,[TAN],FinancialYear,ReturnType,[Quarter],FormType,
+           JobDate,UserID,AssignedDate,Comments,MasterID,PreviousAssignedUserID,PRN,StatusCode,SuperVisorName,StatusDesc
+ORDER BY [JobNo]
 	OFFSET @PageSize * (@PageNumber - 1) ROWS
     FETCH NEXT @PageSize ROWS ONLY OPTION (RECOMPILE);
 END
