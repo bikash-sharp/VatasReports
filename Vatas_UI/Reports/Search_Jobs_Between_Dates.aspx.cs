@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
@@ -13,15 +14,13 @@ namespace Vatas_UI.Reports
 {
     public partial class Search_Jobs_Between_Dates : VatasWebPage
     {
-        int PageNumber = 1;
-        int PageSize = 10;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             txtDateRange.Attributes.Add("readonly", "readonly");
             if (!Page.IsPostBack)
             {
                 BindFirmName();
+                btnSearch_Click(btnSearch, null);
             }
             
         }
@@ -40,19 +39,35 @@ namespace Vatas_UI.Reports
         }
 
 
-        public void BindData(DateTime startDate, DateTime endDate, int? firmId = null)
+        public void BindData(DateTime startDate, DateTime endDate, int PageNumber, int PageSize, string SearchText,int? firmId = null)
         {
+            int TotalPages = 0;
             List<ReturnsCL> result = DataProviderWrapper.Instance.Report_SearchJobsBetweenDates(startDate, endDate, firmId, PageNumber, PageSize);
             rptReport.DataSource = null;
             if (result.Count > 0)
             {
                 rptReport.DataSource = result;
+                int.TryParse(result.FirstOrDefault()?.RecordCount + "", out TotalPages);
             }
             rptReport.DataBind();
+            float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
+            TotalPages = Convert.ToInt32(Math.Ceiling(pages));
+            hidPages.Value = TotalPages.ToString();
         }
 
         public void Export(DateTime startDate, DateTime endDate, int? FirmId)
         {
+            int PageNumber = 1;
+            int.TryParse(hidPageNo.Value, out PageNumber);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_SearchJobsBetweenDates.csv";
 
@@ -90,8 +105,19 @@ namespace Vatas_UI.Reports
             Export(startDate, endDate, FirmId);
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
+        protected void btnSearchByFilter_Click(object sender, EventArgs e)
         {
+            int CurrentPageNo = 1;
+            int.TryParse(hidPageNo.Value, out CurrentPageNo);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
             int? FirmId = null;
             DateTime startDate = DateTime.Now;
             DateTime endDate = DateTime.Now;
@@ -100,7 +126,7 @@ namespace Vatas_UI.Reports
                 FirmId = int.Parse(ddlFirmName.SelectedValue);
             }
             GetDateRange(ref startDate, ref endDate);
-            BindData(startDate, endDate, FirmId);
+            BindData(startDate, endDate, CurrentPageNo, PageSize, SearchText, FirmId);
         }
 
         private void GetDateRange(ref DateTime startDate, ref DateTime endDate)
@@ -119,13 +145,22 @@ namespace Vatas_UI.Reports
             catch (Exception ex)
             {
                 BLFunction.ShowAlert(this, ex.Message, ResponseType.DANGER);
-                //Console.Write(ex.Message);
-                //throw;
             }
         }
 
         protected void ddlFirmName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int CurrentPageNo = 1;
+            int.TryParse(hidPageNo.Value, out CurrentPageNo);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
             DateTime startDate = DateTime.Now;
             DateTime endDate = DateTime.Now;
             Nullable<int> FirmId = null;
@@ -134,12 +169,43 @@ namespace Vatas_UI.Reports
             {
                 FirmId = int.Parse(ddlFirmName.SelectedValue);
             }
-            BindData(startDate, endDate, FirmId);
+            BindData(startDate, endDate, CurrentPageNo, PageSize, SearchText, FirmId);
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void ddlPageLength_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            hidPageNo.Value = "1";
+            btnSearch_Click(btnSearch, null);
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            int CurrentPageNo = 1;
+            int.TryParse(hidPageNo.Value, out CurrentPageNo);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
+            DateTime startDate = DateTime.Now;
+            DateTime endDate = DateTime.Now;
+            Nullable<int> FirmId = null;
+            GetDateRange(ref startDate, ref endDate);
+            if (ddlFirmName.SelectedValue != "0")
+            {
+                FirmId = int.Parse(ddlFirmName.SelectedValue);
+            }
+
+            BindData(startDate, endDate, CurrentPageNo, PageSize, SearchText, FirmId);
         }
     }
 }

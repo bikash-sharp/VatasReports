@@ -66,18 +66,18 @@
           <EntitySet Name="tbl_ProcessStatus" EntityType="VatasSolutionModel.tbl_ProcessStatus" />
           <EntitySet Name="tbl_ProcessesHistoryofjob" EntityType="VatasSolutionModel.tbl_ProcessesHistoryofjob" />
           <FunctionImport Name="proc_Report_GetAllFirmName" ReturnType="Collection(VatasSolutionModel.proc_Report_GetAllFirmName_Result)" />
+          <FunctionImport Name="proc_Report_GetReturnsByJobStatus" ReturnType="Collection(VatasSolutionModel.proc_Report_GetReturnsByJobStatus_Result)">
+            <Parameter Name="JobStatus" Mode="In" Type="String" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="SearhText" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="proc_Report_SearchJobsBetweenDatesWithFirmName" ReturnType="Collection(VatasSolutionModel.proc_Report_SearchJobsBetweenDatesWithFirmName_Result)">
             <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
             <Parameter Name="FirmId" Mode="In" Type="Int32" />
             <Parameter Name="PageNumber" Mode="In" Type="Int32" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="proc_Report_GetReturnsByJobStatus" ReturnType="Collection(VatasSolutionModel.proc_Report_GetReturnsByJobStatus_Result)">
-            <Parameter Name="JobStatus" Mode="In" Type="String" />
-            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
-            <Parameter Name="PageSize" Mode="In" Type="Int32" />
-            <Parameter Name="SearhText" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbl_ProcessPriority">
@@ -117,19 +117,6 @@
           <Property Type="Int32" Name="FirmId" Nullable="false" />
           <Property Type="String" Name="NameOfFirm" Nullable="true" MaxLength="100" />
         </ComplexType>
-        <ComplexType Name="proc_Report_SearchJobsBetweenDatesWithFirmName_Result">
-          <Property Type="Int32" Name="FirmId" Nullable="true" />
-          <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
-          <Property Type="Int64" Name="Job_No" Nullable="true" />
-          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="FormType" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
-          <Property Type="Int32" Name="RecordCount" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="proc_Report_GetReturnsByJobStatus_Result">
           <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
           <Property Type="Int64" Name="JobNo" Nullable="true" />
@@ -150,6 +137,19 @@
           <Property Type="String" Name="SuperVisorName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="StatusCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="StatusDesc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="RecordCount" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="proc_Report_SearchJobsBetweenDatesWithFirmName_Result">
+          <Property Type="Int32" Name="FirmId" Nullable="true" />
+          <Property Type="String" Name="FirmName" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="Job_No" Nullable="true" />
+          <Property Type="String" Name="AccountName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="TAN" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FinancialYear" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ReturnType" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Quarter" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FormType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="JobDate" Nullable="true" MaxLength="12" />
           <Property Type="Int32" Name="RecordCount" Nullable="true" />
         </ComplexType>
       </Schema>
@@ -202,23 +202,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_Report_SearchJobsBetweenDatesWithFirmName" FunctionName="VatasSolutionModel.Store.proc_Report_SearchJobsBetweenDatesWithFirmName">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_Report_SearchJobsBetweenDatesWithFirmName_Result">
-                <ScalarProperty Name="FirmId" ColumnName="FirmId" />
-                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
-                <ScalarProperty Name="Job_No" ColumnName="Job No" />
-                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
-                <ScalarProperty Name="TAN" ColumnName="TAN" />
-                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
-                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
-                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
-                <ScalarProperty Name="FormType" ColumnName="FormType" />
-                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
-                <ScalarProperty Name="RecordCount" ColumnName="RecordCount" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_Report_GetReturnsByJobStatus" FunctionName="VatasSolutionModel.Store.proc_Report_GetReturnsByJobStatus">
             <ResultMapping>
               <ComplexTypeMapping TypeName="VatasSolutionModel.proc_Report_GetReturnsByJobStatus_Result">
@@ -241,6 +224,23 @@
                 <ScalarProperty Name="SuperVisorName" ColumnName="SuperVisorName" />
                 <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
                 <ScalarProperty Name="StatusDesc" ColumnName="StatusDesc" />
+                <ScalarProperty Name="RecordCount" ColumnName="RecordCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_Report_SearchJobsBetweenDatesWithFirmName" FunctionName="VatasSolutionModel.Store.proc_Report_SearchJobsBetweenDatesWithFirmName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="VatasSolutionModel.proc_Report_SearchJobsBetweenDatesWithFirmName_Result">
+                <ScalarProperty Name="FirmId" ColumnName="FirmId" />
+                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+                <ScalarProperty Name="Job_No" ColumnName="Job No" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="TAN" ColumnName="TAN" />
+                <ScalarProperty Name="FinancialYear" ColumnName="FinancialYear" />
+                <ScalarProperty Name="ReturnType" ColumnName="ReturnType" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
                 <ScalarProperty Name="RecordCount" ColumnName="RecordCount" />
               </ComplexTypeMapping>
             </ResultMapping>
