@@ -144,6 +144,10 @@
                 $('[id$=btnSearch]').click();
             });
 
+            $('[id$=txtSearch]').on('input',function(e){
+                $('[id$=hidPageNo]').val('1');
+            });
+
             $('[id$=txtSearch]').on('keydown', function (e) {
                 if (e.keyCode == 13) {
                     $('[id$=btnSearch]').click();

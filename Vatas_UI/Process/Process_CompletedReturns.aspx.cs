@@ -12,9 +12,6 @@ namespace Vatas_UI.Process
 {
     public partial class Process_CompletedReturns : VatasWebPage
     {
-        int PageNumber = 1;
-        int PageSize = 10;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -46,10 +43,7 @@ namespace Vatas_UI.Process
 
             int PageSize = 10;
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
-            if (PageSize <= 0)
-            {
-                PageSize = 2500000;
-            }
+            
             string SearchText = txtSearch.Text.Trim();
 
             if (this.IsValid)
@@ -115,10 +109,7 @@ namespace Vatas_UI.Process
 
             int PageSize = 10;
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
-            if (PageSize <= 0)
-            {
-                PageSize = 2500000;
-            }
+            
             string SearchText = txtSearch.Text.Trim();
 
             StringWriter strwriter = new StringWriter();
@@ -191,6 +182,7 @@ namespace Vatas_UI.Process
 
         protected void ddlPageLength_SelectedIndexChanged(object sender, EventArgs e)
         {
+            hidPageNo.Value = "1";
             btnSearch_Click(btnSearch, null);
         }
 
@@ -201,10 +193,7 @@ namespace Vatas_UI.Process
 
             int PageSize = 10;
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
-            if (PageSize <= 0)
-            {
-                PageSize = 2500000;
-            }
+            
             string SearchText = txtSearch.Text.Trim();
 
             BindData(CurrentPageNo, PageSize, SearchText);
