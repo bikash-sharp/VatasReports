@@ -13,6 +13,15 @@ namespace Vatas_UI.User {
     public partial class UserListing {
         
         /// <summary>
+        /// chkIsActive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIsActive;
+        
+        /// <summary>
         /// rptUserListing control.
         /// </summary>
         /// <remarks>

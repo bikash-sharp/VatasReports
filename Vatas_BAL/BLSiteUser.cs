@@ -112,7 +112,7 @@ namespace Vatas_BAL
         {
             try
             {
-                _context.proc_AddUpdateUser(user.UserId, user.FirstName, user.LastName, user.Email, user.Password, user.MobileNumber, user.AccountType, user.RoleId);
+                _context.proc_AddUpdateUser(user.UserId, user.FirstName, user.LastName, user.Email, user.Password, user.MobileNumber, user.AccountType, user.RoleId,user.IsActive);
                 return true;
             }
             catch (Exception ex)
@@ -147,12 +147,12 @@ namespace Vatas_BAL
         /// </summary>
         /// <param></param>
         /// <returns>List<UserRegistrationCL> list of users</returns>
-        public List<UserRegistrationCL> GetAllRegisterdUsers()
+        public List<UserRegistrationCL> GetAllRegisterdUsers(string isActive)
         {
             List<UserRegistrationCL> users = new List<UserRegistrationCL>();
             try
             {
-                users = _context.proc_GetAllRegisteredUsers().ToList()
+                users = _context.proc_GetAllRegisteredUsers(isActive).ToList()
                      .Select(p =>
                          new UserRegistrationCL
                          {
@@ -217,20 +217,28 @@ namespace Vatas_BAL
         /// </summary>
         /// <param>userid</param>
         /// <returns>registerd user</returns>
-        public bool DeleteRegisteredUser(int UserId)
+        public bool EnableDisableRegisteredUser(int UserId, string isActive)
         {
+            bool result = false;
             try
             {
-                var result = _context.tbl_UserGroup_Registration.Where(p => p.Super_User_Id == UserId).FirstOrDefault();
-                result.Is_Login_Active = "N";
-
-                _context.SaveChanges();
-                return true;
+                var userInfo = _context.tbl_UserGroup_Registration.Where(p => p.Super_User_Id == UserId).FirstOrDefault();
+                if(userInfo != null)
+                {
+                    userInfo.Is_Login_Active = isActive;
+                    _context.SaveChanges();
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                }
             }
             catch (Exception ex)
             {
-                return false;
+                result = false;
             }
+            return result;
         }
 
         /// <summary>

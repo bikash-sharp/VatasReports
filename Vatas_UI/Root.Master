@@ -34,13 +34,21 @@
     <link href="<%= this.AppPath() + "Assets/dist/css/bootstrap-dialog.min.css"%>"
         rel="stylesheet" type="text/css" />
     <style type="text/css">
+          .toggle.android {
+            border-radius: 0px;
+        }
+
+        .toggle.android 
+        .toggle-handle {
+                border-radius: 0px;
+        }
         .table-bar {
             margin-bottom: 0 !important;
         }
 
-            .table-bar > tbody > tr > td {
-                vertical-align: auto !important;
-            }
+        .table-bar > tbody > tr > td {
+            vertical-align: auto !important;
+        }
 
         #page-selection .pagination {
             margin: 0px !important;
@@ -67,20 +75,20 @@
             overflow: visible !important;
         }
 
-            .modal-static,
-            .modal-static .modal-dialog,
-            .modal-static .modal-content {
-                width: 200px;
-            }
+        .modal-static,
+        .modal-static .modal-dialog,
+        .modal-static .modal-content {
+            width: 200px;
+        }
 
-                .modal-static .modal-dialog,
-                .modal-static .modal-content {
-                    padding: 0 !important;
-                    margin: 0 !important;
-                }
+        .modal-static .modal-dialog,
+        .modal-static .modal-content {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
 
-                    .modal-static .modal-content .icon {
-                    }
+        .modal-static .modal-content .icon {
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -197,8 +205,7 @@
         <script src="<%=this.AppPath() + "Scripts/jquery.bootpag.min.js"%>" type="text/javascript" ></script>
 
         <script type="text/javascript">
-            $(document).ready(function () {
-
+            $(document).ready(function () {                
                 $('input[type=checkbox]').iCheck({
                     checkboxClass: 'icheckbox_square-blue',
                     radioClass: 'iradio_square-blue',

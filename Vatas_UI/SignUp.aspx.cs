@@ -49,6 +49,7 @@ namespace Vatas_UI
                 createUser.MobileNumber = txtMobileNumber.Text;
                 createUser.AccountType = "U";
                 createUser.RoleId = 0;
+                createUser.IsActive = "Y";
 
                 bool IsExist = DataProviderWrapper.Instance.IsEmailExist(createUser.Email);
 

@@ -1,15 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/SiteAdmin.master" AutoEventWireup="true" CodeBehind="EditUser.aspx.cs" Inherits="Vatas_UI.User.EditUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-        .toggle.android {
-            border-radius: 0px;
-        }
-
-            .toggle.android .toggle-handle {
-                border-radius: 0px;
-            }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
     <section class="content-header">

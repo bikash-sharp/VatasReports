@@ -181,8 +181,11 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="MobileNumber" Type="varchar" Mode="In" />
           <Parameter Name="AccountType" Type="varchar" Mode="In" />
           <Parameter Name="RoleId" Type="int" Mode="In" />
+          <Parameter Name="IsActive" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="proc_GetAllRegisteredUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="proc_GetAllRegisteredUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IsActive" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="proc_GetMenuByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
         </Function>
@@ -314,17 +317,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <EntitySet Name="tbl_UserGroup_Registration" EntityType="Self.tbl_UserGroup_Registration" />
           <EntitySet Name="tbl_User_Info" EntityType="Self.tbl_User_Info" />
           <EntitySet Name="tbl_Roles" EntityType="db_AdminModel.tbl_Roles" />
-          <FunctionImport Name="proc_AddUpdateUser">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
-            <Parameter Name="FirstName" Mode="In" Type="String" />
-            <Parameter Name="LastName" Mode="In" Type="String" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Password" Mode="In" Type="String" />
-            <Parameter Name="MobileNumber" Mode="In" Type="String" />
-            <Parameter Name="AccountType" Mode="In" Type="String" />
-            <Parameter Name="RoleId" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="proc_GetAllRegisteredUsers" ReturnType="Collection(db_AdminModel.proc_GetAllRegisteredUsers_Result)" />
           <FunctionImport Name="proc_GetRegisteredUserByUserId" ReturnType="Collection(db_AdminModel.proc_GetRegisteredUserByUserId_Result)">
           <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -358,7 +350,21 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           </FunctionImport>
           <EntitySet Name="tbl_Menu" EntityType="db_AdminModel.tbl_Menu" />
           <FunctionImport Name="proc_GetUserRoleByUserId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByUserId_Result)">
+          <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="proc_AddUpdateUser">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="MobileNumber" Mode="In" Type="String" />
+            <Parameter Name="AccountType" Mode="In" Type="String" />
+            <Parameter Name="RoleId" Mode="In" Type="Int32" />
+            <Parameter Name="IsActive" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc_GetAllRegisteredUsers" ReturnType="Collection(db_AdminModel.proc_GetAllRegisteredUsers_Result)">
+            <Parameter Name="IsActive" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbl_Roles">
@@ -371,19 +377,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Name="Role_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_UserRoles" Relationship="db_AdminModel.FK_tbl_UserRoles_tbl_Roles" FromRole="tbl_Roles" ToRole="tbl_UserRoles" />
         </EntityType>
-        <ComplexType Name="proc_GetAllRegisteredUsers_Result">
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Email" Nullable="true" />
-          <Property Type="String" Name="Password" Nullable="true" />
-          <Property Type="String" Name="MobileNumber" Nullable="true" MaxLength="11" />
-          <Property Type="String" Name="OrganizationName" Nullable="false" MaxLength="75" />
-          <Property Type="String" Name="AccountType" Nullable="true" MaxLength="1" />
-          <Property Type="String" Name="IsActive" Nullable="true" MaxLength="1" />
-          <Property Type="Int32" Name="RoleId" Nullable="false" />
-          <Property Type="String" Name="RoleName" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="proc_GetRegisteredUserByUserId_Result">
           <Property Type="Int32" Name="UserId" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
@@ -486,6 +479,19 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Type="Int32" Name="RoleId" Nullable="true" />
           <Property Type="String" Name="Role_Name" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="proc_GetAllRegisteredUsers_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="String" Name="Password" Nullable="true" />
+          <Property Type="String" Name="MobileNumber" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="OrganizationName" Nullable="false" MaxLength="75" />
+          <Property Type="String" Name="AccountType" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="IsActive" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -583,24 +589,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="proc_AddUpdateUser" FunctionName="db_AdminModel.Store.proc_AddUpdateUser" />
-          <FunctionImportMapping FunctionImportName="proc_GetAllRegisteredUsers" FunctionName="db_AdminModel.Store.proc_GetAllRegisteredUsers">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetAllRegisteredUsers_Result">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
-                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
-                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_GetRegisteredUserByUserId" FunctionName="db_AdminModel.Store.proc_GetRegisteredUserByUserId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="db_AdminModel.proc_GetRegisteredUserByUserId_Result">
@@ -696,6 +684,24 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="Role_Name" ColumnName="Role_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_AddUpdateUser" FunctionName="db_AdminModel.Store.proc_AddUpdateUser" />
+          <FunctionImportMapping FunctionImportName="proc_GetAllRegisteredUsers" FunctionName="db_AdminModel.Store.proc_GetAllRegisteredUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetAllRegisteredUsers_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

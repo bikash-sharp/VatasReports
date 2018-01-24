@@ -77,12 +77,13 @@ namespace Vatas_UI.User
                 createUser.MobileNumber = txtMobileNumber.Text;
                 createUser.AccountType = ddlAccountType.SelectedValue;
                 createUser.RoleId = Convert.ToInt32(ddlRoles.SelectedValue);
+
                 createUser.IsActive = chkIsEnabled.Checked ? "Y" : "N";
+
                 bool IsSaved = DataProviderWrapper.Instance.AddUpdateUser(createUser);
                 if (IsSaved)
                 {
-                    BLFunction.ShowAlert(this, "User has been updated successfully", ResponseType.SUCCESS);
-                    Server.Transfer("UserListing.aspx");
+                    BLFunction.ShowAlertRedirect(this, "User has been updated successfully", CurrentPagePath + "UserListing", ResponseType.SUCCESS);
                 }
                 else
                 {
@@ -98,8 +99,8 @@ namespace Vatas_UI.User
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Server.Transfer("UserListing.aspx");
-            //Response.Redirect("UserListing.aspx");
+            Response.RedirectToRoute(CurrentPagePath + "UserListing");
+            //Server.Transfer("UserListing.aspx");
         }
     }
 }

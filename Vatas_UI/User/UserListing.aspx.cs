@@ -13,9 +13,12 @@ namespace Vatas_UI.User
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string isActive = "N";
+            if (chkIsActive.Checked)
+                isActive = "Y";
             if (!Page.IsPostBack)
             {
-                BindData();
+                BindData(isActive);
             }
         }
 
@@ -25,9 +28,9 @@ namespace Vatas_UI.User
             return path.EndsWith("/") ? path : path + "/";
         }
 
-        public void BindData()
+        public void BindData(string isActive)
         {
-            List<UserRegistrationCL> result = DataProviderWrapper.Instance.GetAllRegisterdUser();
+            List<UserRegistrationCL> result = DataProviderWrapper.Instance.GetAllRegisterdUser(isActive);
             if (result.Count > 0)
             {
                 rptUserListing.DataSource = result;
@@ -57,18 +60,56 @@ namespace Vatas_UI.User
         {
             try
             {
+                string isActive = "N";
+                if (chkIsActive.Checked)
+                    isActive = "Y";
                 LinkButton btnDeleteUser = (LinkButton)(sender);
                 int UserId = Convert.ToInt32(btnDeleteUser.CommandArgument);
 
-                bool IsSaved = DataProviderWrapper.Instance.DeleteRegisteredUser(UserId);
+                bool IsSaved = DataProviderWrapper.Instance.EnableDisableRegisteredUser(UserId,"N");
                 if (IsSaved)
                 {
                     BLFunction.ShowAlert(this, "User has been deleted successfully.", ResponseType.SUCCESS);
-                    BindData();
+                    BindData(isActive);
                 }
                 else
                 {
                     BLFunction.ShowAlert(this, "Unable to delete the user.", ResponseType.WARNING);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        protected void chkIsActive_CheckedChanged(object sender, EventArgs e)
+        {
+            string isActive = "N";
+            if (chkIsActive.Checked)
+                isActive = "Y";
+            BindData(isActive);
+        }
+
+        protected void btnEnableUser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string isActive = "N";
+                if (chkIsActive.Checked)
+                    isActive = "Y";
+                LinkButton btnEnableUser = (LinkButton)(sender);
+                int UserId = Convert.ToInt32(btnEnableUser.CommandArgument);
+
+                bool IsSaved = DataProviderWrapper.Instance.EnableDisableRegisteredUser(UserId,"Y");
+                if (IsSaved)
+                {
+                    BLFunction.ShowAlert(this, "User has been enabled successfully.", ResponseType.SUCCESS);
+                    BindData(isActive);
+                }
+                else
+                {
+                    BLFunction.ShowAlert(this, "Unable to enable the user.", ResponseType.WARNING);
                 }
             }
             catch (Exception ex)

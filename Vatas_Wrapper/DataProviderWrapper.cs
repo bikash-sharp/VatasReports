@@ -57,11 +57,11 @@ namespace Vatas_Wrapper
                 return BLSiteUser.Instance(context).IsEmailAlreadyExist(EmailId);
             }
         }
-        public List<UserRegistrationCL> GetAllRegisterdUser()
+        public List<UserRegistrationCL> GetAllRegisterdUser(string isActive)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).GetAllRegisterdUsers();
+                return BLSiteUser.Instance(context).GetAllRegisterdUsers(isActive);
             }
         }
         public UserRegistrationCL GetRegisterdUserByUserId(int UserId)
@@ -71,11 +71,11 @@ namespace Vatas_Wrapper
                 return BLSiteUser.Instance(context).GetRegisterdUserByUserId(UserId);
             }
         }
-        public bool DeleteRegisteredUser(int UserId)
+        public bool EnableDisableRegisteredUser(int UserId, string isActive)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).DeleteRegisteredUser(UserId);
+                return BLSiteUser.Instance(context).EnableDisableRegisteredUser(UserId,isActive);
             }
         }
         public List<DropDownCL> GetAllRoles()

@@ -1,11 +1,4 @@
-﻿USE [db_Admin]
-GO
-/****** Object:  StoredProcedure [dbo].[proc_AddUpdateUser]    Script Date: 21-01-2018 08:24:52 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
+﻿-- =============================================
 -- Author:		Gaurav Singla
 -- Create date: Jan, 15 2018
 -- Description:	Add or Update user
@@ -19,7 +12,8 @@ ALTER PROCEDURE [dbo].[proc_AddUpdateUser]
 	@Password VARCHAR(50),
 	@MobileNumber VARCHAR(50),
 	@AccountType VARCHAR(50),
-	@RoleId INT
+	@RoleId INT,
+	@IsActive VARCHAR(1)
 AS 
 BEGIN
 
@@ -58,16 +52,18 @@ BEGIN
 				@Password,
 				@MobileNumber,
 				@AccountType,
-				'Y',
+				@IsActive,
 				@State,
 				@PinCode,
 				@STDCode,
 				@Telephone,
 				@OrganizationName
 			)
-			
-			Select @UserId = SCOPE_IDENTITY();
-			INSERT INTO tbl_UserRoles VALUES(@UserId,@RoleId)
+
+		Select @UserId = SCOPE_IDENTITY();
+		INSERT INTO tbl_UserRoles VALUES(@UserId,@RoleId)
+
+
 		END
 		ELSE
 			BEGIN
@@ -77,10 +73,11 @@ BEGIN
 						Name=@FirstName,
 						Last_Name=@LastName, 
 						EmailID=@Email,
-						Password=@Password,
+						[Password]=@Password,
 						Confirm_Password=@Password,
 						MobileNumber=@MobileNumber,
-						Account_Type=@AccountType
+						Account_Type=@AccountType,
+						Is_Login_Active=@IsActive
 				WHERE Super_User_Id=@UserId
 
 				IF NOT EXISTS (SELECT UserRoleId FROM tbl_UserRoles WHERE UserId=@UserId)
