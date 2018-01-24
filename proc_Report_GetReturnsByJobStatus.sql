@@ -39,8 +39,8 @@ IF OBJECT_ID('tempdb..#DetailResult') IS NOT NULL
 		PHJ.PRN_No As PRN,
 		PHJ.Supervisor AS SuperVisorName,
 		PHJ.Job_Status As StatusCode,
-		PS.Process_Name AS StatusDesc,
-		RecordCount = COUNT(*) OVER()
+		PS.Process_Name AS StatusDesc
+		--,RecordCount = COUNT(*) OVER()
 		INTO #DetailResult      
 	FROM 
 		Returns_Copy RC 
@@ -54,10 +54,9 @@ IF OBJECT_ID('tempdb..#DetailResult') IS NOT NULL
 	--SELECT * FROM #DetailResult
 	--ALL RECORDS
 	IF @PageSize = -1 OR @PageSize = 0
-	SELECT TOP 1 @PageSize = RecordCount FROM #DetailResult
+	SELECT TOP 1 @PageSize = COUNT(*) FROM #DetailResult
 
-	PRINT @PageSize;
-
+	--PRINT @PageSize;  
 	; WITH FinalResult AS (
 	SELECT * from #DetailResult rs Where (rs.TAN LIKE ''+@SearhText+'%')
 	UNION ALL 
@@ -76,6 +75,7 @@ IF OBJECT_ID('tempdb..#DetailResult') IS NOT NULL
 	SELECT * from #DetailResult rs Where (rs.FormType LIKE '%'+@SearhText+'%'  OR @SearhText IS NULL)
 	)
 
-	SELECT DISTINCT * from FinalResult ORDER BY [JobNo] OFFSET @PageSize * (@PageNumber - 1) ROWS
+	SELECT DISTINCT * , COUNT(*) OVER() AS RecordCount from FinalResult ORDER BY [JobNo]
+	OFFSET @PageSize * (@PageNumber - 1) ROWS
     FETCH NEXT @PageSize ROWS ONLY OPTION (RECOMPILE);
 END
