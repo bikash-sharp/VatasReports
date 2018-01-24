@@ -251,12 +251,13 @@
             }
 
             $('.submit').on('click', function () {
-                if (Page_IsValid) {
-                    $('.overlay').css('display', 'block');
-                }
-                else {
-                    $('.overlay').css('display', 'none');
-                }
+                //$('.overlay').css('display', 'block');
+                //if (Page_IsValid) {
+                //    $('.overlay').css('display', 'block');
+                //}
+                //else {
+                //    $('.overlay').css('display', 'none');
+                //}
             });
 
             //Initialize Select2 Elements
@@ -305,6 +306,16 @@
                 "info": false,
                 "autoWidth": true
             });
+
+            $('#reportTable').DataTable({
+                "paging": false,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": false,
+                "info": false,
+                "autoWidth": true
+            });
+
             $('#processTable').on('draw.dt',
                 function () {
                     $('input[type=checkbox]').each(function () {

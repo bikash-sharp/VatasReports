@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.UI;
 using Vatas_Common;
 using Vatas_Wrapper;
@@ -11,29 +12,43 @@ namespace Vatas_UI.Reports
     {
         string JobStatus = "UPD";
         char IsSent;
-        int PageNumber = 1;
-        int PageSize = 10;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                BindData();
+                btnSearch_Click(btnSearch, null);
             }
         }
 
-        public void BindData()
+        public void BindData(string JobStatus, char IsSent, int PageNumber, int PageSize, string SearchText)
         {
+            int TotalPages = 0;
             List<ReturnsCL> result = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize);
+            rptReport.DataSource = null;
             if (result.Count > 0)
             {
                 rptReport.DataSource = result;
-                rptReport.DataBind();
+                int.TryParse(result.FirstOrDefault()?.RecordCount + "", out TotalPages);
             }
+            rptReport.DataBind();
+            float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
+            TotalPages = Convert.ToInt32(Math.Ceiling(pages));
+            hidPages.Value = TotalPages.ToString();
         }
 
         public void Export()
         {
+            int PageNumber = 1;
+            int.TryParse(hidPageNo.Value, out PageNumber);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_ReturnsUploaded.csv";
 
@@ -59,6 +74,28 @@ namespace Vatas_UI.Reports
         protected void btnExport_Click(object sender, EventArgs e)
         {
             Export();
+        }
+
+        protected void ddlPageLength_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            hidPageNo.Value = "1";
+            btnSearch_Click(btnSearch, null);
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            int CurrentPageNo = 1;
+            int.TryParse(hidPageNo.Value, out CurrentPageNo);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
+            BindData(JobStatus, IsSent, CurrentPageNo, PageSize, SearchText);
         }
     }
 }

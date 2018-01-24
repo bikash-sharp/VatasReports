@@ -15,36 +15,45 @@ namespace Vatas_UI.Reports
     {
         string JobStatus = "ASS";
         char IsSent;
-        int PageNumber = 1;
-        int PageSize = 10;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                BindData(PageNumber);
+                btnSearch_Click(btnSearch, null);
             }
         }
 
-        public void BindData(int PageNumber)
+        public void BindData(string JobStatus, char IsSent, int PageNumber, int PageSize, string SearchText)
         {
+            int TotalPages = 0;
             List<ReturnsCL> result = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize);
+            rptReport.DataSource = null;
             if (result.Count > 0)
             {
                 rptReport.DataSource = result;
-                rptReport.DataBind();
-
-                this.PopulatePager(result[0].RecordCount, PageNumber);
-
-                hdnPages.Value = (Math.Ceiling((double)result[0].RecordCount / PageSize)).ToString();
-                hdnPageSize.Value = PageSize.ToString();
-                hdnPageNumber.Value = PageNumber.ToString();
-                hdnRecordCount.Value = result[0].RecordCount.ToString();
+                int.TryParse(result.FirstOrDefault()?.RecordCount + "", out TotalPages);
             }
+            rptReport.DataBind();
+            float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
+            TotalPages = Convert.ToInt32(Math.Ceiling(pages));
+            hidPages.Value = TotalPages.ToString();
         }
 
         public void Export()
         {
+            int PageNumber = 1;
+            int.TryParse(hidPageNo.Value, out PageNumber);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
+
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_ReturnsAssigned.csv";
 
@@ -72,26 +81,26 @@ namespace Vatas_UI.Reports
             Export();
         }
 
-        private void PopulatePager(int recordCount, int currentPage)
+        protected void ddlPageLength_SelectedIndexChanged(object sender, EventArgs e)
         {
-            double dblPageCount = (double)((decimal)recordCount / Convert.ToDecimal(PageSize));
-            int pageCount = (int)Math.Ceiling(dblPageCount);
-            List<ListItem> pages = new List<ListItem>();
-            if (pageCount > 0)
-            {
-                for (int i = 1; i <= pageCount; i++)
-                {
-                    pages.Add(new ListItem(i.ToString(), i.ToString(), i != currentPage));
-                }
-            }
-            rptPager.DataSource = pages;
-            rptPager.DataBind();
+            hidPageNo.Value = "1";
+            btnSearch_Click(btnSearch, null);
         }
 
-        protected void Page_Changed(object sender, EventArgs e)
+        protected void btnSearch_Click(object sender, EventArgs e)
         {
-            PageNumber = int.Parse((sender as LinkButton).CommandArgument);
-            this.BindData(PageNumber);
+            int CurrentPageNo = 1;
+            int.TryParse(hidPageNo.Value, out CurrentPageNo);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = 2500000;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
+            BindData(JobStatus, IsSent, CurrentPageNo, PageSize, SearchText);
         }
     }
 }
