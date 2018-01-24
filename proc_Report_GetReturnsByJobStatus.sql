@@ -11,7 +11,10 @@ ALTER PROCEDURE [dbo].[proc_Report_GetReturnsByJobStatus]
 AS
 BEGIN
 	SET NOCOUNT ON;
-
+IF OBJECT_ID('tempdb..#DetailResult') IS NOT NULL    
+	BEGIN    
+    DROP TABLE #DetailResult;    
+	END  
 	--DECLARE @JobStatus varchar(10)='ASS'
 	--DECLARE @PageNumber INT = 1
 	--DECLARE @PageSize   INT = 10
@@ -38,23 +41,41 @@ BEGIN
 		PHJ.Job_Status As StatusCode,
 		PS.Process_Name AS StatusDesc,
 		RecordCount = COUNT(*) OVER()
+		INTO #DetailResult      
 	FROM 
 		Returns_Copy RC 
 		INNER JOIN Accounts AC ON RC.CusID = AC.AccID 
 		INNER JOIN tbl_ProcessesHistoryofjob PHJ ON RC.Job_ID = PHJ.MasterID 
 		INNER JOIN tbl_Firm TF ON RC.FirmID = TF.FirmId
 		INNER JOIN tbl_ProcessStatus PS ON PHJ.Job_Status = PS.Process_Code
-	WHERE (PHJ.Job_Status = @JobStatus) AND (PHJ.Is_Sent = '') AND ( RC.Quarter IS NOT NULL AND RC.Quarter != '') 
-	AND (TF.NameOfFirm  LIKE '%'+@SearhText+'%')
-	AND (PHJ.ID LIKE '%'+@SearhText+'%')
-	AND (AC.AccName LIKE '%'+@SearhText+'%')
-	AND (RC.[TAN] LIKE '%'+@SearhText+'%')
-	AND (RC.FY LIKE '%'+@SearhText+'%')
-	AND (RC.OC LIKE '%'+@SearhText+'%')
-	AND (RC.[Quarter] LIKE '%'+@SearhText+'%')
-	AND (RC.RetType LIKE '%'+@SearhText+'%')
+	WHERE (PHJ.Job_Status = @JobStatus) AND (PHJ.Is_Sent = '') AND ( RC.[Quarter] IS NOT NULL AND RC.[Quarter] != '') 	
 	ORDER BY RC.SerialNo_By_Job_Firm
 
-	OFFSET @PageSize * (@PageNumber - 1) ROWS
+	--SELECT * FROM #DetailResult
+	--ALL RECORDS
+	IF @PageSize = -1 OR @PageSize = 0
+	SELECT TOP 1 @PageSize = RecordCount FROM #DetailResult
+
+	PRINT @PageSize;
+
+	; WITH FinalResult AS (
+	SELECT * from #DetailResult rs Where (rs.TAN LIKE ''+@SearhText+'%')
+	UNION ALL 
+	SELECT * from #DetailResult rs Where (rs.FirmName LIKE '%'+@SearhText+'%' OR @SearhText IS NULL)
+	UNION ALL
+	SELECT * from #DetailResult rs Where (rs.JobNo LIKE '%'+@SearhText+'%'  OR @SearhText IS NULL)
+	UNION ALL
+	SELECT * from #DetailResult rs Where (rs.AccountName LIKE '%'+@SearhText+'%' OR @SearhText IS NULL)
+	UNION ALL
+	SELECT * from #DetailResult rs Where (rs.FinancialYear LIKE '%'+@SearhText+'%'  OR @SearhText IS NULL)
+	UNION ALL
+	SELECT * from #DetailResult rs Where (rs.ReturnType LIKE '%'+@SearhText+'%'  OR @SearhText IS NULL)
+	UNION ALL
+	SELECT * from #DetailResult rs Where (rs.[Quarter] LIKE '%'+@SearhText+'%'  OR @SearhText IS NULL)
+	UNION ALL
+	SELECT * from #DetailResult rs Where (rs.FormType LIKE '%'+@SearhText+'%'  OR @SearhText IS NULL)
+	)
+
+	SELECT DISTINCT * from FinalResult ORDER BY [JobNo] OFFSET @PageSize * (@PageNumber - 1) ROWS
     FETCH NEXT @PageSize ROWS ONLY OPTION (RECOMPILE);
 END
