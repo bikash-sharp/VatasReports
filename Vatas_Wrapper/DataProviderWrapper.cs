@@ -175,19 +175,19 @@ namespace Vatas_Wrapper
 
         #region Reports
 
-        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent, int PageNumber, int PageSize)
+        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent, int PageNumber, int PageSize, string SearchText)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLReports.Instance(context).Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize);
+                return BLReports.Instance(context).Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize, SearchText);
             }
         }
 
-        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate, int? firmId, int PageNumber, int PageSize)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate, int? firmId, int PageNumber, int PageSize,string SearchText)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
-                return BLReports.Instance(context).Report_SearchJobsBetweenDates(startDate, endDate, firmId, PageNumber, PageSize);
+                return BLReports.Instance(context).Report_SearchJobsBetweenDates(startDate, endDate, firmId, PageNumber, PageSize, SearchText);
             }
         }
 

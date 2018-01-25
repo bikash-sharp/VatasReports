@@ -68,13 +68,13 @@ namespace Vatas_BAL
         //    return result;
         //}
 
-        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent, int PageNumber, int PageSize)
+        public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent, int PageNumber, int PageSize, string SearchText)
         {
             List<ReturnsCL> result = new List<ReturnsCL>();
             try
             {
                 result =
-                    _vatasSolution.proc_Report_GetReturnsByJobStatus(JobStatus, PageNumber, PageSize,"")
+                    _vatasSolution.proc_Report_GetReturnsByJobStatus(JobStatus, PageNumber, PageSize, SearchText)
                         .ToList()
                         .Select(p => new ReturnsCL
                         {
@@ -116,7 +116,7 @@ namespace Vatas_BAL
             return result;
         }
 
-        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate, int? firmId, int PageNumber, int PageSize)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate, int? firmId, int PageNumber, int PageSize, string SearchText)
         {
             List<ReturnsCL> result = new List<ReturnsCL>();
             try

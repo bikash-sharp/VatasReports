@@ -12,6 +12,7 @@ namespace Vatas_UI.Process
 {
     public partial class Process_CompletedReturns : VatasWebPage
     {
+        static Int32 RecordCount = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -31,6 +32,7 @@ namespace Vatas_UI.Process
                 int.TryParse(result.FirstOrDefault()?.RecordCount + "", out TotalPages);
             }
             rptProcess.DataBind();
+            RecordCount = TotalPages;
             float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
             TotalPages = Convert.ToInt32(Math.Ceiling(pages));
             hidPages.Value = TotalPages.ToString();

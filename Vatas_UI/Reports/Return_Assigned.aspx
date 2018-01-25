@@ -31,7 +31,7 @@
                                         </asp:DropDownList>
                                 </div>
                                 <div class="col-sm-2">
-                                    <asp:TextBox ID="txtSearch" CssClass="form-control" Style="float: right;display:none;" placeholder="Search.." runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtSearch" CssClass="form-control" Style="float: right;" placeholder="Search.." runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="form-inline overflow">

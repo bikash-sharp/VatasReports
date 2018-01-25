@@ -13,6 +13,7 @@ namespace Vatas_UI.Process
 {
     public partial class Process_FrontOfficeReturns : VatasWebPage
     {
+        static Int32 RecordCount = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -32,6 +33,7 @@ namespace Vatas_UI.Process
                 int.TryParse(result.FirstOrDefault()?.RecordCount + "", out TotalPages);
             }
             rptProcess.DataBind();
+            RecordCount = TotalPages;
             float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
             TotalPages = Convert.ToInt32(Math.Ceiling(pages));
             hidPages.Value = TotalPages.ToString();
@@ -106,7 +108,7 @@ namespace Vatas_UI.Process
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
             if (PageSize <= 0)
             {
-                PageSize = 2500000;
+                PageSize = RecordCount;
             }
             string SearchText = txtSearch.Text.Trim();
 

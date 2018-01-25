@@ -16,6 +16,8 @@ namespace Vatas_UI.Reports
         string JobStatus = "ASS";
         char IsSent;
 
+        static Int32 RecordCount=0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -27,7 +29,7 @@ namespace Vatas_UI.Reports
         public void BindData(string JobStatus, char IsSent, int PageNumber, int PageSize, string SearchText)
         {
             int TotalPages = 0;
-            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize);
+            List<ReturnsCL> result = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize,SearchText);
             rptReport.DataSource = null;
             if (result.Count > 0)
             {
@@ -35,6 +37,7 @@ namespace Vatas_UI.Reports
                 int.TryParse(result.FirstOrDefault()?.RecordCount + "", out TotalPages);
             }
             rptReport.DataBind();
+            RecordCount = TotalPages;
             float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
             TotalPages = Convert.ToInt32(Math.Ceiling(pages));
             hidPages.Value = TotalPages.ToString();
@@ -49,7 +52,7 @@ namespace Vatas_UI.Reports
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
             if (PageSize <= 0)
             {
-                PageSize = 2500000;
+                PageSize = RecordCount;
             }
             string SearchText = txtSearch.Text.Trim();
 
@@ -57,7 +60,7 @@ namespace Vatas_UI.Reports
             StringWriter strwriter = new StringWriter();
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_ReturnsAssigned.csv";
 
-            var ResultList = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize);
+            var ResultList = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize, SearchText);
             if (ResultList.Count > 0)
             {
                 strwriter.WriteLine("\"Sr.No\",\"Firm Name\",\"File No\",\"TAN\",\"Account Name\",\"FY\",\"FormType\",\"Quarter\",\"RetType\",\"Date\",\"AssignedDate\",\"OperatorName\"");
@@ -96,7 +99,7 @@ namespace Vatas_UI.Reports
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
             if (PageSize <= 0)
             {
-                PageSize = 2500000;
+                PageSize = RecordCount;
             }
             string SearchText = txtSearch.Text.Trim();
 

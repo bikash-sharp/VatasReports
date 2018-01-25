@@ -12,8 +12,7 @@ namespace Vatas_UI.Process
 {
     public partial class Process_BackOfficeReturns : VatasWebPage
     {
-        int PageNumber = 1;
-        int PageSize = 10;
+        static Int32 RecordCount = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,6 +32,7 @@ namespace Vatas_UI.Process
                 int.TryParse(result.FirstOrDefault()?.RecordCount + "", out TotalPages);
             }
             rptProcess.DataBind();
+            RecordCount = TotalPages;
             float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
             TotalPages = Convert.ToInt32(Math.Ceiling(pages));
             hidPages.Value = TotalPages.ToString();
@@ -46,7 +46,7 @@ namespace Vatas_UI.Process
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
             if (PageSize <= 0)
             {
-                PageSize = 2500000;
+                PageSize = RecordCount;
             }
             string SearchText = txtSearch.Text.Trim();
 
@@ -102,7 +102,7 @@ namespace Vatas_UI.Process
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
             if (PageSize <= 0)
             {
-                PageSize = 2500000;
+                PageSize = RecordCount;
             }
             string SearchText = txtSearch.Text.Trim();
 
@@ -171,6 +171,7 @@ namespace Vatas_UI.Process
         }
         protected void ddlPageLength_SelectedIndexChanged(object sender, EventArgs e)
         {
+            hidPageNo.Value = "1";
             btnSearch_Click(btnSearch, null);
         }
 
@@ -183,7 +184,7 @@ namespace Vatas_UI.Process
             int.TryParse(ddlPageLength.SelectedValue, out PageSize);
             if (PageSize <= 0)
             {
-                PageSize = 2500000;
+                PageSize = RecordCount;
             }
             string SearchText = txtSearch.Text.Trim();
 
