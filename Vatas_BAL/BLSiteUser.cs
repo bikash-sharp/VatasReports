@@ -152,7 +152,7 @@ namespace Vatas_BAL
             List<UserRegistrationCL> users = new List<UserRegistrationCL>();
             try
             {
-                users = _context.proc_GetAllRegisteredUsers(isActive).ToList()
+                users = _context.proc_GetAllRegisteredUsers().ToList()
                      .Select(p =>
                          new UserRegistrationCL
                          {

@@ -114,6 +114,11 @@ namespace Vatas_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByUserId_Result>("proc_GetUserRoleByUserId", userIdParameter);
         }
     
+        public virtual ObjectResult<proc_GetAllRegisteredUsers_Result> proc_GetAllRegisteredUsers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetAllRegisteredUsers_Result>("proc_GetAllRegisteredUsers");
+        }
+    
         public virtual int proc_AddUpdatePathByPathId(Nullable<int> pathId, string pathName, string host, string path, string pathProject)
         {
             var pathIdParameter = pathId.HasValue ?
@@ -191,15 +196,6 @@ namespace Vatas_DAL
                 new ObjectParameter("IsActive", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdateUser", userIdParameter, firstNameParameter, lastNameParameter, emailParameter, passwordParameter, mobileNumberParameter, accountTypeParameter, roleIdParameter, isActiveParameter);
-        }
-    
-        public virtual ObjectResult<proc_GetAllRegisteredUsers_Result> proc_GetAllRegisteredUsers(string isActive)
-        {
-            var isActiveParameter = isActive != null ?
-                new ObjectParameter("IsActive", isActive) :
-                new ObjectParameter("IsActive", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetAllRegisteredUsers_Result>("proc_GetAllRegisteredUsers", isActiveParameter);
         }
     }
 }

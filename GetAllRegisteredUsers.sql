@@ -1,6 +1,6 @@
 ﻿USE [db_Admin]
 GO
-/****** Object:  StoredProcedure [dbo].[proc_GetAllRegisteredUsers]    Script Date: 21-01-2018 08:24:55 ******/
+/****** Object:  StoredProcedure [dbo].[proc_GetAllRegisteredUsers]    Script Date: 26-01-2018 18:28:01 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +12,7 @@ GO
 -- EXEC proc_GetAllRegisteredUsers
 -- =============================================
 ALTER PROCEDURE [dbo].[proc_GetAllRegisteredUsers]
-	
+	@IsActive VARCHAR(10)
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -32,5 +32,5 @@ BEGIN
 	  FROM db_Admin.dbo.tbl_UserGroup_Registration UGR
 	  LEFT JOIN db_Admin.dbo.tbl_UserRoles UR ON UR.UserId=UGR.Super_User_Id
 	  LEFT JOIN db_Admin.dbo.tbl_Roles R ON R.Role_ID=UR.RoleId 
-	  WHERE Is_Login_Active='Y' 
+	  WHERE Is_Login_Active=@IsActive 
 END
