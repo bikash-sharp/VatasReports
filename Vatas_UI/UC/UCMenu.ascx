@@ -7,6 +7,15 @@
     <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
         {
     %>
+    <li id="liConfiguration" class="treeview">
+        <a href="javascript:;" title="Reports"><i class="fa fa-cogs"></i><span>User</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li id="liManagePath"><a href="<%=Page.ResolveUrl("~/ManagePath")%>" title="Manage Path"><i class="fa fa-cog"></i>Manage Path</a></li>
+            <li id="liManageProject"><a href="<%=Page.ResolveUrl("~/ManageProject")%>" title="Manage Project"><i class="fa fa-cog"></i>Manage Project</a></li>
+        </ul>
+    </li>
     <li id="liUser" class="treeview">
         <a href="javascript:;" title="Reports"><i class="fa fa-users"></i><span>User</span>
             <i class="fa fa-angle-left pull-right"></i>

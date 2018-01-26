@@ -984,6 +984,8 @@
     <Content Include="Assets\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Assets\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="ChangePassword.aspx" />
+    <Content Include="Configuration\ManagePath.aspx" />
+    <Content Include="Configuration\ManageProject.aspx" />
     <Content Include="User\CreateUser.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="ForgotPassword.aspx" />
@@ -1110,6 +1112,20 @@
     </Compile>
     <Compile Include="ChangePassword.aspx.designer.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\ManagePath.aspx.cs">
+      <DependentUpon>ManagePath.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuration\ManagePath.aspx.designer.cs">
+      <DependentUpon>ManagePath.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\ManageProject.aspx.cs">
+      <DependentUpon>ManageProject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Configuration\ManageProject.aspx.designer.cs">
+      <DependentUpon>ManageProject.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\CreateUser.aspx.cs">
       <DependentUpon>CreateUser.aspx</DependentUpon>

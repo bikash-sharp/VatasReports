@@ -53,6 +53,7 @@
     <Compile Include="BLCommon.cs" />
     <Compile Include="BLErrorLog.cs" />
     <Compile Include="BLMenu.cs" />
+    <Compile Include="BLPath.cs" />
     <Compile Include="BLProcess.cs" />
     <Compile Include="BLReports.cs" />
     <Compile Include="BLSiteUser.cs" />

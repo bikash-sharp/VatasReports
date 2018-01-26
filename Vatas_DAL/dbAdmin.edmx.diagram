@@ -16,6 +16,8 @@
         <AssociationConnector Association="db_AdminModel.FK_tbl_UserRoles_tbl_UserGroup_Registration" />
         <EntityTypeShape EntityType="db_AdminModel.tbl_UserMenu" Width="1.5" PointX="3.375" PointY="7.75" />
         <EntityTypeShape EntityType="db_AdminModel.tbl_Menu" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="db_AdminModel.tbl_Path" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="db_AdminModel.tbl_Project" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

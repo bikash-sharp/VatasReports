@@ -5,9 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="db_AdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'db_Admin.dbo.tbl_Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tbl_Menu">
           <Key>
             <PropertyRef Name="Menu_id" />
+            
+            
+            
+            
           </Key>
           <Property Name="Menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Parent_Menu" Type="int" Nullable="false" />
@@ -25,6 +31,24 @@
           <Property Name="AssesseeCheck" Type="nvarchar" MaxLength="500" />
           <Property Name="AY" Type="nvarchar" MaxLength="500" />
           <Property Name="url" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_Path">
+          <Key>
+            <PropertyRef Name="Path_ID" />
+          </Key>
+          <Property Name="Path_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Path_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Host" Type="nvarchar" MaxLength="50" />
+          <Property Name="Path" Type="nvarchar" MaxLength="50" />
+          <Property Name="Path_Project" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_Admin" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Project">
+          <Key>
+            <PropertyRef Name="Project_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tbl_Roles">
           <Key>
@@ -168,6 +192,17 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="MenuId" Type="int" Mode="In" />
           <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="proc_AddUpdatePathByPathId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PathId" Type="int" Mode="In" />
+          <Parameter Name="PathName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Host" Type="nvarchar" Mode="In" />
+          <Parameter Name="Path" Type="nvarchar" Mode="In" />
+          <Parameter Name="PathProject" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="proc_AddUpdateProjectByProjectId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjectId" Type="int" Mode="In" />
+          <Parameter Name="ProjectName" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="proc_AddUpdateRolesByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
           <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
@@ -183,9 +218,7 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="RoleId" Type="int" Mode="In" />
           <Parameter Name="IsActive" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="proc_GetAllRegisteredUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="IsActive" Type="varchar" Mode="In" />
-        </Function>
+        <Function Name="proc_GetAllRegisteredUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="proc_GetMenuByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
         </Function>
@@ -199,7 +232,8 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="db_AdminModelStoreContainer">
-          <EntitySet Name="tbl_Menu" EntityType="Self.tbl_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Path" EntityType="Self.tbl_Path" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Project" EntityType="Self.tbl_Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Credential" EntityType="Self.tbl_User_Credential" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User_Session_Details" EntityType="Self.tbl_User_Session_Details" Schema="dbo" store:Type="Tables" />
@@ -207,6 +241,26 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <EntitySet Name="tbl_UserGroup_Registration" EntityType="Self.tbl_UserGroup_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_UserMenu" EntityType="Self.tbl_UserMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_UserRoles" EntityType="Self.tbl_UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Menu" EntityType="Self.tbl_Menu" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_Menu].[Menu_id] AS [Menu_id], 
+    [tbl_Menu].[Parent_Menu] AS [Parent_Menu], 
+    [tbl_Menu].[Menu_Level] AS [Menu_Level], 
+    [tbl_Menu].[Menu_Name] AS [Menu_Name], 
+    [tbl_Menu].[Menu_Link] AS [Menu_Link], 
+    [tbl_Menu].[Menu_Order] AS [Menu_Order], 
+    [tbl_Menu].[Menu_Status] AS [Menu_Status], 
+    [tbl_Menu].[Is_Deleted] AS [Is_Deleted], 
+    [tbl_Menu].[Project_Name] AS [Project_Name], 
+    [tbl_Menu].[Page_ID] AS [Page_ID], 
+    [tbl_Menu].[Sub_ModuleID] AS [Sub_ModuleID], 
+    [tbl_Menu].[ID_Admin] AS [ID_Admin], 
+    [tbl_Menu].[ITRCheck] AS [ITRCheck], 
+    [tbl_Menu].[AssesseeCheck] AS [AssesseeCheck], 
+    [tbl_Menu].[AY] AS [AY], 
+    [tbl_Menu].[url] AS [url]
+    FROM [dbo].[tbl_Menu] AS [tbl_Menu]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="tbl_User_Info" EntityType="Self.tbl_User_Info" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [tbl_User_Info].[User_Info_ID] AS [User_Info_ID], 
@@ -352,6 +406,21 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <FunctionImport Name="proc_GetUserRoleByUserId" ReturnType="Collection(db_AdminModel.proc_GetUserRoleByUserId_Result)">
           <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="proc_GetAllRegisteredUsers" ReturnType="Collection(db_AdminModel.proc_GetAllRegisteredUsers_Result)">
+          </FunctionImport>
+          <EntitySet Name="tbl_Path" EntityType="db_AdminModel.tbl_Path" />
+          <EntitySet Name="tbl_Project" EntityType="db_AdminModel.tbl_Project" />
+          <FunctionImport Name="proc_AddUpdatePathByPathId">
+            <Parameter Name="PathId" Mode="In" Type="Int32" />
+            <Parameter Name="PathName" Mode="In" Type="String" />
+            <Parameter Name="Host" Mode="In" Type="String" />
+            <Parameter Name="Path" Mode="In" Type="String" />
+            <Parameter Name="PathProject" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc_AddUpdateProjectByProjectId">
+            <Parameter Name="ProjectId" Mode="In" Type="Int32" />
+            <Parameter Name="ProjectName" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="proc_AddUpdateUser">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
             <Parameter Name="FirstName" Mode="In" Type="String" />
@@ -361,9 +430,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
             <Parameter Name="MobileNumber" Mode="In" Type="String" />
             <Parameter Name="AccountType" Mode="In" Type="String" />
             <Parameter Name="RoleId" Mode="In" Type="Int32" />
-            <Parameter Name="IsActive" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="proc_GetAllRegisteredUsers" ReturnType="Collection(db_AdminModel.proc_GetAllRegisteredUsers_Result)">
             <Parameter Name="IsActive" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -492,6 +558,24 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Type="Int32" Name="RoleId" Nullable="false" />
           <Property Type="String" Name="RoleName" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="tbl_Path">
+          <Key>
+            <PropertyRef Name="Path_ID" />
+          </Key>
+          <Property Name="Path_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Path_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Path_Project" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Admin" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Project">
+          <Key>
+            <PropertyRef Name="Project_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -687,7 +771,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_AddUpdateUser" FunctionName="db_AdminModel.Store.proc_AddUpdateUser" />
           <FunctionImportMapping FunctionImportName="proc_GetAllRegisteredUsers" FunctionName="db_AdminModel.Store.proc_GetAllRegisteredUsers">
             <ResultMapping>
               <ComplexTypeMapping TypeName="db_AdminModel.proc_GetAllRegisteredUsers_Result">
@@ -705,6 +788,29 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tbl_Path">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_Path">
+              <MappingFragment StoreEntitySet="tbl_Path">
+                <ScalarProperty Name="ID_Admin" ColumnName="ID_Admin" />
+                <ScalarProperty Name="Path_Project" ColumnName="Path_Project" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Path_Name" ColumnName="Path_Name" />
+                <ScalarProperty Name="Path_ID" ColumnName="Path_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Project">
+            <EntityTypeMapping TypeName="db_AdminModel.tbl_Project">
+              <MappingFragment StoreEntitySet="tbl_Project">
+                <ScalarProperty Name="Project_Name" ColumnName="Project_Name" />
+                <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_AddUpdatePathByPathId" FunctionName="db_AdminModel.Store.proc_AddUpdatePathByPathId" />
+          <FunctionImportMapping FunctionImportName="proc_AddUpdateProjectByProjectId" FunctionName="db_AdminModel.Store.proc_AddUpdateProjectByProjectId" />
+          <FunctionImportMapping FunctionImportName="proc_AddUpdateUser" FunctionName="db_AdminModel.Store.proc_AddUpdateUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -198,6 +198,54 @@ namespace Vatas_Wrapper
                 return BLReports.Instance(context).Report_GetAllFirmName();
             }
         }
+
+        public List<PathCL> GetAllPath()
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLPath.Instance(context).GetAllPath();
+            }
+        }
+
+        public bool IsPathAlreadyExist(PathCL path)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLPath.Instance(context).IsPathAlreadyExist(path);
+            }
+        }
+
+        public bool AddUpdatePath(PathCL path)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLPath.Instance(context).AddUpdatePath(path);
+            }
+        }
+
+        public List<DropDownCL> GetAllProject()
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLPath.Instance(context).GetAllProject();
+            }
+        }
+
+        public bool IsProjectAlreadyExist(string projectName)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLPath.Instance(context).IsProjectAlreadyExist(projectName);
+            }
+        }
+
+        public bool AddUpdateProject(int projectId,string projectName)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLPath.Instance(context).AddUpdateProject(projectId,projectName);
+            }
+        }
         #endregion
 
         #region Process

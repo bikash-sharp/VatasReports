@@ -212,4 +212,19 @@ namespace Vatas_Common
         public int MenuOrder { get; set; }
     }
 
+    public class PathCL
+    {
+        public int PathID { get; set; }
+        public string PathName { get; set; }
+        public string Host { get; set; }
+        public string Path { get; set; }
+        public string PathProject { get; set; }
+    }
+
+    public class ProjectCL
+    {
+        public int ProjectId { get; set; }
+        public string ProjectName { get; set; }
+    }
+
 }

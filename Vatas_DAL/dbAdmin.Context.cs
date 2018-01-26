@@ -36,6 +36,8 @@ namespace Vatas_DAL
         public virtual DbSet<tbl_UserRoles> tbl_UserRoles { get; set; }
         public virtual DbSet<tbl_UserMenu> tbl_UserMenu { get; set; }
         public virtual DbSet<tbl_Menu> tbl_Menu { get; set; }
+        public virtual DbSet<tbl_Path> tbl_Path { get; set; }
+        public virtual DbSet<tbl_Project> tbl_Project { get; set; }
     
         public virtual ObjectResult<proc_GetRegisteredUserByUserId_Result> proc_GetRegisteredUserByUserId(Nullable<int> userId)
         {
@@ -112,6 +114,49 @@ namespace Vatas_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserRoleByUserId_Result>("proc_GetUserRoleByUserId", userIdParameter);
         }
     
+        public virtual ObjectResult<proc_GetAllRegisteredUsers_Result> proc_GetAllRegisteredUsers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetAllRegisteredUsers_Result>("proc_GetAllRegisteredUsers");
+        }
+    
+        public virtual int proc_AddUpdatePathByPathId(Nullable<int> pathId, string pathName, string host, string path, string pathProject)
+        {
+            var pathIdParameter = pathId.HasValue ?
+                new ObjectParameter("PathId", pathId) :
+                new ObjectParameter("PathId", typeof(int));
+    
+            var pathNameParameter = pathName != null ?
+                new ObjectParameter("PathName", pathName) :
+                new ObjectParameter("PathName", typeof(string));
+    
+            var hostParameter = host != null ?
+                new ObjectParameter("Host", host) :
+                new ObjectParameter("Host", typeof(string));
+    
+            var pathParameter = path != null ?
+                new ObjectParameter("Path", path) :
+                new ObjectParameter("Path", typeof(string));
+    
+            var pathProjectParameter = pathProject != null ?
+                new ObjectParameter("PathProject", pathProject) :
+                new ObjectParameter("PathProject", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdatePathByPathId", pathIdParameter, pathNameParameter, hostParameter, pathParameter, pathProjectParameter);
+        }
+    
+        public virtual int proc_AddUpdateProjectByProjectId(Nullable<int> projectId, string projectName)
+        {
+            var projectIdParameter = projectId.HasValue ?
+                new ObjectParameter("ProjectId", projectId) :
+                new ObjectParameter("ProjectId", typeof(int));
+    
+            var projectNameParameter = projectName != null ?
+                new ObjectParameter("ProjectName", projectName) :
+                new ObjectParameter("ProjectName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdateProjectByProjectId", projectIdParameter, projectNameParameter);
+        }
+    
         public virtual int proc_AddUpdateUser(Nullable<int> userId, string firstName, string lastName, string email, string password, string mobileNumber, string accountType, Nullable<int> roleId, string isActive)
         {
             var userIdParameter = userId.HasValue ?
@@ -151,15 +196,6 @@ namespace Vatas_DAL
                 new ObjectParameter("IsActive", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_AddUpdateUser", userIdParameter, firstNameParameter, lastNameParameter, emailParameter, passwordParameter, mobileNumberParameter, accountTypeParameter, roleIdParameter, isActiveParameter);
-        }
-    
-        public virtual ObjectResult<proc_GetAllRegisteredUsers_Result> proc_GetAllRegisteredUsers(string isActive)
-        {
-            var isActiveParameter = isActive != null ?
-                new ObjectParameter("IsActive", isActive) :
-                new ObjectParameter("IsActive", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetAllRegisteredUsers_Result>("proc_GetAllRegisteredUsers", isActiveParameter);
         }
     }
 }
