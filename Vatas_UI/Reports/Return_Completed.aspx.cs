@@ -138,6 +138,8 @@ namespace Vatas_UI.Reports
             {
                 PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
                 PdfPTable pdfTab = new PdfPTable(12);
+                pdfTab.HorizontalAlignment = Element.ALIGN_CENTER;
+                pdfTab.WidthPercentage = 90;
                 pdfTab.SpacingBefore = 0f;
                 pdfTab.SpacingAfter = 0f;
 
