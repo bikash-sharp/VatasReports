@@ -1,7 +1,10 @@
-﻿using System;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.UI;
 using Vatas_Common;
 using Vatas_Wrapper;
@@ -99,6 +102,99 @@ namespace Vatas_UI.Reports
             string SearchText = txtSearch.Text.Trim();
 
             BindData(JobStatus, IsSent, CurrentPageNo, PageSize, SearchText);
+        }
+
+        protected void lnkExportToPdf_Click(object sender, EventArgs e)
+        {
+            ExportToPdf();
+        }
+
+        public void ExportToPdf()
+        {
+            int PageNumber = 1;
+            int.TryParse(hidPageNo.Value, out PageNumber);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = RecordCount;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
+            string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_ReturnsAtFrontOffice.pdf";
+            string filePath = Path.Combine(Server.MapPath("~/PDFFiles"), fileName);
+            var normalFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
+            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+
+            Document doc = new Document(iTextSharp.text.PageSize.A4.Rotate(), 1, 1, 1, 1);
+            Paragraph p = new Paragraph("Report - FrontOffice Return", boldFont);
+            p.Alignment = Element.ALIGN_CENTER;
+            p.PaddingTop = 10f;
+            p.SpacingAfter = 20f;
+            p.SpacingBefore = 20f;
+
+            try
+            {
+                PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+                PdfPTable pdfTab = new PdfPTable(10);
+                pdfTab.SpacingBefore = 0f;
+                pdfTab.SpacingAfter = 0f;
+
+                var ResultList = DataProviderWrapper.Instance.Report_GetReturnsByJobStatus(JobStatus, IsSent, PageNumber, PageSize, SearchText);
+
+                if (ResultList.Count > 0)
+                {
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Sr.No", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Firm Name", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("File No", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("TAN", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("AccountName", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("FinancialYear", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("FormType", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Quarter", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("ReturnType", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Date", boldFont)));
+
+                    int i = 0;
+
+                    foreach (ReturnsCL line in ResultList)
+                    {
+                        i += 1;
+
+                        pdfTab.AddCell(i.ToString());
+                        pdfTab.AddCell(line.FirmName.ToString());
+                        pdfTab.AddCell(line.JobNo.ToString());
+                        pdfTab.AddCell(line.TAN.ToString());
+                        pdfTab.AddCell(line.AccountName.ToString());
+                        pdfTab.AddCell(line.FinancialYear.ToString());
+                        pdfTab.AddCell(line.FormType.ToString());
+                        pdfTab.AddCell(line.Quarter.ToString());
+                        pdfTab.AddCell(line.ReturnType.ToString());
+                        pdfTab.AddCell(line.Date);
+                    }
+
+                }
+
+                doc.Open();
+                doc.Add(p);
+                doc.Add(pdfTab);
+                doc.Close();
+                byte[] content = File.ReadAllBytes(filePath);
+                HttpContext context = HttpContext.Current;
+                context.Response.BinaryWrite(content);
+                context.Response.ContentType = "application/pdf";
+                context.Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+                context.Response.End();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                doc.Close();
+            }
         }
     }
 }

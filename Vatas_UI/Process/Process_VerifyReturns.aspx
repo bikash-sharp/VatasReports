@@ -69,9 +69,9 @@
                                                     </td>
                                                     <td>
                                                         <asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' />
+                                                         <asp:HiddenField ID="hdnSrno" runat="server" Value='<%# Container.ItemIndex + 1 %>' />
                                                         <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
                                                     </td>
-                                                    <%--<td><asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td>--%>
                                                     <td>
                                                         <asp:HiddenField ID="hfSelectedUserID" runat="server" Value='<%# Eval("NextUserID") %>' />
                                                         <asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
@@ -116,6 +116,7 @@
 
             <% if (this.rptProcess.Items.Count > 0)
                 { %>
+            <asp:LinkButton ID="lnkExportToPdf" runat="server" CssClass="btn btn-info pull-right submit" style="margin-left: 10px;" OnClick="lnkExportToPdf_Click">Export To PDF</asp:LinkButton>
             <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click">Export To Excel</asp:LinkButton>
             <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" OnClick="btnConfirm_Click" Style="margin-right: 10px;" runat="server" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
             <%     

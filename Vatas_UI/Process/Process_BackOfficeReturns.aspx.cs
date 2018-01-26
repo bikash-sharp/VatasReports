@@ -1,4 +1,6 @@
-﻿using System;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -107,10 +109,10 @@ namespace Vatas_UI.Process
             string SearchText = txtSearch.Text.Trim();
 
             StringWriter strwriter = new StringWriter();
-            string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_Process_FrontOfficeReturns.csv";
+            string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_Process_BackOfficeReturns.csv";
 
             List<ProcessReturnsCL> processList = new List<ProcessReturnsCL>();
-            var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("FO", PageNumber, PageSize, SearchText);
+            var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("BO", PageNumber, PageSize, SearchText);
 
             if (frontOfcList.Count > 0)
             {
@@ -189,6 +191,132 @@ namespace Vatas_UI.Process
             string SearchText = txtSearch.Text.Trim();
 
             BindData(CurrentPageNo, PageSize, SearchText);
+        }
+
+        protected void lnkExportToPdf_Click(object sender, EventArgs e)
+        {
+            ExportToPdf();
+        }
+
+        public void ExportToPdf()
+        {
+            int PageNumber = 1;
+            int.TryParse(hidPageNo.Value, out PageNumber);
+
+            int PageSize = 10;
+            int.TryParse(ddlPageLength.SelectedValue, out PageSize);
+            if (PageSize <= 0)
+            {
+                PageSize = RecordCount;
+            }
+            string SearchText = txtSearch.Text.Trim();
+
+            string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_Process_BackOfficeReturns.csv";
+
+            string filePath = Path.Combine(Server.MapPath("~/PDFFiles"), fileName);
+            var normalFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
+            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+
+            Document doc = new Document(iTextSharp.text.PageSize.A4.Rotate(), 1, 1, 1, 1);
+            Paragraph p = new Paragraph("Process - BackOffice Return", boldFont);
+            p.Alignment = Element.ALIGN_CENTER;
+            p.PaddingTop = 10f;
+            p.SpacingAfter = 20f;
+            p.SpacingBefore = 20f;
+
+            try
+            {
+                PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+                PdfPTable pdfTab = new PdfPTable(10);
+                pdfTab.SpacingBefore = 0f;
+                pdfTab.SpacingAfter = 0f;
+
+                var frontOfcList = DataProviderWrapper.Instance.GetReturnsByJobStatus("BO", PageNumber, PageSize, SearchText);
+
+                if (frontOfcList.Count > 0)
+                {
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Sr.No", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("SendTo", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("ReasonToReturn", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("JobNo", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("TAN", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("AccountName", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("FinancialYear", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("FormType", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Quarter", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("ReturnType", boldFont)));
+                    int i = 0;
+                    foreach (RepeaterItem item in rptProcess.Items)
+                    {
+                        ProcessReturnsCL itemProcess = new ProcessReturnsCL();
+                        HiddenField hfId = (HiddenField)item.FindControl("hfId");
+                        //Label lblSrno = (Label)item.FindControl("lblSrno");
+                        TextBox txtReasons = (TextBox)item.FindControl("txtReasons");
+                        Label lblTAN = (Label)item.FindControl("lblTAN");
+                        Label lblJobNo = (Label)item.FindControl("lblJobNo");
+                        Label lblAccountName = (Label)item.FindControl("lblAccountName");
+                        Label lblFinancialYear = (Label)item.FindControl("lblFinancialYear");
+                        Label lblFormNumber = (Label)item.FindControl("lblFormNumber");
+                        Label lblQuarter = (Label)item.FindControl("lblQuarter");
+                        Label lblReturnType = (Label)item.FindControl("lblReturnType");
+                        CheckBox chkRow = (CheckBox)item.FindControl("chkRow");
+                        DropDownList ddlProcessType = (DropDownList)item.FindControl("ddlProcessType");
+
+                        if (chkRow != null && hfId != null && ddlProcessType != null)
+                        {
+                            //if (chkRow.Checked == true)
+                            {
+                                int JobID = string.IsNullOrEmpty(hfId.Value) ? 0 : int.Parse(hfId.Value);
+                                int JobNo = int.Parse(lblJobNo.Text);
+                                string Reasons = txtReasons.Text;
+                                string ProcessType = "";
+                                if (!string.IsNullOrEmpty(ddlProcessType.SelectedItem.ToString()))
+                                {
+                                    ProcessType = ddlProcessType.SelectedItem.Text;
+                                }
+                                string Srno = (++i).ToString(); //lblSrno.Text;
+                                string AccountName = lblAccountName.Text;
+                                string TAN = lblTAN.Text;
+                                string FinancialYear = lblFinancialYear.Text;
+                                string FormNumber = lblFormNumber.Text;
+                                string Quarter = lblQuarter.Text;
+                                string ReturnType = lblReturnType.Text;
+
+                                pdfTab.AddCell(Srno.ToString());
+                                pdfTab.AddCell(ProcessType.ToString());
+                                pdfTab.AddCell(Reasons.ToString());
+                                pdfTab.AddCell(JobNo.ToString());
+                                pdfTab.AddCell(TAN.ToString());
+                                pdfTab.AddCell(AccountName.ToString());
+                                pdfTab.AddCell(FinancialYear.ToString());
+                                pdfTab.AddCell(FormNumber.ToString());
+                                pdfTab.AddCell(Quarter.ToString());
+                                pdfTab.AddCell(ReturnType.ToString());
+                            }
+                        }
+                    }
+
+                }
+
+                doc.Open();
+                doc.Add(p);
+                doc.Add(pdfTab);
+                doc.Close();
+                byte[] content = File.ReadAllBytes(filePath);
+                HttpContext context = HttpContext.Current;
+                context.Response.BinaryWrite(content);
+                context.Response.ContentType = "application/pdf";
+                context.Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+                context.Response.End();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                doc.Close();
+            }
         }
 
     }

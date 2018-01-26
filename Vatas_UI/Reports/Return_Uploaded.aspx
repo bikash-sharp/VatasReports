@@ -37,45 +37,45 @@
                                 </div>
                             </div>
                             <div class="form-inline overflow">
-                            <table id="reportTable" class="table table-bordered table-striped dataTable">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Firm Name</th>
-                                        <th>File No.</th>
-                                        <th>TAN</th>
-                                        <th>Account Name</th>
-                                        <th>Financial Year(FY)</th>
-                                        <th>Form Type</th>
-                                        <th>Quarter</th>
-                                        <th>Return Type</th>
-                                        <th>Date</th>
-                                        <th>Assigned Date</th>
-                                        <th>Operator Name</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <asp:Repeater ID="rptReport" runat="server">
-                                        <ItemTemplate>
-                                            <tr>
-                                                <td><%# Container.ItemIndex + 1 %></td>
-                                                <td><%# Eval("FirmName") %></td>
-                                                <td><%# Eval("JobNo") %></td>
-                                                <td><%# Eval("TAN") %></td>
-                                                <td><%# Eval("AccountName") %></td>
-                                                <td><%# Eval("FinancialYear") %></td>
-                                                <td><%# Eval("FormType") %></td>
-                                                <td><%# Eval("Quarter") %></td>
-                                                <td><%# Eval("ReturnType") %></td>
-                                                <td><%# Eval("Date") %></td>
-                                                <td><%# Eval("AssignedDate") %></td>
-                                                <td><%# Eval("Username") %></td>
-                                            </tr>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </tbody>
-                            </table>
-                                  </div>
+                                <table id="reportTable" class="table table-bordered table-striped dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Firm Name</th>
+                                            <th>File No.</th>
+                                            <th>TAN</th>
+                                            <th>Account Name</th>
+                                            <th>Financial Year(FY)</th>
+                                            <th>Form Type</th>
+                                            <th>Quarter</th>
+                                            <th>Return Type</th>
+                                            <th>Date</th>
+                                            <th>Assigned Date</th>
+                                            <th>Operator Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <asp:Repeater ID="rptReport" runat="server">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td><%# Container.ItemIndex + 1 %></td>
+                                                    <td><%# Eval("FirmName") %></td>
+                                                    <td><%# Eval("JobNo") %></td>
+                                                    <td><%# Eval("TAN") %></td>
+                                                    <td><%# Eval("AccountName") %></td>
+                                                    <td><%# Eval("FinancialYear") %></td>
+                                                    <td><%# Eval("FormType") %></td>
+                                                    <td><%# Eval("Quarter") %></td>
+                                                    <td><%# Eval("ReturnType") %></td>
+                                                    <td><%# Eval("Date") %></td>
+                                                    <td><%# Eval("AssignedDate") %></td>
+                                                    <td><%# Eval("Username") %></td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div id="page-selection" class="pull-right" style="margin-top: 10px;"></div>
@@ -89,6 +89,8 @@
             <div class="box-footer">
                 <% if (this.rptReport.Items.Count > 0)
                     { %>
+
+                <asp:LinkButton ID="lnkExportToPdf" runat="server" CssClass="btn btn-info pull-right submit" Style="margin-left: 10px;" OnClick="lnkExportToPdf_Click">Export To PDF</asp:LinkButton>
                 <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click">Export To Excel</asp:LinkButton>
                 <%     
                     } %>

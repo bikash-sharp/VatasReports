@@ -76,6 +76,15 @@ namespace Vatas_UI.Reports {
         protected global::System.Web.UI.WebControls.Repeater rptReport;
         
         /// <summary>
+        /// lnkExportToPdf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkExportToPdf;
+        
+        /// <summary>
         /// btnExport control.
         /// </summary>
         /// <remarks>
