@@ -13,9 +13,16 @@ namespace Vatas_UI.Configuration
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (!this.IsPostBack)
             {
-                BindData();
+                if (BLFunction.GetRoleName().ToLower() == "superadmin")
+                {
+                    BindData();
+                }
+                else
+                {
+                    Response.RedirectToRoute("401");
+                }
             }
         }
 

@@ -2,7 +2,7 @@
 
 <ul class="sidebar-menu">
     <li id="lihome"><a href="<%=Page.ResolveUrl("~/Index")%>" title="Home"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
-    <li id="liChangePassword"><a href="<%=Page.ResolveUrl("~/ChangePassword")%>" title="Change Password"><i class="fa fa-key"></i><span>Change Password</span></a></li>
+    <%--<li id="liChangePassword"><a href="<%=Page.ResolveUrl("~/ChangePassword")%>" title="Change Password"><i class="fa fa-key"></i><span>Change Password</span></a></li>--%>
     <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
         {
     %>

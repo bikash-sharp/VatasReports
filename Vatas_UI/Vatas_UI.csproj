@@ -986,6 +986,8 @@
     <Content Include="ChangePassword.aspx" />
     <Content Include="Configuration\ManagePath.aspx" />
     <Content Include="Configuration\ManageProject.aspx" />
+    <Content Include="ErrorPages\401.aspx" />
+    <Content Include="ErrorPages\404.aspx" />
     <Content Include="User\CreateUser.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="ForgotPassword.aspx" />
@@ -1126,6 +1128,20 @@
     </Compile>
     <Compile Include="Configuration\ManageProject.aspx.designer.cs">
       <DependentUpon>ManageProject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\401.aspx.cs">
+      <DependentUpon>401.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\401.aspx.designer.cs">
+      <DependentUpon>401.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\CreateUser.aspx.cs">
       <DependentUpon>CreateUser.aspx</DependentUpon>

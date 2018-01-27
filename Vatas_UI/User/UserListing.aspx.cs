@@ -16,9 +16,16 @@ namespace Vatas_UI.User
             string isActive = "N";
             if (chkIsActive.Checked)
                 isActive = "Y";
-            if (!Page.IsPostBack)
+            if (!this.IsPostBack)
             {
-                BindData(isActive);
+                if (BLFunction.GetRoleName().ToLower() == "superadmin")
+                {
+                    BindData(isActive);
+                }
+                else
+                {
+                    Response.RedirectToRoute("401");
+                }
             }
         }
 
@@ -66,7 +73,7 @@ namespace Vatas_UI.User
                 LinkButton btnDeleteUser = (LinkButton)(sender);
                 int UserId = Convert.ToInt32(btnDeleteUser.CommandArgument);
 
-                bool IsSaved = DataProviderWrapper.Instance.EnableDisableRegisteredUser(UserId,"N");
+                bool IsSaved = DataProviderWrapper.Instance.EnableDisableRegisteredUser(UserId, "N");
                 if (IsSaved)
                 {
                     BLFunction.ShowAlert(this, "User has been deleted successfully.", ResponseType.SUCCESS);
@@ -101,7 +108,7 @@ namespace Vatas_UI.User
                 LinkButton btnEnableUser = (LinkButton)(sender);
                 int UserId = Convert.ToInt32(btnEnableUser.CommandArgument);
 
-                bool IsSaved = DataProviderWrapper.Instance.EnableDisableRegisteredUser(UserId,"Y");
+                bool IsSaved = DataProviderWrapper.Instance.EnableDisableRegisteredUser(UserId, "Y");
                 if (IsSaved)
                 {
                     BLFunction.ShowAlert(this, "User has been enabled successfully.", ResponseType.SUCCESS);

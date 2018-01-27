@@ -15,17 +15,24 @@ namespace Vatas_UI.User
         static int RoleId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (!this.IsPostBack)
             {
-                try
+                if (BLFunction.GetRoleName().ToLower() == "superadmin")
                 {
-                    RoleId = Convert.ToInt32(CurrContext.Items["RoleId"].ToString());
-                    BindMenu(RoleId);
-                    BindData(RoleId);
+                    try
+                    {
+                        RoleId = Convert.ToInt32(CurrContext.Items["RoleId"].ToString());
+                        BindMenu(RoleId);
+                        BindData(RoleId);
+                    }
+                    catch (Exception ex)
+                    {
+                        Server.Transfer("ManageRoles.aspx");
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Server.Transfer("ManageRoles.aspx");
+                    Response.RedirectToRoute("401");
                 }
             }
         }

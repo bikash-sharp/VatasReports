@@ -44,6 +44,13 @@ namespace Vatas_UI
             routes.MapPageRoute("ChangePassword", "ChangePassword", "~/ChangePassword.aspx", true);
             #endregion
 
+            #region
+
+            routes.MapPageRoute("401", "401", "~/ErrorPages/401.aspx", true);
+            routes.MapPageRoute("404", "404", "~/ErrorPages/401.aspx", true);
+
+            #endregion
+
             #region Home Sections
             routes.MapPageRoute("Home", "Index", "~/Home/Index.aspx", true);
             #endregion
