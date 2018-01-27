@@ -159,6 +159,7 @@ namespace Vatas_Common
         public long? NextUserID { get; set; }
         public string AssignedUser { get; set; }
         public string AssignedByUser { get; set; }
+        public long MasterID { get; set; }
         public ProcessReturnsCL()
         {
             SupervisorList = new List<DropDownCL>();

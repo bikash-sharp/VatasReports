@@ -88,8 +88,8 @@
             <div class="box-footer">
                 <% if(this.rptReport.Items.Count > 0)
                    { %>
-                <asp:LinkButton ID="lnkExportToPdf" runat="server" CssClass="btn btn-info pull-right submit" style="margin-left: 10px;" OnClick="lnkExportToPdf_Click">Export To PDF</asp:LinkButton>
-                        <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click">Export To Excel</asp:LinkButton>
+                <asp:LinkButton ID="lnkExportToPdf" runat="server" CssClass="btn btn-info pull-right" style="margin-left: 10px;" OnClick="lnkExportToPdf_Click">Export To PDF</asp:LinkButton>
+                        <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-info pull-right" OnClick="btnExport_Click">Export To Excel</asp:LinkButton>
                   <%     
                    } %>
                 

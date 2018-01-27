@@ -29,7 +29,7 @@ namespace Vatas_UI.User
                     }
                     catch (Exception ex)
                     {
-                        Server.Transfer("UserListing.aspx");
+                        Server.Execute("UserListing.aspx");
                     }
                 }
                 else
@@ -106,7 +106,7 @@ namespace Vatas_UI.User
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.RedirectToRoute(CurrentPagePath + "UserListing");
+            Response.RedirectToRoute("UserListing");
             //Server.Transfer("UserListing.aspx");
         }
     }

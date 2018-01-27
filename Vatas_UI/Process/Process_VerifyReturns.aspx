@@ -36,6 +36,7 @@
                                 </div>
                             </div>
                             <div class="form-inline overflow">
+                                <div class="table-responsive">
                                 <table id="processTable" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
@@ -54,8 +55,8 @@
                                             <th>Quarter</th>
                                             <th>Return Type</th>
                                             <th>Operator Comments</th>
-                                            <th>SuperVisor Name</th>
-                                            <th>SuperVisor Comments</th>
+                                            <%--<th>SuperVisor Name</th>
+                                            <th>SuperVisor Comments</th>--%>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,13 +69,15 @@
                                                         </div>
                                                     </td>
                                                     <td>
+                                                        <asp:HiddenField ID="hfMasterId" runat="server" Value='<%# Eval("MasterID") %>' />
                                                         <asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' />
                                                          <asp:HiddenField ID="hdnSrno" runat="server" Value='<%# Container.ItemIndex + 1 %>' />
                                                         <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
                                                     </td>
                                                     <td>
+                                                        <asp:Label ID="lblOperator" Text='<%# Eval("AssignedUser") %>' runat="server" />
                                                         <asp:HiddenField ID="hfSelectedUserID" runat="server" Value='<%# Eval("NextUserID") %>' />
-                                                        <asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
+                                                        <%--<asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>--%>
                                                     
                                                     <td>
                                                         <asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" /></td>
@@ -88,17 +91,15 @@
                                                         <asp:Label ID="lblQuarter" Text='<%# Eval("Quarter") %>' runat="server" /></td>
                                                     <td>
                                                         <asp:Label ID="lblReturnType" Text='<%# Eval("ReturnType") %>' runat="server" /></td>
-                                                    <td>
-                                                        <asp:Label ID="lblOperatorComments" Text='<%# Eval("ReasonforReturn") %>' runat="server" /></td>
-                                                    <td>
-                                                        <asp:Label ID="lblSuperVisorName" Text='<%# Eval("SupervisorName") %>' runat="server" /></td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtSupervisorComments" CssClass="form-control" TextMode="MultiLine" Style="resize: none; overflow-wrap: break-word; overflow-y: auto;" Rows="4" Columns="40" runat="server"></asp:TextBox></td>
+                                                    <td><asp:Label ID="lblOperatorComments" Text='<%# Eval("ReasonforReturn") %>' runat="server" /></td>
+                                                    <%--<td><asp:Label ID="lblSuperVisorName" Text='<%# Eval("SupervisorName") %>' runat="server" /></td>--%>
+                                                    <%--<td><asp:TextBox ID="txtSupervisorComments" CssClass="form-control" TextMode="MultiLine" Style="resize: none; overflow-wrap: break-word; overflow-y: auto;" Rows="4" Columns="40" runat="server"></asp:TextBox></td>--%>
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
                                     </tbody>
                                 </table>
+                                    </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
@@ -116,9 +117,9 @@
 
             <% if (this.rptProcess.Items.Count > 0)
                 { %>
-            <asp:LinkButton ID="lnkExportToPdf" runat="server" CssClass="btn btn-info pull-right submit" style="margin-left: 10px;" OnClick="lnkExportToPdf_Click">Export To PDF</asp:LinkButton>
-            <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click">Export To Excel</asp:LinkButton>
-            <asp:LinkButton Visible="true" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" OnClick="btnConfirm_Click" Style="margin-right: 10px;" runat="server" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
+            <asp:LinkButton ID="lnkExportToPdf" runat="server" CssClass="btn btn-info pull-right" style="margin-left: 10px;" OnClick="lnkExportToPdf_Click">Export To PDF</asp:LinkButton>
+            <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-info pull-right" OnClick="btnExport_Click">Export To Excel</asp:LinkButton>
+            <asp:LinkButton Visible="false" ValidationGroup="Grid" Text="" CausesValidation="true" ID="btnConfirm" OnClick="btnConfirm_Click" Style="margin-right: 10px;" runat="server" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Process</asp:LinkButton>
             <%     
                 } %>
         </div>

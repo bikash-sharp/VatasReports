@@ -77,9 +77,9 @@
                                 <table id="reportTable" class="table table-bordered table-striped dataTable">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Firm Name</th>
+                                            <%--<th>#</th>--%>
                                             <th>File No.</th>
+                                            <th>Firm Name</th>
                                             <th>TAN</th>
                                             <th>Account Name</th>
                                             <th>Financial Year(FY)</th>
@@ -93,9 +93,9 @@
                                         <asp:Repeater ID="rptReport" runat="server">
                                             <ItemTemplate>
                                                 <tr>
-                                                    <td><%# Container.ItemIndex + 1 %></td>
-                                                    <td><%# Eval("FirmName") %></td>
                                                     <td><%# Eval("JobNo") %></td>
+                                                    <%--<td><%# Container.ItemIndex + 1 %></td>--%>
+                                                    <td><%# Eval("FirmName") %></td>
                                                     <td><%# Eval("TAN") %></td>
                                                     <td><%# Eval("AccountName") %></td>
                                                     <td><%# Eval("FinancialYear") %></td>
@@ -122,8 +122,8 @@
             <div class="box-footer">
                 <% if (this.rptReport.Items.Count > 0)
                     { %>
-                <asp:LinkButton ID="lnkExportToPdf" runat="server" CssClass="btn btn-info pull-right submit" style="margin-left: 10px;" OnClick="lnkExportToPdf_Click">Export To PDF</asp:LinkButton>
-                <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-info pull-right submit" OnClick="btnExport_Click">Export To Excel</asp:LinkButton>
+                <asp:LinkButton ID="lnkExportToPdf" runat="server" CssClass="btn btn-info pull-right" style="margin-left: 10px;" OnClick="lnkExportToPdf_Click">Export To PDF</asp:LinkButton>
+                <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-info pull-right" OnClick="btnExport_Click">Export To Excel</asp:LinkButton>
                 <%     
                     } %>
             </div>

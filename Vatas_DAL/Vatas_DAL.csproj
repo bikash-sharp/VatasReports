@@ -66,6 +66,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dbAdmin.edmx</DependentUpon>
     </Compile>
+    <Compile Include="mydatabase1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mydatabase1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mydatabase1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mydatabase1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mydatabase1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mydatabase1.edmx</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetAllRegisteredUsers_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
@@ -160,6 +175,13 @@
     <None Include="dbAdmin.edmx.diagram">
       <DependentUpon>dbAdmin.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="mydatabase1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>mydatabase1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="mydatabase1.edmx.diagram">
+      <DependentUpon>mydatabase1.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <EntityDeploy Include="VatasSolution.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -179,6 +201,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>dbAdmin.edmx</DependentUpon>
       <LastGenOutput>dbAdmin.cs</LastGenOutput>
+    </Content>
+    <Content Include="mydatabase1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>mydatabase1.edmx</DependentUpon>
+      <LastGenOutput>mydatabase1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="mydatabase1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>mydatabase1.edmx</DependentUpon>
+      <LastGenOutput>mydatabase1.cs</LastGenOutput>
     </Content>
     <Content Include="VatasSolution.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

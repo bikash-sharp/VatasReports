@@ -68,7 +68,8 @@ namespace Vatas_BAL
                     ReasonforReturn = p.Comments,
                     PRN = p.PRN,
                     SupervisorName = p.SuperVisorName,
-                    RecordCount = p.RecordCount == null ? 0 : p.RecordCount.Value
+                    RecordCount = p.RecordCount == null ? 0 : p.RecordCount.Value,
+                    MasterID=p.MasterID.GetValueOrDefault(0)
                 }).ToList();
 
             var priorities = getProcessPriorities();
@@ -103,6 +104,9 @@ namespace Vatas_BAL
                 foreach (var item in result)
                 {
                     item.SupervisorList = UserList;
+                    var GetUserDetails = BLSiteUser.Instance(_admin).GetSiteUserByID(item.NextUserID.GetValueOrDefault(0));
+                    if (GetUserDetails != null)
+                        item.AssignedUser = GetUserDetails.Name + " " + GetUserDetails.Last_Name;
                 }
             }
             return result;

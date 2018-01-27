@@ -98,15 +98,15 @@ namespace Vatas_UI.Process
 
         protected void rptProcess_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                var ddlOperator = e.Item.FindControl("ddlOperator") as DropDownList;
-                var hfSelectedUserID = e.Item.FindControl("hfSelectedUserID") as HiddenField;
-                if (!String.IsNullOrEmpty(hfSelectedUserID.Value) && hfSelectedUserID.Value != "0")
-                {
-                    ddlOperator.Items.OfType<System.Web.UI.WebControls.ListItem>().Where(p => p.Value == hfSelectedUserID.Value).ToList().ForEach(p => p.Selected = true);
-                }
-            }
+            //if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            //{
+            //    var ddlOperator = e.Item.FindControl("ddlOperator") as DropDownList;
+            //    var hfSelectedUserID = e.Item.FindControl("hfSelectedUserID") as HiddenField;
+            //    if (!String.IsNullOrEmpty(hfSelectedUserID.Value) && hfSelectedUserID.Value != "0")
+            //    {
+            //        ddlOperator.Items.OfType<System.Web.UI.WebControls.ListItem>().Where(p => p.Value == hfSelectedUserID.Value).ToList().ForEach(p => p.Selected = true);
+            //    }
+            //}
         }
 
         public void Export()
@@ -131,7 +131,7 @@ namespace Vatas_UI.Process
 
             if (frontOfcList.Count > 0)
             {
-                strwriter.WriteLine("\"Sr.No\",\"DataEntryOperator\",\"JobNo\",\"TAN\",\"AccountName\",\"FinancialYear\",\"FormType\",\"Quarter\",\"ReturnType\",\"OperatorComments\",\"SupervisorName\",\"SupervisorComments\"");
+                strwriter.WriteLine("\"JobNo\",\"DataEntryOperator\",\"TAN\",\"AccountName\",\"FinancialYear\",\"FormType\",\"Quarter\",\"ReturnType\",\"OperatorComments\"");
                 int i = 0;
                 foreach (RepeaterItem item in rptProcess.Items)
                 {
@@ -146,23 +146,20 @@ namespace Vatas_UI.Process
                     Label lblQuarter = (Label)item.FindControl("lblQuarter");
                     Label lblReturnType = (Label)item.FindControl("lblReturnType");
                     CheckBox chkRow = (CheckBox)item.FindControl("chkRow");
-                    DropDownList ddlOperator = (DropDownList)item.FindControl("ddlOperator");
+                    //DropDownList ddlOperator = (DropDownList)item.FindControl("ddlOperator");
                     Label lblOperatorComments = (Label)item.FindControl("lblOperatorComments");
-                    Label lblSuperVisorName = (Label)item.FindControl("lblSuperVisorName");
-                    TextBox txtSupervisorComments = (TextBox)item.FindControl("txtSupervisorComments");
+                    Label lblOperator = (Label)item.FindControl("lblOperator");
+                    //Label lblSuperVisorName = (Label)item.FindControl("lblSuperVisorName");
+                    //TextBox txtSupervisorComments = (TextBox)item.FindControl("txtSupervisorComments");
 
-                    if (chkRow != null && hfId != null && ddlOperator != null)
+                    if (chkRow != null && hfId != null)
                     {
                         //if (chkRow.Checked == true)
                         {
                             int JobID = string.IsNullOrEmpty(hfId.Value) ? 0 : int.Parse(hfId.Value);
                             int JobNo = int.Parse(lblJobNo.Text);
-                            string SupervisorName = "";
-                            if (ddlOperator.SelectedItem != null)
-                            {
-                                SupervisorName = ddlOperator.SelectedItem.Text;
-                            }
-                            string Srno = (++i).ToString(); //lblSrno.Text;
+                            string OperatorName = lblOperator.Text;
+                            //string Srno = (++i).ToString(); //lblSrno.Text;
                             string AccountName = lblAccountName.Text;
                             string TAN = lblTAN.Text;
                             string FinancialYear = lblFinancialYear.Text;
@@ -170,11 +167,11 @@ namespace Vatas_UI.Process
                             string Quarter = lblQuarter.Text;
                             string ReturnType = lblReturnType.Text;
                             string OperatorComments = lblOperatorComments.Text;
-                            string SuperVisorName = lblSuperVisorName.Text;
-                            string SupervisorComments = txtSupervisorComments.Text;
+                            //string SuperVisorName = lblSuperVisorName.Text;
+                            //string SupervisorComments = txtSupervisorComments.Text;
 
-                            strwriter.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\"",
-                                Srno, SupervisorName, JobNo, TAN, AccountName, FinancialYear, FormNumber, Quarter, ReturnType, OperatorComments, SuperVisorName, SupervisorComments));
+                            strwriter.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\"",
+                                JobNo, OperatorName,  TAN, AccountName, FinancialYear, FormNumber, Quarter, ReturnType, OperatorComments));
 
                         }
                     }
@@ -235,8 +232,8 @@ namespace Vatas_UI.Process
 
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_Process_VerifyReturn.pdf";
             string filePath = Path.Combine(Server.MapPath("~/PDFFiles"), fileName);
-            var normalFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
-            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+            var normalFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
+            var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10);
 
             Document doc = new Document(iTextSharp.text.PageSize.A4.Rotate(), 1, 1, 1, 1);
             Paragraph p = new Paragraph("Process - Verify Return", boldFont);
@@ -248,7 +245,7 @@ namespace Vatas_UI.Process
             try
             {
                 PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
-                PdfPTable pdfTab = new PdfPTable(12);
+                PdfPTable pdfTab = new PdfPTable(9);
                 pdfTab.HorizontalAlignment = Element.ALIGN_CENTER;
                 pdfTab.WidthPercentage = 90;
                 pdfTab.SpacingBefore = 0f;
@@ -258,25 +255,25 @@ namespace Vatas_UI.Process
 
                 if (processList.Count > 0)
                 {
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("Sr.No", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("DataEntryOperator", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("JobNo", boldFont)));
+                    //pdfTab.AddCell(new PdfPCell(new Paragraph("Sr.No", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Job No", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Data Entry Operator", boldFont)));
                     pdfTab.AddCell(new PdfPCell(new Paragraph("TAN", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("AccountName", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("FinancialYear", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("FormType", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Account Name", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Financial Year", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Form Type", boldFont)));
                     pdfTab.AddCell(new PdfPCell(new Paragraph("Quarter", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("ReturnType", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("OperatorComments", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("SupervisorName", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("SupervisorComments", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Return Type", boldFont)));
+                    pdfTab.AddCell(new PdfPCell(new Paragraph("Operator Comments", boldFont)));
+                    //pdfTab.AddCell(new PdfPCell(new Paragraph("SupervisorName", boldFont)));
+                    //pdfTab.AddCell(new PdfPCell(new Paragraph("SupervisorComments", boldFont)));
 
                     int i = 0;
                     foreach (RepeaterItem item in rptProcess.Items)
                     {
                         ProcessReturnsCL itemProcess = new ProcessReturnsCL();
                         HiddenField hfId = (HiddenField)item.FindControl("hfId");
-                        HiddenField lblSrno = (HiddenField)item.FindControl("hdnSrno");
+                        //HiddenField lblSrno = (HiddenField)item.FindControl("hdnSrno");
                         Label lblTAN = (Label)item.FindControl("lblTAN");
                         Label lblJobNo = (Label)item.FindControl("lblJobNo");
                         Label lblAccountName = (Label)item.FindControl("lblAccountName");
@@ -285,21 +282,20 @@ namespace Vatas_UI.Process
                         Label lblQuarter = (Label)item.FindControl("lblQuarter");
                         Label lblReturnType = (Label)item.FindControl("lblReturnType");
                         CheckBox chkRow = (CheckBox)item.FindControl("chkRow");
-                        DropDownList ddlOperator = (DropDownList)item.FindControl("ddlOperator");
+                        //DropDownList ddlOperator = (DropDownList)item.FindControl("ddlOperator");
+                        Label lblOperator = (Label)item.FindControl("lblOperator");
                         Label lblOperatorComments = (Label)item.FindControl("lblOperatorComments");
-                        Label lblSuperVisorName = (Label)item.FindControl("lblSuperVisorName");
-                        TextBox txtSupervisorComments = (TextBox)item.FindControl("txtSupervisorComments");
+                        //Label lblSuperVisorName = (Label)item.FindControl("lblSuperVisorName");
+                        //TextBox txtSupervisorComments = (TextBox)item.FindControl("txtSupervisorComments");
 
-                        if (chkRow != null && hfId != null && ddlOperator != null)
+                        if (chkRow != null && hfId != null)
                         {
                             //if (chkRow.Checked == true)
                             {
                                 int JobID = string.IsNullOrEmpty(hfId.Value) ? 0 : int.Parse(hfId.Value);
                                 int JobNo = int.Parse(lblJobNo.Text);
-                                string SupervisorName = "";
-                                if (ddlOperator.SelectedItem != null)
-                                    SupervisorName = ddlOperator.SelectedItem.Text;
-                                string Srno = lblSrno.Value;
+                                string OperatorName = lblOperator.Text;
+                                //string Srno = lblSrno.Value;
                                 string AccountName = lblAccountName.Text;
                                 string TAN = lblTAN.Text;
                                 string FinancialYear = lblFinancialYear.Text;
@@ -307,21 +303,20 @@ namespace Vatas_UI.Process
                                 string Quarter = lblQuarter.Text;
                                 string ReturnType = lblReturnType.Text;
                                 string OperatorComments = lblOperatorComments.Text;
-                                string SuperVisorName = lblSuperVisorName.Text;
-                                string SupervisorComments = txtSupervisorComments.Text;
-
-                                pdfTab.AddCell(Srno.ToString());
-                                pdfTab.AddCell(SupervisorName.ToString());
-                                pdfTab.AddCell(JobNo.ToString());
-                                pdfTab.AddCell(TAN.ToString());
-                                pdfTab.AddCell(AccountName.ToString());
-                                pdfTab.AddCell(FinancialYear.ToString());
-                                pdfTab.AddCell(FormNumber.ToString());
-                                pdfTab.AddCell(Quarter.ToString());
-                                pdfTab.AddCell(ReturnType.ToString());
-                                pdfTab.AddCell(OperatorComments);
-                                pdfTab.AddCell(SuperVisorName);
-                                pdfTab.AddCell(SupervisorComments);
+                                //string SuperVisorName = lblSuperVisorName.Text;
+                                //string SupervisorComments = txtSupervisorComments.Text;
+                                pdfTab.AddCell(new PdfPCell(new Paragraph(JobNo.ToString(), normalFont)));
+                                //pdfTab.AddCell(Srno.ToString());
+                                pdfTab.AddCell(new PdfPCell(new Paragraph(OperatorName.ToString(), normalFont)));
+                                pdfTab.AddCell(new PdfPCell(new Paragraph(TAN.ToString(), normalFont)));
+                                pdfTab.AddCell(new PdfPCell(new Paragraph(AccountName.ToString(), normalFont)));
+                                pdfTab.AddCell(new PdfPCell(new Paragraph(FinancialYear.ToString(), normalFont)));
+                                pdfTab.AddCell(new PdfPCell(new Paragraph(FormNumber.ToString(), normalFont)));
+                                pdfTab.AddCell(new PdfPCell(new Paragraph(Quarter.ToString(), normalFont)));
+                                pdfTab.AddCell(new PdfPCell(new Paragraph(ReturnType.ToString(), normalFont)));
+                                pdfTab.AddCell(new PdfPCell(new Paragraph(OperatorComments, normalFont)));
+                                //pdfTab.AddCell(SuperVisorName);
+                                //pdfTab.AddCell(SupervisorComments);
                             }
                         }
                     }
