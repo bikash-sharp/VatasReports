@@ -13,6 +13,7 @@ namespace Vatas_BAL
         private static readonly BLProcess _instance;
         private static AdminEntities _admin;
         private static VatasSolutionEntities _vatasSolution;
+        private static mydatabase1Entities _mydatabase1;
         static BLProcess()
         {
             _instance = new BLProcess();
@@ -37,6 +38,12 @@ namespace Vatas_BAL
         public static BLProcess Instance(VatasSolutionEntities context)
         {
             _vatasSolution = context;
+            return _instance;
+        }
+
+        public static BLProcess Instance(mydatabase1Entities context)
+        {
+            _mydatabase1 = context;
             return _instance;
         }
 
@@ -145,6 +152,20 @@ namespace Vatas_BAL
                 // ignored
                 var error = ex.InnerException;
                 result = new StringMessageCL("Failed", ResponseType.DANGER);
+            }
+            return result;
+        }
+
+        public ReturnDetailCL GetReturnDetail(string TAN, string Quarter, string FY, string FormNo, string RetType, long MasterID)
+        {
+            ReturnDetailCL result = new ReturnDetailCL();
+            try
+            {
+
+            }
+            catch(Exception ex)
+            {
+                var err = ex.Message;
             }
             return result;
         }

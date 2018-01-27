@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using Vatas_Common;
@@ -54,6 +55,12 @@ namespace Vatas_UI
                 return BLFunction.BaseUrl();
             }
         }
+
+        public static string ServiceURL()
+        {
+            string path = ConfigurationManager.AppSettings["ServiceURL"]+"";
+            return path.EndsWith("/") ? path : path + "/";
+        }
         /// <summary>
         /// get Current Base Directory of the page
         /// </summary>
@@ -74,7 +81,5 @@ namespace Vatas_UI
                 return BaseUrl;
             }
         }
-
-        
     }
 }

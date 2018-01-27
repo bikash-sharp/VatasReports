@@ -14,6 +14,7 @@ namespace Vatas_UI
         protected void Page_Load(object sender, EventArgs e)
         {
             hfPath.Value = AppPath();
+            hfServicePath.Value = ServiceURL();
             if (!this.Page.User.Identity.IsAuthenticated)
             {
                 HttpContext.Current.Response.RedirectToRoute("Login");

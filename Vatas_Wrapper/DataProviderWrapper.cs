@@ -283,6 +283,14 @@ namespace Vatas_Wrapper
             }
         }
 
+        public ReturnDetailCL GetReturnDetail(string TAN, string Quarter, string FY, string FormNo, string RetType, long MasterID=0)
+        {
+            using (mydatabase1Entities context = new mydatabase1Entities())
+            {
+                return BLProcess.Instance(context).GetReturnDetail(TAN, Quarter, FY, FormNo, RetType, MasterID);
+            }
+        }
+
         #endregion
 
     }

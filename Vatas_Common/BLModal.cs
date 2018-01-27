@@ -6,8 +6,7 @@ using System.Text;
 
 namespace Vatas_Common
 {
-    class BLModal { }
-
+    #region CommonSection
     public class DropDownCL
     {
         public string SelectedValue { get; set; }
@@ -16,6 +15,26 @@ namespace Vatas_Common
         public DropDownCL() { }
     }
 
+    public class StringMessageCL
+    {
+        public string Message { get; set; }
+        public string RetValue { get; set; }
+        public ResponseType Response { get; set; }
+        public long IntValue { get; set; }
+        public dynamic ObjClass { get; set; }
+        public StringMessageCL() { }
+        public StringMessageCL(string message, ResponseType response, string retValue = "", long intValue = 0, dynamic objValue = null)
+        {
+            Message = message;
+            Response = response;
+            RetValue = retValue;
+            IntValue = intValue;
+            ObjClass = objValue;
+        }
+    }
+    #endregion
+
+    #region UserAuthSection
     public class AuthMessageCL
     {
         public long UserID { get; set; }
@@ -46,30 +65,6 @@ namespace Vatas_Common
         }
     }
 
-    public class StringMessageCL
-    {
-
-        public string Message { get; set; }
-
-        public string RetValue { get; set; }
-
-        public ResponseType Response { get; set; }
-
-        public long IntValue { get; set; }
-
-        public dynamic ObjClass { get; set; }
-        public StringMessageCL() { }
-        public StringMessageCL(string message, ResponseType response, string retValue = "", long intValue = 0, dynamic objValue = null)
-        {
-            Message = message;
-            Response = response;
-            RetValue = retValue;
-            IntValue = intValue;
-            ObjClass = objValue;
-        }
-    }
-
-
     public class LogonCL
     {
 
@@ -96,19 +91,9 @@ namespace Vatas_Common
         public string FirmName { get; set; }
         public bool IsActive { get; set; }
     }
+    #endregion
 
-    public class UserFirmRolesWrapper
-    {
-        public UserFirmRolesWrapper()
-        {
-            Firms = new FirmCL();
-            Roles = new RoleCL();
-        }
-        public FirmCL Firms { get; set; }
-        public RoleCL Roles { get; set; }
-
-    }
-
+    #region ReturnsSection
     public class ReturnsCL
     {
         public string FirmName { get; set; }
@@ -124,15 +109,24 @@ namespace Vatas_Common
         public string Username { get; set; }
         public int RecordCount { get; set; }
     }
-
-    public class UserCL
+    public class ReturnDetailCL
     {
-        public int UserID { get; set; }
-        public string Username { get; set; }
-        public int RoleId { get; set; }
-        public string RoleName { get; set; }
-        public UserCL() { }
+        public decimal TaxDeducted { get; set; }
+        public decimal TaxDeposited { get; set; }
+        public decimal AmountPaid { get; set; }
+        public int DeducteeCount { get; set; }
+        public string TAN { get; set; }
+        public string FY { get; set; }
+        public string Quarter { get; set; }
+        public string FormNo { get; set; }
+        public string ReturnType { get; set; }
+        public long MasterID { get; set; }
+        public ReturnDetailCL()
+        {
+            TaxDeducted = TaxDeposited = AmountPaid= DeducteeCount = 0;
+        }
     }
+    #endregion
 
     #region ProcessList
 
@@ -170,6 +164,15 @@ namespace Vatas_Common
     }
     #endregion
 
+    #region UserSection
+    public class UserCL
+    {
+        public int UserID { get; set; }
+        public string Username { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
+        public UserCL() { }
+    }
     public class UserRegistrationCL
     {
         public int UserId { get; set; }
@@ -201,7 +204,9 @@ namespace Vatas_Common
         public int MenuId { get; set; }
         public string MenuName { get; set; }
     }
+    #endregion
 
+    #region MenuSection
     public class MenuCL
     {
         public int MenuID { get; set; }
@@ -212,7 +217,9 @@ namespace Vatas_Common
         public string ProjectName { get; set; }
         public int MenuOrder { get; set; }
     }
+    #endregion
 
+    #region ProjectPathSection
     public class PathCL
     {
         public int PathID { get; set; }
@@ -227,5 +234,7 @@ namespace Vatas_Common
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
     }
+    #endregion
+
 
 }

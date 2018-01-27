@@ -85,6 +85,60 @@ namespace Vatas_UI.Process {
         protected global::System.Web.UI.WebControls.LinkButton btnConfirm;
         
         /// <summary>
+        /// hdnTAN control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnTAN;
+        
+        /// <summary>
+        /// hdnQuarter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnQuarter;
+        
+        /// <summary>
+        /// hdnFY control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnFY;
+        
+        /// <summary>
+        /// hdnFormNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnFormNo;
+        
+        /// <summary>
+        /// hdnRetType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnRetType;
+        
+        /// <summary>
+        /// hdnMasterID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnMasterID;
+        
+        /// <summary>
         /// hidPages control.
         /// </summary>
         /// <remarks>
