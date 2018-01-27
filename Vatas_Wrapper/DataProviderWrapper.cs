@@ -246,6 +246,23 @@ namespace Vatas_Wrapper
                 return BLPath.Instance(context).AddUpdateProject(projectId,projectName);
             }
         }
+
+        public bool IsOldPasswordVaild(string EmailId,string OldPassword)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).IsOldPasswordVaild(EmailId,OldPassword);
+            }
+        }
+
+        public bool UpdateNewPassword(string EmailId,string Password)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLSiteUser.Instance(context).UpdateNewPassword(EmailId,Password);
+            }
+        }
+
         #endregion
 
         #region Process

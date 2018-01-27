@@ -36,8 +36,6 @@ namespace Vatas_UI
                 var loginResult = DataProviderWrapper.Instance.CheckUserCredentials(txtEmail.Text.Trim(), txtPassword.Text.Trim());
                 if (loginResult.Resp == ResponseType.SUCCESS)
                 {
-
-
                     string userData = loginResult.UserID + "$" + loginResult.UserName + "$" + loginResult.RoleName; ;
 
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(Convert.ToInt32(loginResult.UserID),

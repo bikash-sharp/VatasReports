@@ -112,7 +112,7 @@ namespace Vatas_BAL
         {
             try
             {
-                _context.proc_AddUpdateUser(user.UserId, user.FirstName, user.LastName, user.Email, user.Password, user.MobileNumber, user.AccountType, user.RoleId,user.IsActive);
+                _context.proc_AddUpdateUser(user.UserId, user.FirstName, user.LastName, user.Email, user.Password, user.MobileNumber, user.AccountType, user.RoleId, user.IsActive);
                 return true;
             }
             catch (Exception ex)
@@ -223,7 +223,7 @@ namespace Vatas_BAL
             try
             {
                 var userInfo = _context.tbl_UserGroup_Registration.Where(p => p.Super_User_Id == UserId).FirstOrDefault();
-                if(userInfo != null)
+                if (userInfo != null)
                 {
                     userInfo.Is_Login_Active = isActive;
                     _context.SaveChanges();
@@ -441,6 +441,48 @@ namespace Vatas_BAL
             {
                 _context.proc_AddUpdateMenu(MenuId, MenuName);
                 return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool IsOldPasswordVaild(string emailId, string OldPassword)
+        {
+            try
+            {
+                var result = _context.tbl_UserGroup_Registration.Where(s => s.EmailID.ToLower() == emailId.ToLower().Trim()).FirstOrDefault();
+                if (result != null)
+                {
+                    if (result.Password.Trim() == OldPassword.Trim())
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateNewPassword(string emailId, string Password)
+        {
+            try
+            {
+                var result = _context.tbl_UserGroup_Registration.Where(s => s.EmailID.ToLower() == emailId.ToLower().Trim()).FirstOrDefault();
+                if (result != null)
+                {
+                    result.Password = Password.Trim();
+                    result.Confirm_Password = Password.Trim();
+                    _context.SaveChanges();
+                    return true;
+                }
+                else
+                    return false;
             }
             catch (Exception ex)
             {

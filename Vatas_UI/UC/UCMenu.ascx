@@ -1,14 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCMenu.ascx.cs" Inherits="Vatas_UI.UC.UCMenu" %>
 
 <ul class="sidebar-menu">
-    <li id="lihome"><a href="<%=Page.ResolveUrl("~/Index")%>" title="Home">
-        <i class="fa fa-dashboard"></i><span>Dashboard</span></a>
-    </li>
+    <li id="lihome"><a href="<%=Page.ResolveUrl("~/Index")%>" title="Home"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
+    <li id="liChangePassword"><a href="<%=Page.ResolveUrl("~/ChangePassword")%>" title="Change Password"><i class="fa fa-key"></i><span>Change Password</span></a></li>
     <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
         {
     %>
     <li id="liConfiguration" class="treeview">
-        <a href="javascript:;" title="Reports"><i class="fa fa-cogs"></i><span>User</span>
+        <a href="javascript:;" title="Reports"><i class="fa fa-cogs"></i><span>Configuration</span>
             <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
