@@ -14,6 +14,7 @@
         <div class="error-page">
             <h2 class="headline text-yellow">401</h2>
             <div class="error-content">
+
                 <h3><i class="fa fa-danger text-red"></i>Oops! Access is denied.</h3>
                 <p>
                     401 - Unauthorized : Access denied due to vaild permission. <br />You do not have permission to view this directory or page using the credentials that you supplied.
