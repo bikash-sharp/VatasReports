@@ -988,6 +988,7 @@
     <Content Include="Configuration\ManageProject.aspx" />
     <Content Include="ErrorPages\401.aspx" />
     <Content Include="ErrorPages\404.aspx" />
+    <Content Include="Template\TaxInvoice.html" />
     <Content Include="User\CreateUser.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="ForgotPassword.aspx" />
