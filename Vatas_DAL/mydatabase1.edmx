@@ -4,20 +4,53 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="mydatabase1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="mydatabase1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="pr_get_returnDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TAN" Type="varchar" Mode="In" />
+          <Parameter Name="QUARTER" Type="varchar" Mode="In" />
+          <Parameter Name="FY" Type="varchar" Mode="In" />
+          <Parameter Name="FORMNO" Type="varchar" Mode="In" />
+          <Parameter Name="RETTYPE" Type="varchar" Mode="In" />
+          <Parameter Name="MasterID" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="mydatabase1ModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mydatabase1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="mydatabase1Entities" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="mydatabase1Entities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="pr_get_returnDetails" ReturnType="Collection(mydatabase1Model.pr_get_returnDetails_Result)">
+            <Parameter Name="TAN" Mode="In" Type="String" />
+            <Parameter Name="QUARTER" Mode="In" Type="String" />
+            <Parameter Name="FY" Mode="In" Type="String" />
+            <Parameter Name="FORMNO" Mode="In" Type="String" />
+            <Parameter Name="RETTYPE" Mode="In" Type="String" />
+            <Parameter Name="MasterID" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="pr_get_returnDetails_Result">
+          <Property Type="Decimal" Name="TaxDeducted" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="TaxDeposited" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="AmountPaid" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Int32" Name="NoOfDeductee" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="mydatabase1ModelStoreContainer" CdmEntityContainer="mydatabase1Entities" />
+        <EntityContainerMapping StorageEntityContainer="mydatabase1ModelStoreContainer" CdmEntityContainer="mydatabase1Entities" >
+          <FunctionImportMapping FunctionImportName="pr_get_returnDetails" FunctionName="mydatabase1Model.Store.pr_get_returnDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="mydatabase1Model.pr_get_returnDetails_Result">
+                <ScalarProperty Name="TaxDeducted" ColumnName="TaxDeducted" />
+                <ScalarProperty Name="TaxDeposited" ColumnName="TaxDeposited" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="NoOfDeductee" ColumnName="NoOfDeductee" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

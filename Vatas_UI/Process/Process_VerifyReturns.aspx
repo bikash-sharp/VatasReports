@@ -209,7 +209,7 @@
                 var qtr=$(this).data('qtr');
                 var frmno=$(this).data('frm');
                 var rettype=$(this).data('ret')
-                
+                $('.overlay').css('display', 'block');
                 $.ajax({
                     url: $('[id$=hfServicePath]').val()+"ReportService.asmx/GetReturnDetails",
                     headers: {
@@ -217,14 +217,22 @@
                     },
                     type: "POST",
                     data: {"TAN":tan,"Quarter":qtr,"FY":fy,"FormNo":frmno,"RetType":rettype,"MasterID":id },
-                    dataType: "json",
-                    success: function (result) {
-                        $("#EquipmentModel div.modal-body").html(result);
-                        $('#EquipmentModel').modal('show');
-                        $.validator.unobtrusive.parse('#EquipmentModel form');
+                    dataType: "xml",
+                    success: function (d) {
+                        alert('Sucess');
+                        var result = JSON.parse(((new XMLSerializer()).serializeToString(d)).replace('</string>','').replace(/^.+>/,''));
+                        var tblbody = $('#tblTaxDetail tbody');
+                        var row ='<tr><td>'+result.TaxDeducted+'</td><td>'+result.TaxDeposited+'</td><td>'+result.AmountPaid+'</td><td>'+result.DeducteeCount+'</td>';
+                        tblbody.html('');
+                        tblbody.append(row);
+                        $('#DetailModel').modal('show');   
+                    },
+                    error: function () {
+                        console.log("error");
                     }
+                }).done(function(d){
+                    $('.overlay').css('display', 'none');
                 });
-                $('#DetailModel').modal('show');
             });
 
             $("#processTable [id*=chkHeader]").on("click", headerclick);
