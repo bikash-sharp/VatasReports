@@ -17,7 +17,7 @@
                 <h3><i class="fa fa-danger text-red"></i>Oops! Access is denied.</h3>
                 <p>
                     401 - Unauthorized : Access denied due to vaild permission. <br />You do not have permission to view this directory or page using the credentials that you supplied.
-            Meanwhile, you may <a href="<%= this.AppPath() + "Home" %>">return to dashboard</a>.
+            Meanwhile, you may <a href="<%= this.AppPath() + "Index" %>">return to dashboard</a>.
                 </p>
             </div>
         </div>
