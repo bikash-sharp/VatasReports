@@ -219,7 +219,6 @@
                     data: {"TAN":tan,"Quarter":qtr,"FY":fy,"FormNo":frmno,"RetType":rettype,"MasterID":id },
                     dataType: "xml",
                     success: function (d) {
-                        alert('Sucess');
                         var result = JSON.parse(((new XMLSerializer()).serializeToString(d)).replace('</string>','').replace(/^.+>/,''));
                         var tblbody = $('#tblTaxDetail tbody');
                         var row ='<tr><td>'+result.TaxDeducted+'</td><td>'+result.TaxDeposited+'</td><td>'+result.AmountPaid+'</td><td>'+result.DeducteeCount+'</td>';
