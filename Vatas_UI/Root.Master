@@ -95,7 +95,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" EnablePartialRendering="true" LoadScriptsBeforeUI="true" ScriptMode="Release" AjaxFrameworkMode="Enabled" ClientIDMode="Static" AsyncPostBackTimeout="0"></asp:ScriptManager>
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" EnablePartialRendering="true" LoadScriptsBeforeUI="true" ScriptMode="Release" ClientIDMode="Static"></asp:ScriptManager>
         <asp:HiddenField ID="hfPath" ClientIDMode="Static" runat="server" />
         <asp:HiddenField ID="hfServicePath" ClientIDMode="Static" runat="server" />
         <div class="wrapper">

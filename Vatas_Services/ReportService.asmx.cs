@@ -14,16 +14,14 @@ namespace Vatas_Services
     /// <summary>
     /// Summary description for ReportService
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
-    [WebServiceBinding(ConformsTo = WsiProfiles.None)]
+    //[WebService]
+    //[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [ScriptService]
     public class ReportService : System.Web.Services.WebService
     {
-        [WebInvoke(Method ="POST",RequestFormat =WebMessageFormat.Json,ResponseFormat =WebMessageFormat.Json)]
         [WebMethod(BufferResponse = false, EnableSession = true)]
-        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string GetReturnDetails(string TAN, string Quarter, string FY, string FormNo, string RetType, long MasterID)
         {
             ReturnDetailCL result = new ReturnDetailCL();
@@ -35,7 +33,8 @@ namespace Vatas_Services
             {
 
             }
-            return JsonConvert.SerializeObject(result);
+            string jsonResult = JsonConvert.SerializeObject(result,Formatting.Indented);
+            return jsonResult;
         }
     }
 }

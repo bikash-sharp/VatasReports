@@ -161,7 +161,18 @@ namespace Vatas_BAL
             ReturnDetailCL result = new ReturnDetailCL();
             try
             {
-
+                result = _mydatabase1.pr_get_returnDetails(TAN, Quarter, FY, FormNo, RetType, MasterID.ToString()).Select(p=> new ReturnDetailCL {
+                    AmountPaid = p.AmountPaid.GetValueOrDefault(0),
+                    DeducteeCount=p.NoOfDeductee.GetValueOrDefault(0),
+                    TaxDeducted=p.TaxDeducted.GetValueOrDefault(0),
+                    TaxDeposited=p.TaxDeposited.GetValueOrDefault(0),
+                    FormNo =FormNo,
+                    FY=FY,
+                    TAN=TAN,
+                    Quarter=Quarter,
+                    ReturnType=RetType,
+                    MasterID=MasterID
+                    }).FirstOrDefault() ;
             }
             catch(Exception ex)
             {

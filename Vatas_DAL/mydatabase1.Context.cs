@@ -12,6 +12,8 @@ namespace Vatas_DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class mydatabase1Entities : DbContext
     {
@@ -25,5 +27,34 @@ namespace Vatas_DAL
             throw new UnintentionalCodeFirstException();
         }
     
+    
+        public virtual ObjectResult<pr_get_returnDetails_Result> pr_get_returnDetails(string tAN, string qUARTER, string fY, string fORMNO, string rETTYPE, string masterID)
+        {
+            var tANParameter = tAN != null ?
+                new ObjectParameter("TAN", tAN) :
+                new ObjectParameter("TAN", typeof(string));
+    
+            var qUARTERParameter = qUARTER != null ?
+                new ObjectParameter("QUARTER", qUARTER) :
+                new ObjectParameter("QUARTER", typeof(string));
+    
+            var fYParameter = fY != null ?
+                new ObjectParameter("FY", fY) :
+                new ObjectParameter("FY", typeof(string));
+    
+            var fORMNOParameter = fORMNO != null ?
+                new ObjectParameter("FORMNO", fORMNO) :
+                new ObjectParameter("FORMNO", typeof(string));
+    
+            var rETTYPEParameter = rETTYPE != null ?
+                new ObjectParameter("RETTYPE", rETTYPE) :
+                new ObjectParameter("RETTYPE", typeof(string));
+    
+            var masterIDParameter = masterID != null ?
+                new ObjectParameter("MasterID", masterID) :
+                new ObjectParameter("MasterID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pr_get_returnDetails_Result>("pr_get_returnDetails", tANParameter, qUARTERParameter, fYParameter, fORMNOParameter, rETTYPEParameter, masterIDParameter);
+        }
     }
 }
