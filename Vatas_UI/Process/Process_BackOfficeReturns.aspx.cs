@@ -213,7 +213,7 @@ namespace Vatas_UI.Process
 
             string fileName = DateTime.Now.Date.ToString("MM/dd/yyyy") + "_Process_BackOfficeReturns.csv";
 
-            string filePath = Path.Combine(Server.MapPath("~/PDFFiles"), fileName);
+            //string filePath = Path.Combine(Server.MapPath("~/PDFFiles"), fileName);
             var normalFont = FontFactory.GetFont(FontFactory.HELVETICA, 12);
             var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
 
@@ -226,7 +226,7 @@ namespace Vatas_UI.Process
 
             try
             {
-                PdfWriter.GetInstance(doc, new FileStream(filePath, FileMode.Create));
+                PdfWriter writer = PdfWriter.GetInstance(doc, Response.OutputStream);
                 PdfPTable pdfTab = new PdfPTable(10);
                 pdfTab.HorizontalAlignment = Element.ALIGN_CENTER;
                 pdfTab.WidthPercentage = 90;
@@ -299,21 +299,23 @@ namespace Vatas_UI.Process
                     }
 
                 }
-
                 doc.Open();
                 doc.Add(p);
                 doc.Add(pdfTab);
+                writer.CloseStream = false;
                 doc.Close();
-                byte[] content = File.ReadAllBytes(filePath);
-                HttpContext context = HttpContext.Current;
-                context.Response.BinaryWrite(content);
-                context.Response.ContentType = "application/pdf";
-                context.Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
-                context.Response.End();
+
+                //byte[] content = File.ReadAllBytes(filePath);
+                Response.Buffer = true;
+                Response.ContentType = "application/pdf";
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Write(doc);
+                Response.End();
             }
             catch (Exception ex)
             {
-                throw;
+                //throw;
             }
             finally
             {
