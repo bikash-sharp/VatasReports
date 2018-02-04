@@ -197,6 +197,7 @@
 
             $('[id$=txtSearch]').on('keydown', function (e) {
                 if (e.keyCode == 13) {
+                    $('[id$=hidPageNo]').val('1');
                     $('[id$=btnSearch]').click();
                 }
             });

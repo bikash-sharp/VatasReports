@@ -38,6 +38,11 @@ namespace Vatas_UI.Process
             RecordCount = TotalPages;
             float pages = Convert.ToSingle(TotalPages) / Convert.ToSingle(PageSize);
             TotalPages = Convert.ToInt32(Math.Ceiling(pages));
+            if (TotalPages < PageNumber)
+            {
+                PageNumber = 1;
+                hidPageNo.Value = PageNumber.ToString();
+            }
             hidPages.Value = TotalPages.ToString();
         }
 
