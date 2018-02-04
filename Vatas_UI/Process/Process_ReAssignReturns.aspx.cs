@@ -137,7 +137,7 @@ namespace Vatas_UI.Process
                 {
                     ProcessReturnsCL itemProcess = new ProcessReturnsCL();
                     HiddenField hfId = (HiddenField)item.FindControl("hfId");
-                    Label lblSrno = (Label)item.FindControl("lblSrno");
+                    //Label lblSrno = (Label)item.FindControl("lblSrno");
                     Label lblTAN = (Label)item.FindControl("lblTAN");
                     Label lblJobNo = (Label)item.FindControl("lblJobNo");
                     Label lblAccountName = (Label)item.FindControl("lblAccountName");
@@ -157,22 +157,22 @@ namespace Vatas_UI.Process
                         {
                             int JobID = string.IsNullOrEmpty(hfId.Value) ? 0 : int.Parse(hfId.Value);
                             int JobNo = int.Parse(lblJobNo.Text);
-                            string SupervisorName = "";
+                            string OperatorName = "";
                             if (ddlOperator.SelectedItem != null)
-                                SupervisorName = ddlOperator.SelectedItem.Text;
-                            string Srno = lblSrno.Text;
+                                OperatorName = ddlOperator.SelectedItem.Text;
+                            string Srno = (++i).ToString();
                             string AccountName = lblAccountName.Text;
                             string TAN = lblTAN.Text;
                             string FinancialYear = lblFinancialYear.Text;
                             string FormNumber = lblFormNumber.Text;
                             string Quarter = lblQuarter.Text;
                             string ReturnType = lblReturnType.Text;
-                            string OperatorComments = lblOperatorComments.Text;
-                            string SuperVisorName = lblSuperVisorName.Text;
-                            string SupervisorComments = txtSupervisorComments.Text;
+                            //string OperatorComments = lblOperatorComments.Text;
+                            //string SuperVisorName = lblSuperVisorName.Text;
+                            //string SupervisorComments = txtSupervisorComments.Text;
 
-                            strwriter.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\",\"{9}\",\"{10}\",\"{11}\"",
-                                Srno, SupervisorName, JobNo, TAN, AccountName, FinancialYear, FormNumber, Quarter, ReturnType, OperatorComments, SuperVisorName, SupervisorComments));
+                            strwriter.WriteLine(string.Format("\"{0}\",\"{1}\",\"{2}\",\"{3}\",\"{4}\",\"{5}\",\"{6}\",\"{7}\",\"{8}\"",
+                                Srno, JobNo, OperatorName,  TAN, AccountName, FinancialYear, FormNumber, Quarter, ReturnType));
 
                         }
                     }
@@ -246,7 +246,7 @@ namespace Vatas_UI.Process
             try
             {
                 PdfWriter writer = PdfWriter.GetInstance(doc, Response.OutputStream);
-                PdfPTable pdfTab = new PdfPTable(12);
+                PdfPTable pdfTab = new PdfPTable(9);
                 pdfTab.HorizontalAlignment = Element.ALIGN_CENTER;
                 pdfTab.WidthPercentage = 90;
                 pdfTab.SpacingBefore = 0f;
@@ -265,16 +265,16 @@ namespace Vatas_UI.Process
                     pdfTab.AddCell(new PdfPCell(new Paragraph("FormType", boldFont)));
                     pdfTab.AddCell(new PdfPCell(new Paragraph("Quarter", boldFont)));
                     pdfTab.AddCell(new PdfPCell(new Paragraph("ReturnType", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("OperatorComments", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("SupervisorName", boldFont)));
-                    pdfTab.AddCell(new PdfPCell(new Paragraph("SupervisorComments", boldFont)));
+                    //pdfTab.AddCell(new PdfPCell(new Paragraph("OperatorComments", boldFont)));
+                    //pdfTab.AddCell(new PdfPCell(new Paragraph("SupervisorName", boldFont)));
+                    //pdfTab.AddCell(new PdfPCell(new Paragraph("SupervisorComments", boldFont)));
 
                     int i = 0;
                     foreach (RepeaterItem item in rptProcess.Items)
                     {
                         ProcessReturnsCL itemProcess = new ProcessReturnsCL();
                         HiddenField hfId = (HiddenField)item.FindControl("hfId");
-                        Label lblSrno = (Label)item.FindControl("lblSrno");
+                        //Label lblSrno = (Label)item.FindControl("lblSrno");
                         Label lblTAN = (Label)item.FindControl("lblTAN");
                         Label lblJobNo = (Label)item.FindControl("lblJobNo");
                         Label lblAccountName = (Label)item.FindControl("lblAccountName");
@@ -284,9 +284,9 @@ namespace Vatas_UI.Process
                         Label lblReturnType = (Label)item.FindControl("lblReturnType");
                         CheckBox chkRow = (CheckBox)item.FindControl("chkRow");
                         DropDownList ddlOperator = (DropDownList)item.FindControl("ddlOperator");
-                        Label lblOperatorComments = (Label)item.FindControl("lblOperatorComments");
-                        Label lblSuperVisorName = (Label)item.FindControl("lblSuperVisorName");
-                        TextBox txtSupervisorComments = (TextBox)item.FindControl("txtSupervisorComments");
+                        //Label lblOperatorComments = (Label)item.FindControl("lblOperatorComments");
+                        //Label lblSuperVisorName = (Label)item.FindControl("lblSuperVisorName");
+                        //TextBox txtSupervisorComments = (TextBox)item.FindControl("txtSupervisorComments");
 
                         if (chkRow != null && hfId != null && ddlOperator != null)
                         {
@@ -297,16 +297,16 @@ namespace Vatas_UI.Process
                                 string SupervisorName = "";
                                 if (ddlOperator.SelectedItem != null)
                                     SupervisorName = ddlOperator.SelectedItem.Text;
-                                string Srno = lblSrno.Text;
+                                string Srno = (++i).ToString();
                                 string AccountName = lblAccountName.Text;
                                 string TAN = lblTAN.Text;
                                 string FinancialYear = lblFinancialYear.Text;
                                 string FormNumber = lblFormNumber.Text;
                                 string Quarter = lblQuarter.Text;
                                 string ReturnType = lblReturnType.Text;
-                                string OperatorComments = lblOperatorComments.Text;
-                                string SuperVisorName = lblSuperVisorName.Text;
-                                string SupervisorComments = txtSupervisorComments.Text;
+                                //string OperatorComments = lblOperatorComments.Text;
+                                //string SuperVisorName = lblSuperVisorName.Text;
+                                //string SupervisorComments = txtSupervisorComments.Text;
 
                                 pdfTab.AddCell(Srno.ToString());
                                 pdfTab.AddCell(SupervisorName.ToString());
@@ -317,9 +317,9 @@ namespace Vatas_UI.Process
                                 pdfTab.AddCell(FormNumber.ToString());
                                 pdfTab.AddCell(Quarter.ToString());
                                 pdfTab.AddCell(ReturnType.ToString());
-                                pdfTab.AddCell(OperatorComments);
-                                pdfTab.AddCell(SuperVisorName);
-                                pdfTab.AddCell(SupervisorComments);
+                                //pdfTab.AddCell(OperatorComments);
+                                //pdfTab.AddCell(SuperVisorName);
+                                //pdfTab.AddCell(SupervisorComments);
                             }
                         }
                     }
@@ -342,11 +342,11 @@ namespace Vatas_UI.Process
             }
             catch (Exception ex)
             {
-                throw;
+                BLFunction.ShowAlert(this, "Error !!! " + ex.Message, ResponseType.DANGER);
             }
             finally
             {
-                doc.Close();
+                
             }
         }
     }

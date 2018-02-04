@@ -339,11 +339,11 @@ namespace Vatas_UI.Process
             }
             catch (Exception ex)
             {
-                throw;
+                BLFunction.ShowAlert(this, "Error !!! "+ex.Message, ResponseType.DANGER);
             }
             finally
             {
-                doc.Close();
+
             }
         }
     }

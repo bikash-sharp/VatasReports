@@ -76,12 +76,12 @@ namespace Vatas_UI.User
                 bool IsSaved = DataProviderWrapper.Instance.EnableDisableRegisteredUser(UserId, "N");
                 if (IsSaved)
                 {
-                    BLFunction.ShowAlert(this, "User has been deleted successfully.", ResponseType.SUCCESS);
+                    BLFunction.ShowAlert(this, "User has been disabled successfully.", ResponseType.SUCCESS);
                     BindData(isActive);
                 }
                 else
                 {
-                    BLFunction.ShowAlert(this, "Unable to delete the user.", ResponseType.WARNING);
+                    BLFunction.ShowAlert(this, "Unable to disable the user.", ResponseType.WARNING);
                 }
             }
             catch (Exception ex)

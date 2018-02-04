@@ -2914,10 +2914,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/28/2017 17:00:50</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>02/01/2018 00:29:56</publishTime>
+      <publishTime>02/03/2018 23:21:46</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>02/01/2018 00:29:56</publishTime>
+      <publishTime>02/03/2018 23:21:46</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>11/03/2015 17:43:42</publishTime>
@@ -2995,7 +2995,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/07/2018 01:58:28</publishTime>
     </File>
     <File Include="bin/Vatas_UI.dll">
-      <publishTime>02/01/2018 00:28:41</publishTime>
+      <publishTime>02/03/2018 23:20:27</publishTime>
     </File>
     <File Include="bin/Vatas_UI.pdb">
       <publishTime>01/07/2018 16:39:29</publishTime>
@@ -3043,7 +3043,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/27/2018 18:27:03</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>02/01/2018 00:29:35</publishTime>
+      <publishTime>02/03/2018 23:21:25</publishTime>
     </File>
     <File Include="Process/Process_AssignReturns.aspx">
       <publishTime>01/28/2018 00:41:10</publishTime>

@@ -45,18 +45,18 @@
                                                     <asp:CheckBox ID="chkHeader" CssClass="chkheader" runat="server" />
                                                 </div>
                                             </th>
-                                            <th>SNo</th>
-                                            <th>Data Entry Operator</th>
                                             <th>Job No</th>
+                                            <%--<th>SNo</th>--%>
+                                            <th>Data Entry Operator</th>
                                             <th>TAN</th>
                                             <th>Account Name</th>
                                             <th>Financial Year(FY)</th>
                                             <th>Form Type</th>
                                             <th>Quarter</th>
                                             <th>Return Type</th>
-                                            <th>Operator Comments</th>
-                                            <th>SuperVisor Name</th>
-                                            <th>SuperVisor Comments</th>
+                                            <%--<th>Operator Comments</th>--%>
+                                            <%--<th>SuperVisor Name</th>--%>
+                                            <%--<th>SuperVisor Comments</th>--%>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,15 +69,17 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td>
-                                                    </td>
-                                                <td>
-                                                    <asp:HiddenField ID="hfSelectedUserID" runat="server" Value='<%# Eval("NextUserID") %>' />
-                                                    <asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList></td>
-                                                    <td>
                                                         <asp:HiddenField ID="hfId" runat="server" Value='<%# Eval("JobID") %>' />
                                                         <asp:Label ID="lblJobNo" Text='<%# Eval("JobNo") %>' runat="server" />
                                                     </td>
+                                                    <%--<td>
+                                                        <asp:Label ID="lblSrno" Text='<%# Container.ItemIndex + 1 %>' runat="server" /></td>
+                                                    </td>--%>
+                                                <td>
+                                                    <asp:HiddenField ID="hfSelectedUserID" runat="server" Value='<%# Eval("NextUserID") %>' />
+                                                    <asp:DropDownList ID="ddlOperator" runat="server" CssClass="form-control" DataSource='<%# Eval("SupervisorList") %>' DataTextField="DataText" DataValueField="DataValue"></asp:DropDownList>
+                                                </td>
+                                                    
                                                     <td>
                                                         <asp:Label ID="lblTAN" Text='<%# Eval("TAN") %>' runat="server" /></td>
                                                     <td>
@@ -90,12 +92,9 @@
                                                         <asp:Label ID="lblQuarter" Text='<%# Eval("Quarter") %>' runat="server" /></td>
                                                     <td>
                                                         <asp:Label ID="lblReturnType" Text='<%# Eval("ReturnType") %>' runat="server" /></td>
-                                                    <td>
-                                                        <asp:Label ID="lblOperatorComments" Text='<%# Eval("ReasonforReturn") %>' runat="server" /></td>
-                                                    <td>
-                                                        <asp:Label ID="lblSuperVisorName" Text='<%# Eval("SupervisorName") %>' runat="server" /></td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtSupervisorComments" CssClass="form-control" TextMode="MultiLine" Style="resize: none; overflow-wrap: break-word; overflow-y: auto;" Rows="4" Columns="40" runat="server"></asp:TextBox></td>
+                                                    <%--<td><asp:Label ID="lblOperatorComments" Text='<%# Eval("ReasonforReturn") %>' runat="server" /></td>--%>
+                                                    <%--<td><asp:Label ID="lblSuperVisorName" Text='<%# Eval("SupervisorName") %>' runat="server" /></td>--%>
+                                                    <%--<td><asp:TextBox ID="txtSupervisorComments" CssClass="form-control" TextMode="MultiLine" Style="resize: none; overflow-wrap: break-word; overflow-y: auto;" Rows="4" Columns="40" runat="server"></asp:TextBox></td>--%>
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
