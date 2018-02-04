@@ -48,7 +48,8 @@ IF OBJECT_ID('tempdb..#DetailResult') IS NOT NULL
 		INNER JOIN tbl_ProcessesHistoryofjob PHJ ON RC.Job_ID = PHJ.MasterID 
 		INNER JOIN tbl_Firm TF ON RC.FirmID = TF.FirmId
 		INNER JOIN tbl_ProcessStatus PS ON PHJ.Job_Status = PS.Process_Code
-	WHERE (PHJ.Job_Status = @JobStatus) AND (PHJ.Is_Sent = '') AND ( RC.[Quarter] IS NOT NULL AND RC.[Quarter] != '') 	
+	WHERE (PHJ.Job_Status = @JobStatus) AND (PHJ.Is_Sent = '') 
+	AND ( RC.[Quarter] IS NOT NULL AND RC.[Quarter] != '' AND RC.[TAN] IS NOT NULL AND RC.[TAN] !='' AND RC.FY IS NOT NULL AND RC.FY !='' AND RC.FY != '---Select---')
 	ORDER BY RC.SerialNo_By_Job_Firm
 
 	--SELECT * FROM #DetailResult
