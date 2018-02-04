@@ -51,6 +51,7 @@
           <Parameter Name="FirmId" Type="int" Mode="In" />
           <Parameter Name="PageNumber" Type="int" Mode="In" />
           <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="SearchText" Type="varchar(max)" Mode="In" />
         </Function>
         <EntityContainer Name="VatasSolutionModelStoreContainer">
           <EntitySet Name="tbl_ProcessesHistoryofjob" EntityType="Self.tbl_ProcessesHistoryofjob" Schema="dbo" store:Type="Tables" />
@@ -78,6 +79,7 @@
             <Parameter Name="FirmId" Mode="In" Type="Int32" />
             <Parameter Name="PageNumber" Mode="In" Type="Int32" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="SearchText" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbl_ProcessPriority">

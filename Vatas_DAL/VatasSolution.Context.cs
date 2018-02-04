@@ -57,7 +57,7 @@ namespace Vatas_DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_GetReturnsByJobStatus_Result>("proc_Report_GetReturnsByJobStatus", jobStatusParameter, pageNumberParameter, pageSizeParameter, searhTextParameter);
         }
     
-        public virtual ObjectResult<proc_Report_SearchJobsBetweenDatesWithFirmName_Result> proc_Report_SearchJobsBetweenDatesWithFirmName(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> firmId, Nullable<int> pageNumber, Nullable<int> pageSize)
+        public virtual ObjectResult<proc_Report_SearchJobsBetweenDatesWithFirmName_Result> proc_Report_SearchJobsBetweenDatesWithFirmName(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> firmId, Nullable<int> pageNumber, Nullable<int> pageSize, string searchText)
         {
             var startDateParameter = startDate.HasValue ?
                 new ObjectParameter("StartDate", startDate) :
@@ -79,7 +79,11 @@ namespace Vatas_DAL
                 new ObjectParameter("PageSize", pageSize) :
                 new ObjectParameter("PageSize", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_SearchJobsBetweenDatesWithFirmName_Result>("proc_Report_SearchJobsBetweenDatesWithFirmName", startDateParameter, endDateParameter, firmIdParameter, pageNumberParameter, pageSizeParameter);
+            var searchTextParameter = searchText != null ?
+                new ObjectParameter("SearchText", searchText) :
+                new ObjectParameter("SearchText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Report_SearchJobsBetweenDatesWithFirmName_Result>("proc_Report_SearchJobsBetweenDatesWithFirmName", startDateParameter, endDateParameter, firmIdParameter, pageNumberParameter, pageSizeParameter, searchTextParameter);
         }
     }
 }

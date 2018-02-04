@@ -122,7 +122,7 @@ namespace Vatas_BAL
             try
             {
                 result =
-                    _vatasSolution.proc_Report_SearchJobsBetweenDatesWithFirmName(startDate, endDate, firmId,PageNumber,PageSize)
+                    _vatasSolution.proc_Report_SearchJobsBetweenDatesWithFirmName(startDate, endDate, firmId,PageNumber,PageSize, SearchText)
                         .ToList()
                         .Select(p => new ReturnsCL
                         {
