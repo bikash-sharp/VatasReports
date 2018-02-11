@@ -85,6 +85,15 @@ namespace Vatas_UI.Process {
         protected global::System.Web.UI.WebControls.LinkButton btnConfirm;
         
         /// <summary>
+        /// hdnJobId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnJobId;
+        
+        /// <summary>
         /// hdnTAN control.
         /// </summary>
         /// <remarks>
@@ -137,6 +146,24 @@ namespace Vatas_UI.Process {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnMasterID;
+        
+        /// <summary>
+        /// btnReAssign control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReAssign;
+        
+        /// <summary>
+        /// btnUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpload;
         
         /// <summary>
         /// hidPages control.

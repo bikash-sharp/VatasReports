@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Vatas_BAL;
@@ -293,5 +294,25 @@ namespace Vatas_Wrapper
 
         #endregion
 
+        #region GetDirectoryFiles
+        public List<FilesCL> GetDirectoryFiles(string JobID,string FY,String FirmName= "VatasInfosys-JALANDHAR", String JobName= "E-TDS")
+        {
+            List<FilesCL> result = new List<FilesCL>();
+            String DirPath = BLFunction.DirectoryPath() + FY+"\""+FirmName+"\""+JobName+"\""+JobID+"\"";
+            DirectoryInfo dirInfo = new DirectoryInfo(DirPath);
+            if(dirInfo.Exists)
+            {
+                var dirfiles = dirInfo.GetFiles();
+                foreach(var _file in dirfiles)
+                {
+                    FilesCL _newFile = new FilesCL();
+                    _newFile.fileName = _file.Name;
+                    _newFile.FileLocation = _file.FullName;
+                    result.Add(_newFile);
+                }
+            }
+            return result;
+        }
+        #endregion
     }
 }

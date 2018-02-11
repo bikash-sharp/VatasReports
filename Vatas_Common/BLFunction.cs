@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -34,6 +35,12 @@ namespace Vatas_Common
         {
             string path = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpContext.Current.Request.ApplicationPath;
             return path.EndsWith("/") ? path : path + "/";
+        }
+
+        public static string DirectoryPath()
+        {
+            string path = ConfigurationManager.AppSettings["DirectoryLocation"] + "";
+            return path.EndsWith("\"") ? path : path + "\"";
         }
 
         /// <summary>

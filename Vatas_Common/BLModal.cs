@@ -236,5 +236,12 @@ namespace Vatas_Common
     }
     #endregion
 
+    #region Folder&Files
+    public class FilesCL
+    {
+        public string fileName { get; set; }
+        public string FileLocation { get; set; }
+    }
+    #endregion
 
 }

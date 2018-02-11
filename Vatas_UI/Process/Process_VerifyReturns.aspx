@@ -96,7 +96,7 @@
                                                             <asp:Label ID="lblReturnType" Text='<%# Eval("ReturnType") %>' runat="server" /></td>
                                                         <td>
                                                             <asp:Label ID="lblOperatorComments" Text='<%# Eval("ReasonforReturn") %>' runat="server" /></td>
-                                                        <td><a href="javascript:;" title="View Details" class="btn btn-info view-details" data-tan='<%# Eval("TAN") %>' data-fy='<%# Eval("FinancialYear") %>' data-qtr='<%# Eval("Quarter") %>' data-ret='<%# Eval("ReturnType") %>' data-frm='<%# Eval("FormNumber") %>' data-id='<%# Eval("MasterID") %>'><i class="glyphicon glyphicon-eye-open"></i>&nbsp;View</td>
+                                                        <td><a href="javascript:;" title="View Details" class="btn btn-info view-details" data-jobid='<%# Eval("JobID") %>' data-tan='<%# Eval("TAN") %>' data-fy='<%# Eval("FinancialYear") %>' data-qtr='<%# Eval("Quarter") %>' data-ret='<%# Eval("ReturnType") %>' data-frm='<%# Eval("FormNumber") %>' data-id='<%# Eval("MasterID") %>'><i class="glyphicon glyphicon-eye-open"></i>&nbsp;View</td>
                                                         <%--<td><asp:Label ID="lblSuperVisorName" Text='<%# Eval("SupervisorName") %>' runat="server" /></td>--%>
                                                         <%--<td><asp:TextBox ID="txtSupervisorComments" CssClass="form-control" TextMode="MultiLine" Style="resize: none; overflow-wrap: break-word; overflow-y: auto;" Rows="4" Columns="40" runat="server"></asp:TextBox></td>--%>
                                                     </tr>
@@ -142,6 +142,7 @@
                         <h4 class="modal-title">Return Details</h4>
                     </div>
                     <div class="modal-body">
+                        <asp:HiddenField ID="hdnJobId" runat="server" />
                         <asp:HiddenField ID="hdnTAN" runat="server" />
                         <asp:HiddenField ID="hdnQuarter" runat="server" />
                         <asp:HiddenField ID="hdnFY" runat="server" />
@@ -166,7 +167,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button>
+                        <asp:Button ID="btnReAssign" CssClass="btn btn-primary" runat="server" Text="Re-Assign" OnClick="btnReAssign_Click" />
+                        <asp:Button ID="btnUpload" CssClass="btn btn-warning" runat="server" Text="Ready for Upload" OnClick="btnReAssign_Click" />
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -204,12 +206,13 @@
 
             $('.view-details').on('click',function(e){
                 e.preventDefault();
-                var id=$(this).data('id');
-                var fy = $(this).data('fy').split('-')[0]+$(this).data('fy').split('-')[1].substr(2,3);
-                var tan = $(this).data('tan');
-                var qtr=$(this).data('qtr');
-                var frmno=$(this).data('frm');
-                var rettype=$(this).data('ret')
+                var jobId = $(this).data('jobid'); $('[id$=hdnJobId]').val(jobId);
+                var id=$(this).data('id'); $('[id$=hdnMasterID]').val(id);
+                var fy = $(this).data('fy').split('-')[0]+$(this).data('fy').split('-')[1].substr(2,3); $('[id$=hdnFY]').val();
+                var tan = $(this).data('tan'); $('[id$=hdnTAN]').val(tan);
+                var qtr=$(this).data('qtr'); $('[id$=hdnQuarter]').val(qtr);
+                var frmno=$(this).data('frm'); $('[id$=hdnFormNo]').val(frmno);
+                var rettype=$(this).data('ret'); $('[id$=hdnRetType]').val(rettype);
                 $('.overlay').css('display', 'block');
                 $.ajax({
                     url: $('[id$=hfServicePath]').val()+"ReportService.asmx/GetReturnDetails",

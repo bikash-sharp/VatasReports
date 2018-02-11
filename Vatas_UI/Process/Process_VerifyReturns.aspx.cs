@@ -346,5 +346,10 @@ namespace Vatas_UI.Process
 
             }
         }
+
+        protected void btnReAssign_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
