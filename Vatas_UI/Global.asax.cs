@@ -55,6 +55,10 @@ namespace Vatas_UI
             routes.MapPageRoute("Home", "Index", "~/Home/Index.aspx", true);
             #endregion
 
+            #region Associate Sections
+            routes.MapPageRoute("AssociateUser", "NewUser", "~/Associate/CreateUser.aspx", true);
+            #endregion
+
             #region Reports Based Pages
             routes.MapPageRoute("FrontOfficeReturn", "FrontOfficeReturn", "~/Reports/Return_Recv_Front_Office.aspx", true);
             routes.MapPageRoute("ReturnAssigned", "ReturnAssigned", "~/Reports/Return_Assigned.aspx", true);
@@ -74,6 +78,10 @@ namespace Vatas_UI
             routes.MapPageRoute("ProcessCompletedReturn", "ProcessCompletedReturn", "~/Process/Process_CompletedReturns.aspx", true);
             routes.MapPageRoute("ProcessInCompletedReturn", "ProcessInCompletedReturn", "~/Process/Process_IncompletedReturns.aspx", true);
             routes.MapPageRoute("ProcessUploadReturn", "ProcessUploadReturn", "~/Process/Process_UploadReturns.aspx", true);
+            #endregion
+
+            #region UserForm
+            routes.MapPageRoute("UserForm", "UserForm", "~/User/UserForm.aspx", true);
             #endregion
         }
         protected void Session_Start(object sender, EventArgs e)

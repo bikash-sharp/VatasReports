@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vatas_UI", "Vatas_UI\Vatas_UI.csproj", "{191371CF-50E2-406D-A7D2-CA41FEFB58AC}"
 EndProject
@@ -31,12 +31,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Procedures", "Procedures", 
 		proc_AddUpdatePathByPathId.sql = proc_AddUpdatePathByPathId.sql
 		proc_AddUpdateProjectByProjectId.sql = proc_AddUpdateProjectByProjectId.sql
 		proc_AddUpdateRolesByRoleId.sql = proc_AddUpdateRolesByRoleId.sql
+		proc_GetDocumentsByUserID.sql = proc_GetDocumentsByUserID.sql
 		proc_GetMenuByRoleId.sql = proc_GetMenuByRoleId.sql
 		proc_GetUserRoleByRoleId.sql = proc_GetUserRoleByRoleId.sql
 		proc_GetUserRoleByUserId.sql = proc_GetUserRoleByUserId.sql
 		proc_Report_GetAllFirmName.sql = proc_Report_GetAllFirmName.sql
 		proc_Report_GetReturnsByJobStatus.sql = proc_Report_GetReturnsByJobStatus.sql
 		proc_Report_SearchJobsBetweenDatesWithFirmName.sql = proc_Report_SearchJobsBetweenDatesWithFirmName.sql
+		proc_SaveAssociateUser.sql = proc_SaveAssociateUser.sql
+		proc_SaveDocument.sql = proc_SaveDocument.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Queries", "Queries", "{4AC8E38D-DC00-4263-960A-9EEC3AF9F0A2}"

@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BLAuthentication.cs" />
     <Compile Include="BLCommon.cs" />
+    <Compile Include="BLDocuments.cs" />
     <Compile Include="BLErrorLog.cs" />
     <Compile Include="BLMenu.cs" />
     <Compile Include="BLPath.cs" />

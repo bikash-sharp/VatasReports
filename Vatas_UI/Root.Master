@@ -89,6 +89,9 @@
 
         .modal-static .modal-content .icon {
         }
+        textarea {
+            resize: none !important; 
+        }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -181,10 +184,11 @@
                 </asp:ContentPlaceHolder>
             </div>
             <footer class="main-footer">
-                <strong>© <a href="http://www.vatasinfotech.com/">Vatas Infotech Pvt Ltd</a>.</strong>
+                <strong>Copyright © <%=DateTime.Now.Year %> <a href="http://www.vatasinfotech.com/">Vatas Infotech Pvt Ltd</a>. All rights reserved.</strong>
             </footer>
         </div>
         <!-- jQuery 2.2.0 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="<%=this.AppPath() + "Assets/plugins/jQuery/jQuery-2.2.0.min.js"%>" type="text/javascript"></script>
         <!-- Bootstrap 3.3.6 -->
         <script src="<%=this.AppPath() + "Assets/bootstrap/js/bootstrap.min.js"%>" type="text/javascript"></script>

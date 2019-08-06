@@ -63,7 +63,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -983,6 +989,8 @@
     <Content Include="Assets\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Assets\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Assets\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Associate\CreateUser.aspx" />
+    <Content Include="Associate\ViewUsers.aspx" />
     <Content Include="ChangePassword.aspx" />
     <Content Include="Configuration\ManagePath.aspx" />
     <Content Include="Configuration\ManageProject.aspx" />
@@ -1095,6 +1103,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="WebHandler\FileUpload.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SignUp.aspx" />
@@ -1103,12 +1112,27 @@
     <Content Include="User\ManageMenu.aspx" />
     <Content Include="User\ManageUserMenu.aspx" />
     <Content Include="User\ManageRoles.aspx" />
+    <Content Include="User\UserForm.aspx" />
     <Content Include="User\UserListing.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Associate\CreateUser.aspx.cs">
+      <DependentUpon>CreateUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\CreateUser.aspx.designer.cs">
+      <DependentUpon>CreateUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\ViewUsers.aspx.cs">
+      <DependentUpon>ViewUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\ViewUsers.aspx.designer.cs">
+      <DependentUpon>ViewUsers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ChangePassword.aspx.cs">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1358,6 +1382,13 @@
     <Compile Include="User\ManageRoles.aspx.designer.cs">
       <DependentUpon>ManageRoles.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User\UserForm.aspx.cs">
+      <DependentUpon>UserForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\UserForm.aspx.designer.cs">
+      <DependentUpon>UserForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="User\UserListing.aspx.cs">
       <DependentUpon>UserListing.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1372,8 +1403,15 @@
     <Compile Include="VatasWebPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="WebHandler\FileUpload.ashx.cs">
+      <DependentUpon>FileUpload.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vatas_BAL\Vatas_BAL.csproj">
+      <Project>{05544C49-4E7D-42D1-89B0-0BF096D9CF25}</Project>
+      <Name>Vatas_BAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vatas_Common\Vatas_Common.csproj">
       <Project>{cb390977-9fcd-40e9-87c6-93e9027630db}</Project>
       <Name>Vatas_Common</Name>

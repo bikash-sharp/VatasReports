@@ -31,12 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -84,6 +82,9 @@
     <Compile Include="proc_GetAllRegisteredUsers_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
+    <Compile Include="proc_GetDocumentsByUserID_Result.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetMenuByRoleId_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
@@ -104,6 +105,9 @@
     </Compile>
     <Compile Include="proc_Report_SearchJobsBetweenDatesWithFirmName_Result.cs">
       <DependentUpon>VatasSolution.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_SaveAssociateUser_Result.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="pr_get_returnDetails_Result.cs">
@@ -185,11 +189,11 @@
     <None Include="mydatabase1.edmx.diagram">
       <DependentUpon>mydatabase1.edmx</DependentUpon>
     </None>
-    <None Include="packages.config" />
     <EntityDeploy Include="VatasSolution.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VatasSolution.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="packages.config" />
     <None Include="VatasSolution.edmx.diagram">
       <DependentUpon>VatasSolution.edmx</DependentUpon>
     </None>

@@ -201,5 +201,84 @@ namespace Vatas_DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetAllRegisteredUsers_Result>("proc_GetAllRegisteredUsers", isActiveParameter);
         }
+    
+        public virtual int proc_SaveDocument(Nullable<int> userId, string documentId, string documentTitle, string documentNotes, Nullable<bool> isProcessed, Nullable<System.DateTime> dateModified)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var documentIdParameter = documentId != null ?
+                new ObjectParameter("DocumentId", documentId) :
+                new ObjectParameter("DocumentId", typeof(string));
+    
+            var documentTitleParameter = documentTitle != null ?
+                new ObjectParameter("DocumentTitle", documentTitle) :
+                new ObjectParameter("DocumentTitle", typeof(string));
+    
+            var documentNotesParameter = documentNotes != null ?
+                new ObjectParameter("DocumentNotes", documentNotes) :
+                new ObjectParameter("DocumentNotes", typeof(string));
+    
+            var isProcessedParameter = isProcessed.HasValue ?
+                new ObjectParameter("IsProcessed", isProcessed) :
+                new ObjectParameter("IsProcessed", typeof(bool));
+    
+            var dateModifiedParameter = dateModified.HasValue ?
+                new ObjectParameter("DateModified", dateModified) :
+                new ObjectParameter("DateModified", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_SaveDocument", userIdParameter, documentIdParameter, documentTitleParameter, documentNotesParameter, isProcessedParameter, dateModifiedParameter);
+        }
+    
+        public virtual ObjectResult<proc_GetDocumentsByUserID_Result> proc_GetDocumentsByUserID(Nullable<int> userId, Nullable<int> pageNumber, Nullable<int> pageSize)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetDocumentsByUserID_Result>("proc_GetDocumentsByUserID", userIdParameter, pageNumberParameter, pageSizeParameter);
+        }
+    
+        public virtual ObjectResult<proc_SaveAssociateUser_Result> proc_SaveAssociateUser(Nullable<long> associateId, Nullable<long> id, string firstName, string lastName, string emailId, string contact, Nullable<System.DateTime> dateModified)
+        {
+            var associateIdParameter = associateId.HasValue ?
+                new ObjectParameter("AssociateId", associateId) :
+                new ObjectParameter("AssociateId", typeof(long));
+    
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("FirstName", firstName) :
+                new ObjectParameter("FirstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("LastName", lastName) :
+                new ObjectParameter("LastName", typeof(string));
+    
+            var emailIdParameter = emailId != null ?
+                new ObjectParameter("EmailId", emailId) :
+                new ObjectParameter("EmailId", typeof(string));
+    
+            var contactParameter = contact != null ?
+                new ObjectParameter("Contact", contact) :
+                new ObjectParameter("Contact", typeof(string));
+    
+            var dateModifiedParameter = dateModified.HasValue ?
+                new ObjectParameter("DateModified", dateModified) :
+                new ObjectParameter("DateModified", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_SaveAssociateUser_Result>("proc_SaveAssociateUser", associateIdParameter, idParameter, firstNameParameter, lastNameParameter, emailIdParameter, contactParameter, dateModifiedParameter);
+        }
     }
 }

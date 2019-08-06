@@ -241,6 +241,20 @@ namespace Vatas_BAL
             return result;
         }
 
+        public bool SaveAssociateSubUsers(int id,int associateId, string firstName, string lastName, string email, string contact , DateTime? modifiedDate = null)
+        {
+            bool result = false;
+            try
+            {
+                //result = (_context.proc_(userId, documentId, documentTitle, documentNotes, isProcessed, modifiedDate) > 0 ? true : false);
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+            }
+            return result;
+        }
+
         /// <summary>
         /// Get all roles
         /// </summary>

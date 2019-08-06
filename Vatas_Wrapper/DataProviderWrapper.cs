@@ -174,6 +174,32 @@ namespace Vatas_Wrapper
             }
         }
 
+        #region Documents
+        public bool SaveDocument(int userId, string documentId, string documentTitle, string documentNotes, bool isProcessed = false, DateTime? modifiedDate = null)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocuments.Instance(context).SaveDocument(userId,documentId,documentTitle,documentNotes,isProcessed,modifiedDate);
+            }
+        }
+
+        public List<UserDocumentsCL> GetDocumentByUserId(int userId, int PageNumber, int PageSize)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocuments.Instance(context).GetDocumentByUserId(userId, PageNumber, PageSize);
+            }
+        }
+
+        public int SaveAssociateUser(int tableUserId,int associateId,string firstName, string lastName, string emailId,string contact,DateTime? dateModified)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocuments.Instance(context).SaveAssociateUser(tableUserId, associateId, firstName,lastName,emailId,contact,dateModified);
+            }
+        }
+        #endregion
+
         #region Reports
 
         public List<ReturnsCL> Report_GetReturnsByJobStatus(string JobStatus, char IsSent, int PageNumber, int PageSize, string SearchText)

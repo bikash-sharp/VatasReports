@@ -59,7 +59,8 @@ namespace Vatas_UI
                     if (IsSaved)
                     {
                         Clear();
-                        BLFunction.ShowAlert(this, "User has been successfully register.", ResponseType.SUCCESS);
+                        
+                        BLFunction.ShowAlertRedirect(this, "User has been successfully register.", this.AppPath() + "Login", ResponseType.SUCCESS);
                         //Thread.Sleep(1000);
                         //Response.Redirect("~/Login", true);
                     }

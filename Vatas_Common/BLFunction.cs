@@ -43,6 +43,12 @@ namespace Vatas_Common
             return path.EndsWith("\"") ? path : path + "\"";
         }
 
+        public static string UserDocumentDirectoryPath()
+        {
+            string path = ConfigurationManager.AppSettings["UserDocumentDirLocation"] + "";
+            return path;
+        }
+
         /// <summary>
         /// Get Current ClientIP
         /// </summary>
@@ -121,13 +127,15 @@ namespace Vatas_Common
                 string decrypt = BLSecurity.Decrypt(context.User.Identity.Name);
                 string[] temp = decrypt.Split('$');
 
-                return temp[2].ToString();
+                return temp[2].RemoveWhitespace();
             }
             else
             {
                 return "";
             }
         }
+
+        
 
         /// <summary>
         /// Show Alert Message
@@ -153,6 +161,22 @@ namespace Vatas_Common
         {
             ScriptManager.RegisterStartupScript(page, typeof(Page), Guid.NewGuid().ToString(), "ShowMessageWithPageRedirect('" + type.ToString() + "','" + message.Replace("'", "").Replace("\r\n", "<Br/>") + "','" + pageurl + "')", true);
             return;
+        }
+
+        public static string GenerateDocumentId()
+        {
+            string id = string.Empty;
+            StringBuilder builder = new StringBuilder();
+            Enumerable
+               .Range(65, 26)
+                .Select(e => ((char)e).ToString())
+                .Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
+                .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
+                .OrderBy(e => Guid.NewGuid())
+                .Take(11)
+                .ToList().ForEach(e => builder.Append(e));
+            id = builder.ToString();
+            return id;
         }
     }
 }

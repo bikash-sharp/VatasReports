@@ -5,15 +5,9 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="db_AdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'db_Admin.dbo.tbl_Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tbl_Menu">
           <Key>
             <PropertyRef Name="Menu_id" />
-            
-            
-            
-            
           </Key>
           <Property Name="Menu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Parent_Menu" Type="int" Nullable="false" />
@@ -70,7 +64,7 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_Menu' does not have a primary key
           <Property Name="ID_Admin" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tbl_User_Info">
           <Key>
             <PropertyRef Name="User_Info_ID" />
@@ -221,6 +215,11 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
         <Function Name="proc_GetAllRegisteredUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IsActive" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="proc_GetDocumentsByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+        </Function>
         <Function Name="proc_GetMenuByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
         </Function>
@@ -233,7 +232,25 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
         <Function Name="proc_GetUserRoleByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
+        <Function Name="proc_SaveAssociateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AssociateId" Type="bigint" Mode="In" />
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="LastName" Type="varchar(max)" Mode="In" />
+          <Parameter Name="EmailId" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Contact" Type="varchar(max)" Mode="In" />
+          <Parameter Name="DateModified" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="proc_SaveDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="DocumentId" Type="varchar(max)" Mode="In" />
+          <Parameter Name="DocumentTitle" Type="varchar(max)" Mode="In" />
+          <Parameter Name="DocumentNotes" Type="varchar(max)" Mode="In" />
+          <Parameter Name="IsProcessed" Type="bit" Mode="In" />
+          <Parameter Name="DateModified" Type="smalldatetime" Mode="In" />
+        </Function>
         <EntityContainer Name="db_AdminModelStoreContainer">
+          <EntitySet Name="tbl_Menu" EntityType="Self.tbl_Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Path" EntityType="Self.tbl_Path" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Project" EntityType="Self.tbl_Project" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Roles" EntityType="Self.tbl_Roles" Schema="dbo" store:Type="Tables" />
@@ -243,26 +260,6 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <EntitySet Name="tbl_UserGroup_Registration" EntityType="Self.tbl_UserGroup_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_UserMenu" EntityType="Self.tbl_UserMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_UserRoles" EntityType="Self.tbl_UserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbl_Menu" EntityType="Self.tbl_Menu" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tbl_Menu].[Menu_id] AS [Menu_id], 
-    [tbl_Menu].[Parent_Menu] AS [Parent_Menu], 
-    [tbl_Menu].[Menu_Level] AS [Menu_Level], 
-    [tbl_Menu].[Menu_Name] AS [Menu_Name], 
-    [tbl_Menu].[Menu_Link] AS [Menu_Link], 
-    [tbl_Menu].[Menu_Order] AS [Menu_Order], 
-    [tbl_Menu].[Menu_Status] AS [Menu_Status], 
-    [tbl_Menu].[Is_Deleted] AS [Is_Deleted], 
-    [tbl_Menu].[Project_Name] AS [Project_Name], 
-    [tbl_Menu].[Page_ID] AS [Page_ID], 
-    [tbl_Menu].[Sub_ModuleID] AS [Sub_ModuleID], 
-    [tbl_Menu].[ID_Admin] AS [ID_Admin], 
-    [tbl_Menu].[ITRCheck] AS [ITRCheck], 
-    [tbl_Menu].[AssesseeCheck] AS [AssesseeCheck], 
-    [tbl_Menu].[AY] AS [AY], 
-    [tbl_Menu].[url] AS [url]
-    FROM [dbo].[tbl_Menu] AS [tbl_Menu]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="tbl_User_Info" EntityType="Self.tbl_User_Info" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [tbl_User_Info].[User_Info_ID] AS [User_Info_ID], 
@@ -433,7 +430,29 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
             <Parameter Name="IsActive" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="proc_GetAllRegisteredUsers" ReturnType="Collection(db_AdminModel.proc_GetAllRegisteredUsers_Result)">
-            <Parameter Name="IsActive" Mode="In" Type="String" />
+          <Parameter Name="IsActive" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="proc_SaveDocument">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="DocumentId" Mode="In" Type="String" />
+            <Parameter Name="DocumentTitle" Mode="In" Type="String" />
+            <Parameter Name="DocumentNotes" Mode="In" Type="String" />
+            <Parameter Name="IsProcessed" Mode="In" Type="Boolean" />
+            <Parameter Name="DateModified" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="proc_GetDocumentsByUserID" ReturnType="Collection(db_AdminModel.proc_GetDocumentsByUserID_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="proc_SaveAssociateUser" ReturnType="Collection(db_AdminModel.proc_SaveAssociateUser_Result)">
+            <Parameter Name="AssociateId" Mode="In" Type="Int64" />
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Contact" Mode="In" Type="String" />
+            <Parameter Name="DateModified" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbl_Roles">
@@ -578,6 +597,19 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
           <Property Type="String" Name="IsActive" Nullable="true" MaxLength="1" />
           <Property Type="Int32" Name="RoleId" Nullable="false" />
           <Property Type="String" Name="RoleName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="proc_GetDocumentsByUserID_Result" >
+          <Property Type="DateTime" Name="DateModified" Nullable="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="DocumentId" Nullable="false" />
+          <Property Type="String" Name="DocumentTitle" Nullable="false" />
+          <Property Type="String" Name="DocumentNotes" Nullable="false" />
+          <Property Type="Boolean" Name="IsProcessed" Nullable="false" />
+          <Property Type="DateTime" Name="DateAdded" Nullable="false" />
+          <Property Type="Int32" Name="RecordCount" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="proc_SaveAssociateUser_Result">
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="38" Scale="0" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -811,6 +843,19 @@ warning 6002: The table/view 'db_Admin.dbo.tbl_User_Info' does not have a primar
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_SaveDocument" FunctionName="db_AdminModel.Store.proc_SaveDocument" />
+          <FunctionImportMapping FunctionImportName="proc_GetDocumentsByUserID" FunctionName="db_AdminModel.Store.proc_GetDocumentsByUserID" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetDocumentsByUserID_Result" />
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_SaveAssociateUser" FunctionName="db_AdminModel.Store.proc_SaveAssociateUser" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_AdminModel.proc_SaveAssociateUser_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

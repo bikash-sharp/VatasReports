@@ -244,4 +244,18 @@ namespace Vatas_Common
     }
     #endregion
 
+    #region Documents
+    public class UserDocumentsCL
+    {
+        public int UserId { get; set; }
+        public string DocumentId { get; set; }
+        public string DocumentTitle { get; set; }
+        public string DocumentNotes { get; set; }
+        public bool IsProcessed { get; set; }
+        public DateTime DateAdded { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public int RecordCount { get; set; }
+    }
+    #endregion
+
 }

@@ -7,72 +7,63 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Vatas_UI.Home {
+namespace Vatas_UI.User {
     
     
-    public partial class Index {
+    public partial class UserForm {
         
         /// <summary>
-        /// AssociatePanel control.
+        /// txtDocumentTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AssociatePanel;
+        protected global::System.Web.UI.WebControls.TextBox txtDocumentTitle;
         
         /// <summary>
-        /// pnlUser control.
+        /// rfvDocumentTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlUser;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDocumentTitle;
         
         /// <summary>
-        /// ddlPageLength control.
+        /// txtDocumentNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPageLength;
+        protected global::System.Web.UI.WebControls.TextBox txtDocumentNotes;
         
         /// <summary>
-        /// rptProcess control.
+        /// fupFile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptProcess;
+        protected global::System.Web.UI.WebControls.FileUpload fupFile;
         
         /// <summary>
-        /// Panel1 control.
+        /// btnCancel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Button btnCancel;
         
         /// <summary>
-        /// hidPages control.
+        /// btnSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hidPages;
-        
-        /// <summary>
-        /// hidPageNo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hidPageNo;
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
     }
 }

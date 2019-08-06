@@ -3,7 +3,12 @@
 <ul class="sidebar-menu">
     <li id="lihome"><a href="<%=Page.ResolveUrl("~/Index")%>" title="Home"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
     <li id="liChangePassword"><a href="<%=Page.ResolveUrl("~/ChangePassword")%>" title="Change Password"><i class="fa fa-key"></i><span>Change Password</span></a></li>
-
+    <%if (BLFunction.GetRoleName().ToLower() == "potentialuser")
+        {
+    %>
+    <li id="liUserForm"><a href="<%=Page.ResolveUrl("~/UserForm")%>" title="Upload Form"><i class="fa fa-cloud-upload"></i><span>Upload Form</span></a></li>
+    <%} %>
+    
     <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
         {
     %>
@@ -28,6 +33,9 @@
         </ul>
     </li>
     <% } %>
+    <%if (BLFunction.GetRoleName().ToLower() == "superadmin")
+        {
+    %>
     <li id="liProcess" class="treeview">
         <a href="javascript:;" title="Reports"><i class="fa fa-stack-overflow"></i><span>Process</span>
             <i class="fa fa-angle-left pull-right"></i>
@@ -57,4 +65,5 @@
             <li id="liReport7"><a href="<%=Page.ResolveUrl("~/SearchJobsBetweenDates")%>" title="Search Jobs Between Dates"><i class="fa fa-files-o"></i>Search Jobs Between Dates</a></li>
         </ul>
     </li>
+    <% } %>
 </ul>

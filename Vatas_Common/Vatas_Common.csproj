@@ -50,6 +50,7 @@
     <Compile Include="BLModal.cs" />
     <Compile Include="BLSecurity.cs" />
     <Compile Include="BLStatic.cs" />
+    <Compile Include="FileUploadCL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
