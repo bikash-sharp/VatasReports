@@ -57,6 +57,7 @@ namespace Vatas_UI
 
             #region Associate Sections
             routes.MapPageRoute("AssociateUser", "NewUser", "~/Associate/CreateUser.aspx", true);
+            routes.MapPageRoute("AssociateUserReport", "UserReports", "~/Associate/ViewUsers.aspx", true);
             #endregion
 
             #region Reports Based Pages
