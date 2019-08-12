@@ -33,7 +33,7 @@
                         </asp:DropDownList>
                     </div>
                 </div>
-                <table id="processTable" class="table table-bordered table-striped dataTable table-responsive">
+                <table id="processTable" class="table table-bordered table-striped dataTable table-responsive overflow">
                     <thead>
                         <tr style="width: 100%!important">
                             <th>Name</th>

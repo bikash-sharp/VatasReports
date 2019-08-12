@@ -94,6 +94,15 @@ namespace Vatas_UI.Associate {
         protected global::System.Web.UI.WebControls.TextBox txtDocumentTitle;
         
         /// <summary>
+        /// rfvDocumentTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDocumentTitle;
+        
+        /// <summary>
         /// txtDocumentNotes control.
         /// </summary>
         /// <remarks>

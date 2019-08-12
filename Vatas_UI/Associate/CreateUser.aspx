@@ -68,6 +68,7 @@
                                     <label for="txtDocumentTitle" class="col-sm-2 control-label">Document Title</label>
                                     <div class="col-sm-10">
                                         <asp:TextBox ID="txtDocumentTitle" runat="server" MaxLength="50" class="form-control" placeholder="Document Title" />
+                                        <asp:RequiredFieldValidator ID="rfvDocumentTitle" ControlToValidate="txtDocumentTitle" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                                 <div class="form-group has-feedback">

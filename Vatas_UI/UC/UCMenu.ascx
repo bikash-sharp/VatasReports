@@ -33,7 +33,7 @@
         </ul>
     </li>
     <% } %>
-    <%if (BLFunction.GetRoleName().ToLower() != "associate" || BLFunction.GetRoleName().ToLower() != "potentialuser" )
+    <%if (BLFunction.GetRoleName().ToLower() != "associate" && BLFunction.GetRoleName().ToLower() != "potentialuser" && BLFunction.GetRoleName().ToLower() != "telecaller" )
         {
     %>
     <li id="liProcess" class="treeview">
