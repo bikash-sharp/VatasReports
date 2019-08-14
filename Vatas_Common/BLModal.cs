@@ -256,6 +256,28 @@ namespace Vatas_Common
         public DateTime? ModifiedDate { get; set; }
         public int RecordCount { get; set; }
     }
+
+    public class AssociateUserDocumentsCL
+    {
+        public long AssociateUserId { get; set; }
+        public string UserName { get; set; }
+        public long AssociateId { get; set; }
+        public string Contact { get; set; }
+        public string EmailId { get; set; }
+        public int UserId { get; set; }
+        public string DocumentId { get; set; }
+        public string DocumentTitle { get; set; }
+        public string DocumentNotes { get; set; }
+        public bool IsProcessed { get; set; }
+        public DateTime DateAdded { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public int RecordCount { get; set; }
+        public List<DropDownCL> Users { get; set; }
+        public AssociateUserDocumentsCL()
+        {
+            Users = new List<DropDownCL>();
+        }
+    }
     #endregion
 
 }

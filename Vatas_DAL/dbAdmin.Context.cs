@@ -280,5 +280,39 @@ namespace Vatas_DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_SaveAssociateUser_Result>("proc_SaveAssociateUser", associateIdParameter, idParameter, firstNameParameter, lastNameParameter, emailIdParameter, contactParameter, dateModifiedParameter);
         }
+    
+        public virtual ObjectResult<proc_GetUserDocumentsByAssociateID_Result> proc_GetUserDocumentsByAssociateID(Nullable<int> userId, Nullable<int> pageNumber, Nullable<int> pageSize)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetUserDocumentsByAssociateID_Result>("proc_GetUserDocumentsByAssociateID", userIdParameter, pageNumberParameter, pageSizeParameter);
+        }
+    
+        public virtual ObjectResult<proc_GetAllDocuments_Result> proc_GetAllDocuments(Nullable<bool> isProcessed, Nullable<int> pageNumber, Nullable<int> pageSize)
+        {
+            var isProcessedParameter = isProcessed.HasValue ?
+                new ObjectParameter("IsProcessed", isProcessed) :
+                new ObjectParameter("IsProcessed", typeof(bool));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetAllDocuments_Result>("proc_GetAllDocuments", isProcessedParameter, pageNumberParameter, pageSizeParameter);
+        }
     }
 }

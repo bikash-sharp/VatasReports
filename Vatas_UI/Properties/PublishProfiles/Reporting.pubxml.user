@@ -2917,13 +2917,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/12/2019 02:33:13</publishTime>
     </File>
     <File Include="Associate/ViewUsers.aspx">
-      <publishTime>08/12/2019 09:39:00</publishTime>
+      <publishTime>08/13/2019 21:42:02</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>08/12/2019 09:50:47</publishTime>
+      <publishTime>08/14/2019 10:08:35</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>08/12/2019 09:50:46</publishTime>
+      <publishTime>08/14/2019 10:08:35</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
@@ -2980,43 +2980,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/Vatas_BAL.dll">
-      <publishTime>08/12/2019 09:50:37</publishTime>
+      <publishTime>08/14/2019 10:08:20</publishTime>
     </File>
     <File Include="bin/Vatas_BAL.dll.config">
       <publishTime>07/20/2019 19:43:16</publishTime>
     </File>
     <File Include="bin/Vatas_BAL.pdb">
-      <publishTime>08/12/2019 09:50:37</publishTime>
+      <publishTime>08/14/2019 10:08:20</publishTime>
     </File>
     <File Include="bin/Vatas_Common.dll">
-      <publishTime>08/12/2019 09:50:37</publishTime>
+      <publishTime>08/14/2019 10:08:19</publishTime>
     </File>
     <File Include="bin/Vatas_Common.pdb">
-      <publishTime>08/12/2019 09:50:37</publishTime>
+      <publishTime>08/14/2019 10:08:19</publishTime>
     </File>
     <File Include="bin/Vatas_DAL.dll">
-      <publishTime>08/12/2019 09:50:37</publishTime>
+      <publishTime>08/14/2019 10:08:19</publishTime>
     </File>
     <File Include="bin/Vatas_DAL.dll.config">
       <publishTime>08/07/2019 02:15:34</publishTime>
     </File>
     <File Include="bin/Vatas_DAL.pdb">
-      <publishTime>08/12/2019 09:50:37</publishTime>
+      <publishTime>08/14/2019 10:08:19</publishTime>
     </File>
     <File Include="bin/Vatas_UI.dll">
-      <publishTime>08/12/2019 09:50:39</publishTime>
+      <publishTime>08/14/2019 10:08:25</publishTime>
     </File>
     <File Include="bin/Vatas_UI.pdb">
-      <publishTime>08/12/2019 09:50:39</publishTime>
+      <publishTime>08/14/2019 10:08:25</publishTime>
     </File>
     <File Include="bin/Vatas_Wrapper.dll">
-      <publishTime>08/12/2019 09:50:38</publishTime>
+      <publishTime>08/14/2019 10:08:20</publishTime>
     </File>
     <File Include="bin/Vatas_Wrapper.dll.config">
       <publishTime>07/20/2019 19:43:16</publishTime>
     </File>
     <File Include="bin/Vatas_Wrapper.pdb">
-      <publishTime>08/12/2019 09:50:38</publishTime>
+      <publishTime>08/14/2019 10:08:20</publishTime>
     </File>
     <File Include="ChangePassword.aspx">
       <publishTime>07/20/2019 19:43:16</publishTime>
@@ -3040,7 +3040,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/07/2018 01:47:05</publishTime>
     </File>
     <File Include="Home/Index.aspx">
-      <publishTime>08/12/2019 09:44:27</publishTime>
+      <publishTime>08/14/2019 10:06:57</publishTime>
     </File>
     <File Include="LockScreen.aspx">
       <publishTime>01/07/2018 13:46:04</publishTime>
@@ -3052,7 +3052,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/01/2019 03:14:57</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>08/12/2019 09:50:42</publishTime>
+      <publishTime>08/14/2019 10:08:28</publishTime>
     </File>
     <File Include="Process/Process_AssignReturns.aspx">
       <publishTime>08/06/2019 04:26:53</publishTime>

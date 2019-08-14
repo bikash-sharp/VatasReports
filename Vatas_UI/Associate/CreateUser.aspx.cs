@@ -45,7 +45,7 @@ namespace Vatas_UI.Associate
                                 string DestFile = Path.Combine(DestDir, item.fileName);
                                 File.Move(SrcFile, DestFile);
                             }
-                            bool IsSaved = DataProviderWrapper.Instance.SaveDocument(BLFunction.GetUserID(), DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false);
+                            bool IsSaved = DataProviderWrapper.Instance.SaveDocument(UserAssociateId, DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false);
                             if (IsSaved)
                             {
                                 BLFunction.ShowAlertRedirect(this, "Your document has been uploaded successfully. Our customer representative will contact you within 48hr.", CurrentPagePath + "NewUser", ResponseType.SUCCESS);

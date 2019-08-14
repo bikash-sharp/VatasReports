@@ -198,6 +198,22 @@ namespace Vatas_Wrapper
                 return BLDocuments.Instance(context).SaveAssociateUser(tableUserId, associateId, firstName,lastName,emailId,contact,dateModified);
             }
         }
+
+        public List<AssociateUserDocumentsCL> GetDocumentByAssociateId(int userId, int PageNumber, int PageSize)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocuments.Instance(context).GetDocumentByAssociateId(userId, PageNumber, PageSize);
+            }
+        }
+
+        public List<AssociateUserDocumentsCL> GetAllUserDocuments(bool IsProcessed, int PageNumber, int PageSize)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocuments.Instance(context).GetAllUserDocuments(IsProcessed, PageNumber, PageSize);
+            }
+        }
         #endregion
 
         #region Reports

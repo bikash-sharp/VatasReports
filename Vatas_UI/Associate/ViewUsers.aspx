@@ -50,13 +50,16 @@
                         <asp:Repeater ID="rptProcess" runat="server">
                             <ItemTemplate>
                                 <tr style="width: 100%!important">
+                                    <td><asp:Label ID="lblUserName" Text='<%# Eval("UserName") %>' runat="server" /></td>
+                                    <td><asp:Label ID="lblEmail" Text='<%# Eval("EmailId") %>' runat="server" /></td>
+                                    <td><asp:Label ID="lblContact" Text='<%# Eval("Contact") %>' runat="server" /></td>
                                     <td><asp:HiddenField ID="hfUserId" runat="server" Value='<%# Eval("UserId") %>' />
                                         <asp:Label ID="lblDocumentId" Text='<%# Eval("DocumentId") %>' runat="server" />
                                     </td>
                                     <td><asp:Label ID="lblDocumentTitle" Text='<%# Eval("DocumentTitle") %>' runat="server" /></td>
                                     <td><asp:Label ID="lblDocumentNotes" Text='<%# Eval("DocumentNotes") %>' runat="server" /></td>
                                     <td><asp:Label ID="lblDateAdded" Text='<%# Eval("DateAdded") %>' runat="server" /></td>
-                                    <td><asp:Label ID="lblProcessed" Text='<%# Eval("IsProcessed") %>' runat="server" /></td>
+                                    <td><asp:Label ID="lblProcessed" Text='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? "Processing":"Pending")%>' ForeColor='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>' runat="server" /></td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
@@ -72,7 +75,22 @@
             <i class="fa fa-refresh fa-spin"></i>
         </div>
     </section>
+    <asp:HiddenField runat="server" ID="hidPages" />
+    <asp:HiddenField runat="server" ID="hidPageNo" Value="1" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
-    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#page-selection").bootpag({
+                next: 'Next',
+                prev: 'Prev',
+                total: <%=hidPages.Value == ""? "0" : hidPages.Value %>,
+                page: <%=hidPageNo.Value %>,
+                maxVisible: 5
+            }).on("page", function (event, num) {
+                $('[id$=hidPageNo]').val(num);
+                $('[id$=btnSearch]').click();
+            });
+        });
+    </script>
 </asp:Content>

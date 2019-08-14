@@ -191,7 +191,8 @@
                                             <asp:Label ID="lblDocumentNotes" Text='<%# Eval("DocumentNotes") %>' runat="server" /></td>
                                         <td>
                                             <asp:Label ID="lblDateAdded" Text='<%# Eval("DateAdded") %>' runat="server" /></td>
-                                        <td><asp:Label ID="lblProcessed" Text='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? "Processing":"Pending")%>' ForeColor='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>' runat="server" /></td>
+                                        <td>
+                                            <asp:Label ID="lblProcessed" Text='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? "Processing":"Pending")%>' ForeColor='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>' runat="server" /></td>
 
                                     </tr>
                                 </ItemTemplate>
@@ -207,39 +208,107 @@
             </div>
         </asp:Panel>
         <%}
-            else if (Vatas_Common.BLFunction.GetRoleName().ToLower() == "superadmin")
+            else if (Vatas_Common.BLFunction.GetRoleName().ToLower() == "superadmin" || Vatas_Common.BLFunction.GetRoleName().ToLower() == "admin" || Vatas_Common.BLFunction.GetRoleName().ToLower() == "dataentrysupervisor" || Vatas_Common.BLFunction.GetRoleName().ToLower() == "frontofficesupervisor")
             { %>
         <asp:Panel ID="Panel1" runat="server">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Reports</h3>
+
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
+
                 </div>
                 <div class="box-body">
                     <div class="row">
-                        Admin Area
+                        <div class="col-md-1">Show entries </div>
+                        <div class="col-md-1">
+                            <asp:DropDownList ID="DropDownList2" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlPageLength_SelectedIndexChanged">
+                                <asp:ListItem Value="10" Selected="True">10</asp:ListItem>
+                                <asp:ListItem Value="20">20</asp:ListItem>
+                                <asp:ListItem Value="30">30</asp:ListItem>
+                                <asp:ListItem Value="50">50</asp:ListItem>
+                                <asp:ListItem Value="-1">ALL</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="col-md-10">
+                            <asp:CheckBox ID="chkIsActive" runat="server" Checked="false" AutoPostBack="true" OnCheckedChanged="chkIsActive_CheckedChanged" Style="float: right!important;" />
+                        </div>
                     </div>
+                    <table id="processTable" class="table table-bordered table-striped dataTable table-responsive overflow">
+                        <thead>
+                            <tr style="width: 100%!important">
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Document Id</th>
+                                <th>Title</th>
+                                <th>Notes</th>
+                                <th>Dated</th>
+                                <th>Status</th>
+                                <th>Assigned To</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <asp:Repeater ID="rptAdmin" runat="server">
+                                <ItemTemplate>
+                                    <tr style="width: 100%!important">
+                                        <td>
+                                            <asp:Label ID="lblUserName" Text='<%# Eval("UserName") %>' runat="server" /></td>
+                                        <td>
+                                            <asp:Label ID="lblEmail" Text='<%# Eval("EmailId") %>' runat="server" /></td>
+                                        <td>
+                                            <asp:Label ID="lblContact" Text='<%# Eval("Contact") %>' runat="server" /></td>
+                                        <td>
+                                            <asp:HiddenField ID="hfUserId" runat="server" Value='<%# Eval("UserId") %>' />
+                                            <asp:Label ID="lblDocumentId" Text='<%# Eval("DocumentId") %>' runat="server" />
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblDocumentTitle" Text='<%# Eval("DocumentTitle") %>' runat="server" /></td>
+                                        <td>
+                                            <asp:Label ID="lblDocumentNotes" Text='<%# Eval("DocumentNotes") %>' runat="server" /></td>
+                                        <td>
+                                            <asp:Label ID="lblDateAdded" Text='<%# Eval("DateAdded") %>' runat="server" /></td>
+                                        <td>
+                                            <asp:Label ID="lblProcessed" Text='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? "Processing":"Pending")%>' ForeColor='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>' runat="server" /></td>
+                                        <td><asp:DropDownList ID="ddlUser" runat="server" CssClass="form-control" DataSource='<%# Eval("Users") %>' DataTextField="DataText" DataValueField="DataValue" AppendDataBoundItems="true">
+                                            <asp:ListItem Selected="True" Text="--Select--" Value="0"></asp:ListItem>
+                                            </asp:DropDownList></td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </tbody>
+                    </table>
                 </div>
-                <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    <div id="page-selection" class="pull-right" style="margin-top: 10px;"></div>
+                </div>
+                 <div class="box-footer">
+                <% if (this.rptAdmin.Items.Count > 0)
+                    { %>
+                    <asp:LinkButton Visible="true" ID="btnConfirm" OnClick="btnConfirm_Click" runat="server" Style="margin-right: 10px;" CssClass="btn btn-info pull-right submit"><i class="fa fa-check"></i>&nbsp;Assign</asp:LinkButton>
+                <%     
+                    } %>
+            </div>
             </div>
         </asp:Panel>
-        <%}  else if (Vatas_Common.BLFunction.GetRoleName().ToLower() == "telecaller")
+        <%}
+            else if (Vatas_Common.BLFunction.GetRoleName().ToLower() == "telecaller")
             { %>
         <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Reports</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </div>
+            <div class="box-header with-border">
+                <h3 class="box-title">Reports</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
                 </div>
-                <div class="box-body">
-                     <div class="row">
+            </div>
+            <div class="box-body">
+                <div class="row">
                     <div class="col-md-1">Show entries </div>
                     <div class="col-md-1">
                         <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control" AutoPostBack="true">
@@ -269,22 +338,26 @@
                         <asp:Repeater ID="Repeater1" runat="server">
                             <ItemTemplate>
                                 <tr style="width: 100%!important">
-                                    <td><asp:HiddenField ID="hfUserId" runat="server" Value='<%# Eval("UserId") %>' />
+                                    <td>
+                                        <asp:HiddenField ID="hfUserId" runat="server" Value='<%# Eval("UserId") %>' />
                                         <asp:Label ID="lblDocumentId" Text='<%# Eval("DocumentId") %>' runat="server" />
                                     </td>
-                                    <td><asp:Label ID="lblDocumentTitle" Text='<%# Eval("DocumentTitle") %>' runat="server" /></td>
-                                    <td><asp:Label ID="lblDocumentNotes" Text='<%# Eval("DocumentNotes") %>' runat="server" /></td>
-                                    <td><asp:Label ID="lblDateAdded" Text='<%# Eval("DateAdded") %>' runat="server" /></td>
-                                    <td><asp:Label ID="lblProcessed" Text='<%# Eval("IsProcessed") %>' runat="server" /></td>
+                                    <td>
+                                        <asp:Label ID="lblDocumentTitle" Text='<%# Eval("DocumentTitle") %>' runat="server" /></td>
+                                    <td>
+                                        <asp:Label ID="lblDocumentNotes" Text='<%# Eval("DocumentNotes") %>' runat="server" /></td>
+                                    <td>
+                                        <asp:Label ID="lblDateAdded" Text='<%# Eval("DateAdded") %>' runat="server" /></td>
+                                    <td>
+                                        <asp:Label ID="lblProcessed" Text='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? "Processing":"Pending")%>' ForeColor='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>' runat="server" /></td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
                     </tbody>
                 </table>
-                </div>
-                <!-- /.box-body -->
             </div>
-        </asp:Panel>
+            <!-- /.box-body -->
+        </div>
         <%} %>
         <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
@@ -307,6 +380,18 @@
             }).on("page", function (event, num) {
                 $('[id$=hidPageNo]').val(num);
                 $('[id$=btnSearch]').click();
+            });
+            $('[id$=chkIsActive]').iCheck('destroy');           
+            $('[id$=chkIsActive]').bootstrapToggle({
+                on: 'Processing',
+                off: 'Pending',
+                onstyle: 'success',
+                offstyle: 'danger',
+                style: 'android'
+            });
+            $('[id$=chkIsActive]').on('change', function () {
+                $(this).click();
+                //$('#console-event').html('Toggle: ' + $(this).prop('checked'))
             });
         });
     </script>

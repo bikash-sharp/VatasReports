@@ -79,6 +79,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mydatabase1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="proc_GetAllDocuments_Result.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
     <Compile Include="proc_GetAllRegisteredUsers_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
@@ -89,6 +92,9 @@
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_GetRegisteredUserByUserId_Result.cs">
+      <DependentUpon>dbAdmin.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proc_GetUserDocumentsByAssociateID_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>
     <Compile Include="proc_GetUserRoleByRoleId_Result.cs">

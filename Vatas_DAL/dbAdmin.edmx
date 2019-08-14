@@ -212,6 +212,11 @@ warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primar
           <Parameter Name="RoleId" Type="int" Mode="In" />
           <Parameter Name="IsActive" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="proc_GetAllDocuments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IsProcessed" Type="bit" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+        </Function>
         <Function Name="proc_GetAllRegisteredUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IsActive" Type="varchar" Mode="In" />
         </Function>
@@ -225,6 +230,11 @@ warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primar
         </Function>
         <Function Name="proc_GetRegisteredUserByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="proc_GetUserDocumentsByAssociateID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
         </Function>
         <Function Name="proc_GetUserRoleByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
@@ -454,6 +464,16 @@ warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primar
             <Parameter Name="Contact" Mode="In" Type="String" />
             <Parameter Name="DateModified" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="proc_GetUserDocumentsByAssociateID" ReturnType="Collection(db_AdminModel.proc_GetUserDocumentsByAssociateID_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="proc_GetAllDocuments" ReturnType="Collection(db_AdminModel.proc_GetAllDocuments_Result)">
+            <Parameter Name="IsProcessed" Mode="In" Type="Boolean" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="tbl_Roles">
           <Key>
@@ -610,6 +630,36 @@ warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primar
         </ComplexType>
         <ComplexType Name="proc_SaveAssociateUser_Result">
           <Property Type="Decimal" Name="Id" Nullable="false" Precision="38" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="proc_GetUserDocumentsByAssociateID_Result" >
+          <Property Type="Int64" Name="AssociateUserId" Nullable="false" />
+          <Property Type="Int32" Name="AssociateId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" />
+          <Property Type="String" Name="Contact" Nullable="false" />
+          <Property Type="String" Name="EmailId" Nullable="false" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="DocumentId" Nullable="false" />
+          <Property Type="String" Name="DocumentTitle" Nullable="false" />
+          <Property Type="String" Name="DocumentNotes" Nullable="false" />
+          <Property Type="Boolean" Name="IsProcessed" Nullable="false" />
+          <Property Type="DateTime" Name="DateAdded" Nullable="false" />
+          <Property Type="Int32" Name="RecordCount" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="proc_GetAllDocuments_Result" >
+          <Property Type="Int32" Name="AssociateId" Nullable="true" />
+          <Property Type="Int64" Name="AssociateUserId" Nullable="true" />
+          <Property Type="String" Name="Contact" Nullable="false" />
+          <Property Type="DateTime" Name="DateAdded" Nullable="false" />
+          <Property Type="DateTime" Name="DateModified" Nullable="true" />
+          <Property Type="String" Name="DocumentId" Nullable="false" />
+          <Property Type="String" Name="DocumentTitle" Nullable="false" />
+          <Property Type="String" Name="DocumentNotes" Nullable="false" />
+          <Property Type="String" Name="EmailId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" />
+          <Property Type="Boolean" Name="IsProcessed" Nullable="false" />
+          <Property Type="Int32" Name="RecordCount" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -856,6 +906,30 @@ warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primar
             <ResultMapping>
               <ComplexTypeMapping TypeName="db_AdminModel.proc_SaveAssociateUser_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetUserDocumentsByAssociateID" FunctionName="db_AdminModel.Store.proc_GetUserDocumentsByAssociateID" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetUserDocumentsByAssociateID_Result" />
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="proc_GetAllDocuments" FunctionName="db_AdminModel.Store.proc_GetAllDocuments" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetAllDocuments_Result">
+                <ScalarProperty Name="AssociateId" ColumnName="AssociateId" />
+                <ScalarProperty Name="AssociateUserId" ColumnName="AssociateUserId" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="DocumentTitle" ColumnName="DocumentTitle" />
+                <ScalarProperty Name="DocumentNotes" ColumnName="DocumentNotes" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IsProcessed" ColumnName="IsProcessed" />
+                <ScalarProperty Name="RecordCount" ColumnName="RecordCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
