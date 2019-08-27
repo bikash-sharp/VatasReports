@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Vatas | Login" Language="C#" MasterPageFile="~/StaticPage.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Vatas_UI.Login" %>
+﻿<%@ Page Title="Tax Help Desk | Login" Language="C#" MasterPageFile="~/StaticPage.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Vatas_UI.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -11,17 +11,17 @@
     <section class=" login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="javascript:;"><b>Vatas </b>Infotech</a>
+                <a href="javascript:;"><b>Tax </b>Help Desk</a>
             </div>
             <div class="login-box-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 <div class="form-group has-feedback">
-                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email"></asp:TextBox>
+                    <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Email" AutoCompleteType="Disabled"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" ControlToValidate="txtEmail" EnableClientScript="true" ValidationGroup="Login" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
 
                 </div>
                 <div class="form-group has-feedback">
-                    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Password" TextMode="Password"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Password" TextMode="Password" AutoCompleteType="Disabled"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" ControlToValidate="txtPassword" EnableClientScript="true" ValidationGroup="Login" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                 </div>
                 <div class="row">

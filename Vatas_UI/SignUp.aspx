@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Vatas | New User" Language="C#" MasterPageFile="~/StaticPage.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="Vatas_UI.SignUp" %>
+﻿<%@ Page Title="Tax Help Desk | New User" Language="C#" MasterPageFile="~/StaticPage.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="Vatas_UI.SignUp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
@@ -12,40 +12,40 @@
     <section class="register-page">
         <div class="register-box">
             <div class="register-logo">
-                <a href="javascript:;"><b>Vatas </b>Infotech</a>
+                <a href="javascript:;"><b>Tax </b>Help Desk</a>
             </div>
             <div class="register-box-body">
                 <p class="login-box-msg">Register a new membership</p>
                 <div>
                     <div class="form-group has-feedback">
-                        <asp:TextBox ID="txtFirstName" runat="server" MaxLength="15" class="form-control" placeholder="First Name" />
+                        <asp:TextBox ID="txtFirstName" runat="server" MaxLength="15" class="form-control" placeholder="First Name" AutoCompleteType="Disabled" />
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         <asp:RequiredFieldValidator ID="rfvFirstName" ControlToValidate="txtFirstName" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group has-feedback">
-                        <asp:TextBox ID="txtLastName" runat="server" MaxLength="15" class="form-control" placeholder="Last Name" />
+                        <asp:TextBox ID="txtLastName" runat="server" MaxLength="15" class="form-control" placeholder="Last Name" AutoCompleteType="Disabled" />
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         <asp:RequiredFieldValidator ID="rfvLastName" ControlToValidate="txtLastName" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group has-feedback">
-                        <asp:TextBox ID="txtEmail" runat="server" class="form-control" MaxLength="30" placeholder="Email" />
+                        <asp:TextBox ID="txtEmail" runat="server" class="form-control" MaxLength="30" placeholder="Email" AutoCompleteType="Disabled" />
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         <asp:RequiredFieldValidator ID="rfvEmail" ControlToValidate="txtEmail" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="revEmail" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RegularExpressionValidator>
                     </div>
                     <div class="form-group has-feedback">
-                        <asp:TextBox ID="txtPassword" MaxLength="15" runat="server" class="form-control" placeholder="Password" TextMode="Password" />
+                        <asp:TextBox ID="txtPassword" MaxLength="15" runat="server" class="form-control" placeholder="Password" TextMode="Password"  AutoCompleteType="Disabled"/>
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         <asp:RequiredFieldValidator ID="rfvPassword" ControlToValidate="txtPassword" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group has-feedback">
-                        <asp:TextBox ID="txtConfirmPassword" MaxLength="15" runat="server" class="form-control" placeholder="Confirm Password" TextMode="Password" />
+                        <asp:TextBox ID="txtConfirmPassword" MaxLength="15" runat="server" class="form-control" placeholder="Confirm Password" TextMode="Password" AutoCompleteType="Disabled" />
                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                         <asp:CompareValidator ID="cmConfirmPassword" runat="server" ControlToValidate="txtConfirmPassword" ControlToCompare="txtPassword" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" ValidationGroup="CreateUser" />
                         <asp:RequiredFieldValidator ID="rfvConfirmPassword" ControlToValidate="txtConfirmPassword" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
                     </div>
                     <div class="form-group has-feedback">
-                        <asp:TextBox ID="txtMobileNumber" runat="server" MaxLength="10" class="form-control" placeholder="Mobile Number" />
+                        <asp:TextBox ID="txtMobileNumber" runat="server" MaxLength="10" class="form-control" placeholder="Mobile Number" AutoCompleteType="Disabled" />
                         <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                         <asp:RegularExpressionValidator runat="server" ID="revMobileNumber" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ControlToValidate="txtMobileNumber" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic" ValidationExpression="[0-9]{10}"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="rfvMobileNumber" ControlToValidate="txtMobileNumber" runat="server" ErrorMessage="<span class='glyphicon glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="CreateUser" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>

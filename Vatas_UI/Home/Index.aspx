@@ -255,7 +255,7 @@
                         <tbody>
                             <asp:Repeater ID="rptAdmin" runat="server">
                                 <ItemTemplate>
-                                    <tr style="width: 100%!important">
+                                    <tr>
                                         <td>
                                             <asp:Label ID="lblUserName" Text='<%# Eval("UserName") %>' runat="server" /></td>
                                         <td>

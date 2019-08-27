@@ -9,7 +9,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Vatas | E-TDS</title>
+    <title>Tax Help Desk | E-TDS</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
     <link rel="stylesheet" href="<%= this.AppPath() +  "Assets/bootstrap/css/bootstrap.min.css" %> " type="text/css" />
     <link rel="stylesheet" href="<%=this.AppPath() + "Assets/plugins/bootstrap-toggle/bootstrap-toggle.min.css"%>" type="text/css" />
@@ -184,7 +184,7 @@
                 </asp:ContentPlaceHolder>
             </div>
             <footer class="main-footer">
-                <strong>Copyright © <%=DateTime.Now.Year %> <a href="http://www.vatasinfotech.com/">Vatas Infotech Pvt Ltd</a>. All rights reserved.</strong>
+                <strong>Copyright © <%=DateTime.Now.Year %> <a href="http://www.taxhelpdesk.in/">Tax Help Desk Pvt Ltd</a>. All rights reserved.</strong>
             </footer>
         </div>
         <!-- jQuery 2.2.0 -->
