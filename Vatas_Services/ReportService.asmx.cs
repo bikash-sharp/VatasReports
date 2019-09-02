@@ -31,7 +31,7 @@ namespace Vatas_Services
             }
             catch (Exception ex)
             {
-
+                var err = ex;
             }
             string jsonResult = JsonConvert.SerializeObject(result,Formatting.Indented);
             return jsonResult;

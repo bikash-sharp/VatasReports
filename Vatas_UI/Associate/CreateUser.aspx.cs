@@ -24,53 +24,16 @@ namespace Vatas_UI.Associate
         {
             try
             {
-                var fileList = HttpContext.Current.Session["userUploadFiles"] as List<FileUploadCL>;
-                if(fileList != null)
+                int UserAssociateId = 0;
+                UserAssociateId = DataProviderWrapper.Instance.SaveAssociateUser(0, BLFunction.GetUserID(), txtFirstName.Text.Trim(), txtLastName.Text.Trim(), txtEmail.Text.Trim(), txtMobileNumber.Text.Trim(), null);
+                if (UserAssociateId > 0)
                 {
-                    if (fileList.Count > 0)
-                    {
-                        int UserAssociateId = 0;
-                        UserAssociateId = DataProviderWrapper.Instance.SaveAssociateUser(0, BLFunction.GetUserID(), txtFirstName.Text.Trim(), txtLastName.Text.Trim(), txtEmail.Text.Trim(), txtMobileNumber.Text.Trim(), null);
-                        if (UserAssociateId > 0)
-                        {
-                            string DocumentId = BLFunction.GenerateDocumentId();
-                            String TempDir = Path.Combine(new string[] { BLFunction.UserDocumentDirectoryPath(), "temp", DateTime.Now.ToString("ddMMyyyy"), HttpContext.Current.Session.SessionID });
-                            string DestDir = Path.Combine(new string[] { BLFunction.UserDocumentDirectoryPath(), BLFunction.GetUserID().ToString(), UserAssociateId.ToString(), DocumentId });
-                            DirectoryInfo directoryInfo = new DirectoryInfo(DestDir);
-                            if (!directoryInfo.Exists)
-                                directoryInfo.Create();
-                            foreach (var item in fileList)
-                            {
-                                string SrcFile = Path.Combine(TempDir, item.fileName);
-                                string DestFile = Path.Combine(DestDir, item.fileName);
-                                File.Move(SrcFile, DestFile);
-                            }
-                            bool IsSaved = DataProviderWrapper.Instance.SaveDocument(UserAssociateId, DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false);
-                            if (IsSaved)
-                            {
-                                BLFunction.ShowAlertRedirect(this, "Your document has been uploaded successfully. Our customer representative will contact you within 48hr.", CurrentPagePath + "NewUser", ResponseType.SUCCESS);
-                            }
-                            else
-                            {
-                                BLFunction.ShowAlert(this, "Unable To upload the files on server.", ResponseType.WARNING);
-                            }
-                        }
-                        else
-                        {
-                            BLFunction.ShowAlert(this, "User Creation failed.Please try later.", ResponseType.WARNING);
-                        }
-
-                    }
-                    else
-                    {
-                        BLFunction.ShowAlert(this, "Please upload atleast one document.", ResponseType.WARNING);
-                    }
+                    BLFunction.ShowAlertRedirect(this, "User Creation success", CurrentPagePath + "NewUser", ResponseType.SUCCESS);
                 }
                 else
                 {
-                    BLFunction.ShowAlert(this, "Please upload atleast one document.", ResponseType.WARNING);
+                    BLFunction.ShowAlert(this, "User Creation failed.Please try later.", ResponseType.WARNING);
                 }
-
             }
             catch (Exception)
             {

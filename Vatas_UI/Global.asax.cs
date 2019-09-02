@@ -47,7 +47,7 @@ namespace Vatas_UI
             #region
 
             routes.MapPageRoute("401", "401", "~/ErrorPages/401.aspx", true);
-            routes.MapPageRoute("404", "404", "~/ErrorPages/401.aspx", true);
+            routes.MapPageRoute("404", "404", "~/ErrorPages/404.aspx", true);
 
             #endregion
 
@@ -57,7 +57,8 @@ namespace Vatas_UI
 
             #region Associate Sections
             routes.MapPageRoute("AssociateUser", "NewUser", "~/Associate/CreateUser.aspx", true);
-            routes.MapPageRoute("AssociateUserReport", "UserReports", "~/Associate/ViewUsers.aspx", true);
+            routes.MapPageRoute("AssociateUsers", "Customers", "~/Associate/ViewUsers.aspx", true);
+            routes.MapPageRoute("AssociateUserDetails", "Customers/{Id}", "~/Associate/UserDetails.aspx", true);
             #endregion
 
             #region Reports Based Pages

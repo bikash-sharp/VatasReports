@@ -29,7 +29,7 @@ namespace Vatas_UI
                 }
                 else
                 {
-                    lblUserName.Text = "User";
+                    lblUserName.Text = BLFunction.GetUserName();
                     hfUserName.Value = BLFunction.GetUserName();
                     HttpContext.Current.Session.Abandon();
                     FormsAuthentication.SignOut();

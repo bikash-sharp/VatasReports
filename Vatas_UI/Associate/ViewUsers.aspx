@@ -1,6 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Root.Master" AutoEventWireup="true" CodeBehind="ViewUsers.aspx.cs" Inherits="Vatas_UI.Associate.ViewUsers" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.Master" AutoEventWireup="true" CodeBehind="ViewUsers.aspx.cs" Inherits="Vatas_UI.Associate.ViewUsers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        span > i {
+            cursor: pointer;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
     <section class="content-header">
@@ -36,30 +41,27 @@
                 <table id="processTable" class="table table-bordered table-striped dataTable table-responsive overflow">
                     <thead>
                         <tr style="width: 100%!important">
+                            <th>Sr.No</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Contact</th>
-                            <th>Document Id</th>
-                            <th>Title</th>
-                            <th>Notes</th>
-                            <th>Dated</th>
-                            <th>Status</th>
+                            <th>Date Added</th>
+                            <th>Last Modified</th>
+                            <th>View Details</th>
                         </tr>
                     </thead>
                     <tbody>
                         <asp:Repeater ID="rptProcess" runat="server">
                             <ItemTemplate>
                                 <tr style="width: 100%!important">
+                                    <td><%# Container.ItemIndex + 1  %></td>
                                     <td><asp:Label ID="lblUserName" Text='<%# Eval("UserName") %>' runat="server" /></td>
                                     <td><asp:Label ID="lblEmail" Text='<%# Eval("EmailId") %>' runat="server" /></td>
                                     <td><asp:Label ID="lblContact" Text='<%# Eval("Contact") %>' runat="server" /></td>
-                                    <td><asp:HiddenField ID="hfUserId" runat="server" Value='<%# Eval("UserId") %>' />
-                                        <asp:Label ID="lblDocumentId" Text='<%# Eval("DocumentId") %>' runat="server" />
-                                    </td>
-                                    <td><asp:Label ID="lblDocumentTitle" Text='<%# Eval("DocumentTitle") %>' runat="server" /></td>
-                                    <td><asp:Label ID="lblDocumentNotes" Text='<%# Eval("DocumentNotes") %>' runat="server" /></td>
                                     <td><asp:Label ID="lblDateAdded" Text='<%# Eval("DateAdded") %>' runat="server" /></td>
-                                    <td><asp:Label ID="lblProcessed" Text='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? "Processing":"Pending")%>' ForeColor='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>' runat="server" /></td>
+                                    <td><asp:Label ID="lblDateModified" Text='<%# Eval("DateModified") %>' runat="server" /></td>
+                                    <td><asp:HyperLink ID="hlViewDetails" Target="_blank" runat="server" NavigateUrl='<%# Page.ResolveUrl("~/Customers/") + Eval("AssociateUserId") %>'><span title="Click to view details"><i class="fa fa-eye fa-2x"></i></span></asp:HyperLink> </td>
+                                    <%--<td><asp:Label ID="lblProcessed" Text='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? "Processing":"Pending")%>' ForeColor='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>' runat="server" /></td> --%>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
@@ -91,6 +93,12 @@
                 $('[id$=hidPageNo]').val(num);
                 $('[id$=btnSearch]').click();
             });
+
+            $('span > i').hover(
+                function () { $(this).addClass('text-green') },
+                function () { $(this).removeClass('text-green') }
+            );
         });
+        
     </script>
 </asp:Content>

@@ -30,6 +30,15 @@
                     <div class="box box-info">
                         <div class="form-horizontal">
                             <div class="box-body">
+                                 <div class="form-group has-feedback">
+                                    <label for="txtServiceType" class="col-sm-2 control-label">Service</label>
+                                    <div class="col-sm-10">
+                                        <asp:DropDownList ID="ddlService" runat="server" AppendDataBoundItems="true" ValidationGroup="SaveDoc" CssClass="form-control">
+                                            <asp:ListItem Text="Select" Value="0" Selected="True"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="rfvServiceType" InitialValue="0" ControlToValidate="ddlService" runat="server"   ErrorMessage="<span class='glyphicon glyphicon-remove form-control-feedback' style='color:#d84a38;'></span>" ForeColor="#d84a38" EnableClientScript="true" ValidationGroup="SaveDoc" SetFocusOnError="true" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
                                 <div class="form-group has-feedback">
                                     <label for="txtDocumentTitle" class="col-sm-2 control-label">Document Title</label>
                                     <div class="col-sm-10">
@@ -74,6 +83,7 @@
             <i class="fa fa-refresh fa-spin"></i>
         </div>
     </section>
+    <asp:HiddenField ID="hfCustomerId" runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
     <script type="text/javascript">
@@ -97,7 +107,7 @@
                     success: function (result) {
                         var tbody = $("#tblFiles tbody");
                         $.each(result, function (index, value) {
-                            var templaterow = '<tr><td class="count"></td><td>' + value.fileName + '</td><td><a href="javascript:;" data-fname=' + value.fileName + ' class="btn-box-tool deletefile"><i class="fa fa-times fa-2x"></i></a></td></tr>'
+                            var templaterow = '<tr><td class="count"></td><td>' + value.displayAs + '</td><td><a href="javascript:;" data-fname=' + value.fileName + ' class="btn-box-tool deletefile"><i class="fa fa-times fa-2x"></i></a></td></tr>'
                             tbody.append(templaterow);
                         });
                         $('.overlay').css('display', 'none');
@@ -111,6 +121,7 @@
             });
 
             $(document.body).on('click', '.deletefile', function (e) {
+                $('.overlay').css('display', 'block');
                 var rowCount = $('.count').length;
                 var fname = $(this).data("fname");
                 $.ajax({
@@ -124,13 +135,15 @@
                             var tbody = $("#tblFiles tbody");
                             tbody.html('');
                             $.each(response.d, function (index, value) {
-                                var templaterow = '<tr><td class="count"></td><td>' + value.fileName + '</td><td><a href="javascript:;" data-fname=' + value.fileName + ' class="btn-box-tool deletefile"><i class="fa fa-times fa-2x"></i></a></td></tr>'
+                                var templaterow = '<tr><td class="count"></td><td>' + value.displayAs + '</td><td><a href="javascript:;" data-fname=' + value.fileName + ' class="btn-box-tool deletefile"><i class="fa fa-times fa-2x"></i></a></td></tr>'
                                 tbody.append(templaterow);
                             });
                         }
+                        $('.overlay').css('display', 'none');
                     },
                     failure: function (response) {
                         alert(response.d);
+                        $('.overlay').css('display', 'none');
                     }
                 });
             });

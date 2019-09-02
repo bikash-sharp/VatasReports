@@ -990,6 +990,7 @@
     <Content Include="Assets\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Assets\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Associate\CreateUser.aspx" />
+    <Content Include="Associate\UserDetails.aspx" />
     <Content Include="Associate\ViewUsers.aspx" />
     <Content Include="ChangePassword.aspx" />
     <Content Include="Configuration\ManagePath.aspx" />
@@ -1104,6 +1105,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="WebHandler\FileUpload.ashx" />
+    <Content Include="WebHandler\FileDownload.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SignUp.aspx" />
@@ -1125,6 +1127,13 @@
     </Compile>
     <Compile Include="Associate\CreateUser.aspx.designer.cs">
       <DependentUpon>CreateUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UserDetails.aspx.cs">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\UserDetails.aspx.designer.cs">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Associate\ViewUsers.aspx.cs">
       <DependentUpon>ViewUsers.aspx</DependentUpon>
@@ -1402,6 +1411,9 @@
     <Compile Include="VatasUserControl.cs" />
     <Compile Include="VatasWebPage.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebHandler\FileDownload.ashx.cs">
+      <DependentUpon>FileDownload.ashx</DependentUpon>
     </Compile>
     <Compile Include="WebHandler\FileUpload.ashx.cs">
       <DependentUpon>FileUpload.ashx</DependentUpon>

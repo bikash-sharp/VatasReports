@@ -220,36 +220,17 @@ warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primar
         <Function Name="proc_GetAllRegisteredUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IsActive" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="proc_GetDocumentsByUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserId" Type="int" Mode="In" />
-          <Parameter Name="PageNumber" Type="int" Mode="In" />
-          <Parameter Name="PageSize" Type="int" Mode="In" />
-        </Function>
         <Function Name="proc_GetMenuByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
         </Function>
         <Function Name="proc_GetRegisteredUserByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
-        <Function Name="proc_GetUserDocumentsByAssociateID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserId" Type="int" Mode="In" />
-          <Parameter Name="PageNumber" Type="int" Mode="In" />
-          <Parameter Name="PageSize" Type="int" Mode="In" />
-        </Function>
         <Function Name="proc_GetUserRoleByRoleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RoleId" Type="int" Mode="In" />
         </Function>
         <Function Name="proc_GetUserRoleByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="proc_SaveAssociateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="AssociateId" Type="bigint" Mode="In" />
-          <Parameter Name="Id" Type="bigint" Mode="In" />
-          <Parameter Name="FirstName" Type="varchar(max)" Mode="In" />
-          <Parameter Name="LastName" Type="varchar(max)" Mode="In" />
-          <Parameter Name="EmailId" Type="varchar(max)" Mode="In" />
-          <Parameter Name="Contact" Type="varchar(max)" Mode="In" />
-          <Parameter Name="DateModified" Type="smalldatetime" Mode="In" />
         </Function>
         <Function Name="proc_SaveDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
@@ -450,25 +431,6 @@ warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primar
             <Parameter Name="IsProcessed" Mode="In" Type="Boolean" />
             <Parameter Name="DateModified" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="proc_GetDocumentsByUserID" ReturnType="Collection(db_AdminModel.proc_GetDocumentsByUserID_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
-            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
-            <Parameter Name="PageSize" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="proc_SaveAssociateUser" ReturnType="Collection(db_AdminModel.proc_SaveAssociateUser_Result)">
-            <Parameter Name="AssociateId" Mode="In" Type="Int64" />
-            <Parameter Name="Id" Mode="In" Type="Int64" />
-            <Parameter Name="FirstName" Mode="In" Type="String" />
-            <Parameter Name="LastName" Mode="In" Type="String" />
-            <Parameter Name="EmailId" Mode="In" Type="String" />
-            <Parameter Name="Contact" Mode="In" Type="String" />
-            <Parameter Name="DateModified" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="proc_GetUserDocumentsByAssociateID" ReturnType="Collection(db_AdminModel.proc_GetUserDocumentsByAssociateID_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
-            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
-            <Parameter Name="PageSize" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="proc_GetAllDocuments" ReturnType="Collection(db_AdminModel.proc_GetAllDocuments_Result)">
             <Parameter Name="IsProcessed" Mode="In" Type="Boolean" />
             <Parameter Name="PageNumber" Mode="In" Type="Int32" />
@@ -617,34 +579,6 @@ warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primar
           <Property Type="String" Name="IsActive" Nullable="true" MaxLength="1" />
           <Property Type="Int32" Name="RoleId" Nullable="false" />
           <Property Type="String" Name="RoleName" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="proc_GetDocumentsByUserID_Result" >
-          <Property Type="DateTime" Name="DateModified" Nullable="true" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="DocumentId" Nullable="false" />
-          <Property Type="String" Name="DocumentTitle" Nullable="false" />
-          <Property Type="String" Name="DocumentNotes" Nullable="false" />
-          <Property Type="Boolean" Name="IsProcessed" Nullable="false" />
-          <Property Type="DateTime" Name="DateAdded" Nullable="false" />
-          <Property Type="Int32" Name="RecordCount" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="proc_SaveAssociateUser_Result">
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="38" Scale="0" />
-        </ComplexType>
-        <ComplexType Name="proc_GetUserDocumentsByAssociateID_Result" >
-          <Property Type="Int64" Name="AssociateUserId" Nullable="false" />
-          <Property Type="Int32" Name="AssociateId" Nullable="false" />
-          <Property Type="String" Name="UserName" Nullable="false" />
-          <Property Type="String" Name="Contact" Nullable="false" />
-          <Property Type="String" Name="EmailId" Nullable="false" />
-          <Property Type="DateTime" Name="DateModified" Nullable="true" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="DocumentId" Nullable="false" />
-          <Property Type="String" Name="DocumentTitle" Nullable="false" />
-          <Property Type="String" Name="DocumentNotes" Nullable="false" />
-          <Property Type="Boolean" Name="IsProcessed" Nullable="false" />
-          <Property Type="DateTime" Name="DateAdded" Nullable="false" />
-          <Property Type="Int32" Name="RecordCount" Nullable="false" />
         </ComplexType>
         <ComplexType Name="proc_GetAllDocuments_Result" >
           <Property Type="Int32" Name="AssociateId" Nullable="true" />
@@ -897,23 +831,6 @@ warning 6002: The table/view 'db_admin.dbo.tbl_User_Info' does not have a primar
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_SaveDocument" FunctionName="db_AdminModel.Store.proc_SaveDocument" />
-          <FunctionImportMapping FunctionImportName="proc_GetDocumentsByUserID" FunctionName="db_AdminModel.Store.proc_GetDocumentsByUserID" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetDocumentsByUserID_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_SaveAssociateUser" FunctionName="db_AdminModel.Store.proc_SaveAssociateUser" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_AdminModel.proc_SaveAssociateUser_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="proc_GetUserDocumentsByAssociateID" FunctionName="db_AdminModel.Store.proc_GetUserDocumentsByAssociateID" >
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="db_AdminModel.proc_GetUserDocumentsByAssociateID_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="proc_GetAllDocuments" FunctionName="db_AdminModel.Store.proc_GetAllDocuments" >
             <ResultMapping>
               <ComplexTypeMapping TypeName="db_AdminModel.proc_GetAllDocuments_Result">

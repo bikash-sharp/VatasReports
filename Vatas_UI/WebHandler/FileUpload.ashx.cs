@@ -32,12 +32,11 @@ namespace Vatas_UI.WebHandler
                     for (int i = 0; i < fileCollection.Count; i++)
                     {
                         HttpPostedFile file = fileCollection[i];
+                        string OriginalFileName = file.FileName;
                         string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                         string filePath = Path.Combine(directoryPath, fileName);
                         file.SaveAs(filePath);
-                        fileList.Add(new FileUploadCL() { fileName = fileName, filePath = filePath });
-
-                        
+                        fileList.Add(new FileUploadCL() { fileName = fileName, filePath = filePath, displayAs = OriginalFileName,folderpath=directoryPath });
                     }
                 }
             }

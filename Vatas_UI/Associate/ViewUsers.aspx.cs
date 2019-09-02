@@ -39,7 +39,7 @@ namespace Vatas_UI.Associate
         public void BindReports(int UserID, int PageNumber, int PageSize)
         {
             int TotalPages = 0;
-            List<AssociateUserDocumentsCL> result = DataProviderWrapper.Instance.GetDocumentByAssociateId(UserID, PageNumber, PageSize);
+            List<AssociateUserCL> result = DataProviderWrapper.Instance.GetUsersByAssociateId(UserID, PageNumber, PageSize,"");
             rptProcess.DataSource = null;
             if (result.Count > 0)
             {

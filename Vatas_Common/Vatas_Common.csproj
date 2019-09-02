@@ -46,12 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssociateUserCL.cs" />
     <Compile Include="BLFunction.cs" />
     <Compile Include="BLModal.cs" />
     <Compile Include="BLSecurity.cs" />
     <Compile Include="BLStatic.cs" />
+    <Compile Include="DocumentStatusCL.cs" />
+    <Compile Include="DocumentStatusDetailCL.cs" />
     <Compile Include="FileUploadCL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceCL.cs" />
+    <Compile Include="UserDocumentDetailCL.cs" />
+    <Compile Include="UserDocumentDetailedWrapper.cs" />
+    <Compile Include="UserDocumentsCL.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

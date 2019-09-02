@@ -22,31 +22,40 @@ namespace Vatas_UI.Home {
         protected global::System.Web.UI.WebControls.Panel AssociatePanel;
         
         /// <summary>
-        /// pnlUser control.
+        /// pnl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlUser;
+        protected global::System.Web.UI.WebControls.Panel pnl;
         
         /// <summary>
-        /// ddlPageLength control.
+        /// ddlPUPageLength control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPageLength;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPUPageLength;
         
         /// <summary>
-        /// rptProcess control.
+        /// txtPUSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptProcess;
+        protected global::System.Web.UI.WebControls.TextBox txtPUSearch;
+        
+        /// <summary>
+        /// rptPotentialUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptPotentialUser;
         
         /// <summary>
         /// Panel1 control.
@@ -58,13 +67,13 @@ namespace Vatas_UI.Home {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// DropDownList2 control.
+        /// ddlAPageLength control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAPageLength;
         
         /// <summary>
         /// chkIsActive control.
@@ -128,5 +137,14 @@ namespace Vatas_UI.Home {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hidPageNo;
+        
+        /// <summary>
+        /// btnPUSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPUSearch;
     }
 }

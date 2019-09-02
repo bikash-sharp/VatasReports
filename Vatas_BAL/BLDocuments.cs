@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 using Vatas_Common;
 using Vatas_DAL;
 
@@ -30,12 +34,35 @@ namespace Vatas_BAL
             return _instance;
         }
 
-        public bool SaveDocument(int userId, string documentId, string documentTitle, string documentNotes, bool isProcessed = false, DateTime? modifiedDate = null)
+        public List<DropDownCL> GetAllServices()
         {
-            bool result = false;
+            List<DropDownCL> result = new List<DropDownCL>();
             try
             {
-                result = (_admin.proc_SaveDocument(userId, documentId, documentTitle, documentNotes, isProcessed, modifiedDate) > 0 ? true : false);
+                string Query = "EXEC proc_GetServices";
+                var resultSet = _admin
+               .MultipleResults(Query)
+               .With<ServiceCL>()
+               .Execute();
+                result = (resultSet[0] as List<ServiceCL>).Where(p=>p.IsActive == true).Select(p=> new DropDownCL() { DataText = p.ServiceName, DataValue=p.ServiceId.ToString() }).ToList();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+            }
+            return result;
+        }
+        public long SaveDocument(int userId, int ServiceId, string documentId, string documentTitle, string documentNotes, bool isProcessed = false, DateTime? modifiedDate = null, bool IsAssociateUser = false)
+        {
+            long result = 0;
+            try
+            {
+                string Query = "EXEC proc_SaveDocument @UserId = '"+userId+"',@ServiceId ='"+ServiceId+"',@DocumentId =N'"+documentId+"',@DocumentTitle=N'"+documentTitle+"',  @DocumentNotes= N'"+documentNotes+"',  @IsProcessed=N'"+Convert.ToInt32(isProcessed)+"',  @DateModified= '"+ Convert.ToString(modifiedDate) + "', @IsAssociateUser=N'"+Convert.ToInt32(IsAssociateUser)+"'";
+                var resultSet = _admin
+               .MultipleResults(Query)
+               .With<decimal>()
+               .Execute();
+                long.TryParse((resultSet[0] as List<decimal>).FirstOrDefault().ToString(), out result);
             }
             catch (Exception ex)
             {
@@ -44,27 +71,25 @@ namespace Vatas_BAL
             return result;
         }
 
-        public List<UserDocumentsCL> GetDocumentByUserId(int userId, int PageNumber, int PageSize)
+       
+        public List<UserDocumentDetailedWrapper> GetDocumentByUserId(long userId, int PageNumber, int PageSize, string SearchText,bool IsAssociateUser= false)
         {
-            List<UserDocumentsCL> result = new List<UserDocumentsCL>();
+            List<UserDocumentDetailedWrapper> result = new List<UserDocumentDetailedWrapper>();
             try
             {
-                var userDocuments = _admin.proc_GetDocumentsByUserID(userId, PageNumber, PageSize);
-                foreach (var item in userDocuments)
+                string Query = "EXEC proc_GetUserDocumentDetailedStatus @UserId='" + userId + "',@PageNumber ='" + PageNumber + "',@PageSize='" + PageSize + "',@SearhText=N'" + SearchText + "',@IsAssociateUser='"+ Convert.ToInt32(IsAssociateUser) + "'";
+                var resultSet = _admin
+                .MultipleResults(Query)
+                .With<UserDocumentDetailedWrapper>()
+                .With<UserDocumentDetailCL>()
+                .Execute();
+                var DocDetails = resultSet[1] as List<UserDocumentDetailCL>;
+                result = resultSet[0] as List<UserDocumentDetailedWrapper>;
+                foreach(var item in result)
                 {
-                    result.Add(new UserDocumentsCL()
-                    {
-                        DateAdded = item.DateAdded,
-                        DocumentId = item.DocumentId,
-                        DocumentNotes = item.DocumentNotes,
-                        DocumentTitle = item.DocumentTitle,
-                        IsProcessed = item.IsProcessed,
-                        ModifiedDate = item.DateModified,
-                        UserId = item.UserId,
-                        RecordCount = item.RecordCount
-                    });
+                    item.userDocumentDetails = DocDetails.Where(p => p.DocumentTableId == item.DocumentTableId).ToList();
                 }
-
+                
             }
             catch (Exception ex)
             {
@@ -78,11 +103,12 @@ namespace Vatas_BAL
             int result = 0;
             try
             {
-                var lst = _admin.proc_SaveAssociateUser(associateId, tableUserId, firstName, lastName, emailId, contact, dateModified);
-                foreach (var item in lst)
-                {
-                    int.TryParse(item.Id.ToString(), out result);
-                }
+                string Query = "EXEC proc_SaveAssociateUser @AssociateId='" + associateId + "', @Id='" + tableUserId + "',@Firstname=N'" + firstName + "',@LastName=N'" + lastName + "',@EmailId=N'" + emailId + "',@Contact=N'" + contact + "',@DateModified= '" + Convert.ToString(dateModified)+"'";
+                var resultSet = _admin
+                .MultipleResults(Query)
+                .With<decimal>()
+                .Execute();
+               int.TryParse( (resultSet[0] as List<decimal>).FirstOrDefault().ToString(), out result);
             }
             catch (Exception)
             {
@@ -91,36 +117,39 @@ namespace Vatas_BAL
             return result;
         }
 
-        public List<AssociateUserDocumentsCL> GetDocumentByAssociateId(int userId, int PageNumber, int PageSize)
+        public List<AssociateUserCL> GetUsersByAssociateId(int userId, int PageNumber, int PageSize, string SearchText)
         {
-            List<AssociateUserDocumentsCL> result = new List<AssociateUserDocumentsCL>();
+            List<AssociateUserCL> result = new List<AssociateUserCL>();
             try
             {
-                var userDocuments = _admin.proc_GetUserDocumentsByAssociateID(userId, PageNumber, PageSize);
-                foreach (var item in userDocuments)
-                {
-                    result.Add(new AssociateUserDocumentsCL()
-                    {
-                        AssociateId = item.AssociateId,
-                        AssociateUserId = item.AssociateUserId,
-                        Contact = item.Contact,
-                        UserName = item.UserName,
-                        EmailId = item.EmailId,
-                        DateAdded = item.DateAdded,
-                        DocumentId = item.DocumentId,
-                        DocumentNotes = item.DocumentNotes,
-                        DocumentTitle = item.DocumentTitle,
-                        IsProcessed = item.IsProcessed,
-                        ModifiedDate = item.DateModified,
-                        UserId = item.UserId,
-                        RecordCount = item.RecordCount
-                    });
-                }
-
+                string Query = "EXEC proc_GetUsersByAssociateId @UserId = '" + userId + "', @PageNumber = '" + PageNumber + "', @PageSize = '" + PageSize + "', @SearchText = N'"+SearchText+"'";
+                var resultSet = _admin
+                .MultipleResults(Query)
+                .With<AssociateUserCL>()
+                .Execute();
+                result = resultSet[0] as List<AssociateUserCL>;
+            }
+            catch(Exception ex)
+            {
+                var err = ex;
+            }
+            return result;
+        }
+        public AssociateUserCL GetCustomerById(long userId)
+        {
+            AssociateUserCL result = new AssociateUserCL();
+            try
+            {
+                string Query = "EXEC proc_GetCustomerByAssociateID @UserId = '" + userId + "'";
+                var resultSet = _admin
+                .MultipleResults(Query)
+                .With<AssociateUserCL>()
+                .Execute();
+                result = (resultSet[0] as List<AssociateUserCL>).ToList().FirstOrDefault();
             }
             catch (Exception ex)
             {
-                var error = ex.Message;
+                var err = ex;
             }
             return result;
         }

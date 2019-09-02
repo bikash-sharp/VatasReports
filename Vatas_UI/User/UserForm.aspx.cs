@@ -17,16 +17,41 @@ namespace Vatas_UI.User
         {
             if (!IsPostBack)
             {
-                if (BLFunction.GetRoleName().ToLower() != "potentialuser")
+                long CustomerId = 0;
+                long.TryParse(Convert.ToString(HttpContext.Current.Items["CustomerId"]), out CustomerId);
+                hfCustomerId.Value = CustomerId.ToString();
+                if (BLFunction.GetRoleName().ToLower() != "potentialuser" && BLFunction.GetRoleName().ToLower() != "associate")
                 {
                     Response.RedirectToRoute("401");
                 }
+                else if (BLFunction.GetRoleName().ToLower() == "associate" && CustomerId == 0)
+                {
+                    Response.RedirectToRoute("401");
+                }
+                BindServices();
             }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            BLFunction.ShowAlertRedirect(this, "This is will cancel the document upload", CurrentPagePath + "UserForm", ResponseType.WARNING);
+            if (BLFunction.GetRoleName().ToLower() == "potentialuser")
+            {
+                BLFunction.ShowAlertRedirect(this, "This is will cancel the document upload", CurrentPagePath + "UserForm", ResponseType.WARNING);
+            }
+            else if (BLFunction.GetRoleName().ToLower() == "associate")
+            {
+                BLFunction.ShowAlertRedirect(this, "This is will cancel the document upload", CurrentPagePath + "Customers/" + hfCustomerId.Value, ResponseType.WARNING);
+            }
+
+        }
+
+        public void BindServices()
+        {
+            var ServiceList = DataProviderWrapper.Instance.GetAllServices();
+            ddlService.DataSource = ServiceList;
+            ddlService.DataTextField = "DataText";
+            ddlService.DataValueField = "DataValue";
+            ddlService.DataBind();
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -38,9 +63,20 @@ namespace Vatas_UI.User
                 {
                     if (fileList.Count > 0)
                     {
+                        List<FileUploadCL> DocumentFiles = new List<FileUploadCL>();
                         string DocumentId = BLFunction.GenerateDocumentId();
                         String TempDir = Path.Combine(new string[] { BLFunction.UserDocumentDirectoryPath(), "temp", DateTime.Now.ToString("ddMMyyyy"), HttpContext.Current.Session.SessionID });
-                        string DestDir = Path.Combine(new string[] { BLFunction.UserDocumentDirectoryPath(), BLFunction.GetUserID().ToString(), DocumentId });
+                        string DestDir = "";
+                        if (BLFunction.GetRoleName().ToLower() == "potentialuser")
+                        {
+                            DestDir = Path.Combine(new string[] { BLFunction.UserDocumentDirectoryPath(), BLFunction.GetUserID().ToString(), DocumentId });
+                        }
+                        else if (BLFunction.GetRoleName().ToLower() == "associate")
+                        {
+                            DestDir = Path.Combine(new string[] { BLFunction.UserDocumentDirectoryPath(), BLFunction.GetUserID().ToString(), hfCustomerId.Value, DocumentId });
+                        }
+
+
                         DirectoryInfo directoryInfo = new DirectoryInfo(DestDir);
                         if (!directoryInfo.Exists)
                             directoryInfo.Create();
@@ -49,11 +85,55 @@ namespace Vatas_UI.User
                             string SrcFile = Path.Combine(TempDir, item.fileName);
                             string DestFile = Path.Combine(DestDir, item.fileName);
                             File.Move(SrcFile, DestFile);
+
+                            DocumentFiles.Add(new FileUploadCL() { fileName = item.fileName, displayAs = item.displayAs, folderpath = DestDir });
                         }
-                        bool IsSaved = DataProviderWrapper.Instance.SaveDocument(BLFunction.GetUserID(), DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false);
-                        if (IsSaved)
+                        int ServiceId = 0;
+                        int.TryParse(ddlService.SelectedValue, out ServiceId);
+                        //Create Document Id
+                        long DocumentTableId = 0;
+                        if (BLFunction.GetRoleName().ToLower() == "potentialuser")
                         {
-                            BLFunction.ShowAlertRedirect(this, "Your document has been uploaded successfully. Our customer representative will contact you within 48hr.", CurrentPagePath + "UserForm", ResponseType.SUCCESS);
+                            DocumentTableId = DataProviderWrapper.Instance.SaveDocument(BLFunction.GetUserID(), ServiceId, DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false);
+                        }
+                        else if (BLFunction.GetRoleName().ToLower() == "associate")
+                        {
+                            DocumentTableId = DataProviderWrapper.Instance.SaveDocument(int.Parse(hfCustomerId.Value), ServiceId, DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false, true);
+                        }
+                        if (DocumentTableId != 0)
+                        {
+                            //Save Files and Folder Path also
+                            bool IsDocumentFilesSaved = DataProviderWrapper.Instance.SaveDocumentFiles(DocumentTableId, DocumentFiles);
+                            //Insert Default Document Status
+                            DocumentStatusDetailCL documentStatusDetail = new DocumentStatusDetailCL();
+                            if (BLFunction.GetRoleName().ToLower() == "potentialuser")
+                            {
+                                documentStatusDetail.AssociateId = 0;
+                                documentStatusDetail.PotentialUserId = BLFunction.GetUserID();
+                            }
+                            else if (BLFunction.GetRoleName().ToLower() == "associate")
+                            {
+                                documentStatusDetail.PotentialUserId = 0;
+                                documentStatusDetail.AssociateId = BLFunction.GetUserID();
+                            }
+                            documentStatusDetail.SupervisorId = documentStatusDetail.StaffId = 0;
+                            documentStatusDetail.IsChecked = false;
+                            documentStatusDetail.DocumentId = DocumentId;
+                            documentStatusDetail.DocumentStatusId = 1; //Received Status by Default
+
+                            long DocumentStatusId = DataProviderWrapper.Instance.InsertDocumentStatusDetails(documentStatusDetail);
+                        }
+
+                        if (DocumentTableId > 0)
+                        {
+                            if (BLFunction.GetRoleName().ToLower() == "potentialuser")
+                            {
+                                BLFunction.ShowAlertRedirect(this, "Your document has been uploaded successfully. Our customer representative will contact you within 48hr.", CurrentPagePath + "UserForm", ResponseType.WARNING);
+                            }
+                            else if (BLFunction.GetRoleName().ToLower() == "associate")
+                            {
+                                BLFunction.ShowAlertRedirect(this, "Your document has been uploaded successfully. Our customer representative will contact you within 48hr.", CurrentPagePath + "Customers/" + hfCustomerId.Value, ResponseType.WARNING);
+                            }
                         }
                         else
                         {

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using Vatas_BAL;
 using Vatas_Common;
 using Vatas_DAL;
@@ -76,7 +73,7 @@ namespace Vatas_Wrapper
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).EnableDisableRegisteredUser(UserId,isActive);
+                return BLSiteUser.Instance(context).EnableDisableRegisteredUser(UserId, isActive);
             }
         }
         public List<DropDownCL> GetAllRoles()
@@ -118,11 +115,11 @@ namespace Vatas_Wrapper
             }
         }
 
-        public bool DeleteUserMenuByMenuId(int RoleId,int MenuId)
+        public bool DeleteUserMenuByMenuId(int RoleId, int MenuId)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).DeleteUserMenuByMenuId(RoleId,MenuId);
+                return BLSiteUser.Instance(context).DeleteUserMenuByMenuId(RoleId, MenuId);
             }
         }
 
@@ -146,7 +143,7 @@ namespace Vatas_Wrapper
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).IsMenuAlreadyExistInUserMenu(RoleId,MenuId);
+                return BLSiteUser.Instance(context).IsMenuAlreadyExistInUserMenu(RoleId, MenuId);
             }
         }
 
@@ -175,35 +172,82 @@ namespace Vatas_Wrapper
         }
 
         #region Documents
-        public bool SaveDocument(int userId, string documentId, string documentTitle, string documentNotes, bool isProcessed = false, DateTime? modifiedDate = null)
+        public List<DropDownCL> GetAllServices()
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLDocuments.Instance(context).SaveDocument(userId,documentId,documentTitle,documentNotes,isProcessed,modifiedDate);
+                return BLDocuments.Instance(context).GetAllServices();
             }
         }
 
-        public List<UserDocumentsCL> GetDocumentByUserId(int userId, int PageNumber, int PageSize)
+        public UserDocumentDetailCL GetDocumentDetailById(long DocumentId)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLDocuments.Instance(context).GetDocumentByUserId(userId, PageNumber, PageSize);
+                return BLDocumentDetail.Instance(context).GetUserDocumentDetail(DocumentId);
+            }
+        }
+        public long SaveDocument(int userId, int ServiceId, string documentId, string documentTitle, string documentNotes, bool isProcessed = false, bool IsAssociateUser = false, DateTime? modifiedDate = null)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocuments.Instance(context).SaveDocument(userId,ServiceId, documentId, documentTitle, documentNotes, isProcessed, modifiedDate,IsAssociateUser);
+            }
+        }
+        public bool SaveDocumentFiles(long ServiceId, List<FileUploadCL> documentFiles)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocumentDetail.Instance(context).SaveDocumentFiles(ServiceId, documentFiles);
             }
         }
 
-        public int SaveAssociateUser(int tableUserId,int associateId,string firstName, string lastName, string emailId,string contact,DateTime? dateModified)
+        public List<UserDocumentDetailedWrapper> GetDocumentByUserId(long userId, int PageNumber, int PageSize, string SearchText,bool IsAssociateUser = false)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLDocuments.Instance(context).SaveAssociateUser(tableUserId, associateId, firstName,lastName,emailId,contact,dateModified);
+                return BLDocuments.Instance(context).GetDocumentByUserId(userId, PageNumber, PageSize,SearchText,IsAssociateUser);
             }
         }
 
-        public List<AssociateUserDocumentsCL> GetDocumentByAssociateId(int userId, int PageNumber, int PageSize)
+        public int SaveAssociateUser(int tableUserId, int associateId, string firstName, string lastName, string emailId, string contact, DateTime? dateModified)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLDocuments.Instance(context).GetDocumentByAssociateId(userId, PageNumber, PageSize);
+                return BLDocuments.Instance(context).SaveAssociateUser(tableUserId, associateId, firstName, lastName, emailId, contact, dateModified);
+            }
+        }
+        
+        #region Associate Screen
+        public List<AssociateUserCL> GetUsersByAssociateId(int userId, int PageNumber, int PageSize, string SearchText)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocuments.Instance(context).GetUsersByAssociateId(userId, PageNumber, PageSize, SearchText);
+            }
+        }
+
+        public AssociateUserCL GetCustomerById(long userId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocuments.Instance(context).GetCustomerById(userId);
+            }
+        }
+        #endregion
+
+        public long InsertDocumentStatusDetails(DocumentStatusDetailCL documentStatusDetail)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocumentStatus.Instance(context).InsertDocumentStatusDetails(documentStatusDetail);
+            }
+        }
+        public List<DropDownCL> GetDocumentStatuses()
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocumentStatus.Instance(context).GetDocumentStatuses();
             }
         }
 
@@ -226,7 +270,7 @@ namespace Vatas_Wrapper
             }
         }
 
-        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate, int? firmId, int PageNumber, int PageSize,string SearchText)
+        public List<ReturnsCL> Report_SearchJobsBetweenDates(DateTime startDate, DateTime endDate, int? firmId, int PageNumber, int PageSize, string SearchText)
         {
             using (VatasSolutionEntities context = new VatasSolutionEntities())
             {
@@ -282,27 +326,27 @@ namespace Vatas_Wrapper
             }
         }
 
-        public bool AddUpdateProject(int projectId,string projectName)
+        public bool AddUpdateProject(int projectId, string projectName)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLPath.Instance(context).AddUpdateProject(projectId,projectName);
+                return BLPath.Instance(context).AddUpdateProject(projectId, projectName);
             }
         }
 
-        public bool IsOldPasswordVaild(string EmailId,string OldPassword)
+        public bool IsOldPasswordVaild(string EmailId, string OldPassword)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).IsOldPasswordVaild(EmailId,OldPassword);
+                return BLSiteUser.Instance(context).IsOldPasswordVaild(EmailId, OldPassword);
             }
         }
 
-        public bool UpdateNewPassword(string EmailId,string Password)
+        public bool UpdateNewPassword(string EmailId, string Password)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLSiteUser.Instance(context).UpdateNewPassword(EmailId,Password);
+                return BLSiteUser.Instance(context).UpdateNewPassword(EmailId, Password);
             }
         }
 
@@ -326,7 +370,7 @@ namespace Vatas_Wrapper
             }
         }
 
-        public ReturnDetailCL GetReturnDetail(string TAN, string Quarter, string FY, string FormNo, string RetType, long MasterID=0)
+        public ReturnDetailCL GetReturnDetail(string TAN, string Quarter, string FY, string FormNo, string RetType, long MasterID = 0)
         {
             using (mydatabase1Entities context = new mydatabase1Entities())
             {
@@ -337,15 +381,15 @@ namespace Vatas_Wrapper
         #endregion
 
         #region GetDirectoryFiles
-        public List<FilesCL> GetDirectoryFiles(string JobID,string FY,String FirmName= "VatasInfosys-JALANDHAR", String JobName= "E-TDS")
+        public List<FilesCL> GetDirectoryFiles(string JobID, string FY, String FirmName = "VatasInfosys-JALANDHAR", String JobName = "E-TDS")
         {
             List<FilesCL> result = new List<FilesCL>();
-            String DirPath = BLFunction.DirectoryPath() + FY+"\""+FirmName+"\""+JobName+"\""+JobID+"\"";
+            String DirPath = BLFunction.DirectoryPath() + FY + "\"" + FirmName + "\"" + JobName + "\"" + JobID + "\"";
             DirectoryInfo dirInfo = new DirectoryInfo(DirPath);
-            if(dirInfo.Exists)
+            if (dirInfo.Exists)
             {
                 var dirfiles = dirInfo.GetFiles();
-                foreach(var _file in dirfiles)
+                foreach (var _file in dirfiles)
                 {
                     FilesCL _newFile = new FilesCL();
                     _newFile.fileName = _file.Name;

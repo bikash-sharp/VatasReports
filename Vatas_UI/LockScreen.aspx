@@ -6,10 +6,10 @@
     <!-- Automatic element centering -->
     <div class="lockscreen-wrapper">
         <div class="lockscreen-logo">
-            <a href="javascript:;"><b>Vatas </b>Infotech</a>
+            <a href="javascript:;"><b>Tas </b>Help Desk</a>
         </div>
         <!-- User name -->
-        <div class="lockscreen-name" style="text-transform: capitalize">
+        <div class="lockscreen-name" style="text-transform: capitalize;padding-left: 50px;">
             <asp:Literal ID="lblUserName" runat="server"></asp:Literal></div>
 
         <!-- START LOCK SCREEN ITEM -->
@@ -42,11 +42,11 @@
             Click<a href="<%= this.AppPath() + "Login"%>" title="Login"> Here</a>  sign in as a different user
         </div>
         <div class="lockscreen-footer text-center">
-            <strong>© <a href="http://www.vatasinfotech.com/">Vatas Infotech Pvt Ltd</a>.</strong>
+            <strong>© <a href="http://www.taxhelpdesk.in/">Tax Help Desk Pvt Ltd</a>.</strong>
         </div>
     </div>
     <!-- /.center -->
-    <asp:HiddenField ID="hfUserName" runat="server" />
+    <asp:HiddenField ID="hfUserName" runat="server" ClientIDMode="Static" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
     <script async="async" type="text/javascript">
