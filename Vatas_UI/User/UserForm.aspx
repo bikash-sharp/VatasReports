@@ -84,6 +84,7 @@
         </div>
     </section>
     <asp:HiddenField ID="hfCustomerId" runat="server" />
+    <asp:HiddenField ID="hfDocumentId" runat="server" />
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
     <script type="text/javascript">

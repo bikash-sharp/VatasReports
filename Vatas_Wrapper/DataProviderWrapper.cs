@@ -187,6 +187,13 @@ namespace Vatas_Wrapper
                 return BLDocumentDetail.Instance(context).GetUserDocumentDetail(DocumentId);
             }
         }
+        public UserDocumentsCL GetDocumentById(long DocumentTableId)
+        {
+            using (AdminEntities context = new AdminEntities())
+            {
+                return BLDocuments.Instance(context).GetDocumentById(DocumentTableId);
+            }
+        }
         public long SaveDocument(int userId, int ServiceId, string documentId, string documentTitle, string documentNotes, bool isProcessed = false, bool IsAssociateUser = false, DateTime? modifiedDate = null)
         {
             using (AdminEntities context = new AdminEntities())

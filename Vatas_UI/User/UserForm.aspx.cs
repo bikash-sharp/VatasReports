@@ -17,9 +17,25 @@ namespace Vatas_UI.User
         {
             if (!IsPostBack)
             {
+                BindServices();
                 long CustomerId = 0;
                 long.TryParse(Convert.ToString(HttpContext.Current.Items["CustomerId"]), out CustomerId);
+                long DocumentId = 0;
+                long.TryParse(Convert.ToString(HttpContext.Current.Items["DocumentTableId"]), out DocumentId);
                 hfCustomerId.Value = CustomerId.ToString();
+                hfDocumentId.Value = DocumentId.ToString();
+                if(DocumentId !=0)
+                {
+                    var DocDetails = DataProviderWrapper.Instance.GetDocumentById(DocumentId);
+                    if(DocDetails != null)
+                    {
+                        ddlService.SelectedIndex = DocDetails.ServiceId;
+                        ddlService.Enabled = false;
+                        txtDocumentNotes.Text = DocDetails.DocumentNotes; txtDocumentNotes.Enabled = false;
+                        txtDocumentTitle.Text = DocDetails.DocumentTitle; txtDocumentTitle.Enabled = false;
+
+                    }
+                }
                 if (BLFunction.GetRoleName().ToLower() != "potentialuser" && BLFunction.GetRoleName().ToLower() != "associate")
                 {
                     Response.RedirectToRoute("401");
@@ -28,7 +44,7 @@ namespace Vatas_UI.User
                 {
                     Response.RedirectToRoute("401");
                 }
-                BindServices();
+                
             }
         }
 
@@ -58,6 +74,7 @@ namespace Vatas_UI.User
         {
             try
             {
+                
                 var fileList = HttpContext.Current.Session["userUploadFiles"] as List<FileUploadCL>;
                 if (fileList != null)
                 {
@@ -65,6 +82,11 @@ namespace Vatas_UI.User
                     {
                         List<FileUploadCL> DocumentFiles = new List<FileUploadCL>();
                         string DocumentId = BLFunction.GenerateDocumentId();
+                        long DocumentTableId = 0;
+                        long.TryParse(hfDocumentId.Value, out DocumentTableId);
+                        var DocDetails = DataProviderWrapper.Instance.GetDocumentById(DocumentTableId);
+                        if (DocDetails != null)
+                            DocumentId = DocDetails.DocumentId;
                         String TempDir = Path.Combine(new string[] { BLFunction.UserDocumentDirectoryPath(), "temp", DateTime.Now.ToString("ddMMyyyy"), HttpContext.Current.Session.SessionID });
                         string DestDir = "";
                         if (BLFunction.GetRoleName().ToLower() == "potentialuser")
@@ -90,18 +112,23 @@ namespace Vatas_UI.User
                         }
                         int ServiceId = 0;
                         int.TryParse(ddlService.SelectedValue, out ServiceId);
-                        //Create Document Id
-                        long DocumentTableId = 0;
-                        if (BLFunction.GetRoleName().ToLower() == "potentialuser")
+                        //Document Table
+                        if(DocumentTableId == 0)
                         {
-                            DocumentTableId = DataProviderWrapper.Instance.SaveDocument(BLFunction.GetUserID(), ServiceId, DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false);
+                            if (BLFunction.GetRoleName().ToLower() == "potentialuser")
+                            {
+                                DocumentTableId = DataProviderWrapper.Instance.SaveDocument(BLFunction.GetUserID(), ServiceId, DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false);
+                            }
+                            else if (BLFunction.GetRoleName().ToLower() == "associate")
+                            {
+                                DocumentTableId = DataProviderWrapper.Instance.SaveDocument(int.Parse(hfCustomerId.Value), ServiceId, DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false, true);
+                            }
                         }
-                        else if (BLFunction.GetRoleName().ToLower() == "associate")
-                        {
-                            DocumentTableId = DataProviderWrapper.Instance.SaveDocument(int.Parse(hfCustomerId.Value), ServiceId, DocumentId, txtDocumentTitle.Text.Trim(), txtDocumentNotes.Text.Trim(), false, true);
-                        }
+                        
                         if (DocumentTableId != 0)
                         {
+                            
+                            
                             //Save Files and Folder Path also
                             bool IsDocumentFilesSaved = DataProviderWrapper.Instance.SaveDocumentFiles(DocumentTableId, DocumentFiles);
                             //Insert Default Document Status

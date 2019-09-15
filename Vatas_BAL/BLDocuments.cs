@@ -52,6 +52,26 @@ namespace Vatas_BAL
             }
             return result;
         }
+        public UserDocumentsCL GetDocumentById(long DocumentTableId)
+        {
+            UserDocumentsCL result = new UserDocumentsCL();
+            try
+            {
+                string Query = "EXEC proc_GetDocumentById @Id = '" + DocumentTableId + "'";
+                var resultSet = _admin
+                .MultipleResults(Query)
+                .With<UserDocumentsCL>()
+                .Execute();
+                result = (resultSet[0] as List<UserDocumentsCL>).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                var err = ex;
+                result = null;
+            }
+            return result;
+
+        }
         public long SaveDocument(int userId, int ServiceId, string documentId, string documentTitle, string documentNotes, bool isProcessed = false, DateTime? modifiedDate = null, bool IsAssociateUser = false)
         {
             long result = 0;

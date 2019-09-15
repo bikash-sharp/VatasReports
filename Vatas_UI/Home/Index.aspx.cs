@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
+using System.Web.UI.WebControls;
 using Vatas_Common;
 using Vatas_Wrapper;
 
@@ -122,6 +124,19 @@ namespace Vatas_UI.Home
 
         }
 
-        
+        protected void btnAddFiles_Click(object sender, EventArgs e)
+        {
+            HttpContext _context = HttpContext.Current;
+            var strId = Convert.ToString(Page.RouteData.Values["Id"]);
+            int AssociaterUserId = 0;
+            int.TryParse(strId, out AssociaterUserId);
+            _context.Items.Add("CustomerId", AssociaterUserId);
+            Button btnAddFiles = (sender as Button);
+            long DocumentTableId = 0;
+            if (btnAddFiles != null)
+                DocumentTableId = int.Parse(btnAddFiles.CommandName);
+            _context.Items.Add("DocumentTableId", DocumentTableId);
+            Server.Transfer("~/User/UserForm.aspx");
+        }
     }
 }
