@@ -209,11 +209,11 @@ namespace Vatas_Wrapper
             }
         }
 
-        public List<UserDocumentDetailedWrapper> GetDocumentByUserId(long userId, int PageNumber, int PageSize, string SearchText,bool IsAssociateUser = false)
+        public List<UserDocumentDetailedWrapper> GetDocumentByUserId(long userId, int PageNumber, int PageSize, string SearchText)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLDocuments.Instance(context).GetDocumentByUserId(userId, PageNumber, PageSize,SearchText,IsAssociateUser);
+                return BLDocuments.Instance(context).GetDocumentByUserId(userId, PageNumber, PageSize,SearchText);
             }
         }
 
@@ -258,11 +258,11 @@ namespace Vatas_Wrapper
             }
         }
 
-        public List<AssociateUserDocumentsCL> GetAllUserDocuments(bool IsProcessed, int PageNumber, int PageSize)
+        public List<UserDocumentDetailedWrapper> GetAllUserDocuments(bool IsProcessed, int PageNumber, int PageSize, string searchText)
         {
             using (AdminEntities context = new AdminEntities())
             {
-                return BLDocuments.Instance(context).GetAllUserDocuments(IsProcessed, PageNumber, PageSize);
+                return BLDocuments.Instance(context).GetAllUserDocuments(IsProcessed, PageNumber, PageSize,searchText);
             }
         }
         #endregion

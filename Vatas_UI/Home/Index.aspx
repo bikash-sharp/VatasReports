@@ -11,8 +11,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceBody" runat="server">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Welcome User   
-        </h1>
+        <h1>Welcome User</h1>
         <ol class="breadcrumb">
             <li><a href="javascript:;"><i class="fa fa-dashboard"></i>Home</a></li>
         </ol>
@@ -96,11 +95,6 @@
                         <!-- ./col -->
                     </div>
                 </div>
-                <!-- /.box-body -->
-                <%--<div class="box-footer">
-                    Footer
-                </div>--%>
-                <!-- /.box-footer-->
             </div>
             <div class="box">
                 <div class="box-header with-border">
@@ -162,7 +156,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-3">
-                            <a class="btn btn-info" href='<%= this.CurrentPagePath + "UserForm" %>' target="_blank"> Upload Document</a>
+                            <a class="btn btn-info" href='<%= this.CurrentPagePath + "UserForm" %>' target="_blank">Upload Document</a>
                         </div>
                         <div class="col-md-5"></div>
                         <div class="col-md-1">Show entries </div>
@@ -188,7 +182,7 @@
                                 <th>Date Added</th>
                                 <th>Date Modified</th>
                                 <th>Status</th>
-                                <th style="width:50px;">Action</th>
+                                <th style="width: 50px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -206,7 +200,7 @@
                                         <td>
                                             <asp:Label ID="lblDocumentStatus" Text='<%# Eval("DocumentStatusName")%>' ForeColor='<%# ((Eval("DocumentStatusName")+"").ToLower() == "received" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>' runat="server" /></td>
                                         <td>
-                                            <asp:Button ID="btnAddFiles" runat="server" CssClass='btn btn-info' Text="Upload more files" OnClick="btnAddFiles_Click" CommandName='<%# Eval("DocumentTableId") %>'/>
+                                            <asp:Button ID="btnAddFiles" runat="server" CssClass='btn btn-info' Text="Upload more files" OnClick="btnAddFiles_Click" CommandName='<%# Eval("DocumentTableId") %>' />
                                         </td>
                                     </tr>
                                     <tr class="hide">
@@ -219,26 +213,26 @@
                                                         <th>Date Uploaded</th>
                                                         <th>Verified</th>
                                                         <th>Date Verified</th>
-                                                        <th style="width:50px;">Download</th>
+                                                        <th style="width: 50px;">Download</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <asp:Repeater ID="rptFiles" runat="server" DataSource='<%# Eval("userDocumentDetails") %>'>
                                                         <ItemTemplate>
                                                             <tr>
-                                                            <td><%# Container.ItemIndex + 1  %></td>
+                                                                <td><%# Container.ItemIndex + 1  %></td>
 
-                                                            <td>
-                                                                <asp:Label ID="lblFileName" Text='<%# Eval("DisplayAs") %>' runat="server" /></td>
-                                                            <td>
-                                                                <asp:Label ID="lblFileUploadDate" Text='<%# Eval("DateAdded") %>' runat="server" /></td>
-                                                            <td>
-                                                                <asp:Label ID="lblIsVerified" Text='<%# Eval("IsValid").ToString().ToLower() == "true" ? "Verified":"Pending" %>' ForeColor='<%# Eval("IsValid").ToString().ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red %>' runat="server" /></td>
-                                                            <td>
-                                                                <asp:Label ID="lblFileStatusModifiedDate" Font-Bold="true" Text='<%# Eval("DateModified") %>' runat="server" /></td>
-                                                            <td>
-                                                                <asp:HyperLink ID="hlDownload" Target="_blank" runat="server" NavigateUrl='<%# this.CurrentPagePath + "WebHandler/FileDownload.ashx?Id=" + BLSecurity.Encrypt(Eval("Id").ToString()) %>'><span title="Click to download"><i class="fa fa-download fa-2x"></i></span></asp:HyperLink></td>
-                                                                </tr>
+                                                                <td>
+                                                                    <asp:Label ID="lblFileName" Text='<%# Eval("DisplayAs") %>' runat="server" /></td>
+                                                                <td>
+                                                                    <asp:Label ID="lblFileUploadDate" Text='<%# Eval("DateAdded") %>' runat="server" /></td>
+                                                                <td>
+                                                                    <asp:Label ID="lblIsVerified" Text='<%# Eval("IsValid").ToString().ToLower() == "true" ? "Verified":"Pending" %>' ForeColor='<%# Eval("IsValid").ToString().ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red %>' runat="server" /></td>
+                                                                <td>
+                                                                    <asp:Label ID="lblFileStatusModifiedDate" Font-Bold="true" Text='<%# Eval("DateModified") %>' runat="server" /></td>
+                                                                <td>
+                                                                    <asp:HyperLink ID="hlDownload" Target="_blank" runat="server" NavigateUrl='<%# this.CurrentPagePath + "WebHandler/FileDownload.ashx?Id=" + BLSecurity.Encrypt(Eval("Id").ToString()) %>'><span title="Click to download"><i class="fa fa-download fa-2x"></i></span></asp:HyperLink></td>
+                                                            </tr>
                                                         </ItemTemplate>
                                                     </asp:Repeater>
                                                 </tbody>
@@ -259,10 +253,10 @@
         <%}
             else if (Vatas_Common.BLFunction.GetRoleName().ToLower() == "superadmin" || Vatas_Common.BLFunction.GetRoleName().ToLower() == "admin" || Vatas_Common.BLFunction.GetRoleName().ToLower() == "dataentrysupervisor" || Vatas_Common.BLFunction.GetRoleName().ToLower() == "frontofficesupervisor")
             { %>
-        <asp:Panel ID="Panel1" runat="server">
+        <asp:Panel ID="pnlAdmin" runat="server" DefaultButton="btnASearch">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Reports</h3>
+                    <h3 class="box-title">Customer Documents</h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -283,50 +277,76 @@
                                 <asp:ListItem Value="-1">ALL</asp:ListItem>
                             </asp:DropDownList>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-1">
                             <asp:CheckBox ID="chkIsActive" runat="server" Checked="false" AutoPostBack="true" OnCheckedChanged="chkIsActive_CheckedChanged" Style="float: right!important;" />
                         </div>
+                        <div class="col-md-7"></div>
+                        <div class="col-md-2">
+                            <asp:TextBox ID="txtASearch" CssClass="form-control" Style="float: right;" placeholder="Search.." runat="server"></asp:TextBox>
+                        </div>
+
                     </div>
-                    <table id="processTable" class="table table-bordered table-striped dataTable table-responsive overflow">
+                    <table id="adminTable" class="table table-bordered table-striped dataTable table-responsive overflow">
                         <thead>
                             <tr style="width: 100%!important">
-                                <th>Name</th>
-                                <th>Email</th>
+                                <th>Sr.No</th>
+                                <th>Name of Customer</th>
+                                <th>Type</th>
+                                <th>Job Type</th>
                                 <th>Contact</th>
-                                <th>Document Id</th>
-                                <th>Title</th>
-                                <th>Notes</th>
                                 <th>Dated</th>
-                                <th>Status</th>
+                                <th>Supervisor Comments</th>
                                 <th>Assigned To</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <asp:Repeater ID="rptAdmin" runat="server">
                                 <ItemTemplate>
                                     <tr>
+                                        <td><%# Container.ItemIndex + 1  %></td>
                                         <td>
-                                            <asp:Label ID="lblUserName" Text='<%# Eval("UserName") %>' runat="server" /></td>
+                                            <asp:Label ID="lblCustomerName" Text='<%# (Convert.ToString(Eval("FirstName")) + Convert.ToString(Eval("LastName"))).Trim() %>' runat="server" /></td>
                                         <td>
-                                            <asp:Label ID="lblEmail" Text='<%# Eval("EmailId") %>' runat="server" /></td>
+                                            <asp:Label ID="lblCustomerType" Text='<%# ((Eval("IsAssociateUser")+"").ToLower() == "true" ? "Associate":"User")%>' runat="server" /></td>
                                         <td>
-                                            <asp:Label ID="lblContact" Text='<%# Eval("Contact") %>' runat="server" /></td>
+                                            <asp:Label ID="lblServiceName" Text='<%# Eval("ServiceName") %>' runat="server" /></td>
                                         <td>
                                             <asp:HiddenField ID="hfUserId" runat="server" Value='<%# Eval("UserId") %>' />
-                                            <asp:Label ID="lblDocumentId" Text='<%# Eval("DocumentId") %>' runat="server" />
+                                            <asp:Label ID="lblContact" Text='<%# Eval("Contact") %>' runat="server" />
                                         </td>
-                                        <td>
-                                            <asp:Label ID="lblDocumentTitle" Text='<%# Eval("DocumentTitle") %>' runat="server" /></td>
-                                        <td>
-                                            <asp:Label ID="lblDocumentNotes" Text='<%# Eval("DocumentNotes") %>' runat="server" /></td>
                                         <td>
                                             <asp:Label ID="lblDateAdded" Text='<%# Eval("DateAdded") %>' runat="server" /></td>
                                         <td>
-                                            <asp:Label ID="lblProcessed" Text='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? "Processing":"Pending")%>' ForeColor='<%# ((Eval("IsProcessed")+"").ToLower() == "true" ? System.Drawing.Color.Green:System.Drawing.Color.Red)%>' runat="server" /></td>
+                                            <!-- Trigger the modal with a button -->
+                                            <a data-toggle="modal" data-target="#myModal" style="cursor:pointer;">View Comments</a>
+                                            <!-- Modal -->
+                                            <div id="myModal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h4 class="modal-title">Modal Header</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Some text in the modal.</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>
                                             <asp:DropDownList ID="ddlUser" runat="server" CssClass="form-control" DataSource='<%# Eval("Users") %>' DataTextField="DataText" DataValueField="DataValue" AppendDataBoundItems="true">
                                                 <asp:ListItem Selected="True" Text="--Select--" Value="0"></asp:ListItem>
                                             </asp:DropDownList></td>
+                                        <td>
+                                            <asp:HyperLink ID="hlViewDetails" Target="_blank" runat="server" NavigateUrl='<%# Page.ResolveUrl("~/Customers/") + Eval("UserId") %>'><span title="Click to view details"><i class="fa fa-eye fa-2x"></i></span></asp:HyperLink>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:Repeater>
@@ -416,6 +436,8 @@
     <asp:HiddenField runat="server" ID="hidPages" />
     <asp:HiddenField runat="server" ID="hidPageNo" Value="1" />
     <asp:Button UseSubmitBehavior="true" ID="btnPUSearch" Text="" CausesValidation="false" OnClick="btnPUSearch_Click" Style="display: none" CssClass="submit" runat="server" />
+    <asp:Button UseSubmitBehavior="true" ID="btnASearch" Text="" CausesValidation="false" OnClick="btnASearch_Click" Style="display: none" CssClass="submit" runat="server" />
+
     <!-- /.content -->
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceFooter" runat="server">
@@ -434,7 +456,7 @@
             });
             $('[id$=chkIsActive]').iCheck('destroy');
             $('[id$=chkIsActive]').bootstrapToggle({
-                on: 'Processing',
+                on: 'Processed',
                 off: 'Pending',
                 onstyle: 'success',
                 offstyle: 'danger',
@@ -444,18 +466,17 @@
                 $(this).click();
                 //$('#console-event').html('Toggle: ' + $(this).prop('checked'))
             });
-             $('.details-control').on('click', function () {
+            $('.details-control').on('click', function () {
                 var tr = $(this).parent('tr').next('tr');
                 if (tr.hasClass('hide')) {
                     var currentElem = $(this).css('background', 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAACdUlEQVR4Aa2V30tTYRjHVSgsoQKhXPUPlKZMlImiIIg/pggiiDeCBAdqyC4Kf9zVhVdeelX33QnCbtYvxZsxxkoqKxiz1SzdFudMb5xO5/bt+fa+sPCw3IVf+PA+532e5ytn53lfK0qoSrggXBauCbUKxtxjjjVnq1IXXxFuCXeEFqGdMOYec6zRtZX/M6sWrgv1hmHcDwQCLxOJxM9CoZAnjLnHHGt0bbXdVG1cEm4KLp/P9yKXyx2jhJhjDWvZc9qUwUWhzuFwdMVisc8QFQ4PcbCygvT0NJLDw0gNDSH96DEyfj8KmQwo1rJHem8oD2VapX/sxlAo9Aqi/N4e9hYWsDMwgARxD2DH7ZZYren5eZxYFqhgMOhnr3BVeSnn216v98Hf3yqXg/X0CX719YFs9/WquJfPGtkzZ2fBWvZ4PB6DHtqrokaol7/0GqLM2hq2enpsxMmpvf3VVVD8UOJxV42Uet1Wy7J+M5mam8P37u6ySM7MgDJNM8mRUl5qYDtOREz+GB3FZlcXNjs7UUrMk/jYGKhsNnuo57TWZhgTw0hHO0EpRdpV/tvICKgjUdFQv/Lu7q7JZHxqCl9dLqGtSJtL4VJ80Wvc8xD2V9YfRUbmLZPp5WVstLTYaSWt+lmt1tISKH5Q/VFqbGOTl6GNTk7iQ3Oz4FSrU8UfuTqdBJHxceQz+2APe/8Zm+Jgh8PhNxBlt7YQNQysNzVivbEJ7wXGiiZEJiZwEI2C4mFgr/aoKnn0jk0TiWfPsTE4iHcN9xBuaMCn/n5sLy7iKJk8ffTqikfvfC4H9laWdX2lUqltaDEu9/o664LtIOVfsOf4L+APb5yaiwyN8+8AAAAASUVORK5CYII=) no-repeat center center');
                     tr.removeClass('hide');
                 }
-                else
-                {
+                else {
                     var currentItem = $(this).css('background', 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAACjElEQVR4Aa2V30uTURjHnVBUgglCaXVTJJVLMdhQm7+1JEvJiKAggmgSQiKJl0V0E13UVf0HQZmBLcvlpqa55tqV0YoMzIhY6js0yDH11X17vuO8Sq5Zgl/48DznPD/G63nOMSmBkoUNwhYhTUgn9NUeY8z5p0wqOVXYKRwQLMJhhYV7Kpaqck2rNdskbBPMdrv9osfjcQaDwW/RaHSR0OceY8xhrqox/a3ZZmGHkO9wOB7ouj6PBGKMOcxlzcqmdDYKGZmZmSWjo6PvIYosRuDWXGj50IwTb4+hxleN5sAVvJh4jvBCGBRzWSO121UPk3EAaUKuz+d7ycTp+Wnc/nwL1d4qHBVidmjZv/npBkJzGiiv19vFWmGrcVDsvKupqeky/056VMf1j9dQOViBKo9Aa/ixdbnYcrQGWsBc1jQ2NtrZQ/VKShHM8kvdEPVN9qJsoBRl/aUoHyiJ+UpcCxJTtmfCDYoHJT2yYyOlPtcaCoUmGGwdbkVRbxGK+2y0gg2GisUvNmJCy/BVUJqm/eBIxXqpgbUtiBise12HQlc+ClwFSKRCiZH6wXpQs7OzETWn6XENa/trYemywuK0IpGsTotgRU3fcVBzouWG6pOnpqY0BhuGGpDXeUjIW7JKcfuX3tjjP9k4FBkZN4PtY+042JGzzNMcGDJ35C7tmcU++tJmjE63OpSUuLEJ62GcfXUO+59kr8rJnlOY0WfAGtYaY/PHYPv9fhdEY7++4nz/BWS17UPWY0Es2avWp3vOYOTnCCheBtaqHskJr95kZBL3AvdR2XkEex5mYbdQ+qwCd97dRTAcXHn1Moyrt16PA2tN//V8jY+Pf4cS/VWerzU9sDay1gd2Xf4F/AZqlpeB9836LwAAAABJRU5ErkJggg==) no-repeat center center');
-                     tr.addClass('hide');
+                    tr.addClass('hide');
                 }
-                   
+
             });
         });
     </script>

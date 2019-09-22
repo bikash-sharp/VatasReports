@@ -58,13 +58,13 @@ namespace Vatas_UI.Home {
         protected global::System.Web.UI.WebControls.Repeater rptPotentialUser;
         
         /// <summary>
-        /// Panel1 control.
+        /// pnlAdmin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Panel pnlAdmin;
         
         /// <summary>
         /// ddlAPageLength control.
@@ -83,6 +83,15 @@ namespace Vatas_UI.Home {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkIsActive;
+        
+        /// <summary>
+        /// txtASearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtASearch;
         
         /// <summary>
         /// rptAdmin control.
@@ -146,5 +155,14 @@ namespace Vatas_UI.Home {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPUSearch;
+        
+        /// <summary>
+        /// btnASearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnASearch;
     }
 }

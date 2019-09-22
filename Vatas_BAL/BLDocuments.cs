@@ -92,12 +92,12 @@ namespace Vatas_BAL
         }
 
        
-        public List<UserDocumentDetailedWrapper> GetDocumentByUserId(long userId, int PageNumber, int PageSize, string SearchText,bool IsAssociateUser= false)
+        public List<UserDocumentDetailedWrapper> GetDocumentByUserId(long userId, int PageNumber, int PageSize, string SearchText)
         {
             List<UserDocumentDetailedWrapper> result = new List<UserDocumentDetailedWrapper>();
             try
             {
-                string Query = "EXEC proc_GetUserDocumentDetailedStatus @UserId='" + userId + "',@PageNumber ='" + PageNumber + "',@PageSize='" + PageSize + "',@SearhText=N'" + SearchText + "',@IsAssociateUser='"+ Convert.ToInt32(IsAssociateUser) + "'";
+                string Query = "EXEC proc_GetUserDocumentDetailedStatus @UserId='" + userId + "',@PageNumber ='" + PageNumber + "',@PageSize='" + PageSize + "',@SearhText=N'" + SearchText + "'";
                 var resultSet = _admin
                 .MultipleResults(Query)
                 .With<UserDocumentDetailedWrapper>()
@@ -174,36 +174,28 @@ namespace Vatas_BAL
             return result;
         }
 
-        public List<AssociateUserDocumentsCL> GetAllUserDocuments(bool IsProcessed, int PageNumber, int PageSize)
+        public List<UserDocumentDetailedWrapper> GetAllUserDocuments(bool IsProcessed, int PageNumber, int PageSize,string SearchText)
         {
-            List<AssociateUserDocumentsCL> result = new List<AssociateUserDocumentsCL>();
+            List<UserDocumentDetailedWrapper> result = new List<UserDocumentDetailedWrapper>();
             try
             {
-                var userDocuments = _admin.proc_GetAllDocuments(IsProcessed, PageNumber, PageSize);
-                foreach (var item in userDocuments)
+                string Query = "EXEC proc_GetAllDocuments @IsProcessed = '" + IsProcessed + "', @PageNumber = '" + PageNumber + "', @PageSize = '" + PageSize + "', @SearchText = N'" + SearchText + "'";
+                var resultSet = _admin
+                .MultipleResults(Query)
+                .With<UserDocumentDetailedWrapper>()
+                .With<UserDocumentRemarkCL>()
+                .Execute();
+                result = (resultSet[0] as List<UserDocumentDetailedWrapper>).ToList();
+                var DocumentRemarks = (resultSet[1] as List<UserDocumentRemarkCL>).ToList();
+
+                foreach(var item in result)
                 {
-                    result.Add(new AssociateUserDocumentsCL()
-                    {
-                        AssociateId = item.AssociateId.GetValueOrDefault(0),
-                        AssociateUserId = item.AssociateUserId.GetValueOrDefault(0),
-                        Contact = item.Contact,
-                        UserName = item.UserName,
-                        EmailId = item.EmailId,
-                        DateAdded = item.DateAdded,
-                        DocumentId = item.DocumentId,
-                        DocumentNotes = item.DocumentNotes,
-                        DocumentTitle = item.DocumentTitle,
-                        IsProcessed = item.IsProcessed,
-                        ModifiedDate = item.DateModified,
-                        UserId = item.UserId,
-                        RecordCount = item.RecordCount,
-                        Users = BLSiteUser.Instance(_admin).GetUserRolesByRoleId((int)Roles.DataEntryOperator)
-                    });
+                    item.userDocumentRemarks.AddRange(DocumentRemarks.Where(p => p.DocumentId == item.DocumentId).ToList());
                 }
             }
             catch (Exception ex)
             {
-                var error = ex.Message;
+                var err = ex;
             }
             return result;
         }

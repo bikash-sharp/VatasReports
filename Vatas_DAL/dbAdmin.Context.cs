@@ -230,22 +230,5 @@ namespace Vatas_DAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("proc_SaveDocument", userIdParameter, documentIdParameter, documentTitleParameter, documentNotesParameter, isProcessedParameter, dateModifiedParameter);
         }
-    
-        public virtual ObjectResult<proc_GetAllDocuments_Result> proc_GetAllDocuments(Nullable<bool> isProcessed, Nullable<int> pageNumber, Nullable<int> pageSize)
-        {
-            var isProcessedParameter = isProcessed.HasValue ?
-                new ObjectParameter("IsProcessed", isProcessed) :
-                new ObjectParameter("IsProcessed", typeof(bool));
-    
-            var pageNumberParameter = pageNumber.HasValue ?
-                new ObjectParameter("PageNumber", pageNumber) :
-                new ObjectParameter("PageNumber", typeof(int));
-    
-            var pageSizeParameter = pageSize.HasValue ?
-                new ObjectParameter("PageSize", pageSize) :
-                new ObjectParameter("PageSize", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_GetAllDocuments_Result>("proc_GetAllDocuments", isProcessedParameter, pageNumberParameter, pageSizeParameter);
-        }
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="ServiceCL.cs" />
     <Compile Include="UserDocumentDetailCL.cs" />
     <Compile Include="UserDocumentDetailedWrapper.cs" />
+    <Compile Include="UserDocumentRemarkCL.cs" />
     <Compile Include="UserDocumentsCL.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

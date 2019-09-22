@@ -80,9 +80,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mydatabase1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="proc_GetAllDocuments_Result.cs">
-      <DependentUpon>dbAdmin.tt</DependentUpon>
-    </Compile>
     <Compile Include="proc_GetAllRegisteredUsers_Result.cs">
       <DependentUpon>dbAdmin.tt</DependentUpon>
     </Compile>

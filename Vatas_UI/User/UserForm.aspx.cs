@@ -36,11 +36,11 @@ namespace Vatas_UI.User
 
                     }
                 }
-                if (BLFunction.GetRoleName().ToLower() != "potentialuser" && BLFunction.GetRoleName().ToLower() != "associate")
+                if (BLFunction.GetRoleName().ToLower() != "potentialuser" && BLFunction.GetRoleName().ToLower() != "associate" && BLFunction.GetRoleName().ToLower() != "superadmin")
                 {
                     Response.RedirectToRoute("401");
                 }
-                else if (BLFunction.GetRoleName().ToLower() == "associate" && CustomerId == 0)
+                else if ((BLFunction.GetRoleName().ToLower() == "associate" || BLFunction.GetRoleName().ToLower() == "superadmin" ) && CustomerId == 0)
                 {
                     Response.RedirectToRoute("401");
                 }
@@ -55,6 +55,10 @@ namespace Vatas_UI.User
                 BLFunction.ShowAlertRedirect(this, "This is will cancel the document upload", CurrentPagePath + "UserForm", ResponseType.WARNING);
             }
             else if (BLFunction.GetRoleName().ToLower() == "associate")
+            {
+                BLFunction.ShowAlertRedirect(this, "This is will cancel the document upload", CurrentPagePath + "Customers/" + hfCustomerId.Value, ResponseType.WARNING);
+            }
+            else if (BLFunction.GetRoleName().ToLower() == "superadmin")
             {
                 BLFunction.ShowAlertRedirect(this, "This is will cancel the document upload", CurrentPagePath + "Customers/" + hfCustomerId.Value, ResponseType.WARNING);
             }

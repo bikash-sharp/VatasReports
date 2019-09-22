@@ -33,12 +33,11 @@ namespace Vatas_UI.Home
             {
                 if (BLFunction.GetRoleName().ToLower() == "potentialuser")
                 {
-                    
                     BindUserReports(BLFunction.GetUserID(), PageNumber, PageSize, "");
                 }
                 else if (BLFunction.GetRoleName().ToLower() == "superadmin" || BLFunction.GetRoleName().ToLower() == "admin" || BLFunction.GetRoleName().ToLower() == "dataentrysupervisor" || BLFunction.GetRoleName().ToLower() == "frontofficesupervisor")
                 {
-                    BindDocuments(PageNumber, PageSize);
+                    BindDocuments(PageNumber, PageSize,"");
                 }
             }
         }
@@ -80,10 +79,10 @@ namespace Vatas_UI.Home
 
 
 
-        public void BindDocuments(int PageNumber, int PageSize)
+        public void BindDocuments(int PageNumber, int PageSize, string searchText)
         {
             int TotalPages = 0;
-            List<AssociateUserDocumentsCL> result = DataProviderWrapper.Instance.GetAllUserDocuments(chkIsActive.Checked, PageNumber, PageSize);
+            List<UserDocumentDetailedWrapper> result = DataProviderWrapper.Instance.GetAllUserDocuments(chkIsActive.Checked, PageNumber, PageSize,searchText);
             rptAdmin.DataSource = null;
             if (result.Count > 0)
             {
@@ -109,7 +108,8 @@ namespace Vatas_UI.Home
             {
                 PageSize = RecordCount;
             }
-            BindDocuments(PageNumber, PageSize);
+            
+            BindDocuments(PageNumber, PageSize, txtASearch.Text.Trim());
         }
 
         protected void btnConfirm_Click(object sender, EventArgs e)
@@ -137,6 +137,11 @@ namespace Vatas_UI.Home
                 DocumentTableId = int.Parse(btnAddFiles.CommandName);
             _context.Items.Add("DocumentTableId", DocumentTableId);
             Server.Transfer("~/User/UserForm.aspx");
+        }
+
+        protected void btnASearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

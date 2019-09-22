@@ -28,13 +28,14 @@ namespace Vatas_UI.Associate
                 var strId = Convert.ToString(Page.RouteData.Values["Id"]);
                 long AssociaterUserId = 0;
                 long.TryParse(strId, out AssociaterUserId);
-                if (BLFunction.GetRoleName().ToLower() != "associate" || AssociaterUserId == 0)
+                if ( (BLFunction.GetRoleName().ToLower() != "associate" || BLFunction.GetRoleName().ToLower() != "superadmin" ) && AssociaterUserId == 0)
                 {
                     Response.RedirectToRoute("401");
                 }
                 else
                 {
-                    BindUserDetails(AssociaterUserId);
+                    if (BLFunction.GetRoleName().ToLower() == "associate")
+                        BindUserDetails(AssociaterUserId);
                     BindUserDocument(AssociaterUserId, PageNumber, PageSize, "");
                 }
             }
@@ -77,7 +78,7 @@ namespace Vatas_UI.Associate
         public void BindUserDocument(long UserID, int PageNumber, int PageSize, string SearchText)
         {
             int TotalPages = 0;
-            List<UserDocumentDetailedWrapper> result = DataProviderWrapper.Instance.GetDocumentByUserId(UserID, PageNumber, PageSize, SearchText,true);
+            List<UserDocumentDetailedWrapper> result = DataProviderWrapper.Instance.GetDocumentByUserId(UserID, PageNumber, PageSize, SearchText);
             rptProcess.DataSource = null;
             if (result.Count > 0)
             {

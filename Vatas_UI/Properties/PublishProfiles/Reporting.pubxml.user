@@ -2917,16 +2917,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/01/2019 05:03:42</publishTime>
     </File>
     <File Include="Associate/UserDetails.aspx">
-      <publishTime>09/02/2019 15:38:12</publishTime>
+      <publishTime>09/16/2019 02:41:31</publishTime>
     </File>
     <File Include="Associate/ViewUsers.aspx">
       <publishTime>09/02/2019 13:22:23</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>09/02/2019 16:42:53</publishTime>
+      <publishTime>09/16/2019 10:22:22</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>09/02/2019 16:42:53</publishTime>
+      <publishTime>09/16/2019 10:22:22</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/02/2015 09:32:26</publishTime>
@@ -2983,43 +2983,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/Vatas_BAL.dll">
-      <publishTime>09/02/2019 16:42:43</publishTime>
+      <publishTime>09/16/2019 10:22:07</publishTime>
     </File>
     <File Include="bin/Vatas_BAL.dll.config">
       <publishTime>07/20/2019 19:43:16</publishTime>
     </File>
     <File Include="bin/Vatas_BAL.pdb">
-      <publishTime>09/02/2019 16:42:43</publishTime>
+      <publishTime>09/16/2019 10:22:07</publishTime>
     </File>
     <File Include="bin/Vatas_Common.dll">
-      <publishTime>09/02/2019 15:11:34</publishTime>
+      <publishTime>09/16/2019 10:22:07</publishTime>
     </File>
     <File Include="bin/Vatas_Common.pdb">
-      <publishTime>09/02/2019 15:11:34</publishTime>
+      <publishTime>09/16/2019 10:22:07</publishTime>
     </File>
     <File Include="bin/Vatas_DAL.dll">
-      <publishTime>09/02/2019 15:11:35</publishTime>
+      <publishTime>09/16/2019 10:22:07</publishTime>
     </File>
     <File Include="bin/Vatas_DAL.dll.config">
       <publishTime>08/07/2019 02:15:34</publishTime>
     </File>
     <File Include="bin/Vatas_DAL.pdb">
-      <publishTime>09/02/2019 15:11:35</publishTime>
+      <publishTime>09/16/2019 10:22:07</publishTime>
     </File>
     <File Include="bin/Vatas_UI.dll">
-      <publishTime>09/02/2019 16:42:45</publishTime>
+      <publishTime>09/16/2019 10:22:11</publishTime>
     </File>
     <File Include="bin/Vatas_UI.pdb">
-      <publishTime>09/02/2019 16:42:45</publishTime>
+      <publishTime>09/16/2019 10:22:11</publishTime>
     </File>
     <File Include="bin/Vatas_Wrapper.dll">
-      <publishTime>09/02/2019 16:42:43</publishTime>
+      <publishTime>09/16/2019 10:22:08</publishTime>
     </File>
     <File Include="bin/Vatas_Wrapper.dll.config">
       <publishTime>07/20/2019 19:43:16</publishTime>
     </File>
     <File Include="bin/Vatas_Wrapper.pdb">
-      <publishTime>09/02/2019 16:42:43</publishTime>
+      <publishTime>09/16/2019 10:22:08</publishTime>
     </File>
     <File Include="ChangePassword.aspx">
       <publishTime>07/20/2019 19:43:16</publishTime>
@@ -3043,7 +3043,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/07/2018 01:47:05</publishTime>
     </File>
     <File Include="Home/Index.aspx">
-      <publishTime>09/02/2019 16:39:53</publishTime>
+      <publishTime>09/16/2019 03:27:05</publishTime>
     </File>
     <File Include="LockScreen.aspx">
       <publishTime>09/01/2019 13:53:42</publishTime>
@@ -3055,7 +3055,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/01/2019 03:14:57</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>09/02/2019 16:42:50</publishTime>
+      <publishTime>09/16/2019 10:22:15</publishTime>
     </File>
     <File Include="Process/Process_AssignReturns.aspx">
       <publishTime>08/06/2019 04:26:53</publishTime>
@@ -3154,7 +3154,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/20/2019 19:43:16</publishTime>
     </File>
     <File Include="User/UserForm.aspx">
-      <publishTime>09/02/2019 08:05:23</publishTime>
+      <publishTime>09/16/2019 02:45:46</publishTime>
     </File>
     <File Include="User/UserListing.aspx">
       <publishTime>07/20/2019 19:43:16</publishTime>
